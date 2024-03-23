@@ -1,0 +1,118 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Index</title>
+	
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script>
+		$(function () {
+			$("#dob").datepicker({
+				dateFormat: 'd/m/yy'
+			});
+		});
+	</script>
+
+</head>
+
+<body>
+
+	<h3>Register</h3>
+	<form method="post" th:action="@{/employee/register}">
+		<table>
+			<tr>
+				<td>Username</td>
+				<td>
+					<input type="text" th:field="${employee.username}">
+				</td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td>
+					<input type="password" th:field="${employee.password}">
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">Description</td>
+				<td>
+					<textarea cols="20" rows="5" th:field="${employee.description}"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>Dob</td>
+				<td>
+					<input type="text" th:field="${employee.dob}">
+				</td>
+			</tr>
+			<tr>
+				<td>Status</td>
+				<td>
+					<input type="checkbox" th:field="${employee.status}">
+				</td>
+			</tr>
+			<tr>
+				<td>Gender</td>
+				<td>
+					<input type="radio" value="m" th:field="${employee.gender}"> Male
+					<br>
+					<input type="radio" value="f" th:field="${employee.gender}"> Female
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">Cert</td>
+				<td>
+					<th:block th:each="cert : ${certs}">
+						<input type="radio" th:value="${cert.id}" 
+							th:field="${employee.cert}"> 
+						<th:block th:text="${cert.name}"></th:block>
+						<br>
+					</th:block>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">Languages</td>
+				<td>
+					<th:block th:each="language : ${languages}">
+						<input type="checkbox" th:value="${language.id}" 
+							th:field="${employee.languages}"> 
+						<th:block th:text="${language.name}"></th:block>
+						<br>
+					</th:block>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">Role</td>
+				<td>
+					<select th:field="${employee.role}">
+						<option th:each="role : ${roles}" th:value="${role.id}" 
+							th:text="${role.name}"></option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Street</td>
+				<td>
+					<input type="text" th:field="${employee.address.street}">
+				</td>
+			</tr>
+			<tr>
+				<td>Ward</td>
+				<td>
+					<input type="text" th:field="${employee.address.ward}">
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+					<button type="submit">Save</button>
+					<input type="hidden" th:field="${employee.id}">
+				</td>
+			</tr>
+		</table>
+	</form>
+
+
+</body>
+
+</html>

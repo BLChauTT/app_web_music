@@ -1,0 +1,14 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Index</title>
+</head>
+<body>
+
+	Msg 1: <th:block th:text="${@demoService.hello()}"></th:block>
+	<br>
+	Msg 2: <th:block th:text="${@demoService.hi('ABC')}"></th:block>
+	<br>
+	Add: <th:block th:text="${@calculateService.add(3, 6)}"></th:block>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Index</title>
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+	<script th:src="@{/assets/js/jquery-3.7.1.min.js}"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+	<script>
+
+		$(document).ready(function () {
+
+			$('#name').keyup(function() {
+				var keyword = $(this).val();
+				$.ajax({
+					type: 'GET',
+					url: '/ajax/findProductByKeyword',
+					data: {
+						keyword: keyword
+					},
+					success: function (products) {
+						var s = '';
+						for(var i = 0; i < products.length; i++) {
+							s += '<tr>';
+							s += '<td>' + products[i].id + '</td>';
+							s += '<td>' + products[i].name + '</td>';
+							s += '<td><img src="/assets/images/' + products[i].photo + '" width="120" height="100"></td>';
+							s += '<td>' + products[i].created + '</td>';
+							s += '<td>' + products[i].price + '</td>';
+							s += '<td>' + products[i].quantity + '</td>';
+							s += '</tr>';
+						}
+						$('#tableProduct tbody').html(s);
+					}
+				});
+			});
+
+		});
+
+	</script>
+
+</head>
+
+<body>
+
+	<table border="1" id="tableProduct">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>
+					Name
+					<br>
+					<input type="text" id="name">
+				</th>
+				<th>Photo</th>
+				<th>Created</th>
+				<th>Price</th>
+				<th>Quantity</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="product : ${products}">
+				<td th:text="${product.id}"></td>
+				<td th:text="${product.name}">
+				</td>
+				<td th:text="${#dates.format(product.created, 'dd/MM/yyyy')}"></td>
+				<td>
+					<img th:src="@{'/assets/images/' + ${product.photo}}" width="120" height="100">
+				</td>
+				<td th:text="${product.price}"></td>
+				<td th:text="${product.quantity}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+</body>
+
+</html>

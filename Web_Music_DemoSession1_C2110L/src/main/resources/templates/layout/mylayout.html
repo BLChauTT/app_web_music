@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="mylayout(title, content)">
+
+<head>
+	<title th:text="${title}"></title>
+</head>
+
+<body>
+
+	<a th:href="@{/home}">Home</a> | 
+	<a th:href="@{/aboutus}">About Us</a> |
+	<a th:href="@{/news}">News</a>
+	<br><br>
+	<th:block th:replace="${content}"></th:block>
+	<br><br>
+	Copyright 
+	
+
+</body>
+
+</html>
