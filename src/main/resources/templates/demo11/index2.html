@@ -1,0 +1,174 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Index</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script>
+		$(function () {
+
+			$("#dialog-message").hide();
+
+			$('#tableProduct tbody').on('click', 'a', function () {
+				var id = $(this).attr('data-id');
+				$.ajax({
+					type: 'GET',
+					url: '/ajaxjpa/findProductById',
+					data: {
+						id: id
+					},
+					success: function (product) {
+						$('#dialog-message img').attr('src', '/assets/images/' + product.photo);
+						$('#dialog-message #productName').html(product.name);
+						$('#dialog-message #price').html(product.price);
+						$("#dialog-message").dialog({
+							modal: true,
+							buttons: {
+								Ok: function () {
+									$(this).dialog("close");
+								}
+							}
+						});
+					}
+				});
+			});
+
+			$("#slider-range").slider({
+				range: true,
+				min: 1,
+				max: 120,
+				values: [1, 120],
+				slide: function (event, ui) {
+					var min = ui.values[0];
+					var max = ui.values[1];
+					$.ajax({
+						type: 'GET',
+						url: '/ajaxjpa/findProductByPrices',
+						data: {
+							min: min,
+							max: max
+						},
+						success: function (products) {
+							fillDataToTable(products);
+						}
+					});
+				}
+			});
+
+			$('#keyword').keyup(function () {
+				var keyword = $(this).val();
+				$.ajax({
+					type: 'GET',
+					url: '/ajaxjpa/findProductByKeyword',
+					data: {
+						keyword: keyword
+					},
+					success: function (products) {
+						fillDataToTable(products);
+					}
+				});
+			});
+			
+			$('#comboboxCategory').change(function() {
+				var categoryId = $(this).val();
+				$.ajax({
+					type: 'GET',
+					url: '/ajaxjpa/findProductByCategoryId',
+					data: {
+						categoryId: categoryId
+					},
+					success: function (products) {
+						fillDataToTable(products);
+					}
+				});
+			});
+
+			function fillDataToTable(products) {
+				var s = '';
+				for (var i = 0; i < products.length; i++) {
+					s += '<tr>';
+					s += '<td>' + products[i].id + '</td>';
+					s += '<td><a href="#" data-id="' + products[i].id + '">' + products[i].name + '</a></td>';
+					s += '<td><a href="#" data-id="' + products[i].id + '"><img src="/assets/images/' + products[i].photo + '" width="70" height="70"></a></td>';
+					s += '<td>' + products[i].created + '</td>';
+					s += '<td>' + products[i].price + '</td>';
+					s += '<td>' + products[i].quantity + '</td>';
+					s += '<td>' + products[i].categoryId + '</td>';
+					s += '<td>' + products[i].categoryName + '</td>';
+					s += '</tr>';
+				}
+				$('#tableProduct tbody').html(s);
+			}
+
+		});
+	</script>
+</head>
+
+<body>
+
+	<table border="1" id="tableProduct">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>
+					Name
+					<br>
+					<input type="text" id="keyword" autocomplete="off">
+				</th>
+				<th>Photo</th>
+				<th>Created</th>
+				<th width="300">
+					Price
+					<br>
+					<div id="slider-range"></div>
+				</th>
+				<th>Quantity</th>
+				<th>Category Id</th>
+				<th>
+					Category Name
+					<br>
+					<select id="comboboxCategory">
+						<option value="-1">All</option>
+						<option th:each="category : ${categories}" 
+							th:value="${category.id}" th:text="${category.name}"></option>
+					</select>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="product : ${products}">
+				<td th:text="${product.id}"></td>
+				<td>
+					<a href="#" th:text="${product.name}" th:attr="data-id=${product.id}"></a>
+				</td>
+				<td th:text="${#dates.format(product.created, 'dd/MM/yyyy')}"></td>
+				<td>
+					<a href="#" th:attr="data-id=${product.id}">
+						<img th:src="@{'/assets/images/' + ${product.photo}}" width="120" height="100">
+					</a>
+				</td>
+				<td align="center" th:text="${product.price}"></td>
+				<td th:text="${product.quantity}"></td>
+				<td th:text="${product.categoryId}"></td>
+				<td th:text="${product.categoryName}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div id="dialog-message" title="Product Details">
+		<p>
+			<img width="70" height="70" id="photo">
+		</p>
+		<p>
+			Name <span id="productName"></span>
+		</p>
+		<p>
+			Price <span id="price"></span>
+		</p>
+	</div>
+
+</body>
+
+</html>

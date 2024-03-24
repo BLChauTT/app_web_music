@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Index</title>
+	 <meta charset="UTF-8"> 
+</head>
+
+<body>
+
+	<a th:href="@{/demo10/index?lang=fr_FR}">
+		<img th:src="@{/assets/images/france.png}" width="50" height="50">
+	</a>
+	
+	<a th:href="@{/demo10/index?lang=ja_JP}">
+		<img th:src="@{/assets/images/japan.png}" width="50" height="50">
+	</a>
+	
+	<a th:href="@{/demo10/index?lang=vi_VN}">
+		<img th:src="@{/assets/images/vietnam.png}" width="50" height="50">
+	</a>
+	
+	<a th:href="@{/demo10/index?lang=en_US}">
+		<img th:src="@{/assets/images/usa.jpg}" width="50" height="50">
+	</a>
+	
+	<br><br>
+	Locale: <th:block th:text="${#locale}"></th:block>
+	<br>
+	Price: <th:block th:text="${#numbers.formatCurrency(price)}"></th:block>
+	<br>
+	Quantity: <th:block th:text="${#numbers.formatInteger(quantity, 3, 'DEFAULT')}"></th:block>
+	<br>
+	Today: <th:block th:text="${#calendars.format(today)}"></th:block>
+	<br>
+	Msg: <th:block th:text="#{msg}"></th:block>
+	<br>
+	Msg 2: <th:block th:text="#{msg2('IPhone 10')}"></th:block>
+
+</body>
+
+</html>

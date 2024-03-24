@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Index</title>
+</head>
+
+<body>
+
+	<a th:href="@{/category/index}">Back</a>
+	<br>
+	<h3>Add Category</h3>
+	<th:block th:text="${msg}"></th:block>
+	<form method="post" th:action="@{/category/add}">
+		<table border="0">
+			<tr>
+				<td>Name</td>
+				<td>
+					<input type="text" th:field="${category.name}">
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+					<input type="submit" value="Save">
+				</td>
+			</tr>
+		</table>
+	</form>
+
+</body>
+
+</html>

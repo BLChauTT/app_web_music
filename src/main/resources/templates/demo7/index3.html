@@ -1,0 +1,56 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Index</title>
+ 
+ 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+ 	
+	<script th:src="@{/assets/js/jquery-3.7.1.min.js}"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+	<script>
+
+		$(document).ready(function () {
+
+			$('#keyword1').autocomplete({
+				source: '/ajax/autocomplete'
+			});
+			
+			$('#keyword2').autocomplete({
+				source: '/ajax/autocomplete2',
+				select: function(event, ui) {
+					alert(ui.item.id);
+					return false;
+				}
+			})
+			.autocomplete( "instance" )._renderItem = function( ul, item ) {
+		      return $( "<li>" )
+		        .append( '<div><img src="/assets/images/' + item.photo + '" width="50" height="50"><br>' + item.price + '<br>' + item.name + '</div>' )
+		        .appendTo( ul );
+		    };
+			
+		});
+
+	</script>
+
+</head>
+
+<body>
+
+	<fieldset>
+		<legend>Autocomplete 1</legend>
+		Keyword <input type="text" id="keyword1">
+	</fieldset>
+	
+	<br><br>
+	
+	<fieldset>
+		<legend>Autocomplete 2</legend>
+		Keyword 2 <input type="text" id="keyword2">
+	</fieldset>
+	
+
+
+</body>
+
+</html>

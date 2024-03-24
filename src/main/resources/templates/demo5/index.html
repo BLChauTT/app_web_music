@@ -1,0 +1,33 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Index</title>
+</head>
+<body>
+
+	<h3>Index</h3>
+	id: <th:block th:text="${session.id}"></th:block>
+	<br>
+	username: <th:block th:text="${session.username}"></th:block>
+	<br>
+	<th:block th:if="${session.username != null}">
+		Welcome <th:block th:text="${session.username}"></th:block>
+	</th:block>
+	<th:block th:if="${session.username == null}">
+		<a th:href="@{/account/login}">Login</a>
+	</th:block>
+	<br>
+	language id: <th:block th:text="${session.language.id}"></th:block>
+	<br>
+	language name: <th:block th:text="${session.language.name}"></th:block>
+	<br>
+	<ul>
+		<li th:each="language : ${session.languages}">
+			Language id: <th:block th:text="${language.id}"></th:block>
+			<br>
+			Language name: <th:block th:text="${language.name}"></th:block>
+		</li>
+	</ul>
+	
+	
+</body>
+</html>

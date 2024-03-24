@@ -1,0 +1,200 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Index</title>
+
+<script th:src="@{/assets/js/jquery-3.7.1.min.js}"></script>
+
+<script>
+	
+	$(document).ready(function() {
+		
+		$('#buttonClickMe').click(function() {
+			$.ajax({
+				type: 'GET',
+				url: '/ajax/ajax1',
+				success: function(data) {
+					$('#result1').html(data);
+				}
+			});
+		});
+		
+		$('#buttonClickMe2').click(function() {
+			$.ajax({
+				type: 'GET',
+				url: '/ajax/ajax2',
+				success: function(data) {
+					$('#result2').html(data);
+				}
+			});
+		});
+		
+		$('#buttonSearch').click(function() {
+			var keyword = $('#keyword').val();
+			$.ajax({
+				type: 'GET',
+				url: '/ajax/ajax3',
+				data: {
+					keyword: keyword
+				},
+				success: function(data) {
+					$('#result3').html(data);
+				}
+			});
+		});
+		
+		$('#buttonSearch2').click(function() {
+			var min = $('#min').val();
+			var max = $('#max').val();
+			$.ajax({
+				type: 'GET',
+				url: '/ajax/ajax4',
+				data: {
+					min: min,
+					max: max
+				},
+				success: function(data) {
+					$('#result4').html(data);
+				}
+			});
+		});
+		
+		$('#buttonLogin').click(function() {
+			var username = $('#username').val();
+			var password = $('#password').val();
+			$.ajax({
+				type: 'POST',
+				url: '/ajax/login',
+				data: {
+					username: username,
+					password: password
+				},
+				success: function(data) {
+					$('#result5').html(data);
+				}
+			});
+		});
+		
+		$('#buttonFind').click(function() {
+			$.ajax({
+				type: 'GET',
+				url: '/ajax/find',
+				success: function(product) {
+					console.log(product);
+					$('#productId').html(product.id);
+					$('#productName').html(product.name);
+					$('#photo').html('<img src="/assets/images/' + product.photo + '" width="50" height="50">');
+				}
+			});
+		});
+		
+		$('#buttonFindAll').click(function() {
+			$.ajax({
+				type: 'GET',
+				url: '/ajax/findAll',
+				success: function(products) {
+					var s = '';
+					for(var i = 0; i < products.length; i++) {
+						s += '<tr>';
+						s += '<td>' + products[i].id + '</td>';
+						s += '<td>' + products[i].name + '</td>';
+						s += '<td><img src="/assets/images/' + products[i].photo + '" width="50" height="50"></td>';
+						s += '</tr>';
+					}
+					$('#tableProduct tbody').html(s);
+				}
+			});
+		});
+		
+	});
+	
+</script>
+
+</head>
+<body>
+
+	<fieldset>
+		<legend>Demo 1</legend>
+		<button id="buttonClickMe">Click Me</button>
+		<br>
+		<span id="result1"></span>
+	</fieldset>
+	
+	<fieldset>
+		<legend>Demo 2</legend>
+		<button id="buttonClickMe2">Click Me 2</button>
+		<br>
+		<span id="result2"></span>
+	</fieldset>
+	
+	<fieldset>
+		<legend>Demo 3</legend>
+		Keyword <input type="text" id="keyword">
+		<br>
+		<button id="buttonSearch">Search</button>
+		<br>
+		<span id="result3"></span>
+	</fieldset>
+	
+	<fieldset>
+		<legend>Demo 4</legend>
+		Min <input type="text" id="min">
+		<br>
+		Max <input type="text" id="max">
+		<br>
+		<button id="buttonSearch2">Search</button>
+		<br>
+		<span id="result4"></span>
+	</fieldset>
+	
+	<fieldset>
+		<legend>Login</legend>
+		Username <input type="text" id="username">
+		<br>
+		Password <input type="password" id="password">
+		<br>
+		<button id="buttonLogin">Login</button>
+		<br>
+		<span id="result5"></span>
+	</fieldset>
+	
+	<fieldset>
+		<legend>Find</legend>
+		<button id="buttonFind">Find</button>
+		<br>
+		<table border="1">
+			<tr>
+				<td>Id</td>
+				<td id="productId"></td>
+			</tr>
+			<tr>
+				<td>Name</td>
+				<td id="productName"></td>
+			</tr>
+			<tr>
+				<td>Photo</td>
+				<td id="photo"></td>
+			</tr>
+		</table>
+	</fieldset>
+	
+	<fieldset>
+		<legend>Find All</legend>
+		<button id="buttonFindAll">Find All</button>
+		<br>
+		<table border="1" id="tableProduct">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Photo</th>
+					<th>Price</th>
+					<th>Created</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</fieldset>
+	
+	
+</body>
+</html>
