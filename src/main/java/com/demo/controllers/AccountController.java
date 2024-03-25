@@ -1,5 +1,6 @@
 package com.demo.controllers;
 
+import com.demo.entities.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
