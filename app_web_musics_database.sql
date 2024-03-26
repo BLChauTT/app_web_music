@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 20, 2024 lúc 12:13 PM
+-- Thời gian đã tạo: Th3 26, 2024 lúc 03:55 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -34,18 +34,19 @@ CREATE TABLE `account` (
   `password` varchar(255) DEFAULT NULL,
   `gender` enum('Male','Female','Other') DEFAULT NULL,
   `dob` date DEFAULT NULL,
-  `region` varchar(255) DEFAULT NULL
+  `region` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `account`
 --
 
-INSERT INTO `account` (`id`, `displayName`, `email`, `password`, `gender`, `dob`, `region`) VALUES
-(1, 'Tan Chau', 'abc@gmail.com', '123', 'Male', '2023-01-01', 'VietNam'),
-(2, 'Duc Toan', 'abc1@gmail.com', '123', 'Male', '2023-01-02', 'VietNam'),
-(3, 'Huy Pham', 'abc2@gmail.com', '123', 'Male', '2023-01-03', 'VietNam'),
-(4, 'Tran Duong', 'abc3@gmail.com', '123', 'Male', '2023-01-04', 'VietNam');
+INSERT INTO `account` (`id`, `displayName`, `email`, `password`, `gender`, `dob`, `region`, `status`) VALUES
+(1, 'Tan Chau', 'abc@gmail.com', '123', 'Male', '2023-01-01', 'VietNam', 1),
+(2, 'Duc Toan', 'abc1@gmail.com', '123', 'Male', '2023-01-02', 'VietNam', 1),
+(3, 'Huy Pham', 'abc2@gmail.com', '123', 'Male', '2023-01-03', 'VietNam', 1),
+(4, 'Tran Duong', 'abc3@gmail.com', '123', 'Male', '2023-01-04', 'VietNam', 1);
 
 -- --------------------------------------------------------
 
