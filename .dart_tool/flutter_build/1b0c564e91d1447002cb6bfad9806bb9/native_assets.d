@@ -1,0 +1,1 @@
+ D:\\Code\\Ki4\\Android\\Spocify\\.dart_tool\\flutter_build\\1b0c564e91d1447002cb6bfad9806bb9\\native_assets.yaml: 
