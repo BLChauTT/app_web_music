@@ -4,7 +4,7 @@
             "outputFile": "com.example.spocify.app-mergeDebugResources-9:/values/values.xml",
             "map": [
                 {
-                    "source": "D:\\Code\\Ki4\\Android\\Spocify\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "D:\\Code\\Ki4\\Android\\app_web_music\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
