@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:spocify/utils/global.colors.dart';
+import 'package:spocify/views/home.dart';
 import 'package:spocify/views/register.dart';
 import 'package:spocify/views/widgets/button.form.global.dart';
 import 'package:spocify/views/widgets/social.login.dart';
 import 'package:spocify/views/widgets/text.form.global.dart';
+import 'package:spocify/app/globals.dart' as globals;
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -70,7 +72,15 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                const ButtonGlobal(
+                ButtonGlobal(
+                  myVoidCallback: () {
+                    print('oke');
+                    globals.email = emailController.text.toString();
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => HomePage()));
+                  },
                   text: "Sign in",
                 ),
                 const SizedBox(

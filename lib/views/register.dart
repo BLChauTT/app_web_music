@@ -79,8 +79,9 @@ class RegisterPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                const ButtonGlobal(
+                ButtonGlobal(
                   text: "Sign Up",
+                  myVoidCallback: (){},
                 ),
                 const SizedBox(
                   height: 50,

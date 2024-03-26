@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:spocify/models/song.model.dart';
 import 'package:spocify/utils/global.colors.dart';
 import 'package:spocify/views/login.dart';
+import 'package:spocify/app/globals.dart' as globals;
 
 class HomePage extends StatefulWidget {
   @override
@@ -58,7 +59,7 @@ class HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Welcome",
+                      "Welcome ${globals.email}",
                       style: TextStyle(
                         color: GlobalColors.whiteColor,
                         fontSize: 16,

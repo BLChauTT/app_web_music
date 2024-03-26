@@ -6,9 +6,10 @@ class ButtonGlobal extends StatefulWidget {
   const ButtonGlobal({
     Key? key,
     required this.text,
+    required this.myVoidCallback
   }) : super(key: key);
   final String text;
-
+  final VoidCallback myVoidCallback;
   @override
   _ButtonGlobalState createState() => _ButtonGlobalState();
 }
@@ -17,13 +18,7 @@ class _ButtonGlobalState extends State<ButtonGlobal> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        if (widget.text == "Sign Up") {
-          signup();
-        } else {
-          login();
-        }
-      },
+      onTap: widget.myVoidCallback,
       child: Container(
         alignment: Alignment.center,
         height: 55,

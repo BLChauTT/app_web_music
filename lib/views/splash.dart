@@ -13,19 +13,22 @@ class SplashPage extends StatefulWidget {
 
 class SplashPageState extends State<SplashPage> {
   @override
-  void initState() {}
-
+  void initState() {
+    // TODO: implement initState
+    runApp();
+    super.initState();
+  }
+  void runApp(){
+    Future.delayed(Duration(seconds: 1)).then((value) => Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LoginPage(),
+      ),
+    ));
+  }
   @override
   Widget build(BuildContext context) {
 
-    Timer(const Duration(seconds: 2), () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => LoginPage(),
-        ),
-      );
-    });
 
     return Scaffold(
       backgroundColor: GlobalColors.mainColor,
