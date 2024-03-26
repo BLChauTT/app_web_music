@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:spocify/utils/global.colors.dart';
 
-class TextFormGlobal extends StatelessWidget {
-  const TextFormGlobal(
-      {Key? key,
-      required this.controller,
-      required this.text,
-      required this.textInputType,
-      required this.obscure})
-      : super(key: key);
+class TextFormGlobal extends StatefulWidget {
+  const TextFormGlobal({
+    Key? key,
+    required this.controller,
+    required this.text,
+    required this.textInputType,
+    required this.obscure,
+  }) : super(key: key);
+
   final TextEditingController controller;
   final String text;
   final TextInputType textInputType;
   final bool obscure;
 
+  @override
+  _TextFormGlobalState createState() => _TextFormGlobalState();
+}
+
+class _TextFormGlobalState extends State<TextFormGlobal> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,15 +32,18 @@ class TextFormGlobal extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(6),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 7),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 7,
+          ),
         ],
       ),
       child: TextFormField(
-        controller: controller,
-        keyboardType: textInputType,
-        obscureText: obscure,
+        controller: widget.controller,
+        keyboardType: widget.textInputType,
+        obscureText: widget.obscure,
         decoration: InputDecoration(
-          hintText: text,
+          hintText: widget.text,
           border: InputBorder.none,
           contentPadding: const EdgeInsets.all(0),
           hintStyle: const TextStyle(

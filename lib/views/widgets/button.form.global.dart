@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:spocify/utils/global.colors.dart';
+import 'package:spocify/views/home.dart';
 
-class ButtonGlobal extends StatelessWidget {
+class ButtonGlobal extends StatefulWidget {
   const ButtonGlobal({
     Key? key,
     required this.text,
@@ -9,10 +10,19 @@ class ButtonGlobal extends StatelessWidget {
   final String text;
 
   @override
+  _ButtonGlobalState createState() => _ButtonGlobalState();
+}
+
+class _ButtonGlobalState extends State<ButtonGlobal> {
+  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print("Login");
+        if (widget.text == "Sign Up") {
+          signup();
+        } else {
+          login();
+        }
       },
       child: Container(
         alignment: Alignment.center,
@@ -28,12 +38,27 @@ class ButtonGlobal extends StatelessWidget {
           ],
         ),
         child: Text(
-          text,
+          widget.text,
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w600,
           ),
         ),
+      ),
+    );
+  }
+
+  void signup() {
+    // Xử lý logic khi nhấn nút Sign Up
+
+  }
+
+  void login() {
+    // Xử lý logic khi nhấn nút Login
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomePage(),
       ),
     );
   }

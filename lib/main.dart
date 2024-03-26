@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spocify/views/home.dart';
 import 'package:spocify/views/login.dart';
 import 'package:spocify/views/register.dart';
 import 'package:spocify/views/splash.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: SplashPage(),
+      home: HomePage(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:spocify/utils/global.colors.dart';
 
-class SocialLogin extends StatelessWidget {
+class SocialLogin extends StatefulWidget {
   const SocialLogin({
     Key? key,
     required this.text,
@@ -11,13 +11,18 @@ class SocialLogin extends StatelessWidget {
   final String text;
 
   @override
+  _SocialLoginState createState() => _SocialLoginState();
+}
+
+class _SocialLoginState extends State<SocialLogin> {
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
           alignment: Alignment.center,
           child: Text(
-            text,
+            widget.text,
             style: TextStyle(
               color: GlobalColors.textColor,
               fontWeight: FontWeight.w600,
