@@ -15,12 +15,12 @@ import jakarta.persistence.*;
 public class Account implements java.io.Serializable {
 
 	private Integer id;
-	private String username;
-	private String password;
-	private String fullName;
 	private String email;
+	private String password;
+	//private String fullName;
+	//private String email;
 	private boolean status;
-	private String securityCode;
+	//private String securityCode;
 	private Date dob;
 	private Set<Role> roles = new HashSet<Role>(0);
 	private Set<Invoice> invoices = new HashSet<Invoice>(0);
@@ -35,32 +35,32 @@ public class Account implements java.io.Serializable {
 		this.dob = dob;
 	}
 
-	@Column(name = "security_code", nullable = false, length = 250)
-	public String getSecurityCode() {
-		return securityCode;
-	}
-
-	public void setSecurityCode(String securityCode) {
-		this.securityCode = securityCode;
-	}
+//	@Column(name = "security_code", nullable = false, length = 250)
+//	public String getSecurityCode() {
+//		return securityCode;
+//	}
+//
+//	public void setSecurityCode(String securityCode) {
+//		this.securityCode = securityCode;
+//	}
 
 	public Account() {
 	}
 
-	public Account(String username, String password, String fullName, String email, boolean status) {
-		this.username = username;
-		this.password = password;
-		this.fullName = fullName;
+	public Account(String email, String password, boolean status) {
 		this.email = email;
+		this.password = password;
+		//this.fullName = fullName;
+		//this.email = email;
 		this.status = status;
 	}
 
-	public Account(String username, String password, String fullName, String email, boolean status, Set<Role> roles,
+	public Account(String email, String password, boolean status, Set<Role> roles,
 			Set<Invoice> invoices) {
-		this.username = username;
-		this.password = password;
-		this.fullName = fullName;
 		this.email = email;
+		this.password = password;
+		//this.fullName = fullName;
+		//this.email = email;
 		this.status = status;
 		this.roles = roles;
 		this.invoices = invoices;
@@ -78,13 +78,13 @@ public class Account implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "username", nullable = false, length = 250)
-	public String getUsername() {
-		return this.username;
+	@Column(name = "email", nullable = false, length = 250)
+	public String getemail() {
+		return this.email;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setemail(String email) {
+		this.email = email;
 	}
 
 	@Column(name = "password", nullable = false, length = 250)
@@ -96,23 +96,23 @@ public class Account implements java.io.Serializable {
 		this.password = password;
 	}
 
-	@Column(name = "full_name", nullable = false, length = 250)
-	public String getFullName() {
-		return this.fullName;
-	}
+//	@Column(name = "full_name", nullable = false, length = 250)
+//	public String getFullName() {
+//		return this.fullName;
+//	}
+//
+//	public void setFullName(String fullName) {
+//		this.fullName = fullName;
+//	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-
-	@Column(name = "email", nullable = false, length = 250)
-	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
+//	@Column(name = "email", nullable = false, length = 250)
+//	public String getEmail() {
+//		return this.email;
+//	}
+//
+//	public void setEmail(String email) {
+//		this.email = email;
+//	}
 
 	@Column(name = "status", nullable = false)
 	public boolean isStatus() {

@@ -12,8 +12,8 @@ import com.demo.entitiesjpa.Account;
 @Repository
 public interface AccountRepository extends CrudRepository<Account, Integer> {
 
-	@Query("from Account where username = :username and password = :password and status = :status")
-	public Account login(@Param("username") String username, @Param("password") String password,
+	@Query("from Account where email = :email and password = :password and status = :status")
+	public Account login(@Param("email") String email, @Param("password") String password,
 			@Param("status") boolean status);
 
 	@Query("from Account where email = :email")

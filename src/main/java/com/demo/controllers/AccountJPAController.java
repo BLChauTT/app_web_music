@@ -65,38 +65,38 @@ public class AccountJPAController {
 		return "accountjpa/register";
 	}
 
-	@PostMapping("register")
-	public String register(@ModelAttribute("account") Account account, RedirectAttributes redirectAttributes) {
-		account.setStatus(false);
-		String securityCode = RandomHelper.random();
-		account.setSecurityCode(securityCode);
-		if (accountJPAService.save(account)) {
-
-			/* Gui email kich hoat tai khoan */
-			String content = "Nhan vao <a href='" + environment.getProperty("BASE_URL") + "accountjpa/verify?email="
-					+ account.getEmail() + "&securitycode=" + securityCode + "'>day</a> de kich hoat";
-			String from = environment.getProperty("spring.mail.username");
-			mailService.send(from, account.getEmail(), "Verify", content);
-
-			return "redirect:/accountjpa/login";
-		} else {
-			redirectAttributes.addFlashAttribute("msg", "Failed");
-			return "redirect:/accountjpa/register";
-		}
-	}
+//	@PostMapping("register")
+//	public String register(@ModelAttribute("account") Account account, RedirectAttributes redirectAttributes) {
+//		account.setStatus(false);
+//		String securityCode = RandomHelper.random();
+//		//account.setSecurityCode(securityCode);
+//		if (accountJPAService.save(account)) {
+//
+//			/* Gui email kich hoat tai khoan */
+//			String content = "Nhan vao <a href='" + environment.getProperty("BASE_URL") + "accountjpa/verify?email="
+//					+ account.getEmail() + "&securitycode=" + securityCode + "'>day</a> de kich hoat";
+//			String from = environment.getProperty("spring.mail.username");
+//			mailService.send(from, account.getEmail(), "Verify", content);
+//
+//			return "redirect:/accountjpa/login";
+//		} else {
+//			redirectAttributes.addFlashAttribute("msg", "Failed");
+//			return "redirect:/accountjpa/register";
+//		}
+//	}
 
 	@GetMapping("verify")
 	public String verify(@RequestParam("email") String email, @RequestParam("securitycode") String securitycode,
 			ModelMap modelMap) {
 		Account account = accountJPAService.findByEmail(email);
 		if (account != null) {
-			if (account.getSecurityCode().equals(securitycode)) {
-				account.setStatus(true);
-				accountJPAService.save(account);
-				modelMap.put("msg", "Kich hoat tai khoan thanh cong. Nhan vao <a href='" + environment.getProperty("BASE_URL") + "accountjpa/login'>day</a> de kich hoat");
-			} else {
-				modelMap.put("msg", "Khong the kich hoat tai khoan");
-			}
+//			if (account.getSecurityCode().equals(securitycode)) {
+//				account.setStatus(true);
+//				accountJPAService.save(account);
+//				modelMap.put("msg", "Kich hoat tai khoan thanh cong. Nhan vao <a href='" + environment.getProperty("BASE_URL") + "accountjpa/login'>day</a> de kich hoat");
+//			} else {
+//				modelMap.put("msg", "Khong the kich hoat tai khoan");
+//			}
 		} else {
 			modelMap.put("msg", "Email khong ton tai");
 		}

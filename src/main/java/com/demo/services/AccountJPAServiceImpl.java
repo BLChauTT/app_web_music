@@ -28,8 +28,8 @@ public class AccountJPAServiceImpl implements AccountJPAService {
 	}
 
 	@Override
-	public boolean login(String username, String password) {
-		return accountRepository.login(username, password, true) != null;
+	public boolean login(String email, String password) {
+		return accountRepository.login(email, password, true) != null;
 	}
 
 	@Override
@@ -39,11 +39,17 @@ public class AccountJPAServiceImpl implements AccountJPAService {
 
 	@Override
 	public List<Account> findByBirthday() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new Date());
-		int day = calendar.get(Calendar.DAY_OF_MONTH);
-		int month = calendar.get(Calendar.MONTH) + 1;
-		return accountRepository.findByBirthday(day, month);
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	//@Override
+	//public List<Account> findByBirthday() {
+//		Calendar calendar = Calendar.getInstance();
+//		calendar.setTime(new Date());
+//		int day = calendar.get(Calendar.DAY_OF_MONTH);
+//		int month = calendar.get(Calendar.MONTH) + 1;
+//		return accountRepository.findByBirthday(day, month);
+	//}
 
 }

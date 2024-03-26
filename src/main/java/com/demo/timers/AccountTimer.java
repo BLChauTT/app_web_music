@@ -18,14 +18,14 @@ public class AccountTimer {
 	// @Scheduled(fixedDelay = 1000 * 60)
 	@Scheduled(cron = "0 * * * * *")
 	public void display2() {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		System.out.println("Cac tai khoan sinh nhat hôm nay");
-		for (Account account : accountJPAService.findByBirthday()) {
-			System.out.println("full name: " + account.getFullName());
-			System.out.println("email: " + account.getEmail());
-			System.out.println("dob: " + simpleDateFormat.format(account.getDob()));
-			System.out.println("--------------------------");
-		}
+//		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//		System.out.println("Cac tai khoan sinh nhat hôm nay");
+//		for (Account account : accountJPAService.findByBirthday()) {
+//			System.out.println("full name: " + account.getFullName());
+//			System.out.println("email: " + account.getEmail());
+//			System.out.println("dob: " + simpleDateFormat.format(account.getDob()));
+//			System.out.println("--------------------------");
+//		}
 	}
 
 }
