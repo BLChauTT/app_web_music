@@ -1,8 +1,8 @@
 class Song {
-  final String title;
-  final String description;
-  final String url;
-  final String coverUrl;
+  late final String title;
+  late final String description;
+  late final String url;
+  late final String coverUrl;
 
   Song({
     required this.title,

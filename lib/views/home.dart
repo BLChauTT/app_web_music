@@ -10,6 +10,8 @@ import 'package:spocify/views/login.dart';
 import 'package:spocify/app/globals.dart' as globals;
 import 'package:spocify/views/song_screen.dart';
 
+import '../app/globals.dart';
+
 class HomePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -214,14 +216,13 @@ class HomePageState extends State<HomePage> {
                                       ),
                                       InkWell(
                                         onTap: (){
-                                          globals.songTitle = songs[index].title.toString();
-                                          globals.songUrl = songs[index].url.toString();
-                                          globals.songImg = songs[index].coverUrl.toString();
-                                          globals.songAuthur = songs[index].description.toString();
+                                          globals.currentIndexTrending = index;
+                                          nextIndexTrending = currentIndexTrending + 1;
+                                          preIndexTrending = currentIndexTrending - 1;
 
-                                          print(globals.songTitle);
-                                          print(globals.songUrl);
-                                          print(globals.songImg);
+                                          print(currentIndexTrending);
+                                          print(nextIndexTrending);
+                                          print(preIndexTrending);
 
                                           Navigator.push(
                                             context,
