@@ -9,6 +9,7 @@ import 'package:spocify/utils/global.colors.dart';
 import 'package:spocify/views/login.dart';
 import 'package:spocify/app/globals.dart' as globals;
 import 'package:spocify/views/song_screen.dart';
+import 'package:spocify/views/testaudio_screen.dart';
 
 import '../app/globals.dart';
 
@@ -54,6 +55,13 @@ class HomePageState extends State<HomePage> {
                 backgroundColor: GlobalColors.greyColor,
               ),
             ),
+            // IconButton(
+            //     onPressed: (){
+            //       Navigator.push(
+            //         context,
+            //         MaterialPageRoute(builder: (context) =>  SimpleExampleApp()),
+            //       );
+            //     }, icon: Icon(Icons.add))
           ],
         ),
         body: SingleChildScrollView(
