@@ -37,6 +37,10 @@ dependencies:
   flutter_svg: ^2.0.10+1
   flutter_img: ^0.1.6+148
   flutter_native_splash: ^2.4.0
+  audioplayers: ^6.0.0
+  get: ^4.6.6
+  rx: ^0.4.0
+  just_audio: ^0.9.36
 
 
 
@@ -58,15 +62,15 @@ flutter_native_splash:
   android: true
   ios: true
   web: false
-  color: "#33CCFF"
-  color_dark: "#33CCFF"
+  color: "#C1151A"
+  color_dark: "#C1151A"
   image: "assets/images/UM-ICON.png"
   android_12:
-    color: "#33CCFF"
-    color_dark: "#33CCFF"
+    color: "#C1151A"
+    color_dark: "#C1151A"
     image: "assets/images/UM-ICON.png"
     image_dark: "assets/images/UM-ICON.png"
-    icon_background_color_dark: "#33CCFF"
+    icon_background_color_dark: "#C1151A"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

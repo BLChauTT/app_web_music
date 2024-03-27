@@ -1,11 +1,14 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:spocify/models/playlists_model.dart';
 import 'package:spocify/models/song.model.dart';
 import 'package:spocify/utils/global.colors.dart';
 import 'package:spocify/views/login.dart';
 import 'package:spocify/app/globals.dart' as globals;
+import 'package:spocify/views/song_screen.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,6 +19,7 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   List<Song> songs = Song.songs;
+  List<Playlist> playlists = Playlist.playlists;
 
   @override
   void initState() {}
@@ -29,7 +33,7 @@ class HomePageState extends State<HomePage> {
             end: Alignment.bottomCenter,
             colors: [
               GlobalColors.bottomColor.withOpacity(0.8),
-              GlobalColors.skyBlueColor.withOpacity(0.8),
+              GlobalColors.subBlueColor.withOpacity(0.8),
             ]),
       ),
       child: Scaffold(
@@ -59,7 +63,7 @@ class HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Welcome ${globals.email}",
+                      "Welcome",
                       style: TextStyle(
                         color: GlobalColors.whiteColor,
                         fontSize: 16,
@@ -90,7 +94,6 @@ class HomePageState extends State<HomePage> {
                           Icons.search,
                           color: Colors.grey.shade400,
                         ),
-                        // Đặt góc bo tròn
                         isDense: true,
                         filled: true,
                         fillColor: GlobalColors.whiteColor,
@@ -129,7 +132,7 @@ class HomePageState extends State<HomePage> {
                           Text(
                             "View More",
                             style:
-                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                Theme.of(context).textTheme.bodySmall!.copyWith(
                                       color: GlobalColors.whiteColor,
                                     ),
                           ),
@@ -193,7 +196,7 @@ class HomePageState extends State<HomePage> {
                                                 .textTheme
                                                 .bodyLarge!
                                                 .copyWith(
-                                                  color: GlobalColors.textColor,
+                                                  color: GlobalColors.greyColor.withOpacity(1.0),
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                           ),
@@ -203,15 +206,34 @@ class HomePageState extends State<HomePage> {
                                                 .textTheme
                                                 .bodySmall!
                                                 .copyWith(
-                                                  color: GlobalColors.greyColor,
+                                                  color: GlobalColors.greyColor.withOpacity(0.4),
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                           ),
                                         ],
                                       ),
-                                      Icon(
-                                        Icons.play_circle,
-                                        color: GlobalColors.mainColor,
+                                      InkWell(
+                                        onTap: (){
+                                          globals.songTitle = songs[index].title.toString();
+                                          globals.songUrl = songs[index].url.toString();
+                                          globals.songImg = songs[index].coverUrl.toString();
+                                          globals.songAuthur = songs[index].description.toString();
+
+                                          print(globals.songTitle);
+                                          print(globals.songUrl);
+                                          print(globals.songImg);
+
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => SongScreenPage(),
+                                            ),
+                                          );
+                                        },
+                                        child: Icon(
+                                          Icons.play_circle,
+                                          color: GlobalColors.mainColor,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -221,6 +243,113 @@ class HomePageState extends State<HomePage> {
                           );
                         },
                       ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 20.0,
+                  top: 10.0,
+                  bottom: 10.0,
+                ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        right: 20.0,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Playlists",
+                            style:
+                                Theme.of(context).textTheme.headline6!.copyWith(
+                                      color: GlobalColors.whiteColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                          ),
+                          Text(
+                            "View More",
+                            style:
+                                Theme.of(context).textTheme.bodySmall!.copyWith(
+                                      color: GlobalColors.whiteColor,
+                                    ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: playlists.length,
+                      itemBuilder: ((context, index) {
+                        return InkWell(
+                          onTap: (){
+                            //nghe nhac
+                          },
+                          child: Container(
+                            height: 75,
+                            margin: const EdgeInsets.only(bottom: 10, right: 20),
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            decoration: BoxDecoration(
+                              color: GlobalColors.mainColor.withOpacity(0.6),
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  child: Image.network(
+                                    playlists[index].imageUrl,
+                                    height: 50,
+                                    width: 50,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        playlists[index].title,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge!
+                                            .copyWith(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
+                                      Text(
+                                        "${playlists[index].songs.length} songs",
+                                        maxLines: 2,
+                                        style:
+                                            Theme.of(context).textTheme.bodySmall,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.play_circle,
+                                    color: GlobalColors.whiteColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
                     ),
                   ],
                 ),

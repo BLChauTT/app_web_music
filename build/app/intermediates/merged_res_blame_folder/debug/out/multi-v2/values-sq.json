@@ -1,16 +1,57 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.spocify.app-mergeDebugResources-9:/values-sq/values-sq.xml",
+            "outputFile": "com.example.spocify.app-mergeDebugResources-15:/values-sq/values-sq.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\ADMIN\\.gradle\\caches\\transforms-3\\2579a7de00054bf46a8dbc332552f622\\transformed\\core-1.6.0\\res\\values-sq\\values-sq.xml",
+                    "source": "C:\\Users\\ADMIN\\.gradle\\caches\\transforms-3\\af72863ed300a57bffb75b18c0d4fe34\\transformed\\jetified-media2-session-1.2.1\\res\\values-sq\\values-sq.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,161,268,362,494",
+                        "endColumns": "105,106,93,131,140",
+                        "endOffsets": "156,263,357,489,630"
+                    },
+                    "to": {
+                        "startLines": "2,12,13,14,15",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,831,938,1032,1164",
+                        "endColumns": "105,106,93,131,140",
+                        "endOffsets": "156,933,1027,1159,1300"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\ADMIN\\.gradle\\caches\\transforms-3\\1c54749537a4d1ff3f2079d73b98930f\\transformed\\jetified-exoplayer-core-2.18.7\\res\\values-sq\\values-sq.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,126,187,254,320,398,477,569,655",
+                        "endColumns": "70,60,66,65,77,78,91,85,69",
+                        "endOffsets": "121,182,249,315,393,472,564,650,720"
+                    },
+                    "to": {
+                        "startLines": "3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "161,232,293,360,426,504,583,675,761",
+                        "endColumns": "70,60,66,65,77,78,91,85,69",
+                        "endOffsets": "227,288,355,421,499,578,670,756,826"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\ADMIN\\.gradle\\caches\\transforms-3\\75f115a0f1013408c24b813aa08b99f3\\transformed\\core-1.9.0\\res\\values-sq\\values-sq.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
                         "startOffsets": "55",
                         "endColumns": "100",
                         "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "16",
+                        "startColumns": "4",
+                        "startOffsets": "1305",
+                        "endColumns": "100",
+                        "endOffsets": "1401"
                     }
                 }
             ]

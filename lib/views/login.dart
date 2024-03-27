@@ -76,6 +76,7 @@ class LoginPage extends StatelessWidget {
                   myVoidCallback: () {
                     print('oke');
                     globals.email = emailController.text.toString();
+                    globals.pwd = passwordController.toString();
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -101,8 +102,8 @@ class LoginPage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "Don\'t have an account? ",
+            const Text(
+              "Don't have an account? ",
             ),
             InkWell(
               child: Text(
