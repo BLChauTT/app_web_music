@@ -123,9 +123,9 @@
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-3.0.1",
+      "rootUri": "file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-3.0.2",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.1"
     },
     {
       "name": "flutter_native_splash",
@@ -183,9 +183,9 @@
     },
     {
       "name": "intl",
-      "rootUri": "file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.18.1",
+      "rootUri": "file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.19.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.0"
     },
     {
       "name": "js",
@@ -470,7 +470,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-03-26T14:44:21.807673Z",
+  "generated": "2024-03-27T00:38:02.944022Z",
   "generator": "pub",
   "generatorVersion": "3.3.0"
 }
