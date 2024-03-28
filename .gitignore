@@ -58,8 +58,11 @@ analysis_benchmark.json
 .pub-preload-cache/
 .pub-cache/
 .pub/
+
 build/*
-.idea/*
+.idea/libraries*
+spocify.iml
+
 flutter_*.png
 linked_*.ds
 unlinked.ds
