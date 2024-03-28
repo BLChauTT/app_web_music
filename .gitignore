@@ -17,7 +17,7 @@
 *.iml
 *.ipr
 *.iws
-.idea/
+.idea/*
 
 # Visual Studio Code related
 .classpath
@@ -59,8 +59,30 @@ analysis_benchmark.json
 .pub-cache/
 .pub/
 
+# Chau
 build/*
-.idea/libraries*
+build/
+.dart_tool/*
+.dart_tool/
+.flutter-plugins*
+.flutter-plugins**
+.idea/*
+.idea/
+*.xml
+**.xml
+*.iml
+**.iml
+linux/*
+linux/
+windows/*
+windows/
+/.dart_tool
+.flutter-plugins
+.flutter-plugins-dependencies
+/.idea
+/linux
+/macos
+/windows
 spocify.iml
 
 flutter_*.png
@@ -144,4 +166,3 @@ app.*.symbols
 /android/app/debug
 /android/app/profile
 /android/app/release
-
