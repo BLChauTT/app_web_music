@@ -49,5 +49,11 @@ public class AccountController {
 		session.removeAttribute("username");
 		return "redirect:/account/login";
 	}
+	
+	@GetMapping("signup")
+	public String signup(ModelMap model) {
+		model.put("account", new Account());
+		return "account/signup";
+	}
 
 }

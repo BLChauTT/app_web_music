@@ -1,0 +1,76 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:replace="~{template/authen :: renderBody('Sign up', ~{this::.card-body})}">
+
+<head>
+	<title></title>
+</head>
+
+<body>
+	<div class="card-body">
+		<div class="alert alert-dismissible bg-maroon color-palette" th:if="${error != null}">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="color: white">×</button>
+			<h5><i class="icon fas fa-ban"></i> Alert!</h5>
+			<p th:text="${error}"></p>
+		</div>
+
+		<form th:action="@{/account/signup}" method="POST">
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" placeholder="Username" th:field="${account.username}">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-envelope"></span>
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<input type="password" class="form-control" placeholder="Password" th:field="${account.password}">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-lock"></span>
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" placeholder="Fullname">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<i class="fas fa-users"></i>
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<select class="form-control" id="genderSelect">
+					<option value="" disabled selected>Select Gender</option>
+					<option value="male">Male</option>
+					<option value="female">Female</option>
+					<option value="other">Other</option>
+				</select>
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<i class="fas fa-users"></i>
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<input type="date" class="form-control" placeholder="Birthday">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<i class="fas fa-users"></i>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="btn-group w-100">
+					<input type="submit" class="btn btn-primary col start" />
+				</div>
+			</div>
+		</form>
+		<!-- /.social-auth-links -->
+		<p class="mb-0">
+			<a th:href="@{/account/login}" class="text-center">I already have an account.</a>
+		</p>
+	</div>
+</body>
+
+
+</html>
