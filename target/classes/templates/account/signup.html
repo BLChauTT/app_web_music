@@ -15,7 +15,7 @@
 
 		<form th:action="@{/account/signup}" method="POST">
 			<div class="input-group mb-3">
-				<input type="text" class="form-control" placeholder="Username" th:field="${account.username}">
+				<input type="text" class="form-control" placeholder="Username" th:field="${account.email}">
 				<div class="input-group-append">
 					<div class="input-group-text">
 						<span class="fas fa-envelope"></span>
@@ -31,7 +31,7 @@
 				</div>
 			</div>
 			<div class="input-group mb-3">
-				<input type="text" class="form-control" placeholder="Fullname">
+				<input type="text" class="form-control" placeholder="Fullname" th:field="${account.displayName}">
 				<div class="input-group-append">
 					<div class="input-group-text">
 						<i class="fas fa-users"></i>
@@ -39,11 +39,11 @@
 				</div>
 			</div>
 			<div class="input-group mb-3">
-				<select class="form-control" id="genderSelect">
+				<select class="form-control" id="genderSelect" th:field="${account.gender}">
 					<option value="" disabled selected>Select Gender</option>
-					<option value="male">Male</option>
-					<option value="female">Female</option>
-					<option value="other">Other</option>
+					<option value="Male">Male</option>
+					<option value="Female">Female</option>
+					<option value="Other">Other</option>
 				</select>
 				<div class="input-group-append">
 					<div class="input-group-text">
@@ -52,7 +52,7 @@
 				</div>
 			</div>
 			<div class="input-group mb-3">
-				<input type="date" class="form-control" placeholder="Birthday">
+				<input type="date" class="form-control" placeholder="Birthday" th:field="${account.dob}">
 				<div class="input-group-append">
 					<div class="input-group-text">
 						<i class="fas fa-users"></i>
@@ -65,6 +65,7 @@
 				</div>
 			</div>
 		</form>
+
 		<!-- /.social-auth-links -->
 		<p class="mb-0">
 			<a th:href="@{/account/login}" class="text-center">I already have an account.</a>

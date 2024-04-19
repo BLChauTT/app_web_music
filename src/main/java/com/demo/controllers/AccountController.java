@@ -1,17 +1,17 @@
 package com.demo.controllers;
 
-import com.demo.entities.Account;
+import com.demo.entitiesjpa.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.services.AccountJPAService;
-import com.demo.services.AccountService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -55,5 +55,17 @@ public class AccountController {
 		model.put("account", new Account());
 		return "account/signup";
 	}
+	
+	@PostMapping("signup")
+	public String signup(@ModelAttribute("account") Account account, RedirectAttributes redirectAttributes) {
+	    if (accountService.save(account)) {
+	        redirectAttributes.addFlashAttribute("successMsg", "Signup successful. Please login.");
+	        return "redirect:/account/login";
+	    } else {
+	        redirectAttributes.addFlashAttribute("errorMsg", "Signup failed. Please try again.");
+	        return "redirect:/account/signup";
+	    }
+	}
+
 
 }

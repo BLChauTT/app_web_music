@@ -1,7 +1,5 @@
 package com.demo.repositories;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -18,9 +16,5 @@ public interface AccountRepository extends CrudRepository<Account, Integer> {
 
 	@Query("from Account where email = :email")
 	public Account findByEmail(@Param("email") String email);
-
-	@Query("from Account where day(dob) = :day and month(dob) = :month")
-	public List<Account> findByBirthday(@Param("day") int day, 
-			@Param("month") int month);
 
 }

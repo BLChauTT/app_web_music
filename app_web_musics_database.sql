@@ -1,11 +1,11 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 26, 2024 lúc 03:55 AM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: Apr 19, 2024 at 12:45 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `app_web_musics_database`
+-- Database: `app_web_musics_database`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `account`
+-- Table structure for table `account`
 --
 
 CREATE TABLE `account` (
@@ -32,14 +32,14 @@ CREATE TABLE `account` (
   `displayName` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `gender` enum('Male','Female','Other') DEFAULT NULL,
+  `gender` varchar(50) DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `region` varchar(255) DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `account`
+-- Dumping data for table `account`
 --
 
 INSERT INTO `account` (`id`, `displayName`, `email`, `password`, `gender`, `dob`, `region`, `status`) VALUES
@@ -51,7 +51,7 @@ INSERT INTO `account` (`id`, `displayName`, `email`, `password`, `gender`, `dob`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `accountrole`
+-- Table structure for table `accountrole`
 --
 
 CREATE TABLE `accountrole` (
@@ -61,7 +61,7 @@ CREATE TABLE `accountrole` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `accountrole`
+-- Dumping data for table `accountrole`
 --
 
 INSERT INTO `accountrole` (`id`, `accountId`, `roleId`) VALUES
@@ -73,7 +73,7 @@ INSERT INTO `accountrole` (`id`, `accountId`, `roleId`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `author`
+-- Table structure for table `author`
 --
 
 CREATE TABLE `author` (
@@ -83,7 +83,7 @@ CREATE TABLE `author` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `author`
+-- Dumping data for table `author`
 --
 
 INSERT INTO `author` (`id`, `name`, `image`) VALUES
@@ -94,7 +94,7 @@ INSERT INTO `author` (`id`, `name`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `lovelist`
+-- Table structure for table `lovelist`
 --
 
 CREATE TABLE `lovelist` (
@@ -106,7 +106,7 @@ CREATE TABLE `lovelist` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `lovelist`
+-- Dumping data for table `lovelist`
 --
 
 INSERT INTO `lovelist` (`id`, `name`, `musicId`, `accountId`, `image`) VALUES
@@ -119,7 +119,7 @@ INSERT INTO `lovelist` (`id`, `name`, `musicId`, `accountId`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `music`
+-- Table structure for table `music`
 --
 
 CREATE TABLE `music` (
@@ -135,7 +135,7 @@ CREATE TABLE `music` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `music`
+-- Dumping data for table `music`
 --
 
 INSERT INTO `music` (`id`, `name`, `authorId`, `image`, `file`, `album`, `postingDate`, `modifyDate`, `time`) VALUES
@@ -146,7 +146,7 @@ INSERT INTO `music` (`id`, `name`, `authorId`, `image`, `file`, `album`, `postin
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `role`
+-- Table structure for table `role`
 --
 
 CREATE TABLE `role` (
@@ -155,7 +155,7 @@ CREATE TABLE `role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `role`
+-- Dumping data for table `role`
 --
 
 INSERT INTO `role` (`id`, `name`) VALUES
@@ -164,86 +164,123 @@ INSERT INTO `role` (`id`, `name`) VALUES
 (3, 'sa');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `account`
+-- Indexes for table `account`
 --
 ALTER TABLE `account`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `accountrole`
+-- Indexes for table `accountrole`
 --
 ALTER TABLE `accountrole`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `author`
+-- Indexes for table `author`
 --
 ALTER TABLE `author`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `lovelist`
+-- Indexes for table `lovelist`
 --
 ALTER TABLE `lovelist`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `music`
+-- Indexes for table `music`
 --
 ALTER TABLE `music`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `role`
+-- Indexes for table `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `account`
+-- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT cho bảng `accountrole`
+-- AUTO_INCREMENT for table `accountrole`
 --
 ALTER TABLE `accountrole`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT cho bảng `author`
+-- AUTO_INCREMENT for table `author`
 --
 ALTER TABLE `author`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `lovelist`
+-- AUTO_INCREMENT for table `lovelist`
 --
 ALTER TABLE `lovelist`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT cho bảng `music`
+-- AUTO_INCREMENT for table `music`
 --
 ALTER TABLE `music`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `role`
+-- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
+
+-- Bổ sung table Album
+CREATE TABLE `album` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `releaseDate` date NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- Bổ sung cột Status cho table Music
+ALTER TABLE `music`
+  ADD COLUMN `status` tinyint(1) NOT NULL DEFAULT 1;
+
+-- Thêm table Rating
+CREATE TABLE `rating` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `musicId` int(11) NOT NULL,
+  `accountId` int(11) NOT NULL,
+  `ratingValue` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_rating_music` FOREIGN KEY (`musicId`) REFERENCES `music` (`id`),
+  CONSTRAINT `fk_rating_account` FOREIGN KEY (`accountId`) REFERENCES `account` (`id`)
+);
+
+-- Thêm table Comment
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `musicId` int(11) NOT NULL,
+  `accountId` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `commentDate` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_comment_music` FOREIGN KEY (`musicId`) REFERENCES `music` (`id`),
+  CONSTRAINT `fk_comment_account` FOREIGN KEY (`accountId`) REFERENCES `account` (`id`)
+);
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

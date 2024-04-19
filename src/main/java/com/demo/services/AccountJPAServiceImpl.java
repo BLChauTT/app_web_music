@@ -1,9 +1,5 @@
 package com.demo.services;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,20 +32,5 @@ public class AccountJPAServiceImpl implements AccountJPAService {
 	public Account findByEmail(String email) {
 		return accountRepository.findByEmail(email);
 	}
-
-	@Override
-	public List<Account> findByBirthday() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	//@Override
-	//public List<Account> findByBirthday() {
-//		Calendar calendar = Calendar.getInstance();
-//		calendar.setTime(new Date());
-//		int day = calendar.get(Calendar.DAY_OF_MONTH);
-//		int month = calendar.get(Calendar.MONTH) + 1;
-//		return accountRepository.findByBirthday(day, month);
-	//}
-
+	
 }

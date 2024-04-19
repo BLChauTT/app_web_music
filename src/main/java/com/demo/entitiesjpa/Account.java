@@ -17,13 +17,11 @@ public class Account implements java.io.Serializable {
 	private Integer id;
 	private String email;
 	private String password;
-	//private String fullName;
-	//private String email;
+	private String displayName;
+	private String gender;
 	private boolean status;
 	//private String securityCode;
 	private Date dob;
-	private Set<Role> roles = new HashSet<Role>(0);
-	private Set<Invoice> invoices = new HashSet<Invoice>(0);
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "dob", nullable = false, length = 10)
@@ -47,23 +45,23 @@ public class Account implements java.io.Serializable {
 	public Account() {
 	}
 
-	public Account(String email, String password, boolean status) {
+	public Account(String email, String password, String displayName, String gender, boolean status) {
 		this.email = email;
 		this.password = password;
-		//this.fullName = fullName;
-		//this.email = email;
+		this.displayName = displayName;
+		this.gender = gender;
 		this.status = status;
 	}
 
-	public Account(String email, String password, boolean status, Set<Role> roles,
+	public Account(String email, String password, String displayName, String gender, boolean status, Set<Role> roles,
 			Set<Invoice> invoices) {
 		this.email = email;
 		this.password = password;
-		//this.fullName = fullName;
-		//this.email = email;
+		this.displayName = displayName;
+		this.gender = gender;
 		this.status = status;
-		this.roles = roles;
-		this.invoices = invoices;
+//		this.roles = roles;
+//		this.invoices = invoices;
 	}
 
 	@Id
@@ -96,23 +94,23 @@ public class Account implements java.io.Serializable {
 		this.password = password;
 	}
 
-//	@Column(name = "full_name", nullable = false, length = 250)
-//	public String getFullName() {
-//		return this.fullName;
-//	}
-//
-//	public void setFullName(String fullName) {
-//		this.fullName = fullName;
-//	}
+	@Column(name = "displayname", nullable = false, length = 250)
+	public String getDisplayName() {
+		return this.displayName;
+	}
 
-//	@Column(name = "email", nullable = false, length = 250)
-//	public String getEmail() {
-//		return this.email;
-//	}
-//
-//	public void setEmail(String email) {
-//		this.email = email;
-//	}
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
+
+	@Column(name = "gender", nullable = false, length = 250)
+	public String getGender() {
+		return this.gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
 	@Column(name = "status", nullable = false)
 	public boolean isStatus() {
@@ -122,26 +120,4 @@ public class Account implements java.io.Serializable {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "account_role", joinColumns = {
-			@JoinColumn(name = "account_id", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "role_id", nullable = false, updatable = false) })
-	public Set<Role> getRoles() {
-		return this.roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
-	public Set<Invoice> getInvoices() {
-		return this.invoices;
-	}
-
-	public void setInvoices(Set<Invoice> invoices) {
-		this.invoices = invoices;
-	}
-
 }
