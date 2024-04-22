@@ -22,6 +22,11 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("account")
 public class AccountController {
+	//các chức năng để nói khi báo cáo:
+//	+ login 
+//	+ register bằng mail 
+//	+ forget Password bằng mail
+//	+ bảo bật bằng token, ngăn ngừa user truy cập link trái phép
 
 	@Autowired
 	private AccountJPAService accountService;
@@ -30,7 +35,7 @@ public class AccountController {
 	@Autowired
 	private Environment environment;
 
-	@GetMapping("login")
+	@GetMapping({"login", ""})
 	public String login() {
 		return "account/login";
 	}
@@ -57,12 +62,12 @@ public class AccountController {
 		session.removeAttribute("username");
 		return "redirect:/account/login";
 	}
-	
+
 	@GetMapping("accessDenied")
 	public String accessDenied() {
 		return "account/accessDenied";
 	}
-	
+
 	@GetMapping("signup")
 	public String register(ModelMap modelMap) {
 		Account account = new Account();
@@ -89,47 +94,87 @@ public class AccountController {
 	}
 
 	@GetMapping("verify")
-	public String verify(@RequestParam("email") String email, @RequestParam("securityCode") String securityCode, ModelMap modelMap) {
+	public String verify(@RequestParam("email") String email, @RequestParam("securityCode") String securityCode,
+			ModelMap modelMap) {
 		Account account = accountService.findByEmail(email);
-		if(account != null) {
-			if(account.getSecurityCode().equals(securityCode)) {
+		if (account != null) {
+			if (account.getSecurityCode().equals(securityCode)) {
 				account.setStatus(true);
 				accountService.save(account);
 				modelMap.put("msg", "Success");
-			}else {
+			} else {
 				modelMap.put("msg", "K thể kích hoạt tài khoản");
 			}
-		}else {
+		} else {
 			modelMap.put("msg", "Email k tồn tại");
 		}
 		return "account/verify";
 	}
-	
+
 	@GetMapping("forgetPassword")
 	public String forgetPassword(ModelMap modelMap) {
 		Account account = new Account();
 		modelMap.put("account", account);
 		return "account/forgetPassword";
 	}
-	
+
 	@PostMapping("forgetPassword")
 	public String forgetPassword(@RequestParam("email") String email, RedirectAttributes redirectAttributes) {
-	    Account account = accountService.findByEmail(email);
-	    if(account != null) {
-	        String newPassword = RandomHelper.random();
-	        account.setPassword(newPassword);
-	        accountService.save(account);
-	        
-	        String content = "Mật khẩu mới của bạn là: " + newPassword;
-	        String from = environment.getProperty("spring.mail.username");
-	        mailService.send(from, email, "Mật khẩu mới", content);
-	        
-	        redirectAttributes.addFlashAttribute("msg", "Mật khẩu mới đã được gửi đến email của bạn.");
+		Account account = accountService.findByEmail(email);
+		if (account != null) {
+			String newPassword = RandomHelper.random();
+			String newToken = RandomHelper.random();
+			account.setPassword(newPassword);
+			account.setToken(newToken);
+			accountService.save(account);
+
+			String newPasswordLink = environment.getProperty("BASE_URL") + "account/newPassword?email=" + email + "&token=" + newToken;
+
+			String emailContent = "Mật khẩu mới của bạn là: " + newPassword + ". Click vào <a href='" + newPasswordLink
+					+ "'>đây</a> để đổi mật khẩu mới.";
+			String emailFrom = environment.getProperty("spring.mail.username");
+			mailService.send(emailFrom, email, "Đổi mật khẩu mới", emailContent);
+
+			redirectAttributes.addFlashAttribute("msg", "Mật khẩu mới đã được gửi đến email của bạn.");
+		} else {
+			redirectAttributes.addFlashAttribute("msg", "Email không tồn tại trong hệ thống.");
+		}
+		return "redirect:/account/forgetPassword";
+	}
+	
+	@GetMapping("newPassword")
+	public String newPassword(@RequestParam("email") String email, @RequestParam("token") String token, ModelMap modelMap) {
+		if (isValidToken(email, token)) {
+	        Account account = new Account();
+	        account.setEmail(email);
+	        modelMap.put("account", account);
+	        return "account/newPassword";
 	    } else {
-	        redirectAttributes.addFlashAttribute("msg", "Email không tồn tại trong hệ thống.");
+	    	return "redirect:/account/accessDenied";
 	    }
-	    return "redirect:/account/forgetPassword";
+	}
+	
+	private boolean isValidToken(String email, String token) {
+		Account account = accountService.findByEmailAndToken(email, token);
+	    if (account != null) {
+	        return true; // Token hợp lệ
+	    } else {
+	        return false; // Token không hợp lệ
+	    }
 	}
 
+	@PostMapping("newPassword")
+	public String newPassword(@RequestParam("email") String email, @RequestParam("password") String password,
+			RedirectAttributes redirectAttributes) {
+		Account account = accountService.findByEmail(email);
+		if (account != null) {
+			account.setPassword(password);
+			accountService.save(account);
+			redirectAttributes.addFlashAttribute("mistake", "Mật khẩu đã được đổi thành công.");
+		} else {
+			redirectAttributes.addFlashAttribute("mistake", "Không thể đổi mật khẩu. Vui lòng thử lại sau.");
+		}
+		return "redirect:/account/login";
+	}
 
 }

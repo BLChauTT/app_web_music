@@ -10,4 +10,6 @@ public interface AccountJPAService {
 	
 	public Account findByEmail(String email);
 	
+	public Account findByEmailAndToken(String email, String token);
+	
 }

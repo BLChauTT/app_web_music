@@ -31,6 +31,7 @@ public class Account implements java.io.Serializable {
 	private Date dob;
 	private String region;
 	private String securityCode;
+	private String token;
 	private boolean status;
 	private Set<Comment> comments = new HashSet<Comment>(0);
 	private Set<Rating> ratings = new HashSet<Rating>(0);
@@ -42,7 +43,7 @@ public class Account implements java.io.Serializable {
 		this.status = status;
 	}
 
-	public Account(String name, String email, String password, String gender, Date dob, String region, String securityCode,
+	public Account(String name, String email, String password, String gender, Date dob, String region, String securityCode, String token,
 			boolean status, Set<Comment> comments, Set<Rating> ratings) {
 		this.name = name;
 		this.email = email;
@@ -51,6 +52,7 @@ public class Account implements java.io.Serializable {
 		this.dob = dob;
 		this.region = region;
 		this.securityCode = securityCode;
+		this.token = token;
 		this.status = status;
 		this.comments = comments;
 		this.ratings = ratings;
@@ -75,6 +77,15 @@ public class Account implements java.io.Serializable {
 
 	public void setSecurityCode(String securityCode) {
 		this.securityCode = securityCode;
+	}
+	
+	@Column(name = "token", nullable = false, length = 250)
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	@Column(name = "name")

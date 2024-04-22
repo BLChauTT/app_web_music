@@ -32,5 +32,10 @@ public class AccountJPAServiceImpl implements AccountJPAService {
 	public Account findByEmail(String email) {
 		return accountRepository.findByEmail(email);
 	}
+
+	@Override
+	public Account findByEmailAndToken(String email, String token) {
+		return accountRepository.findByEmailAndToken(email, token);
+	}
 	
 }

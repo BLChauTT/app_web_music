@@ -16,5 +16,8 @@ public interface AccountRepository extends CrudRepository<Account, Integer> {
 
 	@Query("from Account where email = :email")
 	public Account findByEmail(@Param("email") String email);
+	
+	@Query("from Account where email = :email and token = :token")
+	public Account findByEmailAndToken(@Param("email") String email, @Param("token") String token);
 
 }
