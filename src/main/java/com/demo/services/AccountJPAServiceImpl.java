@@ -3,7 +3,7 @@ package com.demo.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.demo.entitiesjpa.Account;
+import com.demo.entities.Account;
 import com.demo.repositories.AccountRepository;
 
 @Service

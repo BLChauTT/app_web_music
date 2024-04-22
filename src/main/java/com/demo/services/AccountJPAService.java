@@ -1,6 +1,6 @@
 package com.demo.services;
 
-import com.demo.entitiesjpa.Account;
+import com.demo.entities.Account;
 
 public interface AccountJPAService {
 
