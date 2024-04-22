@@ -1,8 +1,12 @@
 package com.demo.services;
 
+import java.util.List;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.demo.dtos.AccountDTO;
 import com.demo.entities.Account;
 import com.demo.repositories.AccountRepository;
 
@@ -37,5 +41,11 @@ public class AccountJPAServiceImpl implements AccountJPAService {
 	public Account findByEmailAndToken(String email, String token) {
 		return accountRepository.findByEmailAndToken(email, token);
 	}
+	
+	@Override
+	public Iterable<Account> findAll() {
+		return accountRepository.findAll();
+	}
+
 	
 }
