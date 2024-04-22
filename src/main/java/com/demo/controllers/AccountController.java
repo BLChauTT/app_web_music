@@ -106,13 +106,30 @@ public class AccountController {
 	}
 	
 	@GetMapping("forgetPassword")
-	public String forgetPassword() {
+	public String forgetPassword(ModelMap modelMap) {
+		Account account = new Account();
+		modelMap.put("account", account);
 		return "account/forgetPassword";
 	}
 	
 	@PostMapping("forgetPassword")
-	public String forgetPassword(@ModelAttribute("account") Account account, RedirectAttributes redirectAttributes) {
-		return "account/newPassword";
+	public String forgetPassword(@RequestParam("email") String email, RedirectAttributes redirectAttributes) {
+	    Account account = accountService.findByEmail(email);
+	    if(account != null) {
+	        String newPassword = RandomHelper.random();
+	        account.setPassword(newPassword);
+	        accountService.save(account);
+	        
+	        String content = "Mật khẩu mới của bạn là: " + newPassword;
+	        String from = environment.getProperty("spring.mail.username");
+	        mailService.send(from, email, "Mật khẩu mới", content);
+	        
+	        redirectAttributes.addFlashAttribute("msg", "Mật khẩu mới đã được gửi đến email của bạn.");
+	    } else {
+	        redirectAttributes.addFlashAttribute("msg", "Email không tồn tại trong hệ thống.");
+	    }
+	    return "redirect:/account/forgetPassword";
 	}
+
 
 }
