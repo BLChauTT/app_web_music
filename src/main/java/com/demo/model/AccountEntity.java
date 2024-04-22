@@ -12,8 +12,8 @@ public class AccountEntity {
     @Column(name = "id")
     private int id;
     @Basic
-    @Column(name = "displayName")
-    private String displayName;
+    @Column(name = "name")
+    private String name;
     @Basic
     @Column(name = "email")
     private String email;
@@ -38,12 +38,12 @@ public class AccountEntity {
         this.id = id;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getname() {
+        return name;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
+    public void setname(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -94,7 +94,7 @@ public class AccountEntity {
         AccountEntity that = (AccountEntity) o;
 
         if (id != that.id) return false;
-        if (displayName != null ? !displayName.equals(that.displayName) : that.displayName != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
         if (gender != null ? !gender.equals(that.gender) : that.gender != null) return false;
@@ -107,7 +107,7 @@ public class AccountEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (displayName != null ? displayName.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (gender != null ? gender.hashCode() : 0);

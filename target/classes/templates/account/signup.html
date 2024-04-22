@@ -1,77 +1,84 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-	th:replace="~{template/authen :: renderBody('Sign up', ~{this::.card-body})}">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title></title>
+	<title>Index</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script>
+		$(function () {
+			$("#dob").datepicker({
+				dateFormat: 'dd/mm/yy'
+			});
+		});
+	</script>
+
 </head>
 
 <body>
-	<div class="card-body">
-		<div class="alert alert-dismissible bg-maroon color-palette" th:if="${error != null}">
-			<button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="color: white">×</button>
-			<h5><i class="icon fas fa-ban"></i> Alert!</h5>
-			<p th:text="${error}"></p>
-		</div>
 
-		<form th:action="@{/account/signup}" method="POST">
-			<div class="input-group mb-3">
-				<input type="text" class="form-control" placeholder="Username" th:field="${account.email}">
-				<div class="input-group-append">
-					<div class="input-group-text">
-						<span class="fas fa-envelope"></span>
-					</div>
-				</div>
-			</div>
-			<div class="input-group mb-3">
-				<input type="password" class="form-control" placeholder="Password" th:field="${account.password}">
-				<div class="input-group-append">
-					<div class="input-group-text">
-						<span class="fas fa-lock"></span>
-					</div>
-				</div>
-			</div>
-			<div class="input-group mb-3">
-				<input type="text" class="form-control" placeholder="Fullname" th:field="${account.displayName}">
-				<div class="input-group-append">
-					<div class="input-group-text">
-						<i class="fas fa-users"></i>
-					</div>
-				</div>
-			</div>
-			<div class="input-group mb-3">
-				<select class="form-control" id="genderSelect" th:field="${account.gender}">
-					<option value="" disabled selected>Select Gender</option>
-					<option value="Male">Male</option>
-					<option value="Female">Female</option>
-					<option value="Other">Other</option>
-				</select>
-				<div class="input-group-append">
-					<div class="input-group-text">
-						<i class="fas fa-users"></i>
-					</div>
-				</div>
-			</div>
-			<div class="input-group mb-3">
-				<input type="date" class="form-control" placeholder="Birthday" th:field="${account.dob}">
-				<div class="input-group-append">
-					<div class="input-group-text">
-						<i class="fas fa-users"></i>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="btn-group w-100">
-					<input type="submit" class="btn btn-primary col start" />
-				</div>
-			</div>
-		</form>
+	<a th:href="@{/account/login}">Login</a>
+	<h3>Register</h3>
+	<span th:text="${msg}" style="color: red"></span>
+	<br>
+	<form method="post" th:action="@{/account/register}">
+		<table border="0">
+			<tr>
+				<td>Email</td>
+				<td>
+					<input type="text" th:field="${account.email}">
+				</td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td>
+					<input type="password" th:field="${account.password}">
+				</td>
+			</tr>
+			<tr>
+				<td>Full Name</td>
+				<td>
+					<input type="text" th:field="${account.name}">
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">Gender</td>
+				<td>
+					<label><input type="radio" name="gender" value="Male" th:checked="${account.gender eq 'Male'}">
+						Male</label>
+					<label><input type="radio" name="gender" value="Female" th:checked="${account.gender eq 'Female'}">
+						Female</label>
+					<label><input type="radio" name="gender" value="Other" th:checked="${account.gender eq 'Other'}">
+						Other</label>
+				</td>
+			</tr>
+			<tr>
+				<td>Dob</td>
+				<td>
+					<input type="text" th:field="${account.dob}">
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">Region</td>
+				<td>
+					<label><input type="radio" name="region" value="VietNam"
+							th:checked="${account.region eq 'VietNam'}"> VietNam</label>
+					<label><input type="radio" name="region" value="USA" th:checked="${account.region eq 'USA'}">
+						USA</label>
+					<label><input type="radio" name="region" value="UK" th:checked="${account.region eq 'UK'}">
+						UK</label>
+				</td>
+			</tr>
 
-		<!-- /.social-auth-links -->
-		<p class="mb-0">
-			<a th:href="@{/account/login}" class="text-center">I already have an account.</a>
-		</p>
-	</div>
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+					<input type="submit" value="Save">
+				</td>
+			</tr>
+		</table>
+	</form>
+
 </body>
-
 
 </html>

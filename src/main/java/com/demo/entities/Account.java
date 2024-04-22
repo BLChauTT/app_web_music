@@ -24,12 +24,13 @@ import jakarta.persistence.TemporalType;
 public class Account implements java.io.Serializable {
 
 	private Integer id;
-	private String displayName;
+	private String name;
 	private String email;
 	private String password;
 	private String gender;
 	private Date dob;
 	private String region;
+	private String securityCode;
 	private boolean status;
 	private Set<Comment> comments = new HashSet<Comment>(0);
 	private Set<Rating> ratings = new HashSet<Rating>(0);
@@ -41,14 +42,15 @@ public class Account implements java.io.Serializable {
 		this.status = status;
 	}
 
-	public Account(String displayName, String email, String password, String gender, Date dob, String region,
+	public Account(String name, String email, String password, String gender, Date dob, String region, String securityCode,
 			boolean status, Set<Comment> comments, Set<Rating> ratings) {
-		this.displayName = displayName;
+		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.gender = gender;
 		this.dob = dob;
 		this.region = region;
+		this.securityCode = securityCode;
 		this.status = status;
 		this.comments = comments;
 		this.ratings = ratings;
@@ -65,14 +67,23 @@ public class Account implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	@Column(name = "displayName")
-	public String getDisplayName() {
-		return this.displayName;
+	
+	@Column(name = "security_code", nullable = false, length = 250)
+	public String getSecurityCode() {
+		return securityCode;
 	}
 
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
+	public void setSecurityCode(String securityCode) {
+		this.securityCode = securityCode;
+	}
+
+	@Column(name = "name")
+	public String getname() {
+		return this.name;
+	}
+
+	public void setname(String name) {
+		this.name = name;
 	}
 
 	@Column(name = "email")
