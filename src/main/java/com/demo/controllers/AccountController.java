@@ -1,10 +1,20 @@
 package com.demo.controllers;
 
 import com.demo.entities.Account;
+import com.demo.entities.Role;
+import com.demo.entities.Userprofile;
+import com.demo.helpers.FileHelper;
 import com.demo.helpers.RandomHelper;
+
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.services.AccountJPAService;
@@ -72,16 +83,28 @@ public class AccountController {
 	@GetMapping("signup")
 	public String register(ModelMap modelMap) {
 		Account account = new Account();
+		Userprofile userprofile = new Userprofile();
+		modelMap.put("userprofile", userprofile);
 		modelMap.put("account", account);
 		return "account/signup";
 	}
 
 	@PostMapping("register")
-	public String register(@ModelAttribute("account") Account account, RedirectAttributes redirectAttributes) {
+	public String register(@ModelAttribute("account") Account account, @ModelAttribute("userprofile") Userprofile userprofile, RedirectAttributes redirectAttributes) {
+		Role role = new Role();
+		role.setRoleId(2);
+		role.setRoleName("User");
+		
 		account.setStatus(false);
+		account.setRole(role);
 		String securityCode = RandomHelper.random();
 		account.setSecurityCode(securityCode);
 		if (accountService.save(account)) {
+			Account account2 = accountService.findByEmail(account.getEmail());
+			userprofile.setAccount(account2);
+			userprofile.setAvatarUrl("noimage.jpg");
+			accountService.saveUserProfile(userprofile);
+			
 			// gởi mail kích hoạt tài khoản
 			String content = "Nhấn vào <a href='" + environment.getProperty("BASE_URL") + "account/verify?email="
 					+ account.getEmail() + "&securityCode=" + account.getSecurityCode() + "'>đây để kích hoạt</a>";
