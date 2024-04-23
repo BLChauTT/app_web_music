@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:replace="~{template/authen :: renderBody('Register', ~{this::.card-body})}">
 
 <head>
 	<title>Index</title>
@@ -16,64 +17,84 @@
 </head>
 
 <body>
+	<div class="card-body">
+		<span th:text="${msg}" style="color: red"></span>
+		<br>
+		
+		<form th:action="@{/account/register}" method="post">
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" th:field="${account.username}" placeholder="User Name">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-user"></span>
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<input type="email" class="form-control" th:field="${account.email}" placeholder="Email">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-envelope"></span>
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<input type="password" class="form-control" th:field="${account.password}" placeholder="Password">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-lock"></span>
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" th:field="${userprofile.fullName}" placeholder="Full Name">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-user"></span>
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" th:field="${userprofile.address}" placeholder="Address">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-map-marker-alt"></span>
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" th:field="${userprofile.phoneNumber}" placeholder="Phone">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-phone"></span>
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<input type="file" class="form-control" th:field="${userprofile.avatarUrl}" placeholder="Avata">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-user-circle"></span>
+					</div>
+					<span class="input-group-text">Avatar</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-2">
 
-	<a th:href="@{/account/login}">Login</a>
-	<h3>Register</h3>
-	<span th:text="${msg}" style="color: red"></span>
-	<br>
-	<form method="post" th:action="@{/account/register}">
-		<table border="0">
-			<tr>
-				<td>Email</td>
-				<td>
-					<input type="text" th:field="${account.email}">
-				</td>
-			</tr>
-			<tr>
-				<td>Password</td>
-				<td>
-					<input type="password" th:field="${account.password}">
-				</td>
-			</tr>
-			<tr>
-				<td>User Name</td>
-				<td>
-					<input type="text" th:field="${account.username}">
-				</td>
-			</tr>
-			<tr>
-				<td>Full Name</td>
-				<td>
-					<input type="text" th:field="${userprofile.fullName}">
-				</td>
-			</tr>
-			<tr>
-				<td>Address</td>
-				<td>
-					<input type="text" th:field="${userprofile.address}">
-				</td>
-			</tr>
-			<tr>
-				<td>Phone No</td>
-				<td>
-					<input type="text" th:field="${userprofile.phoneNumber}">
-				</td>
-			</tr>
-			<tr>
-				<td>Avatar</td>
-				<td>
-					<input type="file" th:field="${userprofile.avatarUrl}">
-				</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td>
-					<input type="submit" value="Save">
-				</td>
-			</tr>
-		</table>
-	</form>
-
+				</div>
+				<!-- /.col -->
+				<div class="col-8">
+					<button type="submit" class="btn btn-primary btn-block">Register</button>
+				</div>
+				<!-- /.col -->
+			</div>
+		</form>
+		<div class="social-auth-links text-center">
+			<p>- OR -</p>
+			<a th:href="@{/account/login}" class="btn btn-block btn-danger">I already have an account</a>
+		</div>
+	</div>
 </body>
 
 </html>
