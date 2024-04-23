@@ -41,7 +41,6 @@ public class Account implements java.io.Serializable {
 	private Set<Notification> notifications = new HashSet<Notification>(0);
 	private Set<AccountSong> accountSongs = new HashSet<AccountSong>(0);
 	private Set<Rating> ratings = new HashSet<Rating>(0);
-	private Set<Accountverification> accountverifications = new HashSet<Accountverification>(0);
 	private Set<Userprofile> userprofiles = new HashSet<Userprofile>(0);
 	private Set<Accountmembership> accountmemberships = new HashSet<Accountmembership>(0);
 	private Set<Song> songs = new HashSet<Song>(0);
@@ -61,7 +60,7 @@ public class Account implements java.io.Serializable {
 	public Account(int accountId, Role role, String username, String email, String password, boolean status,
 			String token, String securityCode, Set<Favorite> favorites, Set<Comment> comments,
 			Set<Notification> notifications, Set<AccountSong> accountSongs, Set<Rating> ratings,
-			Set<Accountverification> accountverifications, Set<Userprofile> userprofiles,
+			Set<Userprofile> userprofiles,
 			Set<Accountmembership> accountmemberships, Set<Song> songs, Set<Transactionhistory> transactionhistories) {
 		this.accountId = accountId;
 		this.role = role;
@@ -76,7 +75,6 @@ public class Account implements java.io.Serializable {
 		this.notifications = notifications;
 		this.accountSongs = accountSongs;
 		this.ratings = ratings;
-		this.accountverifications = accountverifications;
 		this.userprofiles = userprofiles;
 		this.accountmemberships = accountmemberships;
 		this.songs = songs;
@@ -202,15 +200,6 @@ public class Account implements java.io.Serializable {
 
 	public void setRatings(Set<Rating> ratings) {
 		this.ratings = ratings;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
-	public Set<Accountverification> getAccountverifications() {
-		return this.accountverifications;
-	}
-
-	public void setAccountverifications(Set<Accountverification> accountverifications) {
-		this.accountverifications = accountverifications;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")

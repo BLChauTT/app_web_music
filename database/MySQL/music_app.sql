@@ -10,7 +10,7 @@ CREATE TABLE Role (
 
 -- Tạo bảng Account
 CREATE TABLE Account (
-    account_id INT PRIMARY KEY,
+    account_id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE Account (
 
 -- Tạo bảng UserProfile
 CREATE TABLE UserProfile (
-    profile_id INT PRIMARY KEY,
+    profile_id INT PRIMARY KEY AUTO_INCREMENT,
     account_id INT UNIQUE,
     full_name VARCHAR(100),
     avatar_url VARCHAR(255),
@@ -34,25 +34,25 @@ CREATE TABLE UserProfile (
 
 -- Tạo bảng Author
 CREATE TABLE Author (
-    author_id INT PRIMARY KEY,
+    author_id INT PRIMARY KEY AUTO_INCREMENT,
     author_name VARCHAR(255) UNIQUE NOT NULL
 );
 
 -- Tạo bảng Singer
 CREATE TABLE Singer (
-    singer_id INT PRIMARY KEY,
+    singer_id INT PRIMARY KEY AUTO_INCREMENT,
     singer_name VARCHAR(255) UNIQUE NOT NULL
 );
 
 -- Tạo bảng Category
 CREATE TABLE Category (
-    category_id INT PRIMARY KEY,
+    category_id INT PRIMARY KEY AUTO_INCREMENT,
     category_name VARCHAR(100) UNIQUE NOT NULL
 );
 
 -- Tạo bảng MembershipPackage
 CREATE TABLE MembershipPackage (
-    package_id INT PRIMARY KEY,
+    package_id INT PRIMARY KEY AUTO_INCREMENT,
     package_name VARCHAR(100) UNIQUE NOT NULL,
     duration INT, -- Đơn vị là tháng
     price DECIMAL(10,2)
@@ -60,7 +60,7 @@ CREATE TABLE MembershipPackage (
 
 -- Tạo bảng SongDetail
 CREATE TABLE SongDetail (
-    song_detail_id INT PRIMARY KEY,  
+    song_detail_id INT PRIMARY KEY AUTO_INCREMENT,  
     title VARCHAR(255) NOT NULL,
     lyric varchar(255),
     song_time TIME,
@@ -73,7 +73,7 @@ CREATE TABLE SongDetail (
 
 -- Tạo bảng Song
 CREATE TABLE Song (
-    song_id INT PRIMARY KEY,
+    song_id INT PRIMARY KEY AUTO_INCREMENT,
     account_id INT, -- Khóa ngoại liên kết với bảng Account_Song
     song_detail_id INT, -- Khóa ngoại liên kết với bảng SongDetail
     author_id INT, -- Khóa ngoại liên kết với bảng Author
@@ -84,7 +84,7 @@ CREATE TABLE Song (
 
 -- Tạo bảng Account_Song
 CREATE TABLE Account_Song (
-    account_song_id INT PRIMARY KEY,
+    account_song_id INT PRIMARY KEY AUTO_INCREMENT,
     account_id INT,
     song_id INT,
     post_date DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -94,7 +94,7 @@ CREATE TABLE Account_Song (
 
 -- Tạo bảng Rating
 CREATE TABLE Rating (
-    rating_id INT PRIMARY KEY,
+    rating_id INT PRIMARY KEY AUTO_INCREMENT,
     account_id INT,
     song_id INT,
     rating INT,
@@ -105,7 +105,7 @@ CREATE TABLE Rating (
 
 -- Tạo bảng Comment
 CREATE TABLE Comment (
-    comment_id INT PRIMARY KEY,
+    comment_id INT PRIMARY KEY AUTO_INCREMENT,
     account_id INT,
     song_id INT,
     comment_text TEXT,
@@ -116,7 +116,7 @@ CREATE TABLE Comment (
 
 -- Tạo bảng Favorite
 CREATE TABLE Favorite (
-    favorite_id INT PRIMARY KEY,
+    favorite_id INT PRIMARY KEY AUTO_INCREMENT,
     account_id INT,
     song_id INT,
     FOREIGN KEY (account_id) REFERENCES Account(account_id),
@@ -143,7 +143,7 @@ CREATE TABLE SongCategory (
 
 -- Tạo bảng TransactionHistory
 CREATE TABLE TransactionHistory (
-    transaction_id INT PRIMARY KEY,
+    transaction_id INT PRIMARY KEY AUTO_INCREMENT,
     account_id INT,
     package_id INT,
     transaction_date DATE,
@@ -154,7 +154,7 @@ CREATE TABLE TransactionHistory (
 
 -- Tạo bảng Payment
 CREATE TABLE Payment (
-    payment_id INT PRIMARY KEY,
+    payment_id INT PRIMARY KEY AUTO_INCREMENT,
     transaction_id INT,
     payment_date DATE,
     amount DECIMAL(10,2),
@@ -164,7 +164,7 @@ CREATE TABLE Payment (
 
 -- Tạo bảng AccountMembership
 CREATE TABLE AccountMembership (
-    account_membership_id INT PRIMARY KEY,
+    account_membership_id INT PRIMARY KEY AUTO_INCREMENT,
     account_id INT,
     package_id INT,
     start_date DATE,
@@ -173,18 +173,9 @@ CREATE TABLE AccountMembership (
     FOREIGN KEY (package_id) REFERENCES MembershipPackage(package_id)
 );
 
--- Tạo bảng AccountVerification
-CREATE TABLE AccountVerification (
-    verification_id INT PRIMARY KEY,
-    account_id INT,
-    verification_code VARCHAR(255),
-    is_verified INT,
-    FOREIGN KEY (account_id) REFERENCES Account(account_id)
-);
-
 -- Tạo bảng Notification
 CREATE TABLE Notification (
-    notification_id INT PRIMARY KEY,
+    notification_id INT PRIMARY KEY AUTO_INCREMENT,
     account_id INT,
     message TEXT,
     created_at DATE,
@@ -298,11 +289,6 @@ INSERT INTO AccountMembership (account_membership_id, account_id, package_id, st
 VALUES (1, 2, 1, '2022-04-01', '2022-05-01'),
        (2, 2, 2, '2022-04-01', '2022-10-01'),
        (3, 3, 3, '2022-04-01', '2023-04-01');
-
--- Dữ liệu mẫu cho bảng AccountVerification
-INSERT INTO AccountVerification (verification_id, account_id, verification_code, is_verified)
-VALUES (1, 2, 'verification_code_1', 1),
-       (2, 3, 'verification_code_2', 1);
 
 -- Dữ liệu mẫu cho bảng Notification
 INSERT INTO Notification (notification_id, account_id, message, created_at)
