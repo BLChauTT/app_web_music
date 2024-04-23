@@ -17,12 +17,6 @@ public class AdminController {
 
 	@GetMapping("index")
 	public String admin() {
-//		System.out.println("asd");
-//		if (accountJPAService.findAll() == null) {
-//			System.out.println("Err");
-//		}else {
-//			System.out.println("sdfsdf");
-//		}
 		return "admin/index";
 	}
 

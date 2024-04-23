@@ -13,7 +13,10 @@ CREATE TABLE Account (
     account_id INT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    status tinyint(1) NOT NULL DEFAULT 1,
+    token varchar(255),
+    security_code varchar(255),
     role_id INT,
     FOREIGN KEY (role_id) REFERENCES Role(role_id)
 );
@@ -193,10 +196,10 @@ VALUES (1, 'Admin'),
        (3, 'Artist');
 
 -- Dữ liệu mẫu cho bảng Account
-INSERT INTO Account (account_id, username, email, password_hash, role_id)
-VALUES (1, 'admin', 'admin@example.com', 'hashed_password', 1),
-       (2, 'user1', 'user1@example.com', 'hashed_password', 2),
-       (3, 'user2', 'user2@example.com', 'hashed_password', 2);
+INSERT INTO Account (account_id, username, email, password, role_id)
+VALUES (1, 'admin', 'admin@example.com', '123', 1),
+       (2, 'user1', 'user1@example.com', '123', 2),
+       (3, 'user2', 'user2@example.com', '123', 2);
 
 -- Dữ liệu mẫu cho bảng UserProfile
 INSERT INTO UserProfile (profile_id, account_id, full_name, avatar_url, address, phone_number)
