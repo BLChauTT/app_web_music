@@ -36,40 +36,35 @@
 				</td>
 			</tr>
 			<tr>
+				<td>User Name</td>
+				<td>
+					<input type="text" th:field="${account.username}">
+				</td>
+			</tr>
+			<tr>
 				<td>Full Name</td>
 				<td>
-					<input type="text" th:field="${account.name}">
+					<input type="text" th:field="${userprofile.fullName}">
 				</td>
 			</tr>
 			<tr>
-				<td valign="top">Gender</td>
+				<td>Address</td>
 				<td>
-					<label><input type="radio" name="gender" value="Male" th:checked="${account.gender eq 'Male'}">
-						Male</label>
-					<label><input type="radio" name="gender" value="Female" th:checked="${account.gender eq 'Female'}">
-						Female</label>
-					<label><input type="radio" name="gender" value="Other" th:checked="${account.gender eq 'Other'}">
-						Other</label>
+					<input type="text" th:field="${userprofile.address}">
 				</td>
 			</tr>
 			<tr>
-				<td>Dob</td>
+				<td>Phone No</td>
 				<td>
-					<input type="text" th:field="${account.dob}">
+					<input type="text" th:field="${userprofile.phoneNumber}">
 				</td>
 			</tr>
 			<tr>
-				<td valign="top">Region</td>
+				<td>Avatar</td>
 				<td>
-					<label><input type="radio" name="region" value="VietNam"
-							th:checked="${account.region eq 'VietNam'}"> VietNam</label>
-					<label><input type="radio" name="region" value="USA" th:checked="${account.region eq 'USA'}">
-						USA</label>
-					<label><input type="radio" name="region" value="UK" th:checked="${account.region eq 'UK'}">
-						UK</label>
+					<input type="file" th:field="${userprofile.avatarUrl}">
 				</td>
 			</tr>
-
 			<tr>
 				<td>&nbsp;</td>
 				<td>

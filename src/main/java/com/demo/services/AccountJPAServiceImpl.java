@@ -7,18 +7,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.demo.entities.Account;
+import com.demo.entities.Userprofile;
 import com.demo.repositories.AccountRepository;
+import com.demo.repositories.UserProfileRepository;
 
 @Service
 public class AccountJPAServiceImpl implements AccountJPAService {
 
 	@Autowired
 	private AccountRepository accountRepository;
+	@Autowired
+	private UserProfileRepository userProfileRepository;
 
 	@Override
 	public boolean save(Account account) {
 		try {
 			accountRepository.save(account);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean saveUserProfile(Userprofile userprofile) {
+		try {
+			userProfileRepository.save(userprofile);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
