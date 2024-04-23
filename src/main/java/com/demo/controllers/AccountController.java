@@ -27,6 +27,7 @@ public class AccountController {
 //	+ register bằng mail 
 //	+ forget Password bằng mail
 //	+ bảo bật bằng token, ngăn ngừa user truy cập link trái phép
+//	+ bảo mật bằng recaptcha của gg đế tránh bị robot tấn công (spam)
 
 	@Autowired
 	private AccountJPAService accountService;
@@ -124,13 +125,13 @@ public class AccountController {
 		if (account != null) {
 			String newPassword = RandomHelper.random();
 			String newToken = RandomHelper.random();
-			account.setPassword(newPassword);
+			//account.setPassword(newPassword);
 			account.setToken(newToken);
 			accountService.save(account);
 
 			String newPasswordLink = environment.getProperty("BASE_URL") + "account/newPassword?email=" + email + "&token=" + newToken;
 
-			String emailContent = "Mật khẩu mới của bạn là: " + newPassword + ". Click vào <a href='" + newPasswordLink
+			String emailContent = "Click vào <a href='" + newPasswordLink
 					+ "'>đây</a> để đổi mật khẩu mới.";
 			String emailFrom = environment.getProperty("spring.mail.username");
 			mailService.send(emailFrom, email, "Đổi mật khẩu mới", emailContent);

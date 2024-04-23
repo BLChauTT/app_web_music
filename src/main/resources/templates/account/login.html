@@ -1,15 +1,17 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-	  th:replace="~{template/authen :: renderBody('Sign in', ~{this::.card-body})}">
+	th:replace="~{template/authen :: renderBody('Sign in', ~{this::.card-body})}">
+
 <head>
-<title>Index</title>
+	<title>Index</title>
 </head>
+
 <body>
 	<div class="card-body">
 		<div class="alert alert-success alert-dismissible" th:if="${next != null}">
 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 			<h5><i class="icon fas fa-check"></i> Notification</h5>
 			<p th:text="${next}"></p>
-			
+
 		</div>
 
 		<div class="alert alert-dismissible bg-maroon color-palette" th:if="${mistake != null}">
@@ -18,7 +20,7 @@
 			<p th:text="${mistake}"></p>
 		</div>
 
-		<form th:action="@{/account/login}" method="POST">
+		<form th:action="@{/account/login}" method="POST" id="form">
 			<div class="input-group mb-3">
 				<input type="text" class="form-control" placeholder="Username" name="username">
 				<div class="input-group-append">
@@ -35,8 +37,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<input type="submit" style="width: 100%" class="btn btn-primary btn-block" value="Sign in" />
+			<div class="form-group text-center">
+				<div class="g-recaptcha" data-sitekey="6LfY88MpAAAAADsSsv-pphqBsHTev-sXksg9kXx2"
+					style="display: inline-block;"></div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-12">
+					<input type="submit" style="width: 100%" class="btn btn-primary btn-block" value="Sign in" />
+				</div>
 			</div>
 		</form>
 		<p class="mb-0">
@@ -47,4 +55,5 @@
 		</p>
 	</div>
 </body>
+
 </html>
