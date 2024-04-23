@@ -60,8 +60,10 @@ CREATE TABLE MembershipPackage (
 
 -- Tạo bảng SongDetail
 CREATE TABLE SongDetail (
-    song_detail_id INT PRIMARY KEY,
+    song_detail_id INT PRIMARY KEY,  
     title VARCHAR(255) NOT NULL,
+    lyric varchar(255),
+    song_time TIME,
     genre VARCHAR(50),
     release_date DATE,
     file_url VARCHAR(255),

@@ -1,6 +1,7 @@
 package com.demo.entities;
-// Generated Apr 23, 2024, 10:45:04 AM by Hibernate Tools 4.3.6.Final
+// Generated Apr 23, 2024, 4:04:14 PM by Hibernate Tools 4.3.6.Final
 
+import java.sql.Time;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +13,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -26,8 +29,10 @@ import jakarta.persistence.UniqueConstraint;
 @Table(name = "songdetail", catalog = "music_app")
 public class Songdetail implements java.io.Serializable {
 
-	private Integer songDetailId;
+	private int songDetailId;
 	private String title;
+	private String lyric;
+	private Time songTime;
 	private String genre;
 	private Date releaseDate;
 	private String fileUrl;
@@ -38,13 +43,17 @@ public class Songdetail implements java.io.Serializable {
 	public Songdetail() {
 	}
 
-	public Songdetail(String title) {
+	public Songdetail(int songDetailId, String title) {
+		this.songDetailId = songDetailId;
 		this.title = title;
 	}
 
-	public Songdetail(String title, String genre, Date releaseDate, String fileUrl, Integer listenCount, Integer status,
-			Set<Song> songs) {
+	public Songdetail(int songDetailId, String title, String lyric, Time songTime, String genre, Date releaseDate,
+			String fileUrl, Integer listenCount, Integer status, Set<Song> songs) {
+		this.songDetailId = songDetailId;
 		this.title = title;
+		this.lyric = lyric;
+		this.songTime = songTime;
 		this.genre = genre;
 		this.releaseDate = releaseDate;
 		this.fileUrl = fileUrl;
@@ -55,13 +64,13 @@ public class Songdetail implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
+	
 	@Column(name = "song_detail_id", unique = true, nullable = false)
-	public Integer getSongDetailId() {
+	public int getSongDetailId() {
 		return this.songDetailId;
 	}
 
-	public void setSongDetailId(Integer songDetailId) {
+	public void setSongDetailId(int songDetailId) {
 		this.songDetailId = songDetailId;
 	}
 
@@ -72,6 +81,25 @@ public class Songdetail implements java.io.Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	@Column(name = "lyric")
+	public String getLyric() {
+		return this.lyric;
+	}
+
+	public void setLyric(String lyric) {
+		this.lyric = lyric;
+	}
+
+	@Temporal(TemporalType.TIME)
+	@Column(name = "song_time", length = 8)
+	public Date getSongTime() {
+		return this.songTime;
+	}
+
+	public void setSongTime(Time songTime) {
+		this.songTime = songTime;
 	}
 
 	@Column(name = "genre", length = 50)
