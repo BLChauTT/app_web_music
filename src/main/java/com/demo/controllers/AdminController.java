@@ -16,7 +16,8 @@ public class AdminController {
 	private AccountJPAService accountJPAService;
 
 	@GetMapping("index")
-	public String admin() {
+	public String admin(ModelMap modelMap) {
+		modelMap.put("accounts", accountJPAService.findAll());
 		return "admin/index";
 	}
 
