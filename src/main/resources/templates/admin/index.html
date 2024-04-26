@@ -1,13 +1,10 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	th:replace="~{template/admin/index :: renderBody('Account', ~{this::.card-body})}">
-
 <head>
 	<title>Index</title>
 </head>
-
 <body>
 	<div class="card-body">
-
 		<div id="content" class="flex"><!-- ############ Main START-->
 			<div>
 				<div class="page-hero page-container" id="page-hero">
@@ -42,33 +39,47 @@
 								<table class="table table-theme table-row v-middle">
 									<thead>
 										<tr>
-											<th style="width:20px"><label class="ui-check m-0"><input
+											<th style="width:10px"><label class="ui-check m-0"><input
 														type="checkbox"><i></i></label></th>
 											<th class="text-muted">Owner</th>
-											<th class="text-muted sortable" data-toggle-class="asc">Email & Full
+											<th class="text-muted">Email & User
 												Name</th>
-											<th class="text-muted"><span class="d-none d-sm-block">Posts</span></th>
-											<th class="text-muted"><span class="d-none d-sm-block">Finish</span>
+											<th class="text-muted"><span class="d-none d-sm-block">Role</span></th>
+											<th class="text-muted"><span class="d-none d-sm-block">Status</span>
 											</th>
 											<th style="width:50px"></th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr class="v-middle" data-id="15">
+										<tr class="v-middle" data-id="15" th:each="account : ${accounts}">
 											<td><label class="ui-check m-0"><input type="checkbox" name="id" value="15">
 													<i></i></label></td>
+											<td th:text="${account.accountId}">
+												<div class="avatar-group">
+													<a href="#" class="avatar ajax w-32" data-toggle="tooltip"
+														title="Eu">
+														<img th:src="@{/admin/assets/img/a8.jpg}" alt="."></a>
+												</div>
+											</td>
+											<td class="flex">
+												<a href="#" class="item-title text-color"
+													th:text="${account.username}"></a>
+												<div class="item-except text-muted text-sm h-1x"
+													th:text="${account.email}"></div>
+											</td>
 											<td>
-												<div class="avatar-group"><a href="#" class="avatar ajax w-32"
-														data-toggle="tooltip" title="Eu"><img
-															th:src="@{/admin/assets/img/a8.jpg}" alt="."></a></div>
+												<span class="item-badge badge text-uppercase"
+													th:classappend="${account.role.roleId == 1} ? 'bg-secondary' : (${account.role.roleId == 2} ? 'bg-success' : 'bg-danger')"
+													th:text="${account.role.roleName}">
+												</span>
+
 											</td>
-											<td class="flex"><a href="#" class="item-title text-color">abc@gmail.com</a>
-												<div class="item-except text-muted text-sm h-1x">Lan ... ...</div>
+											<td>
+												<span class="item-amount d-none d-sm-block text-sm"
+													th:text="${account.status} ? 'Present' : 'Lock'">
+												</span>
 											</td>
-											<td><span class="item-amount d-none d-sm-block text-sm">240</span></td>
-											<td><span
-													class="item-amount d-none d-sm-block text-sm [object Object]">50</span>
-											</td>
+
 											<td>
 												<div class="item-action dropdown"><a href="#" data-toggle="dropdown"
 														class="text-muted"><i data-feather="more-vertical"></i></a>
@@ -80,32 +91,7 @@
 														</div>
 											</td>
 										</tr>
-										<tr class="v-middle" data-id="15">
-											<td><label class="ui-check m-0"><input type="checkbox" name="id" value="15">
-													<i></i></label></td>
-											<td>
-												<div class="avatar-group"><a href="#" class="avatar ajax w-32"
-														data-toggle="tooltip" title="Eu"><img
-															th:src="@{/admin/assets/img/a8.jpg}" alt="."></a></div>
-											</td>
-											<td class="flex"><a href="#" class="item-title text-color">abc@gmail.com</a>
-												<div class="item-except text-muted text-sm h-1x">Lan ... ...</div>
-											</td>
-											<td><span class="item-amount d-none d-sm-block text-sm">240</span></td>
-											<td><span
-													class="item-amount d-none d-sm-block text-sm [object Object]">50</span>
-											</td>
-											<td>
-												<div class="item-action dropdown"><a href="#" data-toggle="dropdown"
-														class="text-muted"><i data-feather="more-vertical"></i></a>
-													<div class="dropdown-menu dropdown-menu-right bg-black" role="menu">
-														<a class="dropdown-item" href="#">See detail </a><a
-															class="dropdown-item delete">Delete </a><a
-															class="dropdown-item edit">Edit</a>
-														<div class="dropdown-divider">
-														</div>
-											</td>
-										</tr>
+
 									</tbody>
 								</table>
 							</div>
@@ -131,8 +117,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 </body>
-
 </html>
