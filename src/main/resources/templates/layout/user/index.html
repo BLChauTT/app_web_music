@@ -153,7 +153,7 @@
                         <div class="scrollable hover" style="max-height: 250px">
                             <div class="list list-row">
                                 <div class="list-item" data-id="7">
-                                    <div><a href="music.detail.html"><span class="w-32 avatar gd-primary"><img
+                                    <div><a th:href="@{user/music.detail.html}"><span class="w-32 avatar gd-primary"><img
                                             src="../assets/img/a7.jpg" alt="."></span></a></div>
                                     <div class="flex">
                                         <div class="item-feed h-2x">From design to dashboard, <a href="#">@Dash</a>
@@ -162,7 +162,7 @@
                                     </div>
                                 </div>
                                 <div class="list-item" data-id="19">
-                                    <div><a href="music.detail.html"><span class="w-32 avatar gd-warning">T</span></a>
+                                    <div><a th:href="@{user/music.detail.html}"><span class="w-32 avatar gd-warning">T</span></a>
                                     </div>
                                     <div class="flex">
                                         <div class="item-feed h-2x">We help companies deliver reliable and beautiful <a
@@ -170,22 +170,22 @@
                                     </div>
                                 </div>
                                 <div class="list-item" data-id="3">
-                                    <div><a href="music.detail.html"><span class="w-32 avatar gd-primary"><img
-                                            src="../assets/img/a3.jpg" alt="."></span></a></div>
+                                    <div><a th:href="@{user/music.detail.html}"><span class="w-32 avatar gd-primary"><img
+                                            th:src="@{../static/assets/user/img/a3.jpg}" alt="."></span></a></div>
                                     <div class="flex">
                                         <div class="item-feed h-2x"><a href="#">@NextUI</a> submit a ticket request
                                         </div>
                                     </div>
                                 </div>
                                 <div class="list-item" data-id="13">
-                                    <div><a href="music.detail.html"><span class="w-32 avatar gd-primary">L</span></a>
+                                    <div><a th:href="@{user/music.detail.html}"><span class="w-32 avatar gd-primary">L</span></a>
                                     </div>
                                     <div class="flex">
                                         <div class="item-feed h-2x">Thanks! Awesome to see good support on Twitter</div>
                                     </div>
                                 </div>
                                 <div class="list-item" data-id="17">
-                                    <div><a href="music.detail.html"><span class="w-32 avatar gd-warning">A</span></a>
+                                    <div><a th:href="@{user/music.detail.html}"><span class="w-32 avatar gd-warning">A</span></a>
                                     </div>
                                     <div class="flex">
                                         <div class="item-feed h-2x">Alibaba made a smart screen <a href="#">@Alibaba</a>
@@ -193,7 +193,7 @@
                                     </div>
                                 </div>
                                 <div class="list-item" data-id="15">
-                                    <div><a href="music.detail.html"><span class="w-32 avatar gd-success">J</span></a>
+                                    <div><a th:href="@{user/music.detail.html}"><span class="w-32 avatar gd-success">J</span></a>
                                     </div>
                                     <div class="flex">
                                         <div class="item-feed h-2x">Fun project from this weekend. Both computer
@@ -205,12 +205,12 @@
                         </div>
                         <div class="d-flex px-3 py-2 b-t">
                             <div class="flex"><span>6 Notifications</span></div>
-                            <a href="page.setting.html">See all <i class="fa fa-angle-right text-muted"></i></a></div>
+                            <a th:href="@{user/page.setting.html}">See all <i class="fa fa-angle-right text-muted"></i></a></div>
                     </div><!-- / dropdown --></li><!-- User dropdown menu -->
                 <li class="nav-item dropdown"><a href="#" data-toggle="dropdown"
                                                  class="nav-link d-flex align-items-center px-2 text-color"><span
                         class="dropdown-toggle mx-2 d-none l-h-1x d-lg-block text-right">Jacqueline Reid</span> <span
-                        class="avatar w-24" style="margin: -2px"><img src="../assets/img/a0.jpg" alt="..."></span></a>
+                        class="avatar w-24" style="margin: -2px"><img th:src="@{../static/assets/user/img/a0.jpg}" alt="..."></span></a>
                     <div class="dropdown-menu dropdown-menu-right w mt-3 animate fadeIn"><a class="dropdown-item"
                                                                                             th:href="@{user/music.artist.html}"><span>Jacqueline Reid</span>
                     </a><a class="dropdown-item" href="#"><span class="badge bg-success text-uppercase">Upgrade</span>
@@ -241,14 +241,14 @@
                 <div class="row no-gutters list-grouped">
                     <div class="col-sm-6">
                         <div class="list-item list-overlay r mb-3">
-                            <div class="media media-4x3"><a href="music.detail.html#" class="ajax media-content"
-                                                            style="background-image:url(../assets/img/c10.jpg)"></a>
+                            <div class="media media-4x3"><a th:href="@{user/music.detail.html#}" class="ajax media-content"
+                                                            style="background-image:url(static/assets/user/img/c10.jpg)"></a>
                                 <div class="media-action"></div>
                             </div>
                             <div class="list-content p-5">
-                                <div class="list-body"><a href="music.detail.html#"
+                                <div class="list-body"><a th:href="@{user/music.detail.html#}"
                                                           class="list-title title ajax h4 font-weight-bold">Amazing
-                                    songs </a><a href="music.artist.html#"
+                                    songs </a><a th:href="@{user/music.artist.html#}"
                                                  class="list-subtitle d-block text-muted subtitle ajax h-1x">Pharetra
                                     dapibus cursus tellus scelerisque sed morbi nulla rhoncus,</a></div>
                             </div>
@@ -256,14 +256,14 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="list-item list-overlay r mb-3">
-                            <div class="media media-4x3"><a href="music.detail.html#" class="ajax media-content"
-                                                            style="background-image:url(../assets/img/c15.jpg)"></a>
+                            <div class="media media-4x3"><a th:href="@{user/music.detail.html#}" class="ajax media-content"
+                                                            style="background-image:url(static/assets/user/img/c15.jpg)"></a>
                                 <div class="media-action"></div>
                             </div>
                             <div class="list-content p-5">
-                                <div class="list-body"><a href="music.detail.html#"
+                                <div class="list-body"><a th:href="@{user/music.detail.html#}"
                                                           class="list-title title ajax h4 font-weight-bold">Weekly top
-                                    albums </a><a href="music.artist.html#"
+                                    albums </a><a th:href="@{user/music.artist.html#}"
                                                   class="list-subtitle d-block text-muted subtitle ajax h-1x">Porta
                                     neque, ultricies porta consectetur diam aenean volutpat mi</a></div>
                             </div>
@@ -310,8 +310,8 @@
                     <div class="col-2" data-id="92570808" data-category="Pop" data-tag="Canada"
                          data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music4/v4/64/3d/c1/643dc113-29d1-08de-78e2-a4ab4c3f1730/mzaf_5420937162202173294.plus.aac.p.m4a">
                         <div class="list-item slick-item r mb-3">
-                            <div class="media"><a href="music.detail.html#92570808" class="ajax media-content"
-                                                  style="background-image:url(../assets/img/c1.jpg)"></a>
+                            <div class="media"><a th:href="@{user/music.detail.html#92570808}" class="ajax media-content"
+                                                  style="background-image:url(static/assets/user/img/c1.jpg)"></a>
                                 <div class="media-action media-action-overlay">
                                     <button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
                                             data-feather="heart" class="active-danger"></i></button>
@@ -322,9 +322,9 @@
                                 </div>
                             </div>
                             <div class="list-content text-center">
-                                <div class="list-body"><a href="music.detail.html#92570808"
+                                <div class="list-body"><a th:href="@{user/music.detail.html#92570808}"
                                                           class="list-title title ajax h-1x">Rude </a><a
-                                        href="music.artist.html#92570808"
+                                        th:href="@{user/music.artist.html#92570808}"
                                         class="list-subtitle d-block text-muted subtitle ajax h-1x">Magic!</a></div>
                             </div>
                         </div>
@@ -332,8 +332,8 @@
                     <div class="col-2" data-id="263013345" data-category="Electronic" data-tag="all"
                          data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music1/v4/f2/52/4b/f2524bfb-d546-affa-e89f-f165a1c99cb0/mzaf_2577649036970470026.plus.aac.p.m4a">
                         <div class="list-item slick-item r mb-3">
-                            <div class="media"><a href="music.detail.html#263013345" class="ajax media-content"
-                                                  style="background-image:url(../assets/img/c2.jpg)"></a>
+                            <div class="media"><a th:href="@{user/music.detail.html#263013345}" class="ajax media-content"
+                                                  style="background-image:url(static/assets/user/img/c2.jpg)"></a>
                                 <div class="media-action media-action-overlay">
                                     <button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
                                             data-feather="heart" class="active-danger"></i></button>
@@ -344,9 +344,9 @@
                                 </div>
                             </div>
                             <div class="list-content text-center">
-                                <div class="list-body"><a href="music.detail.html#263013345"
+                                <div class="list-body"><a th:href="@{user/music.detail.html#263013345}"
                                                           class="list-title title ajax h-1x">Reality </a><a
-                                        href="music.artist.html#263013345"
+                                        th:href="@{user/music.artist.html#263013345}"
                                         class="list-subtitle d-block text-muted subtitle ajax h-1x">Lost Frequencies
                                     Feat. Janieck Devy</a></div>
                             </div>
@@ -355,8 +355,8 @@
                     <div class="col-2" data-id="258710574" data-category="Pop" data-tag="USA"
                          data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music7/v4/03/c0/60/03c060ce-1617-e556-def2-4fd34d7e1f24/mzaf_8527312642501236756.plus.aac.p.m4a">
                         <div class="list-item slick-item r mb-3">
-                            <div class="media"><a href="music.detail.html#258710574" class="ajax media-content"
-                                                  style="background-image:url(../assets/img/c3.jpg)"></a>
+                            <div class="media"><a th:href="@{user/music.detail.html#258710574}" class="ajax media-content"
+                                                  style="background-image:url(static/assets/user/img/c3.jpg)"></a>
                                 <div class="media-action media-action-overlay">
                                     <button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
                                             data-feather="heart" class="active-danger"></i></button>
@@ -367,9 +367,9 @@
                                 </div>
                             </div>
                             <div class="list-content text-center">
-                                <div class="list-body"><a href="music.detail.html#258710574"
+                                <div class="list-body"><a th:href="@{user/music.detail.html#258710574}"
                                                           class="list-title title ajax h-1x">Stressed Out </a><a
-                                        href="music.artist.html#258710574"
+                                       th:href="@{user/music.artist.html#258710574}"
                                         class="list-subtitle d-block text-muted subtitle ajax h-1x">Twenty One
                                     Pilots</a></div>
                             </div>
@@ -378,8 +378,8 @@
                     <div class="col-2" data-id="75007235" data-category="R&amp;B" data-tag="USA"
                          data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music/v4/2d/16/73/2d16730a-4f8a-f86b-b078-29a8c8e03ca8/mzaf_4212496176990487601.plus.aac.p.m4a">
                         <div class="list-item slick-item r mb-3">
-                            <div class="media"><a href="music.detail.html#75007235" class="ajax media-content"
-                                                  style="background-image:url(../assets/img/c4.jpg)"></a>
+                            <div class="media"><a th:href="@{user/music.detail.html#75007235}" class="ajax media-content"
+                                                  style="background-image:url(static/assets/user/img/c4.jpg)"></a>
                                 <div class="media-action media-action-overlay">
                                     <button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
                                             data-feather="heart" class="active-danger"></i></button>
@@ -390,9 +390,9 @@
                                 </div>
                             </div>
                             <div class="list-content text-center">
-                                <div class="list-body"><a href="music.detail.html#75007235"
+                                <div class="list-body"><a th:href="@{user/music.detail.html#75007235}"
                                                           class="list-title title ajax h-1x">Scream &amp; Shout </a><a
-                                        href="music.artist.html#75007235"
+                                        th:href="@{user/music.artist.html#75007235}"
                                         class="list-subtitle d-block text-muted subtitle ajax h-1x">will.i.am Feat.
                                     Britney Spears</a></div>
                             </div>
@@ -401,8 +401,8 @@
                     <div class="col-2" data-id="324443962" data-category="all" data-tag="USA"
                          data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview62/v4/bd/6b/34/bd6b3443-d4c3-26fd-91c8-d0b31ab47ee3/mzaf_8046559398209773051.plus.aac.p.m4a">
                         <div class="list-item slick-item r mb-3">
-                            <div class="media"><a href="music.detail.html#324443962" class="ajax media-content"
-                                                  style="background-image:url(../assets/img/c5.jpg)"></a>
+                            <div class="media"><a th:href="@{user/music.detail.html#324443962}" class="ajax media-content"
+                                                  style="background-image:url(static/assets/user/img/c5.jpg)"></a>
                                 <div class="media-action media-action-overlay">
                                     <button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
                                             data-feather="heart" class="active-danger"></i></button>
@@ -413,9 +413,9 @@
                                 </div>
                             </div>
                             <div class="list-content text-center">
-                                <div class="list-body"><a href="music.detail.html#324443962"
+                                <div class="list-body"><a th:href="@{user/music.detail.html#324443962}"
                                                           class="list-title title ajax h-1x">Closer </a><a
-                                        href="music.artist.html#324443962"
+                                        th:href="@{user/music.artist.html#324443962}"
                                         class="list-subtitle d-block text-muted subtitle ajax h-1x">The Chainsmokers
                                     Feat. Halsey</a></div>
                             </div>
@@ -424,8 +424,8 @@
                     <div class="col-2" data-id="234782921" data-category="Electronic" data-tag="USA"
                          data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music69/v4/02/4c/98/024c9802-ce83-e0b4-3cd3-11c5c6284cdb/mzaf_9006921880389738307.plus.aac.p.m4a">
                         <div class="list-item slick-item r mb-3">
-                            <div class="media"><a href="music.detail.html#234782921" class="ajax media-content"
-                                                  style="background-image:url(../assets/img/c6.jpg)"></a>
+                            <div class="media"><a th:href="@{user/music.detail.html#234782921}" class="ajax media-content"
+                                                  style="background-image:url(static/assets/user/img/c6.jpg)"></a>
                                 <div class="media-action media-action-overlay">
                                     <button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
                                             data-feather="heart" class="active-danger"></i></button>
@@ -436,7 +436,7 @@
                                 </div>
                             </div>
                             <div class="list-content text-center">
-                                <div class="list-body"><a href="music.detail.html#234782921"
+                                <div class="list-body"><a th:href="@{user/music.detail.html#234782921}"
                                                           class="list-title title ajax h-1x">Lean On </a><a
                                         href="music.artist.html#234782921"
                                         class="list-subtitle d-block text-muted subtitle ajax h-1x">Major Lazer Feat. MØ
@@ -448,7 +448,7 @@
                          data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music1/v4/ca/8c/3d/ca8c3dc7-51cf-78b8-4fbc-7607893c155f/mzaf_6545808409327260529.plus.aac.p.m4a">
                         <div class="list-item slick-item r mb-3">
                             <div class="media"><a href="music.detail.html#86035248" class="ajax media-content"
-                                                  style="background-image:url(../assets/img/c7.jpg)"></a>
+                                                  style="background-image:url(static/assets/user/img/c7.jpg)"></a>
                                 <div class="media-action media-action-overlay">
                                     <button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
                                             data-feather="heart" class="active-danger"></i></button>
