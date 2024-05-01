@@ -1,0 +1,57 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Index</title>
+</head>
+<body>
+
+<a th:href="@{/song/findAll}">Back</a>
+<h3>Music Details</h3>
+<table border="1">
+    <tr>
+        <td>Id</td>
+        <td th:text="${song.songId}"></td>
+    </tr>
+    <tr>
+        <td>Account_Id</td>
+        <td th:text="${song.account.accountId}"></td>
+    </tr>
+    <tr>
+        <td>Song_Detail_Id</td>
+        <td th:text="${song.songdetail.songDetailId}"></td>
+    </tr>
+    <tr>
+        <td>Author</td>
+        <td th:text="${song.author.authorId}"></td>
+    </tr>
+    <tr>
+        <td>Title</td>
+        <td th:text="${song.songdetail.title}"></td>
+    </tr>
+    <tr>
+        <td>Genre</td>
+        <td th:text="${song.songdetail.genre}"></td>
+    </tr>
+    <tr>
+        <td>Release Date</td>
+        <td th:text="${#dates.format(song.songdetail.releaseDate, 'dd/MM/yyyy')}"></td>
+    </tr>
+    <tr>
+        <td>File URL</td>
+        <td th:text="${song.songdetail.fileUrl}"></td>
+    </tr>
+    <tr>
+        <td>Lyric</td>
+        <td th:text="${song.songdetail.lyric}"></td>
+    </tr>
+    <tr>
+        <td>Listen Count</td>
+        <td th:text="${song.songdetail.listenCount}"></td>
+    </tr>
+    <tr>
+        <td>Status</td>
+        <td th:text="${song.songdetail.status}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

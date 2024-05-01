@@ -16,7 +16,11 @@
         <td th:text="${i.index + 1}"></td>
         <td th:text="${song.songId}"></td>
         <td th:text="${song.account.accountId}"></td>
-        <td th:text="${song.songdetail.songDetailId}"></td>
+        <td>
+            <a th:text="${song.songdetail.songDetailId}"
+                    th:href="@{'/song/details/' + ${song.songdetail.songDetailId}}">
+            </a>
+        </td>
         <td th:text="${song.author.authorId}"></td>
     </tr>
 </table>

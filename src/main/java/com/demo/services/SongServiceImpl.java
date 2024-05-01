@@ -24,8 +24,13 @@ public class SongServiceImpl implements SongService{
     }
 
     @Override
-    public Song getSongById(int id) throws Exception {
-        return songRepository.getById(id);
+    public Song findSongById(int id) {
+        for (Song song : findAll()) {
+            if (song.getSongId() == id) {
+                return song;
+            }
+        }
+        return null;
     }
 
     @Override
