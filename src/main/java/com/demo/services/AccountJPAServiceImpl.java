@@ -61,5 +61,22 @@ public class AccountJPAServiceImpl implements AccountJPAService {
 		return accountRepository.findAll();
 	}
 
+	@Override
+	public Account findById(Integer accountId) {		
+		return accountRepository.findById(accountId).get();
+	}
+
+	@Override
+	public boolean remove(Account entity) {
+		try {
+			entity.setStatus(false);
+	        accountRepository.save(entity);
+			return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+
 	
 }

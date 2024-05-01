@@ -17,4 +17,8 @@ public interface AccountJPAService {
 
 	public boolean saveUserProfile(Userprofile userprofile);
 	
+	public Account findById(Integer accountId);
+	
+	public boolean remove(Account entity);
+	
 }

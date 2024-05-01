@@ -1,5 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-	th:replace="~{template/admin/index :: renderBody('Account', ~{this::.card-body})}">
+	th:replace="~{layout/admin/index :: renderBody('Account', ~{this::.card-body})}">
 <head>
 	<title>Index</title>
 </head>
@@ -58,7 +58,7 @@
 												<div class="avatar-group">
 													<a href="#" class="avatar ajax w-32" data-toggle="tooltip"
 														title="Eu">
-														<img th:src="@{/admin/assets/img/a8.jpg}" alt="."></a>
+														<img th:src="@{/assets/admin/img/a8.jpg}" alt="."></a>
 												</div>
 											</td>
 											<td class="flex">
@@ -84,9 +84,9 @@
 												<div class="item-action dropdown"><a href="#" data-toggle="dropdown"
 														class="text-muted"><i data-feather="more-vertical"></i></a>
 													<div class="dropdown-menu dropdown-menu-right bg-black" role="menu">
-														<a class="dropdown-item" href="#">See detail </a><a
-															class="dropdown-item delete">Delete </a><a
-															class="dropdown-item edit">Edit</a>
+														<a class="dropdown-item" href="#">See detail </a>
+														<a class="dropdown-item delete" th:href="@{'/admin/remove/' + ${account.accountId}}">Delete </a>
+														<a class="dropdown-item edit">Edit</a>
 														<div class="dropdown-divider">
 														</div>
 											</td>
