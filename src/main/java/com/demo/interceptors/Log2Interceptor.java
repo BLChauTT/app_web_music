@@ -1,8 +1,5 @@
 package com.demo.interceptors;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 

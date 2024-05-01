@@ -13,10 +13,10 @@ public class ProductDTO {
 	private boolean status;
 	private String description;
 	private String photo;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date created;
-	
+
 	private int categoryId;
 	private String categoryName;
 

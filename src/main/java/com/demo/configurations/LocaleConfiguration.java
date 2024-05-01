@@ -21,7 +21,7 @@ public class LocaleConfiguration implements WebMvcConfigurer {
 		source.setDefaultEncoding("UTF-8");
 		return source;
 	}
-	
+
 	@Bean
 	public SessionLocaleResolver localeResolver() {
 		SessionLocaleResolver resolver = new SessionLocaleResolver();

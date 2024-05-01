@@ -1,6 +1,12 @@
 package com.demo.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "accountrole", schema = "app_web_musics_database", catalog = "")
@@ -47,9 +53,7 @@ public class AccountroleEntity {
 
         AccountroleEntity that = (AccountroleEntity) o;
 
-        if (id != that.id) return false;
-        if (accountId != that.accountId) return false;
-        if (roleId != that.roleId) return false;
+        if ((id != that.id) || (accountId != that.accountId) || (roleId != that.roleId)) return false;
 
         return true;
     }

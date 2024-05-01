@@ -1,20 +1,7 @@
 package com.demo.controllers;
 
-import com.demo.entities.Account;
-import com.demo.entities.Role;
-import com.demo.entities.Userprofile;
-import com.demo.helpers.FileHelper;
-import com.demo.helpers.RandomHelper;
-
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +9,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.demo.entities.Account;
+import com.demo.entities.Role;
+import com.demo.entities.Userprofile;
+import com.demo.helpers.RandomHelper;
 import com.demo.services.AccountJPAService;
 import com.demo.services.MailService;
 
@@ -34,8 +24,8 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("account")
 public class AccountController {
 	//các chức năng để nói khi báo cáo:
-//	+ login 
-//	+ register bằng mail 
+//	+ login
+//	+ register bằng mail
 //	+ forget Password bằng mail
 //	+ bảo bật bằng token, ngăn ngừa user truy cập link trái phép
 //	+ bảo mật bằng recaptcha của gg đế tránh bị robot tấn công (spam)
@@ -94,7 +84,7 @@ public class AccountController {
 		Role role = new Role();
 		role.setRoleId(2);
 		role.setRoleName("User");
-		
+
 		account.setStatus(false);
 		account.setRole(role);
 		String securityCode = RandomHelper.random();
@@ -104,7 +94,7 @@ public class AccountController {
 			userprofile.setAccount(account2);
 			userprofile.setAvatarUrl("noimage.jpg");
 			accountService.saveUserProfile(userprofile);
-			
+
 			// gởi mail kích hoạt tài khoản
 			String content = "Nhấn vào <a href='" + environment.getProperty("BASE_URL") + "account/verify?email="
 					+ account.getEmail() + "&securityCode=" + account.getSecurityCode() + "'>đây để kích hoạt</a>";
@@ -165,7 +155,7 @@ public class AccountController {
 		}
 		return "redirect:/account/forgetPassword";
 	}
-	
+
 	@GetMapping("newPassword")
 	public String newPassword(@RequestParam("email") String email, @RequestParam("token") String token, ModelMap modelMap) {
 		if (isValidToken(email, token)) {
@@ -177,7 +167,7 @@ public class AccountController {
 	    	return "redirect:/account/accessDenied";
 	    }
 	}
-	
+
 	private boolean isValidToken(String email, String token) {
 		Account account = accountService.findByEmailAndToken(email, token);
 	    if (account != null) {

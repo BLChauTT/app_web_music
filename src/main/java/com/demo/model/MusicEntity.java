@@ -1,8 +1,14 @@
 package com.demo.model;
 
-import jakarta.persistence.*;
-
 import java.sql.Date;
+
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "music", schema = "app_web_musics_database", catalog = "")
@@ -115,14 +121,9 @@ public class MusicEntity {
 
         MusicEntity that = (MusicEntity) o;
 
-        if (id != that.id) return false;
-        if (authorId != that.authorId) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (image != null ? !image.equals(that.image) : that.image != null) return false;
-        if (file != null ? !file.equals(that.file) : that.file != null) return false;
-        if (album != null ? !album.equals(that.album) : that.album != null) return false;
-        if (postingDate != null ? !postingDate.equals(that.postingDate) : that.postingDate != null) return false;
-        if (modifyDate != null ? !modifyDate.equals(that.modifyDate) : that.modifyDate != null) return false;
+        if ((id != that.id) || (authorId != that.authorId) || (name != null ? !name.equals(that.name) : that.name != null) || (image != null ? !image.equals(that.image) : that.image != null)) return false;
+        if ((file != null ? !file.equals(that.file) : that.file != null) || (album != null ? !album.equals(that.album) : that.album != null) || (postingDate != null ? !postingDate.equals(that.postingDate) : that.postingDate != null)
+				|| (modifyDate != null ? !modifyDate.equals(that.modifyDate) : that.modifyDate != null)) return false;
         if (time != null ? !time.equals(that.time) : that.time != null) return false;
 
         return true;

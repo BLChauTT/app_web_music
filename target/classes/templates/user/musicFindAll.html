@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Index</title>
+</head>
+<body>
+<h3>Music List - Find All</h3>
+<table border="1">
+    <tr>
+        <th>No</th>
+        <th>Song_Id</th>
+        <th>Account_Id</th>
+        <th>Song_Detail_Id</th>
+        <th>Author_Id</th>9
+    </tr>
+    <tr th:each="song, i : ${songs}">
+        <td th:text="${i.index + 1}"></td>
+        <td th:text="${song.songId}"></td>
+        <td th:text="${song.account.accountId}"></td>
+        <td th:text="${song.songdetail.songDetailId}"></td>
+        <td th:text="${song.author.authorId}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

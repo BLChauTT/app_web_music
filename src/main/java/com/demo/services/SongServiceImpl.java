@@ -1,20 +1,21 @@
 package com.demo.services;
 
-import com.demo.entities.Song;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.demo.entities.Song;
+import com.demo.repositories.SongRepository;
 
 @Service
 public class SongServiceImpl implements SongService{
 
     @Autowired
-    private SongService songService;
+    public SongRepository songRepository;
 
     @Override
     public boolean save(Song song) throws Exception {
         try {
-            songService.save(song);
+            songRepository.save(song);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -24,7 +25,7 @@ public class SongServiceImpl implements SongService{
 
     @Override
     public Song getSongById(int id) throws Exception {
-        return songService.getSongById(id);
+        return songRepository.getById(id);
     }
 
     @Override
@@ -39,6 +40,6 @@ public class SongServiceImpl implements SongService{
 
     @Override
     public Iterable<Song> findAll() {
-        return songService.findAll();
+        return songRepository.findAll();
     }
 }

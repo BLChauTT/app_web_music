@@ -26,7 +26,7 @@ public class AdminController {
 	public String music() {
 		return "admin/music";
 	}
-	
+
 	@GetMapping(value = "remove/{id}")
 	private String remove(@PathVariable int id, RedirectAttributes attr) {
 		Account account = accountJPAService.findById(id);

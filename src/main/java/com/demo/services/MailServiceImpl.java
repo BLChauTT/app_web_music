@@ -12,7 +12,7 @@ public class MailServiceImpl implements MailService {
 
 	@Autowired
 	private JavaMailSender sender;
-	
+
 	@Override
 	public boolean send(String from, String to, String subject, String content) {
 		try {

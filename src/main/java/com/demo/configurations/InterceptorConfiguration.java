@@ -1,7 +1,6 @@
 package com.demo.configurations;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -20,19 +19,19 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 
 	@Autowired
 	private Log2Interceptor log2Interceptor;
-	
+
 	@Autowired
 	private Log3Interceptor log3Interceptor;
-	
+
 	@Autowired
 	private SecurityInterceptor securityInterceptor;
-	
+
 	@Autowired
 	private IPInterceptor ipInterceptor;
-	
+
 	@Autowired
 	private AdminInterceptor adminInterceptor;
-	
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(ipInterceptor);

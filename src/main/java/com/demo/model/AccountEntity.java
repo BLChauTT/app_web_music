@@ -1,8 +1,14 @@
 package com.demo.model;
 
-import jakarta.persistence.*;
-
 import java.sql.Date;
+
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "account", schema = "app_web_musics_database", catalog = "")
@@ -93,13 +99,9 @@ public class AccountEntity {
 
         AccountEntity that = (AccountEntity) o;
 
-        if (id != that.id) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (gender != null ? !gender.equals(that.gender) : that.gender != null) return false;
-        if (dob != null ? !dob.equals(that.dob) : that.dob != null) return false;
-        if (region != null ? !region.equals(that.region) : that.region != null) return false;
+        if ((id != that.id) || (name != null ? !name.equals(that.name) : that.name != null) || (email != null ? !email.equals(that.email) : that.email != null)
+				|| (password != null ? !password.equals(that.password) : that.password != null)) return false;
+        if ((gender != null ? !gender.equals(that.gender) : that.gender != null) || (dob != null ? !dob.equals(that.dob) : that.dob != null) || (region != null ? !region.equals(that.region) : that.region != null)) return false;
 
         return true;
     }

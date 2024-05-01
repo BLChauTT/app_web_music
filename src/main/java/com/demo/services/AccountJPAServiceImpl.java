@@ -1,8 +1,5 @@
 package com.demo.services;
 
-import java.util.List;
-
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +26,7 @@ public class AccountJPAServiceImpl implements AccountJPAService {
 			return false;
 		}
 	}
-	
+
 	@Override
 	public boolean saveUserProfile(Userprofile userprofile) {
 		try {
@@ -55,14 +52,14 @@ public class AccountJPAServiceImpl implements AccountJPAService {
 	public Account findByEmailAndToken(String email, String token) {
 		return accountRepository.findByEmailAndToken(email, token);
 	}
-	
+
 	@Override
 	public Iterable<Account> findAll() {
 		return accountRepository.findAll();
 	}
 
 	@Override
-	public Account findById(Integer accountId) {		
+	public Account findById(Integer accountId) {
 		return accountRepository.findById(accountId).get();
 	}
 
@@ -78,5 +75,5 @@ public class AccountJPAServiceImpl implements AccountJPAService {
 		}
 	}
 
-	
+
 }

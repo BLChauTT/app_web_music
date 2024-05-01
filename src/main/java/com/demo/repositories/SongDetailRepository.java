@@ -6,4 +6,4 @@ import com.demo.entities.Songdetail;
 
 public interface SongDetailRepository extends CrudRepository<Songdetail, Integer> {
 
-}     
+}

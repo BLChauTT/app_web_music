@@ -9,5 +9,5 @@ public class FileHelper {
 		int lastIndex = fileName.lastIndexOf(".");
 		return name + fileName.substring(lastIndex);
 	}
-	
+
 }

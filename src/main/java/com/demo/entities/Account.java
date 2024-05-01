@@ -1,7 +1,6 @@
 package com.demo.entities;
 // Generated Apr 23, 2024, 11:24:45 AM by Hibernate Tools 4.3.6.Final
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,8 +14,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import jakarta.persistence.UniqueConstraint;
 
 
@@ -36,15 +33,15 @@ public class Account implements java.io.Serializable {
 	private boolean status;
 	private String token;
 	private String securityCode;
-	private Set<Favorite> favorites = new HashSet<Favorite>(0);
-	private Set<Comment> comments = new HashSet<Comment>(0);
-	private Set<Notification> notifications = new HashSet<Notification>(0);
-	private Set<AccountSong> accountSongs = new HashSet<AccountSong>(0);
-	private Set<Rating> ratings = new HashSet<Rating>(0);
-	private Set<Userprofile> userprofiles = new HashSet<Userprofile>(0);
-	private Set<Accountmembership> accountmemberships = new HashSet<Accountmembership>(0);
-	private Set<Song> songs = new HashSet<Song>(0);
-	private Set<Transactionhistory> transactionhistories = new HashSet<Transactionhistory>(0);
+	private Set<Favorite> favorites = new HashSet<>(0);
+	private Set<Comment> comments = new HashSet<>(0);
+	private Set<Notification> notifications = new HashSet<>(0);
+	private Set<AccountSong> accountSongs = new HashSet<>(0);
+	private Set<Rating> ratings = new HashSet<>(0);
+	private Set<Userprofile> userprofiles = new HashSet<>(0);
+	private Set<Accountmembership> accountmemberships = new HashSet<>(0);
+	private Set<Song> songs = new HashSet<>(0);
+	private Set<Transactionhistory> transactionhistories = new HashSet<>(0);
 
 	public Account() {
 	}

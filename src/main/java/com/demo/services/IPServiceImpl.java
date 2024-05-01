@@ -11,7 +11,7 @@ public class IPServiceImpl implements IPService {
 	private List<String> blockIPs;
 
 	public IPServiceImpl() {
-		blockIPs = new ArrayList<String>();
+		blockIPs = new ArrayList<>();
 		blockIPs.add("172.16.10.3");
 	}
 

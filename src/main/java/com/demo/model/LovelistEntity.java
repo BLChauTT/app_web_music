@@ -1,6 +1,12 @@
 package com.demo.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "lovelist", schema = "app_web_musics_database", catalog = "")
@@ -69,10 +75,7 @@ public class LovelistEntity {
 
         LovelistEntity that = (LovelistEntity) o;
 
-        if (id != that.id) return false;
-        if (musicId != that.musicId) return false;
-        if (accountId != that.accountId) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if ((id != that.id) || (musicId != that.musicId) || (accountId != that.accountId) || (name != null ? !name.equals(that.name) : that.name != null)) return false;
         if (image != null ? !image.equals(that.image) : that.image != null) return false;
 
         return true;
