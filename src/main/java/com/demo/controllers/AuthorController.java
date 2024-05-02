@@ -7,28 +7,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.demo.services.SingerService;
+import com.demo.services.AuthorService;
 
 @Controller
-@RequestMapping("singer")
-public class SingerController {
+@RequestMapping("author")
+public class AuthorController {
     @Autowired
-    private SingerService singerService;
+    private AuthorService authorService;
     @Autowired
-    public SingerController(SingerService singerService) {
-        this.singerService = singerService;
+    public AuthorController(AuthorService _authorService) {
+    	this.authorService = _authorService;
     }
 
     @GetMapping("findAll")
     public String findAll(ModelMap modelMap) {
-        modelMap.put("singers", singerService.findAll());
-        return "user/singer/singerFindAll";
+        modelMap.put("authors", authorService.findAll());
+        return "user/author/authorFindAll";
     }
-
     @GetMapping("details/{id}")
     public String details(@PathVariable("id") int id, ModelMap modelMap) {
-        modelMap.put("sing", singerService.findSingerById(id));
-        return "user/singer/singerDetail";
+        modelMap.put("author", authorService.findAuthorById(id));
+        return "user/author/authorDetail";
     }
 
 }

@@ -1,9 +1,8 @@
 package com.demo.services;
 
-import com.demo.entities.Singer;
-import com.demo.entities.Song;
-
 import java.util.List;
+
+import com.demo.entities.Singer;
 
 public interface SingerService {
     public boolean save(Singer singer) throws Exception;

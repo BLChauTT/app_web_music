@@ -11,15 +11,15 @@ public class UserprofileServiceImpl implements UserProfileService {
 
 	@Autowired
 	private UserProfileRepository userProfileRepository;
-	
-	
+
+
 	@Override
 	public Userprofile findByAccountId(int accountId) {
-		
+
 		return userProfileRepository.findByAccountId(accountId);
 	}
 
-	
 
-	
+
+
 }
