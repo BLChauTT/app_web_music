@@ -22,7 +22,7 @@ public class AuthorController {
     @GetMapping("findAll")
     public String findAll(ModelMap modelMap) {
         modelMap.put("authors", authorService.findAll());
-        return "user/authorFindAll";
+        return "user/author/authorFindAll";
     }
     @GetMapping("details/{id}")
     public String details(@PathVariable("id") int id, ModelMap modelMap) {

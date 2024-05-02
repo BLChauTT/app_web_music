@@ -27,7 +27,7 @@ public class SingerController {
 
     @GetMapping("details/{id}")
     public String details(@PathVariable("id") int id, ModelMap modelMap) {
-        modelMap.put("sing", singerService.findSingerById(id));
+        modelMap.put("singer", singerService.findSingerById(id));
         return "user/singer/singerDetail";
     }
 

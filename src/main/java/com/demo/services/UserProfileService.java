@@ -5,6 +5,6 @@ import com.demo.entities.Userprofile;
 public interface UserProfileService {
 
 	public Userprofile findByAccountId(int accountId);
-	
+
 	public boolean saveUserProfile(Userprofile userprofile);
 }

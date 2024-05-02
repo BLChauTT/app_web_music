@@ -26,7 +26,7 @@ public class SingerServiceImpl implements SingerService{
 
     @Override
     public Singer findSingerById(int id) {
-        for (Singer singer: findAll()) {
+        for (Singer singer : singerRepository.findAll()) {
             if (singer.getSingerId() == id) {
                 return singer;
             }

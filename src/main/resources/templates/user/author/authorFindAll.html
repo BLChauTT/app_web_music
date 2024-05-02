@@ -14,7 +14,12 @@
     <tr th:each="author, i : ${authors}">
         <td th:text="${i.index + 1}"></td>
         <td th:text="${author.authorId}"></td>
-        <td th:text="${author.authorName}"></td>
+        <td>
+            <a th:text="${author.authorName}"
+               th:href="@{'/author/details/' + ${author.authorId}}">
+            </a>
+        </td>
+
     </tr>
 </table>
 
