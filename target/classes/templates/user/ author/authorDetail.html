@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Index</title>
+</head>
+<body>
+
+<a th:href="@{/author/findAll}">Back</a>
+<h3>Music Details</h3>
+<table border="1">
+    <tr>
+        <td>AuthorId</td>
+        <td th:text="${author.authorId}"></td>
+    </tr>
+    <tr>
+        <td>AuthorName</td>
+        <td th:text="${author.authorName}"></td>
+    </tr>
+    <tr>
+        <td>Song_Id</td>
+        <td th:text="${author.song.songId}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
