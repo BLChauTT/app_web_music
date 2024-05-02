@@ -8,12 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.Account;
+import com.demo.entities.Userprofile;
 import com.demo.services.AccountJPAService;
+import com.demo.services.UserProfileService;
 @Controller
 @RequestMapping("admin")
 public class AdminController {
 	@Autowired
 	private AccountJPAService accountJPAService;
+	
+	@Autowired
+    private UserProfileService userProfileService;
 
 	@GetMapping("index")
 	public String admin(ModelMap modelMap) {
@@ -37,5 +42,10 @@ public class AdminController {
 		}
 		return "redirect:/admin/index";
 	}
-
+	
+	@GetMapping("profile/{accountId}")
+	public String getUserProfile(@PathVariable("accountId") int accountId, ModelMap modelMap) {
+		modelMap.put("profiles", userProfileService.findByAccountId(accountId));
+        return "admin/profile";
+    }
 }
