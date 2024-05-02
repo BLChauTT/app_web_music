@@ -1,8 +1,10 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	th:replace="~{layout/admin/index :: renderBody('Account', ~{this::.card-body})}">
+
 <head>
 	<title>Index</title>
 </head>
+
 <body>
 	<div class="card-body">
 		<div id="content" class="flex"><!-- ############ Main START-->
@@ -84,11 +86,17 @@
 												<div class="item-action dropdown"><a href="#" data-toggle="dropdown"
 														class="text-muted"><i data-feather="more-vertical"></i></a>
 													<div class="dropdown-menu dropdown-menu-right bg-black" role="menu">
-														<a class="dropdown-item" href="#">See detail </a>
-														<a class="dropdown-item delete" th:href="@{'/admin/remove/' + ${account.accountId}}">Delete </a>
+														<a class="dropdown-item"
+															th:href="@{'/admin/profile/' + ${account.accountId}}">See
+															detail </a>
+														<a class="dropdown-item delete"
+															th:href="@{'/admin/remove/' + ${account.accountId}}">Delete
+														</a>
 														<a class="dropdown-item edit">Edit</a>
 														<div class="dropdown-divider">
 														</div>
+													</div>
+												</div>
 											</td>
 										</tr>
 
@@ -119,4 +127,5 @@
 		</div>
 	</div>
 </body>
+
 </html>
