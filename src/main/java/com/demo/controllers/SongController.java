@@ -22,7 +22,6 @@ public class SongController {
     @GetMapping({"index", "","/"})
     public String song(ModelMap modelMap) {
         modelMap.put("song", songService.findAll());
-        // test
         return "user/music";
     }
 
