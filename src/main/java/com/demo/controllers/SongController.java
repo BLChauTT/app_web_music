@@ -22,19 +22,19 @@ public class SongController {
 
     @GetMapping({"index", "","/"})
     public String song(ModelMap modelMap) {
-        modelMap.put("song", songService.findAll());
+        //modelMap.put("song", songService.findAll());
         return "user/music";
     }
 
     @GetMapping("findAll")
     public String findAll(ModelMap modelMap) {
         modelMap.put("songs", songService.findAll());
-        return "user/music/musicFindAll";
+        return "user/musicTest/musicFindAll";
     }
 
     @GetMapping("details/{id}")
     public String details(@PathVariable("id") int id, ModelMap modelMap) {
         modelMap.put("song", songService.findSongById(id));
-        return "user/music/musicDetail";
+        return "user/musicTest/musicDetail";
     }
 }
