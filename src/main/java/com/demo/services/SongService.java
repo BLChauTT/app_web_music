@@ -10,5 +10,6 @@ public interface SongService {
     public Song updateSong(int id, Song song);
     public void deleteSong(int id);
     public Iterable<Song> findAll();
+    public List<Song> getSongsByAccount(int accountId);
     public List<Song> getSongsByAuthor(int authorId);
 }

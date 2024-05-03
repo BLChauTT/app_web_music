@@ -21,15 +21,13 @@ public class UserprofileServiceImpl implements UserProfileService {
 
 
 	@Override
-	public boolean saveUserProfile(Userprofile userprofile) {
-		try {
-			userProfileRepository.save(userprofile);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+	public Userprofile updateProfile(int id, Userprofile userprofile) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+
+
 
 
 

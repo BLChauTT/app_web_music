@@ -1,10 +1,11 @@
 package com.demo.services;
 
+import com.demo.entities.Song;
 import com.demo.entities.Userprofile;
 
 public interface UserProfileService {
 
 	public Userprofile findByAccountId(int accountId);
 
-	public boolean saveUserProfile(Userprofile userprofile);
+	public Userprofile updateProfile(int id, Userprofile userprofile);
 }
