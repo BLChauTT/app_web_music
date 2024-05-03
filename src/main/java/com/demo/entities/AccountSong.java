@@ -1,7 +1,7 @@
 package com.demo.entities;
-// Generated May 3, 2024, 7:07:39 PM by Hibernate Tools 4.3.6.Final
+// Generated May 3, 2024, 8:30:25 PM by Hibernate Tools 4.3.6.Final
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -91,7 +91,7 @@ public class AccountSong implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "post_date", length = 19)
+	@Column(name = "post_date", length = 10)
 	public Date getPostDate() {
 		return this.postDate;
 	}

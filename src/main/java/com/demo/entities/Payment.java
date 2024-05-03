@@ -1,8 +1,7 @@
 package com.demo.entities;
-// Generated May 3, 2024, 7:07:39 PM by Hibernate Tools 4.3.6.Final
+// Generated May 3, 2024, 8:30:25 PM by Hibernate Tools 4.3.6.Final
 
-import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,13 +25,13 @@ public class Payment implements java.io.Serializable {
 	private Integer paymentId;
 	private Transactionhistory transactionhistory;
 	private Date paymentDate;
-	private BigDecimal amount;
+	private Float amount;
 	private String paymentMethod;
 
 	public Payment() {
 	}
 
-	public Payment(Transactionhistory transactionhistory, Date paymentDate, BigDecimal amount, String paymentMethod) {
+	public Payment(Transactionhistory transactionhistory, Date paymentDate, Float amount, String paymentMethod) {
 		this.transactionhistory = transactionhistory;
 		this.paymentDate = paymentDate;
 		this.amount = amount;
@@ -71,12 +70,12 @@ public class Payment implements java.io.Serializable {
 		this.paymentDate = paymentDate;
 	}
 
-	@Column(name = "amount", precision = 10)
-	public BigDecimal getAmount() {
+	@Column(name = "amount", precision = 12, scale = 0)
+	public Float getAmount() {
 		return this.amount;
 	}
 
-	public void setAmount(BigDecimal amount) {
+	public void setAmount(Float amount) {
 		this.amount = amount;
 	}
 

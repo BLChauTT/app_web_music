@@ -1,5 +1,5 @@
 package com.demo.entities;
-// Generated May 3, 2024, 7:07:39 PM by Hibernate Tools 4.3.6.Final
+// Generated May 3, 2024, 8:30:25 PM by Hibernate Tools 4.3.6.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,6 +33,7 @@ public class Account implements java.io.Serializable {
 	private String token;
 	private String securityCode;
 	private Set<Album> albums = new HashSet<>(0);
+	private Set<Notification> notifications = new HashSet<>(0);
 	private Set<AccountSong> accountSongs = new HashSet<>(0);
 	private Set<Userprofile> userprofiles = new HashSet<>(0);
 	private Set<Accountmembership> accountmemberships = new HashSet<>(0);
@@ -49,8 +50,9 @@ public class Account implements java.io.Serializable {
 	}
 
 	public Account(Role role, String username, String email, String password, boolean status, String token,
-			String securityCode, Set<Album> albums, Set<AccountSong> accountSongs, Set<Userprofile> userprofiles,
-			Set<Accountmembership> accountmemberships, Set<Transactionhistory> transactionhistories) {
+			String securityCode, Set<Album> albums, Set<Notification> notifications, Set<AccountSong> accountSongs,
+			Set<Userprofile> userprofiles, Set<Accountmembership> accountmemberships,
+			Set<Transactionhistory> transactionhistories) {
 		this.role = role;
 		this.username = username;
 		this.email = email;
@@ -59,6 +61,7 @@ public class Account implements java.io.Serializable {
 		this.token = token;
 		this.securityCode = securityCode;
 		this.albums = albums;
+		this.notifications = notifications;
 		this.accountSongs = accountSongs;
 		this.userprofiles = userprofiles;
 		this.accountmemberships = accountmemberships;
@@ -148,6 +151,15 @@ public class Account implements java.io.Serializable {
 
 	public void setAlbums(Set<Album> albums) {
 		this.albums = albums;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
+	public Set<Notification> getNotifications() {
+		return this.notifications;
+	}
+
+	public void setNotifications(Set<Notification> notifications) {
+		this.notifications = notifications;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")

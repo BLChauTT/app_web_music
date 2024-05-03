@@ -1,7 +1,6 @@
 package com.demo.entities;
-// Generated May 3, 2024, 7:07:39 PM by Hibernate Tools 4.3.6.Final
+// Generated May 3, 2024, 8:30:25 PM by Hibernate Tools 4.3.6.Final
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +24,7 @@ public class Membershippackage implements java.io.Serializable {
 	private Integer packageId;
 	private String packageName;
 	private Integer duration;
-	private BigDecimal price;
+	private Float price;
 	private Set<Transactionhistory> transactionhistories = new HashSet<>(0);
 	private Set<Accountmembership> accountmemberships = new HashSet<>(0);
 
@@ -36,7 +35,7 @@ public class Membershippackage implements java.io.Serializable {
 		this.packageName = packageName;
 	}
 
-	public Membershippackage(String packageName, Integer duration, BigDecimal price,
+	public Membershippackage(String packageName, Integer duration, Float price,
 			Set<Transactionhistory> transactionhistories, Set<Accountmembership> accountmemberships) {
 		this.packageName = packageName;
 		this.duration = duration;
@@ -75,12 +74,12 @@ public class Membershippackage implements java.io.Serializable {
 		this.duration = duration;
 	}
 
-	@Column(name = "price", precision = 10)
-	public BigDecimal getPrice() {
+	@Column(name = "price", precision = 12, scale = 0)
+	public Float getPrice() {
 		return this.price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(Float price) {
 		this.price = price;
 	}
 

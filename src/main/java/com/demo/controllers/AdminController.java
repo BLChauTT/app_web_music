@@ -66,7 +66,7 @@ public class AdminController {
 
 	@GetMapping("music/{accountId}")
 	public String getMusicProfile(@PathVariable("accountId") int accountId, ModelMap modelMap) {
-		modelMap.put("songs", songService.getSongsByAccount(accountId));
+		//modelMap.put("songs", songService.getSongsByAccount(accountId));
 		modelMap.put("profile", userProfileService.findByAccountId(accountId));
 		return "admin/musics/profileMusic";
 	}

@@ -1,7 +1,7 @@
 package com.demo.entities;
-// Generated May 3, 2024, 7:07:39 PM by Hibernate Tools 4.3.6.Final
+// Generated May 3, 2024, 8:30:25 PM by Hibernate Tools 4.3.6.Final
 
-import java.sql.Date;
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

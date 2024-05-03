@@ -1,7 +1,7 @@
 package com.demo.entities;
-// Generated May 3, 2024, 7:07:39 PM by Hibernate Tools 4.3.6.Final
+// Generated May 3, 2024, 8:30:25 PM by Hibernate Tools 4.3.6.Final
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,7 +26,7 @@ public class Songdetail implements java.io.Serializable {
 	private Integer songDetailId;
 	private String title;
 	private String lyric;
-	private Date songTime;
+	private String songTime;
 	private String genre;
 	private Date releaseDate;
 	private String fileUrl;
@@ -42,7 +42,7 @@ public class Songdetail implements java.io.Serializable {
 		this.title = title;
 	}
 
-	public Songdetail(String title, String lyric, Date songTime, String genre, Date releaseDate, String fileUrl,
+	public Songdetail(String title, String lyric, String songTime, String genre, Date releaseDate, String fileUrl,
 			Integer listenCount, Integer status, String songCoverUrl, Set<Song> songs) {
 		this.title = title;
 		this.lyric = lyric;
@@ -86,13 +86,12 @@ public class Songdetail implements java.io.Serializable {
 		this.lyric = lyric;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "song_time", length = 8)
-	public Date getSongTime() {
+	@Column(name = "song_time")
+	public String getSongTime() {
 		return this.songTime;
 	}
 
-	public void setSongTime(Date songTime) {
+	public void setSongTime(String songTime) {
 		this.songTime = songTime;
 	}
 

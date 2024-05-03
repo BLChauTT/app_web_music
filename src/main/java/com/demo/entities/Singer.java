@@ -1,5 +1,5 @@
 package com.demo.entities;
-// Generated May 3, 2024, 7:07:39 PM by Hibernate Tools 4.3.6.Final
+// Generated May 3, 2024, 8:30:25 PM by Hibernate Tools 4.3.6.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -71,7 +71,7 @@ public class Singer implements java.io.Serializable {
 		this.singerAvatarUrl = singerAvatarUrl;
 	}
 
-	@Column(name = "description", length = 65535)
+	@Column(name = "description")
 	public String getDescription() {
 		return this.description;
 	}

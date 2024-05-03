@@ -1,8 +1,7 @@
 package com.demo.entities;
-// Generated May 3, 2024, 7:07:39 PM by Hibernate Tools 4.3.6.Final
+// Generated May 3, 2024, 8:30:25 PM by Hibernate Tools 4.3.6.Final
 
-import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,14 +29,14 @@ public class Transactionhistory implements java.io.Serializable {
 	private Account account;
 	private Membershippackage membershippackage;
 	private Date transactionDate;
-	private BigDecimal amount;
+	private Float amount;
 	private Set<Payment> payments = new HashSet<>(0);
 
 	public Transactionhistory() {
 	}
 
-	public Transactionhistory(Account account, Membershippackage membershippackage, Date transactionDate,
-			BigDecimal amount, Set<Payment> payments) {
+	public Transactionhistory(Account account, Membershippackage membershippackage, Date transactionDate, Float amount,
+			Set<Payment> payments) {
 		this.account = account;
 		this.membershippackage = membershippackage;
 		this.transactionDate = transactionDate;
@@ -87,12 +86,12 @@ public class Transactionhistory implements java.io.Serializable {
 		this.transactionDate = transactionDate;
 	}
 
-	@Column(name = "amount", precision = 10)
-	public BigDecimal getAmount() {
+	@Column(name = "amount", precision = 12, scale = 0)
+	public Float getAmount() {
 		return this.amount;
 	}
 
-	public void setAmount(BigDecimal amount) {
+	public void setAmount(Float amount) {
 		this.amount = amount;
 	}
 

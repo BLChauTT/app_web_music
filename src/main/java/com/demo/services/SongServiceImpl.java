@@ -55,9 +55,5 @@ public class SongServiceImpl implements SongService{
     public List<Song> findSongsBySingerId(int singerId) {
         return songRepository.findSongsBySingerId(singerId);
     }
-	@Override
-	public List<Song> getSongsByAccount(int accountId) {
-		return songRepository.findByAccountId(accountId);
-	}
 
 }
