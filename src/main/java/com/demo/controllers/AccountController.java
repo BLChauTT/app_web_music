@@ -184,7 +184,7 @@ public class AccountController {
 		if (account != null) {
 			account.setPassword(password);
 			accountService.save(account);
-			redirectAttributes.addFlashAttribute("mistake", "Mật khẩu đã được đổi thành công.");
+			redirectAttributes.addFlashAttribute("next", "Mật khẩu đã được đổi thành công.");
 		} else {
 			redirectAttributes.addFlashAttribute("mistake", "Không thể đổi mật khẩu. Vui lòng thử lại sau.");
 		}
