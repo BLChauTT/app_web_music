@@ -8,6 +8,6 @@ import com.demo.entities.Notification;
 public interface NotificationService {
 
 	public List<Notification> findByAccountId(int accountId);
-	
+
 	public boolean delete(int id);
 }

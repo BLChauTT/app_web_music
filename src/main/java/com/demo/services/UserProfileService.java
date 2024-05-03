@@ -1,6 +1,5 @@
 package com.demo.services;
 
-import com.demo.entities.Song;
 import com.demo.entities.Userprofile;
 
 public interface UserProfileService {

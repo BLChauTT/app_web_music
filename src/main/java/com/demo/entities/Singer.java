@@ -1,7 +1,6 @@
 package com.demo.entities;
 // Generated May 3, 2024, 7:07:39 PM by Hibernate Tools 4.3.6.Final
 
-import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,14 +10,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import jakarta.persistence.UniqueConstraint;
 
 /**
@@ -32,7 +25,7 @@ public class Singer implements java.io.Serializable {
 	private String singerName;
 	private String singerAvatarUrl;
 	private String description;
-	private Set<Song> songs = new HashSet<Song>(0);
+	private Set<Song> songs = new HashSet<>(0);
 
 	public Singer() {
 	}

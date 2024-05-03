@@ -13,7 +13,7 @@ public class NotificationServiceImpl implements NotificationService {
 
 	@Autowired
 	private NotificationRepository notificationRepository;
-	
+
 	@Override
 	public List<Notification> findByAccountId(int accountId) {
 		return notificationRepository.findByAccountId(accountId);
@@ -29,7 +29,7 @@ public class NotificationServiceImpl implements NotificationService {
 		}
 	}
 
-	
+
 
 
 
