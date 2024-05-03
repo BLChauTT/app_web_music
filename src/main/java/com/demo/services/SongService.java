@@ -12,4 +12,5 @@ public interface SongService {
     public Iterable<Song> findAll();
     public List<Song> getSongsByAccount(int accountId);
     public List<Song> getSongsByAuthor(int authorId);
+    public List<Song> findSongsBySingerId(int authorId);
 }

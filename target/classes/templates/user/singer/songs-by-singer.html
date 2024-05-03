@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Songs by Author</title>
+    <title>Songs by Singer</title>
 </head>
 <body>
-<h2>Songs by <span th:text="${author.authorName}"></span></h2>
+<h2>Songs by Singer</h2>
 <ul>
     <li th:each="song : ${songs}">
         <span th:text="${song.songdetail.title}"></span>

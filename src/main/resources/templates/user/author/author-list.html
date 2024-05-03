@@ -2,15 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Authors</title>
+    <title>Songs by Author</title>
 </head>
 <body>
-<h2>Authors</h2>
+<h2>Songs by <span th:text="${author.authorName}"></span></h2>
 <ul>
-    <li th:each="author : ${authors}">
-        <a th:href="@{/songs/by-author/{authorId}(authorId=${author.authorId})}">
-            <span th:text="${author.authorName}"></span>
-        </a>
+    <li th:each="song : ${songs}">
+        <span th:text="${song.songdetail.title}"></span>
     </li>
 </ul>
 </body>
