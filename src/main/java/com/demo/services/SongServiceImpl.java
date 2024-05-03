@@ -1,5 +1,7 @@
 package com.demo.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,6 @@ public class SongServiceImpl implements SongService{
             return false;
         }
     }
-
     @Override
     public Song findSongById(int id) {
         for (Song song : findAll()) {
@@ -32,19 +33,22 @@ public class SongServiceImpl implements SongService{
         }
         return null;
     }
-
     @Override
     public Song updateSong(int id, Song song) {
         return null;
     }
-
     @Override
     public void deleteSong(int id) {
 
     }
-
     @Override
     public Iterable<Song> findAll() {
         return songRepository.findAll();
     }
+
+    @Override
+    public List<Song> getSongsByAuthor(int authorId) {
+        return songRepository.findByAuthor(authorId);
+    }
+
 }

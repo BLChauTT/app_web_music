@@ -11,4 +11,7 @@ import com.demo.entities.Song;
 public interface SongRepository extends JpaRepository<Song, Integer> {
     @Query("from Song where account.accountId = :accountId")
     public List<Song> findByAccountId(@Param("accountId") int categoryId);
+    
+    @Query("from Song where author.authorId = :authorId")
+    public List<Song> findByAuthor(@Param("authorId") int authorId);
 }

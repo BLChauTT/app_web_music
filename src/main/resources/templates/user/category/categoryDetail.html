@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Category Detail</title>
+</head>
+<body>
+
+<a th:href="@{/category/findAll}">Back</a>
+<h3>Category Details</h3>
+<table border="1">
+    <tr>
+        <td>Id</td>
+        <td th:text="${category.categoryId}"></td>
+    </tr>
+    <tr>
+        <td>Name</td>
+        <td th:text="${category.categoryName}"></td>
+    </tr>
+</table>
+
+</body> 
+</html>

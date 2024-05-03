@@ -1,5 +1,7 @@
 package com.demo.services;
 
+import java.util.List;
+
 import com.demo.entities.Song;
 
 public interface SongService {
@@ -8,4 +10,5 @@ public interface SongService {
     public Song updateSong(int id, Song song);
     public void deleteSong(int id);
     public Iterable<Song> findAll();
+    public List<Song> getSongsByAuthor(int authorId);
 }
