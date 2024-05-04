@@ -60,16 +60,13 @@
 											<td style="min-width:30px;text-align:center" th:text="${detail.songDetailId}"><small
 													class="text-muted"></small>
 											</td>
-											<td class="flex"><a href="page.invoice.detail.html"
-													class="item-company ajax h-1x" th:text="${detail.title}"></a>
-												<div class="item-mail text-muted h-1x d-none d-sm-block">
-													</div>
+											<td class="flex" th:text="${detail.title}">
 											</td>
 											<td>
 												<span class="item-amount d-none d-sm-block text-sm" th:text="${detail.genre}"></span>
 											</td>
 											<td>
-												<span class="item-badge badge text-uppercase bg-secondary" th:text="${detail.status} ? 'Present' : 'Lock'"></span>
+												<span class="item-badge badge text-uppercase bg-secondary" th:text="${detail.status} ? 'Premium' : 'Often'"></span>
 											</td>
 											<td class="no-wrap">
 												<div class="item-date text-muted text-sm d-none d-md-block" th:text="${#dates.format(detail.releaseDate, 'dd/MM/yyyy')}"></div>

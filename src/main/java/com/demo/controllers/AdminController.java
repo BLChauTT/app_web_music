@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.Account;
 import com.demo.services.AccountJPAService;
+import com.demo.services.AccountSongService;
 import com.demo.services.NotificationService;
 import com.demo.services.SongDetailService;
 import com.demo.services.SongService;
@@ -27,7 +28,7 @@ public class AdminController {
 	private UserProfileService userProfileService;
 	// music
 	@Autowired
-	private SongService songService;
+	private AccountSongService accountSongService;
 	@Autowired
 	private SongDetailService songDetailRepository;
 	// comment
@@ -66,7 +67,7 @@ public class AdminController {
 
 	@GetMapping("music/{accountId}")
 	public String getMusicProfile(@PathVariable("accountId") int accountId, ModelMap modelMap) {
-		//modelMap.put("songs", songService.getSongsByAccount(accountId));
+		modelMap.put("asongs", accountSongService.findByAccountId(accountId));
 		modelMap.put("profile", userProfileService.findByAccountId(accountId));
 		return "admin/musics/profileMusic";
 	}

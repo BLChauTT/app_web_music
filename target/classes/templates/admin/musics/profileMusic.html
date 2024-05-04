@@ -11,8 +11,20 @@
 			<div>
 				<div class="page-hero page-container" id="page-hero">
 					<div class="padding d-flex">
+						<div class="flex">
+							<a th:href="@{'/admin/index'}" class="btn btn-md text-muted">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+									fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+									stroke-linejoin="round" class="feather feather-arrow-left">
+									<line x1="19" y1="12" x2="5" y2="12"></line>
+									<polyline points="12 19 5 12 12 5"></polyline>
+								</svg>
+								<span class="d-none d-sm-inline mx-1">Back Account</span>
+							</a>
+						</div>
 						<div class="page-title">
-							<h2 class="text-md text-highlight">List Music</h2><small class="text-muted" th:text="${profile.fullName}"></small>
+							<h2 class="text-md text-highlight">List Music</h2><small class="text-muted"
+								th:text="${profile.fullName}"></small>
 						</div>
 						<div class="flex"></div>
 					</div>
@@ -40,8 +52,8 @@
 									<thead>
 										<tr>
 											<th style="width:20px"></th>
-											<th class="text-muted sort sortable" data-sort="id"
-												style="width:80px">User Id</th>
+											<th class="text-muted sort sortable" data-sort="id" style="width:80px">User
+												Id</th>
 											<th class="text-muted sort sortable" data-sort="item-company">Full Name</th>
 											<th class="text-muted sort sortable" data-sort="item-company">Title</th>
 											<th class="text-muted sort sortable" data-sort="item-amount"
@@ -53,34 +65,31 @@
 										</tr>
 									</thead>
 									<tbody class="list">
-										<tr class="v-middle" data-id="2" th:each="song : ${songs}">
+										<tr class="v-middle" data-id="2" th:each="a : ${asongs}">
 											<td>
 												<label class="ui-check m-0"><input type="checkbox" name="id" value="2">
 													<i></i></label>
 											</td>
 											<td style="min-width:30px;text-align:center"
-												th:text="${song.account.accountId}"><small class="text-muted"></small>
+												th:text="${a.account.accountId}"><small class="text-muted"></small>
 											</td>
-											<td style="min-width:30px;text-align:center"
-												th:text="${profile.fullName}"><small class="text-muted"></small>
+											<td style="min-width:30px;text-align:center" th:text="${profile.fullName}">
+												<small class="text-muted"></small>
 											</td>
-											<td class="flex"><a href=""
-													class="item-company ajax h-1x"
-													th:text="${song.songdetail.title}"></a>
-												<div class="item-mail text-muted h-1x d-none d-sm-block">
-												</div>
+											<td class="flex" th:text="${a.song.songdetail.title}">
+												<small class="text-muted"></small>
 											</td>
 											<td>
 												<span class="item-amount d-none d-sm-block text-sm"
-													th:text="${song.songdetail.genre}"></span>
+													th:text="${a.song.songdetail.genre}"></span>
 											</td>
 											<td>
 												<span class="item-badge badge text-uppercase bg-secondary"
-													th:text="${song.songdetail.status} ? 'Present' : 'Lock'"></span>
+													th:text="${a.song.songdetail.status} ? 'Present' : 'Lock'"></span>
 											</td>
 											<td class="no-wrap">
 												<div class="item-date text-muted text-sm d-none d-md-block"
-													th:text="${#dates.format(song.songdetail.releaseDate, 'dd/MM/yyyy')}">
+													th:text="${#dates.format(a.song.songdetail.releaseDate, 'dd/MM/yyyy')}">
 												</div>
 											</td>
 											<td>
@@ -98,68 +107,9 @@
 									</tbody>
 								</table>
 							</div>
-							<div class="d-flex">
-								<ul class="pagination">
-									<li class="page-item disabled"><a class="page-link" href="#"
-											aria-label="Previous"><span aria-hidden="true">&laquo;</span> <span
-												class="sr-only">Previous</span></a></li>
-									<li class="page-item active"><a class="page-link" href="#">1 <span
-												class="sr-only">(current)</span></a></li>
-									<li class="page-item"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#">4</a></li>
-									<li class="page-item"><a class="page-link" href="#">5</a></li>
-									<li class="page-item"><a class="page-link" href="#" aria-label="Next"><span
-												aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span></a>
-									</li>
-								</ul><small class="text-muted py-2 mx-2">Total <span id="count">15</span> items</small>
-							</div>
+							
 						</div><!-- .modal -->
-						<div id="modal" class="modal fade" data-backdrop="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title">New invoice</h5>
-									</div>
-									<div class="modal-body p-4">
-										<form>
-											<div class="form-row">
-												<div class="form-group col-md-6"><label class="text-muted">First
-														Name</label><input type="text" class="form-control"
-														placeholder="First name"></div>
-												<div class="form-group col-md-6"><label class="text-muted">Last
-														Name</label><input type="text" class="form-control"
-														placeholder="Last name"></div>
-											</div>
-											<div class="form-row">
-												<div class="form-group col-md-6"><label
-														class="text-muted">Email</label><input type="email"
-														class="form-control" placeholder="Email"></div>
-												<div class="form-group col-md-6"><label class="text-muted">Password
-														<small>(Register account)</small></label><input type="password"
-														class="form-control" placeholder="Password"></div>
-											</div>
-											<div class="form-group"><label class="text-muted">Address</label><input
-													type="text" class="form-control" placeholder="1234 Main St"></div>
-											<div class="form-row">
-												<div class="form-group col-md-6"><label
-														class="text-muted">City</label><input type="text"
-														class="form-control"></div>
-												<div class="form-group col-md-4"><label for="inputState"
-														class="text-muted d-block">State</label><select
-														class="custom-select">
-														<option selected="selected">Choose...</option>
-														<option>...</option>
-													</select></div>
-												<div class="form-group col-md-2"><label
-														class="text-muted">Zip</label><input type="text"
-														class="form-control"></div>
-											</div><button type="submit" class="btn btn-primary">Submit</button>
-										</form>
-									</div>
-								</div><!-- /.modal-content -->
-							</div>
-						</div><!-- / .modal -->
+
 					</div>
 				</div>
 			</div><!-- ############ Main END-->
