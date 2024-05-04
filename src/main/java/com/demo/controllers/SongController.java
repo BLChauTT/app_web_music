@@ -30,7 +30,7 @@ public class SongController {
     @GetMapping({"index", "","/"})
     public String song(ModelMap modelMap) {
         //modelMap.put("song", songService.findAll());
-        return "user/music";
+        return "user/musicTest/main.music";
     }
     @GetMapping("findAll")
     public String findAll(ModelMap modelMap) {
