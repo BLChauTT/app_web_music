@@ -1,0 +1,17 @@
+<head>
+	<title>Upload</title>
+</head>
+
+<body>
+	<div th:if="${msg}">
+        <p th:text="${msg}"></p>
+    </div>
+	<h1>Upload file</h1>
+	<form method="post" th:action="@{/file/upload}" enctype="multipart/form-data">
+		<input type="file" name="file"><br><br>
+		<input type="submit" value="Submit">
+	</form>
+	<a th:href="@{/file/download}">Download File</a>
+</body>
+
+</html>
