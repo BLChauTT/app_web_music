@@ -134,11 +134,13 @@
             <!-- / brand --><!-- Navbar collapse -->
             <div class="collapse navbar-collapse order-2 order-lg-1" id="navbarToggler">
                 <form class="input-group m-2 my-lg-0">
-                    <div class="input-group-prepend"><button type="button" class="btn no-shadow no-bg px-0"><i
-                            data-feather="search"></i></button></div>
-                    <input type="text" class="form-control no-border no-shadow no-bg typeahead"
-                           placeholder="Search..." data-plugin="typeahead" data-api="../assets/api/music.json">
-                </form>
+						<div class="input-group-prepend"><button type="button"
+								class="btn no-shadow no-bg px-0 text-inherit">
+								<i data-feather="search"></i></button>
+						</div><input type="text" class="form-control no-border no-shadow no-bg typeahead"
+							placeholder="Search..." data-plugin="typeahead"
+							data-api="@{/assets/admin/api/menu.json}">
+					</form>
             </div>
             <ul class="nav navbar-menu order-1 order-lg-2">
                 <li class="nav-item d-none d-sm-block"><a class="nav-link px-2" data-toggle="fullscreen"
@@ -321,7 +323,7 @@
 
     <!-- ############ Footer END-->
 </div>
-
+<script th:src="@{/assets/user/js/site.min.js}"></script>
 
 </body>
 
