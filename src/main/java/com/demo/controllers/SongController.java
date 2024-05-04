@@ -14,6 +14,7 @@ import com.demo.entities.Author;
 import com.demo.entities.Song;
 import com.demo.services.AuthorService;
 import com.demo.services.SongService;
+import com.demo.services.UserProfileService;
 
 @Controller
 @RequestMapping("song")
@@ -23,13 +24,17 @@ public class SongController {
     @Autowired
     private AuthorService authorService;
     @Autowired
-    public SongController(SongService _songService) {
+    private UserProfileService userProfileService;
+    @Autowired
+    public SongController(SongService _songService,
+                          UserProfileService _userProfileService
+                          ) {
         this.songService = _songService;
+        this.userProfileService = _userProfileService;
     }
 
     @GetMapping({"index", "","/"})
     public String song(ModelMap modelMap) {
-        //modelMap.put("song", songService.findAll());
         return "user/music";
     }
     @GetMapping("findAll")

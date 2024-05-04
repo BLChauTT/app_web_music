@@ -29,19 +29,19 @@ import jakarta.servlet.ServletContext;
 @Controller
 @RequestMapping("file")
 public class FileProcessController {
-	
+
 	private static final String DIRECTORY = "C://Users//T14s//Desktop//app_web_music//target//classes//static//assets//music//";
     private static final String DEFAULT_FILE_NAME = "";
 
     @Autowired
     ServletContext context;
-	
+
 	@GetMapping({"upload", "/", ""})
 	public String index() {
 		System.out.println("Call");
 		return "file/upload";
 	}
-	
+
 	@PostMapping("upload")
 	public String singleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 		if(file.isEmpty()) {
@@ -64,16 +64,16 @@ public class FileProcessController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return "redirect:/file/upload";
 	}
-	
+
 	@GetMapping("download")
 	public String download() {
 		System.out.println("Call");
 		return "file/download";
 	}
-	
+
 	//đang lấy tên file mặc định cho trước, anh em sửa thì fileName từ db vào là được
 	@GetMapping("/downloadFile")
     public ResponseEntity<InputStreamResource> downloadFile1(@RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
