@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import com.demo.entities.Notification;
 import com.demo.entities.Rating;
 
 public interface RatingRepository extends CrudRepository<Rating, Integer> {
