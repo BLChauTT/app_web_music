@@ -8,7 +8,7 @@ import com.demo.entities.Rating;
 public interface AccountSongService {
 
 	public List<AccountSong> findByAccountId(int accountId);
-	
+
 	public List<Rating> ratingByAccountId(int accountId);
 
 }

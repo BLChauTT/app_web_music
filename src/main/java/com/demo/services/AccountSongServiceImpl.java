@@ -15,7 +15,7 @@ public class AccountSongServiceImpl implements AccountSongService {
 
 	@Autowired
 	private AccountSongRepository accountSongRepository;
-	
+
 	@Autowired
 	private RatingRepository ratingRepository;
 

@@ -45,6 +45,10 @@ public class SongController {
     public String artist(ModelMap modelMap) {
         return "user/music.artist";
     }
+    @GetMapping({"detail"})
+    public String detail(ModelMap modelMap) {
+        return "user/music.detail";
+    }
     @GetMapping("findAll")
     public String findAll(ModelMap modelMap) {
         modelMap.put("songs", songService.findAll());
