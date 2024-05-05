@@ -10,6 +10,6 @@ import com.demo.entities.Comment;
 
 public interface CommentRepository extends CrudRepository<Comment, Integer> {
 
-	@Query("from Comment where accountSong.accountSongId = :accountSongId")
-    public List<Comment> findByAccountId(@Param("accountSongId") int accountSongId);
+	@Query("from Comment where accountSong.account.accountId = :accountId")
+    public List<Comment> findByAccountId(@Param("accountId") int accountId);
 }

@@ -10,6 +10,6 @@ import com.demo.entities.Rating;
 
 public interface RatingRepository extends CrudRepository<Rating, Integer> {
 
-	@Query("from Rating where accountSong.accountSongId = :accountSongId")
-    public List<Rating> findByAccountId(@Param("accountSongId") int accountSongId);
+	@Query("from Rating where accountSong.account.accountId = :accountId")
+    public List<Rating> findByAccountId(@Param("accountId") int accountId);
 }
