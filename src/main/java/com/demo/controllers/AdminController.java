@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.Account;
@@ -40,14 +43,26 @@ public class AdminController {
 	private NotificationService notificationService;
 
 	@GetMapping("index")
-	public String admin(ModelMap modelMap) {
-		modelMap.put("accounts", accountJPAService.findAll());
-		// test
-		return "admin/accounts/index";
+	public String admin(ModelMap modelMap, 
+			@RequestParam(name = "name", required = false) String name) {
+	    List<Account> listAccouns = null;
+	    if (name != null && !name.isEmpty()) {
+	        listAccouns = accountJPAService.findByusername(name);
+	    } else {
+	        listAccouns = accountJPAService.findAllList();
+	    }
+	    modelMap.put("listAccount", listAccouns);
+        // Đếm tổng số lượng mục trong cơ sở dữ liệu
+        long totalItems = accountJPAService.countTotalAccounts();
+        
+
+        modelMap.addAttribute("totalItems", totalItems);
+	    return "admin/accounts/index";
 	}
 
 	@GetMapping("music")
-	public String music(ModelMap modelMap) {
+	public String music(ModelMap modelMap,
+			@RequestParam(name = "keyword", required = false) String keyword) {
 		modelMap.put("details", songDetailRepository.findAll());
 		return "admin/musics/music";
 	}

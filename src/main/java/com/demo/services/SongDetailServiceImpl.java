@@ -1,5 +1,7 @@
 package com.demo.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,11 @@ public class SongDetailServiceImpl implements SongDetailService{
 	@Override
 	public Iterable<Songdetail> findAll() {
 		return songDetailRepository.findAll();
+	}
+
+	@Override
+	public List<Songdetail> findKeywordSong(String keyword) {
+		return songDetailRepository.findByKeyword(keyword);
 	}
 
 

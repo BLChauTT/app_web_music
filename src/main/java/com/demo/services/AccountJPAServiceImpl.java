@@ -1,6 +1,11 @@
 package com.demo.services;
 
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.demo.entities.Account;
@@ -73,6 +78,27 @@ public class AccountJPAServiceImpl implements AccountJPAService {
 			ex.printStackTrace();
 			return false;
 		}
+	}
+
+	@Override
+	public List<Account> findByusername(String username) {
+		return accountRepository.findByPartialUsername(username);
+	}
+
+	@Override
+	public List<Account> findAllList() {
+		
+		return accountRepository.findAll();
+	}
+
+	@Override
+	public Page<Account> findPaginated(Pageable pageable) {
+		return accountRepository.findAllPaged(pageable);
+	}
+
+	@Override
+	public long countTotalAccounts() {
+		return accountRepository.count();
 	}
 
 
