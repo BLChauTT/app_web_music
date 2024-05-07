@@ -9,8 +9,9 @@ public interface SongDetailService {
     
   //pagination
   	public List<Songdetail> findSongsWithPagination(int offset, int pageSize);
-    
-    public List<Songdetail> findKeywordSong(String keyword);
-
 	public long countTotalSongs();
+    public List<Songdetail> findKeywordSong(String keyword);
+    public boolean save(Songdetail songdetail);
+    public Songdetail find(int id);
+    public List<Songdetail> findByKeywordAjax(String keyword);
 }

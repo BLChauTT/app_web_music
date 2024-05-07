@@ -88,7 +88,7 @@ public class AccountJPAServiceImpl implements AccountJPAService {
 
 	@Override
 	public List<Account> findAllList() {
-		
+
 		return accountRepository.findAll();
 	}
 

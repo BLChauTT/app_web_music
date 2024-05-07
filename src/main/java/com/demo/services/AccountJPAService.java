@@ -15,11 +15,11 @@ public interface AccountJPAService {
 	public boolean login(String username, String password);
 
 	public Account findByEmail(String email);
-	
+
 	public List<Account> findByusername(String username);
 
 	public Account findByEmailAndToken(String email, String token);
-	
+
 	public List<Account> findAllList();
 
 	public Iterable<Account> findAll();
@@ -29,9 +29,9 @@ public interface AccountJPAService {
 	public Account findById(Integer accountId);
 
 	public boolean remove(Account entity);
-	
+
 	public Page<Account> findPaginated(Pageable pageable);
-	
+
 	public long countTotalAccounts();
 	
 	//pagination

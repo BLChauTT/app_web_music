@@ -20,7 +20,7 @@ public class AccountSongServiceImpl implements AccountSongService {
 
 	@Autowired
 	private RatingRepository ratingRepository;
-	
+
 	@Autowired
 	private CommentRepository commentRepository;
 
@@ -28,11 +28,11 @@ public class AccountSongServiceImpl implements AccountSongService {
 	public List<AccountSong> findByAccountId(int accountId) {
 		return accountSongRepository.findByAccountId(accountId);
 	}
-	
+
 
 	@Override
 	public List<Rating> ratingByAccountId(int accountId) {
-		
+
 		return ratingRepository.findByAccountId(accountId);
 	}
 

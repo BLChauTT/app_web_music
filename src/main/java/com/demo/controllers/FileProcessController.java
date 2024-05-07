@@ -30,7 +30,7 @@ import jakarta.servlet.ServletContext;
 @RequestMapping("file")
 public class FileProcessController {
 
-	private static final String DIRECTORY = "C://Users//T14s//Desktop//app_web_music//target//classes//static//assets//music//";
+	private static final String DIRECTORY = "D:\\DoAnKy4\\app_web_music\\target\\classes\\static\\assets";
     private static final String DEFAULT_FILE_NAME = "";
 
     @Autowired

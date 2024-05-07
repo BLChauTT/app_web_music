@@ -11,59 +11,70 @@
 				dateFormat: 'dd/mm/yy'
 			});
 		});
+		function setReleaseDate() {
+			var currentDate = new Date();
+			var day = currentDate.getDate();
+			var month = currentDate.getMonth() + 1;
+			var year = currentDate.getFullYear();
+
+			if (day < 10) {
+				day = '0' + day;
+			}
+			if (month < 10) {
+				month = '0' + month;
+			}
+
+			var formattedDate = day + '/' + month + '/' + year;
+
+			document.getElementById('releaseDate').value = formattedDate;
+		}
 	</script>
 </head>
 
 <body>
-
-	<a th:href="@{/productjpa/index}">Back</a>
-	<h3>Add Product</h3>
+	<a th:href="@{/song/findAll}">Back</a>
+	<h3>Add Song</h3>
 	<th:block th:text="${msg}"></th:block>
-	<form method="post" th:action="@{/productjpa/add}" enctype="multipart/form-data">
+	<form method="post" th:action="@{/songDetail/add}" enctype="multipart/form-data">
 		<table border="0">
 			<tr>
-				<td>Name</td>
-				<td>
-					<input type="text" th:field="${product.name}">
-				</td>
-			</tr>
-			<tr>
-				<td>Price</td>
-				<td>
-					<input type="text" th:field="${product.price}">
-				</td>
-			</tr>
-			<tr>
-				<td>Quantity</td>
-				<td>
-					<input type="text" th:field="${product.quantity}">
-				</td>
-			</tr>
-			<tr>
-				<td>Created</td>
-				<td>
-					<input type="text" th:field="${product.created}">
-				</td>
-			</tr>
-			<tr>
-				<td valign="top">Description</td>
+				<td valign="top">Title</td>
 				<td valign="top">
-					<textarea cols="20" rows="5" th:field="${product.description}"></textarea>
+					<input type="text" th:field="${songDetail.title}">
+				</td>
+			</tr>
+			<tr>
+				<td>Lyric</td>
+				<td>
+					<textarea cols="20" rows="5" th:field="${songDetail.lyric}"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>SongTime</td>
+				<td>
+					<input type="date" th:field="${songDetail.songTime}">
+				</td>
+			</tr>
+			<tr>
+				<td>Category</td>
+				<td> product.category.id
+					<select th:field="${songDetail.songs}">
+						<option th:each="category : ${categories}"
+								th:value="${category.categoryId}" th:text="${category.categoryName}"></option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Release Date</td>
+				<td>
+					<input type="text" id="releaseDate" th:field="${songDetail.releaseDate}">
+					<button type="button" onclick="setReleaseDate()">Set Current Date</button>
 				</td>
 			</tr>
 			<tr>
 				<td>Status</td>
 				<td>
-					<input type="checkbox" th:field="${product.status}">
-				</td>
-			</tr>
-			<tr>
-				<td>Category</td>
-				<td>
-					<select th:field="${product.category.id}">
-						<option th:each="category : ${categories}" 
-							th:value="${category.id}" th:text="${category.name}"></option>
-					</select>
+					<input type="number" th:field="${songDetail.status}">
 				</td>
 			</tr>
 			<tr>
