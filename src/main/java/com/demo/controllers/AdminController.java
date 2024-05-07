@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.Account;
-import com.demo.entities.AccountSong;
-import com.demo.entities.Rating;
 import com.demo.entities.Songdetail;
 import com.demo.services.AccountJPAService;
 import com.demo.services.AccountSongService;
@@ -74,14 +72,14 @@ public class AdminController {
 //		modelMap.put("details", songDetailRepository.findAll());
 //		return "admin/musics/music";
 //	}
-	
+
 	@GetMapping("music")
-	public String music(ModelMap modelMap, 
-						@RequestParam(name = "keyword", required = false) String keyword, 
+	public String music(ModelMap modelMap,
+						@RequestParam(name = "keyword", required = false) String keyword,
 						@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
 						@RequestParam(value = "pageSize", defaultValue = "2", required = false) int pageSize) {
 		List<Songdetail> songs;
-		
+
 		songs = songDetailJPAService.findSongsWithPagination(pageNo, pageSize);
 		modelMap.put("details", songs);
 		long totalItems = songDetailJPAService.countTotalSongs();

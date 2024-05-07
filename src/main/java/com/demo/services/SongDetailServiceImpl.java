@@ -8,7 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.demo.entities.Account;
 import com.demo.entities.Songdetail;
 import com.demo.repositories.SongDetailRepository;
 

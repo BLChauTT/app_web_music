@@ -6,7 +6,7 @@ import com.demo.entities.Songdetail;
 
 public interface SongDetailService {
     public Iterable<Songdetail> findAll();
-    
+
   //pagination
   	public List<Songdetail> findSongsWithPagination(int offset, int pageSize);
 	public long countTotalSongs();

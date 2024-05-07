@@ -52,12 +52,12 @@
 			<tr>
 				<td>SongTime</td>
 				<td>
-					<input type="date" th:field="${songDetail.songTime}">
+					<input type="text" th:field="${songDetail.songTime}">
 				</td>
 			</tr>
 			<tr>
 				<td>Category</td>
-				<td> product.category.id
+				<td>
 					<select th:field="${songDetail.songs}">
 						<option th:each="category : ${categories}"
 								th:value="${category.categoryId}" th:text="${category.categoryName}"></option>
@@ -74,13 +74,22 @@
 			<tr>
 				<td>Status</td>
 				<td>
-					<input type="number" th:field="${songDetail.status}">
+					<select th:field="${songDetail.status}">
+						<option value="1">1</option>
+						<option value="2">2</option>
+					</select>
 				</td>
 			</tr>
 			<tr>
 				<td>Photo</td>
 				<td>
-					<input type="file" name="file">
+					<input type="file" name="fileImage">
+				</td>
+			</tr>
+			<tr>
+				<td>Song</td>
+				<td>
+					<input type="file" name="fileMusic">
 				</td>
 			</tr>
 			<tr>

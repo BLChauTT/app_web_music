@@ -10,4 +10,10 @@ public class FileHelper {
 		return name + fileName.substring(lastIndex);
 	}
 
+//	public static String generateFileName(String fileName) {
+//		String extension = fileName.substring(fileName.lastIndexOf("."));
+//		String name = UUID.randomUUID().toString().replace("-", "");
+//		return name + extension;
+//	}
+
 }

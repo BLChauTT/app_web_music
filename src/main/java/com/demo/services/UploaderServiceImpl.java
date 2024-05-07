@@ -1,11 +1,12 @@
 package com.demo.services;
 
-import com.demo.entities.Songdetail;
-import com.demo.repositories.SongDetailRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.demo.entities.Songdetail;
+import com.demo.repositories.SongDetailRepository;
 
 @Service
 public class UploaderServiceImpl implements UploaderService {
