@@ -33,5 +33,8 @@ public interface AccountJPAService {
 	public Page<Account> findPaginated(Pageable pageable);
 	
 	public long countTotalAccounts();
+	
+	//pagination
+	public List<Account> findAccountsWithPagination(int offset, int pageSize);
 
 }

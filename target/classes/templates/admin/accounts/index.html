@@ -48,6 +48,7 @@
 											<th style="width:50px"></th>
 										</tr>
 									</thead>
+
 									<tbody>
 										<tr class="v-middle" data-id="15" th:each="account : ${listAccount}">
 
@@ -102,8 +103,22 @@
 									</tbody>
 								</table>
 							</div>
+							<!--Phân trang here-->
+							<div class="pagination">
+								<a th:href="@{/admin/index?pageNo=0&amp;pageSize=2}"
+									th:class="${pageNo == 0} ? 'disabled' : ''">First</a>
+								<a th:each="pageItem : ${#numbers.sequence(0, totalPages - 1)}"
+									th:href="@{'/admin/index?pageNo=' + ${pageItem} + '&pageSize=' +${pageSize}}"
+									th:text="${pageItem + 1}" th:class="${pageItem == pageNo} ? 'active' : ''"></a>
+								<a th:if="${pageNo < totalPages -1}"
+									th:href="@{'/admin/index?pageNo=' + ${pageNo + 1} + '&pageSize=' + ${pageSize}}">Next
+									&raquo;</a>
+								<a th:href="@{'/admin/index?pageNo=' + ${totalPages - 1} + '&pageSize=' + ${pageSize}}"
+									th:class="${pageNo == totalPages - 1} ? 'disabled' : ''">Last</a>
+							</div>
+							
 							<div class="d-flex">
-								
+
 								<small class="text-muted py-2 mx-2">Total <span th:text="${totalItems}"></span>
 									items</small>
 							</div>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -100,6 +101,14 @@ public class AccountJPAServiceImpl implements AccountJPAService {
 	public long countTotalAccounts() {
 		return accountRepository.count();
 	}
-
+	
+	//Phân Trang
+	@Override
+	public List<Account> findAccountsWithPagination(int pageNo, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNo, pageSize);
+		Page<Account> pageAccounts = accountRepository.findAll(pageable);
+		List<Account> accounts = pageAccounts.getContent();
+		return accounts;
+	}
 
 }
