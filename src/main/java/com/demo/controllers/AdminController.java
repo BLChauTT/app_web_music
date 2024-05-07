@@ -1,11 +1,8 @@
 package com.demo.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.Account;
-import com.demo.entities.AccountSong;
-import com.demo.entities.Rating;
 import com.demo.services.AccountJPAService;
 import com.demo.services.AccountSongService;
 import com.demo.services.NotificationService;
@@ -43,7 +38,7 @@ public class AdminController {
 	private NotificationService notificationService;
 
 	@GetMapping("index")
-	public String admin(ModelMap modelMap, 
+	public String admin(ModelMap modelMap,
 			@RequestParam(name = "name", required = false) String name) {
 	    List<Account> listAccouns = null;
 	    if (name != null && !name.isEmpty()) {
@@ -54,7 +49,7 @@ public class AdminController {
 	    modelMap.put("listAccount", listAccouns);
         // Đếm tổng số lượng mục trong cơ sở dữ liệu
         long totalItems = accountJPAService.countTotalAccounts();
-        
+
 
         modelMap.addAttribute("totalItems", totalItems);
 	    return "admin/accounts/index";
@@ -109,7 +104,7 @@ public class AdminController {
 		}
 		return "redirect:" + referer;
 	}
-	
+
 	@GetMapping("rating/{accountId}")
 	public String getRatingandComment(@PathVariable("accountId") int accountId, ModelMap modelMap) {
 		modelMap.put("ratings", accountSongService.ratingByAccountId(accountId));

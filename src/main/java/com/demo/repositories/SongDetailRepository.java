@@ -13,5 +13,7 @@ public interface SongDetailRepository extends CrudRepository<Songdetail, Integer
     public List<Songdetail> findByKeyword(@Param("keyword") String keyword);
     @Query("from Songdetail where year(releaseDate) = :year")
     public List<Songdetail> findByYear(@Param("year") int year);
+    //List<Songdetail> findSongdetailByUploader(String uploader);
+    Songdetail findById(int id);
 
 }
