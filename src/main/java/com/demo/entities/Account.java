@@ -33,12 +33,12 @@ public class Account implements java.io.Serializable {
 	private boolean status;
 	private String token;
 	private String securityCode;
-	private Set<Album> albums = new HashSet<Album>(0);
-	private Set<Notification> notifications = new HashSet<Notification>(0);
-	private Set<AccountSong> accountSongs = new HashSet<AccountSong>(0);
-	private Set<Userprofile> userprofiles = new HashSet<Userprofile>(0);
-	private Set<Accountmembership> accountmemberships = new HashSet<Accountmembership>(0);
-	private Set<Transactionhistory> transactionhistories = new HashSet<Transactionhistory>(0);
+	private Set<Album> albums = new HashSet<>(0);
+	private Set<Notification> notifications = new HashSet<>(0);
+	private Set<AccountSong> accountSongs = new HashSet<>(0);
+	private Set<Userprofile> userprofiles = new HashSet<>(0);
+	private Set<Accountmembership> accountmemberships = new HashSet<>(0);
+	private Set<Transactionhistory> transactionhistories = new HashSet<>(0);
 
 	public Account() {
 	}

@@ -5,10 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Date;
 
-import com.demo.entities.Category;
-import com.demo.entities.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
@@ -23,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.AccountSong;
+import com.demo.entities.Category;
+import com.demo.entities.Song;
 import com.demo.entities.Songdetail;
 import com.demo.helpers.FileHelper;
 import com.demo.services.AccountSongService;
@@ -99,7 +98,7 @@ public class SongDetailController {
                 System.out.println("File path: " + pathMusic);
 
                 songdetail.setSongCoverUrl(fileNameImage);
-                songdetail.setReleaseDate(new Date());
+//                songdetail.setReleaseDate(new Date());
                 songdetail.setFileUrl(pathMusic.toString());
             }
             if (songDetailService.save(songdetail)) {
