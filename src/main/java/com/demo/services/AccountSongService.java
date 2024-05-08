@@ -5,7 +5,6 @@ import java.util.List;
 import com.demo.entities.AccountSong;
 import com.demo.entities.Comment;
 import com.demo.entities.Rating;
-import com.demo.entities.Song;
 
 public interface AccountSongService {
 	public List<AccountSong> findByAccountId(int accountId);

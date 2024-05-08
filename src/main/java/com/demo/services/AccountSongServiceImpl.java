@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.demo.entities.AccountSong;
 import com.demo.entities.Comment;
 import com.demo.entities.Rating;
-import com.demo.entities.Song;
 import com.demo.repositories.AccountSongRepository;
 import com.demo.repositories.CommentRepository;
 import com.demo.repositories.RatingRepository;
@@ -60,7 +59,7 @@ public class AccountSongServiceImpl implements AccountSongService {
 	public List<AccountSong> findAll() {
 		return accountSongRepository.findAll();
 	}
-	
+
 	@Override
 	public List<AccountSong> findByTitle(String title) {
 		return accountSongRepository.findBySongDetail(title);

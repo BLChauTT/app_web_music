@@ -13,8 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.Account;
 import com.demo.entities.AccountSong;
-import com.demo.entities.Song;
-import com.demo.entities.Songdetail;
 import com.demo.services.AccountJPAService;
 import com.demo.services.AccountSongService;
 import com.demo.services.NotificationService;

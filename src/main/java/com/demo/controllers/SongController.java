@@ -69,8 +69,8 @@ public class SongController {
     }
     @GetMapping("/singer/{singerId}/songs")
     public String getSongsBySingerId(@PathVariable("singerId") int singerId, Model model) {
-        List<Song> songs = songService.findSongsBySingerId(singerId);
-        model.addAttribute("songs", songs);
+//        List<Song> songs = songService.findSongsBySingerId(singerId);
+//        model.addAttribute("songs", songs);
         return "user/singer/songs-by-singer";
     }
 

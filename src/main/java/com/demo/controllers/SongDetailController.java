@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.AccountSong;
-import com.demo.entities.Category;
 import com.demo.entities.Song;
 import com.demo.entities.Songdetail;
 import com.demo.helpers.FileHelper;
@@ -76,7 +75,7 @@ public class SongDetailController {
 //                accountSongService.save(accountSong);
                 //category
                 Song song = (Song) songdetail.getSongs();
-                Category category = song.getCategory();
+                //Category category = song.getCategory();
 
                 String fileNameImage = FileHelper.generateFileName(fileImage.getOriginalFilename());
                 String fileNameMusic = FileHelper.generateFileName(fileMusic.getOriginalFilename());

@@ -16,7 +16,7 @@ public interface AccountSongRepository extends JpaRepository<AccountSong, Intege
 
 	@Query("from AccountSong where song.songId = :songId")
     public List<AccountSong> findBySongId(@Param("songId") int songId);
-	
+
 	@Query("from AccountSong where song.songdetail.title LIKE %:partialTitle%")
     public List<AccountSong> findBySongDetail(@Param("partialTitle") String partialTitle);
 }

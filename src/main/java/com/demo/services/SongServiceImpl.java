@@ -54,11 +54,11 @@ public class SongServiceImpl implements SongService{
         return songRepository.findByAuthorId(authorId);
     }
 
-    @Override
-    public List<Song> findSongsBySingerId(int singerId) {
-        return songRepository.findSongsBySingerId(singerId);
-    }
-    
+//    @Override
+//    public List<Song> findSongsBySingerId(int singerId) {
+//        return songRepository.findSongsBySingerId(singerId);
+//    }
+
     @Override
 	public List<Song> findAllList() {
 		return songRepository.findAll();
@@ -67,7 +67,7 @@ public class SongServiceImpl implements SongService{
 	public List<Song> findByTitle(String title) {
 		return songRepository.findBySongDetail(title);
 	}
-	
+
 	@Override
 	public List<Song> findSongsWithPagination(int pageNo, int pageSize) {
 		Pageable pageable = PageRequest.of(pageNo, pageSize);
