@@ -67,14 +67,14 @@ public class SongDetailController {
                 return "redirect:/songDetail/add";
             } else {
                 boolean savedSongDetail = songDetailService.save(songdetail);
-                Integer songDetailId = savedSongDetail.getId();
-
-                Integer accountId = (Integer) request.getSession().getAttribute("accountId");
-
-                AccountSong accountSong = new AccountSong();
-                accountSong.setAccount(accountId);
-                accountSong.setSong(songDetailId);
-                accountSongService.save(accountSong);
+//                Integer songDetailId = savedSongDetail.getId();
+//
+//                Integer accountId = (Integer) request.getSession().getAttribute("accountId");
+//
+//                AccountSong accountSong = new AccountSong();
+//                accountSong.setAccount(accountId);
+//                accountSong.setSong(songDetailId);
+//                accountSongService.save(accountSong);
                 //category
                 Song song = (Song) songdetail.getSongs();
                 Category category = song.getCategory();

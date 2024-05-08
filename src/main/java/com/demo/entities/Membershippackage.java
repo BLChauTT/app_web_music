@@ -1,6 +1,7 @@
 package com.demo.entities;
-// Generated May 3, 2024, 8:30:25 PM by Hibernate Tools 4.3.6.Final
+// Generated May 8, 2024, 3:01:13 PM by Hibernate Tools 4.3.6.Final
 
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,8 +11,12 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.persistence.UniqueConstraint;
 
 /**
@@ -25,8 +30,8 @@ public class Membershippackage implements java.io.Serializable {
 	private String packageName;
 	private Integer duration;
 	private Float price;
-	private Set<Transactionhistory> transactionhistories = new HashSet<>(0);
-	private Set<Accountmembership> accountmemberships = new HashSet<>(0);
+	private Set<Transactionhistory> transactionhistories = new HashSet<Transactionhistory>(0);
+	private Set<Accountmembership> accountmemberships = new HashSet<Accountmembership>(0);
 
 	public Membershippackage() {
 	}
