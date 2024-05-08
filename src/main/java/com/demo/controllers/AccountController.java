@@ -29,6 +29,8 @@ public class AccountController {
 //	+ forget Password bằng mail
 //	+ bảo bật bằng token, ngăn ngừa user truy cập link trái phép
 //	+ bảo mật bằng recaptcha của gg đế tránh bị robot tấn công (spam)
+//  + phân trang
+//  + upload download nhạc
 
 	@Autowired
 	private AccountJPAService accountService;
