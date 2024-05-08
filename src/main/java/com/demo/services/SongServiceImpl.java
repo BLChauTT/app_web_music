@@ -3,6 +3,9 @@ package com.demo.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.demo.entities.Song;
@@ -55,5 +58,22 @@ public class SongServiceImpl implements SongService{
     public List<Song> findSongsBySingerId(int singerId) {
         return songRepository.findSongsBySingerId(singerId);
     }
+    
+    @Override
+	public List<Song> findAllList() {
+		return songRepository.findAll();
+	}
+	@Override
+	public List<Song> findByTitle(String title) {
+		return songRepository.findBySongDetail(title);
+	}
+	
+	@Override
+	public List<Song> findSongsWithPagination(int pageNo, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNo, pageSize);
+		Page<Song> pageSongs = songRepository.findAll(pageable);
+		List<Song> songs = pageSongs.getContent();
+		return songs;
+	}
 
 }

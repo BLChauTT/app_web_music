@@ -15,4 +15,6 @@ public interface SongRepository extends JpaRepository<Song, Integer> {
     List<Song> findSongsBySingerId(@Param("singerId") int singerId);
     @Query("from Song where category.categoryId = :categoryId")
     public List<Song> findByCategoryId(@Param("categoryId") int categoryId);
+    @Query("from Song where songdetail.title LIKE %:partialTitle%")
+    public List<Song> findBySongDetail(@Param("partialTitle") String partialTitle);
 }

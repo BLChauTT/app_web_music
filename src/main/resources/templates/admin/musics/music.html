@@ -26,13 +26,15 @@
 											class="text-muted"></i></button> <button
 										class="btn btn-sm btn-icon btn-white sort hide" data-sort="item-title"
 										data-toggle="tooltip" title="Sort"><i class="sorting"></i></button></div>
-								<form class="flex">
-									<div class="input-group"><input type="text"
+								<form class="flex" method="GET" th:action="@{/admin/music}">
+									<div class="input-group">
+										<input type="text" name="keyword"
 											class="form-control form-control-theme form-control-sm search"
-											placeholder="Search" required> <span class="input-group-append"><button
-												class="btn btn-white no-border btn-sm" type="button"><span
-													class="d-flex text-muted"><i
-														data-feather="search"></i></span></button></span></div>
+											placeholder="Search">
+										<span class="input-group-append"><button class="btn btn-white no-border btn-sm"
+												type="button"><span class="d-flex text-muted"><i
+														data-feather="search"></i></span></button></span>
+									</div>
 								</form>
 							</div>
 							<div class="table-responsive">
@@ -42,9 +44,14 @@
 											<th style="width:20px"></th>
 											<th class="text-muted sort sortable" data-sort="id"
 												style="width:40px;text-align:center">No.</th>
-											<th class="text-muted sort sortable" data-sort="item-company">Name</th>
+											<th class="text-muted sort sortable" data-sort="item-company">User Name
+											</th>
+											<th class="text-muted sort sortable" data-sort="item-company">Name music
+											</th>
+											<th class="text-muted sort sortable" data-sort="item-company"
+												style="width:150px">Album</th>
 											<th class="text-muted sort sortable" data-sort="item-amount"
-												style="width:60px">Album</th>
+												style="width:100px">Genre</th>
 											<th class="text-muted sort sortable" data-sort="item-badge"
 												style="width:60px">Status</th>
 											<th class="text-muted" style="width:120px">Date Submitted</th>
@@ -52,24 +59,30 @@
 										</tr>
 									</thead>
 									<tbody class="list">
-										<tr class="v-middle" data-id="2" th:each="detail : ${details}">
+										<tr class="v-middle" data-id="2" th:each="ac : ${accountSongs}">
 											<td>
 												<label class="ui-check m-0"><input type="checkbox" name="id" value="2">
 													<i></i></label>
 											</td>
-											<td style="min-width:30px;text-align:center" th:text="${detail.songDetailId}"><small
+											<td style="min-width:30px;text-align:center"
+												th:text="${ac.song.songdetail.songDetailId}"><small
 													class="text-muted"></small>
 											</td>
-											<td class="flex" th:text="${detail.title}">
+											<td class="flex" th:text="${ac.account.username}">
+											<td class="flex" th:text="${ac.song.songdetail.title}">
+											</td>
+											<td class="flex" th:text="${ac.song.album.albumName}">
+											</td>
+											<td class="flex" th:text="${ac.song.category.categoryName}">
 											</td>
 											<td>
-												<span class="item-amount d-none d-sm-block text-sm" th:text="${detail.genre}"></span>
-											</td>
-											<td>
-												<span class="item-badge badge text-uppercase bg-secondary" th:text="${detail.status} ? 'Premium' : 'Often'"></span>
+												<span class="item-badge badge text-uppercase bg-secondary"
+													th:text="${ac.song.songdetail.status} ? 'Premium' : 'Often'"></span>
 											</td>
 											<td class="no-wrap">
-												<div class="item-date text-muted text-sm d-none d-md-block" th:text="${#dates.format(detail.releaseDate, 'dd/MM/yyyy')}"></div>
+												<div class="item-date text-muted text-sm d-none d-md-block"
+													th:text="${#dates.format(ac.song.songdetail.releaseDate, 'dd/MM/yyyy')}">
+												</div>
 											</td>
 											<td>
 												<div class="item-action dropdown"><a href="#" data-toggle="dropdown"

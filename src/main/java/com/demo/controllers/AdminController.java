@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.Account;
+import com.demo.entities.AccountSong;
+import com.demo.entities.Song;
 import com.demo.entities.Songdetail;
 import com.demo.services.AccountJPAService;
 import com.demo.services.AccountSongService;
 import com.demo.services.NotificationService;
 import com.demo.services.SongDetailService;
+import com.demo.services.SongService;
 import com.demo.services.UserProfileService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,7 +38,7 @@ public class AdminController {
 	@Autowired
 	private AccountSongService accountSongService;
 	@Autowired
-	private SongDetailService songDetailRepository;
+	private SongService songService;
 	// comment
 	@Autowired
 	private NotificationService notificationService;
@@ -44,7 +47,7 @@ public class AdminController {
 	@GetMapping("index")
 	public String admin(ModelMap modelMap, @RequestParam(name = "name", required = false) String name,
 						@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-						@RequestParam(value = "pageSize", defaultValue = "2", required = false) int pageSize) {
+						@RequestParam(value = "pageSize", defaultValue = "5", required = false) int pageSize) {
 		List<Account> listAccounts;
 		long totalItems;
 
@@ -77,11 +80,15 @@ public class AdminController {
 	public String music(ModelMap modelMap,
 						@RequestParam(name = "keyword", required = false) String keyword,
 						@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-						@RequestParam(value = "pageSize", defaultValue = "2", required = false) int pageSize) {
-		List<Songdetail> songs;
+						@RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
+		List<AccountSong> songs;
 
-		songs = songDetailJPAService.findSongsWithPagination(pageNo, pageSize);
-		modelMap.put("details", songs);
+		if (keyword != null && !keyword.isEmpty()) {
+			songs = accountSongService.findByTitle(keyword);
+		} else {
+			songs = accountSongService.findSongsWithPagination(pageNo, pageSize);
+		}
+		modelMap.put("accountSongs", songs);
 		long totalItems = songDetailJPAService.countTotalSongs();
 		int totalPages = (int) Math.ceil((double) totalItems / pageSize);
 		modelMap.addAttribute("totalItems", totalItems);

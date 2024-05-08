@@ -3,11 +3,15 @@ package com.demo.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.demo.entities.AccountSong;
 import com.demo.entities.Comment;
 import com.demo.entities.Rating;
+import com.demo.entities.Song;
 import com.demo.repositories.AccountSongRepository;
 import com.demo.repositories.CommentRepository;
 import com.demo.repositories.RatingRepository;
@@ -47,5 +51,26 @@ public class AccountSongServiceImpl implements AccountSongService {
 		}
 	}
 
+	@Override
+	public List<AccountSong> findBySongId(int songId) {
+		return accountSongRepository.findBySongId(songId);
+	}
 
+	@Override
+	public List<AccountSong> findAll() {
+		return accountSongRepository.findAll();
+	}
+	
+	@Override
+	public List<AccountSong> findByTitle(String title) {
+		return accountSongRepository.findBySongDetail(title);
+	}
+
+	@Override
+	public List<AccountSong> findSongsWithPagination(int pageNo, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNo, pageSize);
+		Page<AccountSong> pageSongs = accountSongRepository.findAll(pageable);
+		List<AccountSong> songs = pageSongs.getContent();
+		return songs;
+	}
 }

@@ -5,10 +5,15 @@ import java.util.List;
 import com.demo.entities.AccountSong;
 import com.demo.entities.Comment;
 import com.demo.entities.Rating;
+import com.demo.entities.Song;
 
 public interface AccountSongService {
 	public List<AccountSong> findByAccountId(int accountId);
 	public List<Rating> ratingByAccountId(int accountId);
 	public List<Comment> commentByAccountId(int accountId);
 	public boolean save(AccountSong accountSong);
+	public List<AccountSong> findBySongId(int songId);
+	public List<AccountSong> findAll();
+	public List<AccountSong> findByTitle(String title);
+	public List<AccountSong> findSongsWithPagination(int offset, int pageSize);
 }

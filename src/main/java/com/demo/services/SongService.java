@@ -12,4 +12,7 @@ public interface SongService {
     public Iterable<Song> findAll();
     public List<Song> getSongsByAuthor(int authorId);
     public List<Song> findSongsBySingerId(int authorId);
+    public List<Song> findAllList();
+    public List<Song> findByTitle(String title);
+    public List<Song> findSongsWithPagination(int offset, int pageSize);
 }
