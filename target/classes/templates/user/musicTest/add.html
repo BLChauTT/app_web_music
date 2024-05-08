@@ -58,7 +58,7 @@
 			<tr>
 				<td>Category</td>
 				<td>
-					<select th:field="${songDetail.songs}">
+					<select th:field="${songDetail}">
 						<option th:each="category : ${categories}"
 								th:value="${category.categoryId}" th:text="${category.categoryName}"></option>
 					</select>

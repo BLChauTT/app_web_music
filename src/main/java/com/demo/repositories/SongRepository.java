@@ -13,4 +13,6 @@ public interface SongRepository extends JpaRepository<Song, Integer> {
     public List<Song> findByAuthorId(@Param("authorId") int authorId);
     @Query("SELECT s FROM Song s JOIN s.singers sg WHERE sg.singerId = :singerId")
     List<Song> findSongsBySingerId(@Param("singerId") int singerId);
+    @Query("from Song where category.categoryId = :categoryId")
+    public List<Song> findByCategoryId(@Param("categoryId") int categoryId);
 }

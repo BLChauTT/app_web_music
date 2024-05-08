@@ -14,21 +14,16 @@ import com.demo.repositories.RatingRepository;
 
 @Service
 public class AccountSongServiceImpl implements AccountSongService {
-
 	@Autowired
 	private AccountSongRepository accountSongRepository;
-
 	@Autowired
 	private RatingRepository ratingRepository;
-
 	@Autowired
 	private CommentRepository commentRepository;
-
 	@Override
 	public List<AccountSong> findByAccountId(int accountId) {
 		return accountSongRepository.findByAccountId(accountId);
 	}
-
 
 	@Override
 	public List<Rating> ratingByAccountId(int accountId) {
@@ -36,10 +31,20 @@ public class AccountSongServiceImpl implements AccountSongService {
 		return ratingRepository.findByAccountId(accountId);
 	}
 
-
 	@Override
 	public List<Comment> commentByAccountId(int accountId) {
 		return commentRepository.findByAccountId(accountId);
+	}
+
+	@Override
+	public boolean save(AccountSong accountSong) {
+		try {
+			accountSongRepository.save(accountSong);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 

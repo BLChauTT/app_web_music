@@ -11,8 +11,8 @@ import com.demo.entities.AccountSong;
 
 @Repository
 public interface AccountSongRepository extends CrudRepository<AccountSong, Integer> {
-
 	@Query("from AccountSong where account.accountId = :accountId")
     public List<AccountSong> findByAccountId(@Param("accountId") int accountId);
+
 
 }

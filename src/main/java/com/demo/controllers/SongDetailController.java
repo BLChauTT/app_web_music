@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
 
+import com.demo.entities.Category;
+import com.demo.entities.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
@@ -48,7 +50,6 @@ public class SongDetailController {
         AccountSong newAccountSong = new AccountSong();
         Songdetail songDetail = new Songdetail();
         modelMap.put("songDetail", songDetail);
-        //modelMap.put("accountSong", accountSongService);
         modelMap.put("categories", categoryService.findAll());
         return "user/musicTest/add";
     }
@@ -65,6 +66,19 @@ public class SongDetailController {
                 redirectAttributes.addFlashAttribute("msg", "File is Empty");
                 return "redirect:/songDetail/add";
             } else {
+                boolean savedSongDetail = songDetailService.save(songdetail);
+                Integer songDetailId = savedSongDetail.getId();
+
+                Integer accountId = (Integer) request.getSession().getAttribute("accountId");
+
+                AccountSong accountSong = new AccountSong();
+                accountSong.setAccount(accountId);
+                accountSong.setSong(songDetailId);
+                accountSongService.save(accountSong);
+                //category
+                Song song = (Song) songdetail.getSongs();
+                Category category = song.getCategory();
+
                 String fileNameImage = FileHelper.generateFileName(fileImage.getOriginalFilename());
                 String fileNameMusic = FileHelper.generateFileName(fileMusic.getOriginalFilename());
                 String musicsFolder = "assets/musics";
