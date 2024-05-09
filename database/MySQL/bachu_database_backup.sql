@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2024 at 02:32 PM
+-- Generation Time: May 08, 2024 at 08:31 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.1.25
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -73,7 +73,6 @@ CREATE TABLE `account_song` (
   `account_song_id` int(11) NOT NULL,
   `account_id` int(11) DEFAULT NULL,
   `song_id` int(11) DEFAULT NULL,
-  `album_id` int(11) DEFAULT NULL,
   `post_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -81,12 +80,12 @@ CREATE TABLE `account_song` (
 -- Dumping data for table `account_song`
 --
 
-INSERT INTO `account_song` (`account_song_id`, `account_id`, `song_id`, `album_id`, `post_date`) VALUES
-(1, 2, 1, 1, '2024-05-03'),
-(2, 3, 2, 1, '2024-05-03'),
-(3, 4, 3, 1, '2024-05-03'),
-(4, 5, 4, 1, '2024-05-03'),
-(5, 2, 5, 1, '2024-05-03');
+INSERT INTO `account_song` (`account_song_id`, `account_id`, `song_id`, `post_date`) VALUES
+(1, 2, 1, '2024-05-03'),
+(2, 3, 2, '2024-05-03'),
+(3, 4, 3, '2024-05-03'),
+(4, 5, 4, '2024-05-03'),
+(5, 2, 5, '2024-05-03');
 
 -- --------------------------------------------------------
 
@@ -112,28 +111,6 @@ INSERT INTO `album` (`album_id`, `album_name`, `release_date`, `album_cover_url`
 (3, 'Album Three', '2023-03-01', 'https://example.com/album/album3.jpg', 4),
 (4, 'Album Four', '2023-04-01', 'https://example.com/album/album4.jpg', 5),
 (5, 'Album Five', '2023-05-01', 'https://example.com/album/album5.jpg', 2);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `album_song`
---
-
-CREATE TABLE `album_song` (
-  `album_id` int(11) NOT NULL,
-  `song_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `album_song`
---
-
-INSERT INTO `album_song` (`album_id`, `song_id`) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(1, 4),
-(1, 5);
 
 -- --------------------------------------------------------
 
@@ -495,8 +472,7 @@ ALTER TABLE `accountmembership`
 ALTER TABLE `account_song`
   ADD PRIMARY KEY (`account_song_id`),
   ADD KEY `account_id` (`account_id`),
-  ADD KEY `song_id` (`song_id`),
-  ADD KEY `album_id` (`album_id`);
+  ADD KEY `song_id` (`song_id`);
 
 --
 -- Indexes for table `album`
@@ -504,13 +480,6 @@ ALTER TABLE `account_song`
 ALTER TABLE `album`
   ADD PRIMARY KEY (`album_id`),
   ADD KEY `account_id` (`account_id`);
-
---
--- Indexes for table `album_song`
---
-ALTER TABLE `album_song`
-  ADD PRIMARY KEY (`album_id`,`song_id`),
-  ADD KEY `song_id` (`song_id`);
 
 --
 -- Indexes for table `author`
@@ -754,21 +723,13 @@ ALTER TABLE `accountmembership`
 --
 ALTER TABLE `account_song`
   ADD CONSTRAINT `account_song_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`),
-  ADD CONSTRAINT `account_song_ibfk_2` FOREIGN KEY (`song_id`) REFERENCES `song` (`song_id`),
-  ADD CONSTRAINT `account_song_ibfk_3` FOREIGN KEY (`album_id`) REFERENCES `album` (`album_id`);
+  ADD CONSTRAINT `account_song_ibfk_2` FOREIGN KEY (`song_id`) REFERENCES `song` (`song_id`);
 
 --
 -- Constraints for table `album`
 --
 ALTER TABLE `album`
   ADD CONSTRAINT `album_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`);
-
---
--- Constraints for table `album_song`
---
-ALTER TABLE `album_song`
-  ADD CONSTRAINT `album_song_ibfk_1` FOREIGN KEY (`album_id`) REFERENCES `album` (`album_id`),
-  ADD CONSTRAINT `album_song_ibfk_2` FOREIGN KEY (`song_id`) REFERENCES `song` (`song_id`);
 
 --
 -- Constraints for table `comment`
