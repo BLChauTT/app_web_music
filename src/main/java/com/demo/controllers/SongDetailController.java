@@ -20,10 +20,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.AccountSong;
+import com.demo.entities.Album;
+import com.demo.entities.Author;
+import com.demo.entities.Category;
 import com.demo.entities.Song;
 import com.demo.entities.Songdetail;
 import com.demo.helpers.FileHelper;
 import com.demo.services.AccountSongService;
+import com.demo.services.AuthorService;
 import com.demo.services.CategoryService;
 import com.demo.services.SongDetailService;
 import com.demo.services.SongService;
@@ -36,81 +40,115 @@ public class SongDetailController {
     @Autowired
     private SongDetailService songDetailService;
     @Autowired
-    private SongService songService;
-    @Autowired
-    private AccountSongService accountSongService;
+    private AuthorService authorService;
     @Autowired
     private CategoryService categoryService;
-    private static final String DIRECTORY = "D:\\DoAnKy4\\app_web_music\\target\\classes\\static\\assets";
-    private static final String DEFAULT_FILE_NAME = "";
+    @Autowired
+    private SongService songService;
+    private static final String DIRECTORY = "C://Users//T14s//Desktop//app_web_music//target//classes//static//assets//music//";
     @GetMapping("add")
     public String add(ModelMap modelMap) {
-        AccountSong newAccountSong = new AccountSong();
         Songdetail songDetail = new Songdetail();
+        Category category = new Category();
+        Author author = new Author();
         modelMap.put("songDetail", songDetail);
+        modelMap.put("category", category);
+        modelMap.put("author", author);
         modelMap.put("categories", categoryService.findAll());
         return "user/musicTest/add";
     }
 
     @PostMapping("add")
     public String add(@ModelAttribute("songDetail") Songdetail songdetail,
+    				  @ModelAttribute("category") Category category,
+    				  @ModelAttribute("author") Author author,
                       @RequestParam("fileImage") MultipartFile fileImage,
                       @RequestParam("fileMusic") MultipartFile fileMusic,
                       RedirectAttributes redirectAttributes) {
         try {
-            if (fileImage.isEmpty()) {
-                songdetail.setSongCoverUrl("no-image.jpg");
-            } else if (fileMusic.isEmpty()) {
-                redirectAttributes.addFlashAttribute("msg", "File is Empty");
-                return "redirect:/songDetail/add";
-            } else {
-                boolean savedSongDetail = songDetailService.save(songdetail);
-//                Integer songDetailId = savedSongDetail.getId();
-//
-//                Integer accountId = (Integer) request.getSession().getAttribute("accountId");
-//
-//                AccountSong accountSong = new AccountSong();
-//                accountSong.setAccount(accountId);
-//                accountSong.setSong(songDetailId);
-//                accountSongService.save(accountSong);
-                //category
-                Song song = (Song) songdetail.getSongs();
-                //Category category = song.getCategory();
-
-                String fileNameImage = FileHelper.generateFileName(fileImage.getOriginalFilename());
-                String fileNameMusic = FileHelper.generateFileName(fileMusic.getOriginalFilename());
-                String musicsFolder = "assets/musics";
-
-                String absolutePath = Paths.get(DIRECTORY, musicsFolder).toString();
-                File songsFolder = new File(absolutePath);
-
-                File imagesFolder = new ClassPathResource("static/assets/images").getFile();
-                //File songsFolder = new ClassPathResource("static/assets/musics").getFile();
-
-                Path pathImage = Paths.get(imagesFolder.getAbsolutePath() + File.separator + fileNameImage);
-                Path pathMusic = Paths.get(songsFolder.getAbsolutePath() + File.separator + fileNameMusic);
-
-                Files.copy(fileImage.getInputStream(), pathImage, StandardCopyOption.REPLACE_EXISTING);
-                Files.copy(fileMusic.getInputStream(), pathMusic, StandardCopyOption.REPLACE_EXISTING);
-
-                System.out.println("File name: " + fileNameMusic);
-                System.out.println("File path: " + pathMusic);
-
-                songdetail.setSongCoverUrl(fileNameImage);
-//                songdetail.setReleaseDate(new Date());
-                songdetail.setFileUrl(pathMusic.toString());
-            }
+            //set file url + listenCount + songCoverURL (image)
+            try {
+    			File uploadFolderForMusic = new File(new ClassPathResource(".").getFile().getPath() + "/static/assets/music");
+    			if (!uploadFolderForMusic.exists()) {
+    				uploadFolderForMusic.mkdirs();
+    			}
+    			File uploadFolderForImage = new File(new ClassPathResource(".").getFile().getPath() + "/static/assets/images");
+    			if (!uploadFolderForImage.exists()) {
+    				uploadFolderForImage.mkdirs();
+    			}
+    			String FilenameForMusic = FileHelper.generateFileName(fileMusic.getOriginalFilename());
+    			String FilenameForImage = FileHelper.generateFileName(fileImage.getOriginalFilename());
+    			File saveFileForMusic = new ClassPathResource("static/assets/music").getFile();
+    			File saveFileForImage = new ClassPathResource("static/assets/images").getFile();
+    			Path pathForMusic = Paths.get(saveFileForMusic.getAbsolutePath() + File.separator + FilenameForMusic);
+    			Path pathForImage = Paths.get(saveFileForImage.getAbsolutePath() + File.separator + FilenameForImage);
+    			Files.copy(fileMusic.getInputStream(), pathForMusic, StandardCopyOption.REPLACE_EXISTING);
+    			Files.copy(fileImage.getInputStream(), pathForImage, StandardCopyOption.REPLACE_EXISTING);
+    			//http://localhost:8087/assets/music/ + tên image
+    			System.out.println("File name for music: " + FilenameForMusic);
+    			System.out.println("File name for image: " + FilenameForImage);
+    			System.out.println("File path for Music: " + pathForMusic);
+    			System.out.println("File path for Image: " + pathForImage);
+    			
+    			songdetail.setFileUrl(FilenameForMusic); //cái này chỉ lưu file name. DB never save url b/c mỗi máy sẽ có 1 DIRECTORY khác nhau
+    			songdetail.setListenCount(1);
+    			songdetail.setSongCoverUrl(FilenameForImage);
+            } catch (Exception e) {
+    			e.printStackTrace();
+    		}
+            //end set file url + listenCount + songCoverURL (image)
             if (songDetailService.save(songdetail)) {
-                redirectAttributes.addFlashAttribute("msg", "Success");
-                return "redirect:/song/findAll";
+            	Song song = new Song();
+                //lấy object category
+                Category categoryObject = new Category();
+                categoryObject = categoryService.find(category.getCategoryId());
+                System.out.println("Cate Id: " + categoryObject.getCategoryId());
+                song.setCategory(categoryObject);
+                //end lấy object category
+                //lấy object author
+                Author authorObject = authorService.findAuthorByKeyword(author.getAuthorName());
+                if (authorObject != null) { // Kiểm tra xem tác giả đã tồn tại hay chưa
+                    System.out.println("Author found, Id: " + authorObject.getAuthorId());
+                    song.setAuthor(authorObject);
+                } else {
+                    // Tạo một tác giả mới nếu không tìm thấy
+                    if (authorService.save(author)) {
+                        Author newAuthor = authorService.findAuthorByKeyword(author.getAuthorName());
+                        if (newAuthor != null) {
+                            System.out.println("New Author created, Id: " + newAuthor.getAuthorId());
+                            song.setAuthor(newAuthor);
+                        } else {
+                            System.out.println("Failed to create new Author.");
+                        }
+                    } else {
+                        System.out.println("Failed to save Author.");
+                    }
+                }
+            	//end lấy object author
+            	//lấy object songDetail vừa tạo
+            	Songdetail songDetailObject = new Songdetail();
+            	songDetailObject = songDetailService.findByFileUrlAndSongCoverUrl(songdetail.getFileUrl(), songdetail.getSongCoverUrl());
+            	System.out.println("Song detail Id: " + songDetailObject.getSongDetailId());
+            	song.setSongdetail(songDetailObject);
+            	//end lấy object songDetail vừa tạo
+            	//set default album
+//            	Album albumObject = new Album();
+//            	albumObject = 
+//            	song.setAlbum(null);
+            	//end set default album
+            	
+            	songService.save(song);
+            	
+            	return "redirect:/song/findAll";
             } else {
-                redirectAttributes.addFlashAttribute("msg", "Failed");
-                return "redirect:/song/add";
+            	redirectAttributes.addFlashAttribute("msg", "Error");
+            	return "redirect:/songDetail/add";
             }
+            
         } catch (Exception e) {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("msg", "Failed");
-            return "redirect:/song/add";
+            return "redirect:/song/findAll";
         }
     }
 

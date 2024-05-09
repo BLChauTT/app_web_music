@@ -20,5 +20,8 @@ public interface SongDetailRepository extends JpaRepository<Songdetail, Integer>
 	public Page<Songdetail> findAllPaged(Pageable pageable);
     //List<Songdetail> findSongdetailByUploader(String uploader);
     Songdetail findById(int id);
+    
+    @Query("from Songdetail where fileUrl = :fileUrl and songCoverUrl = :songCoverUrl")
+    public Songdetail findByFileUrlAndSongCoverUrl(@Param("fileUrl") String file_url, @Param("songCoverUrl") String songCoverUrl);
 
 }

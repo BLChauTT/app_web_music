@@ -26,7 +26,6 @@ public class Singer implements java.io.Serializable {
 	private String singerName;
 	private String singerAvatarUrl;
 	private String description;
-	private Set<Song> songs = new HashSet<>(0);
 
 	public Singer() {
 	}
@@ -35,11 +34,10 @@ public class Singer implements java.io.Serializable {
 		this.singerName = singerName;
 	}
 
-	public Singer(String singerName, String singerAvatarUrl, String description, Set<Song> songs) {
+	public Singer(String singerName, String singerAvatarUrl, String description) {
 		this.singerName = singerName;
 		this.singerAvatarUrl = singerAvatarUrl;
 		this.description = description;
-		this.songs = songs;
 	}
 
 	@Id
@@ -79,15 +77,6 @@ public class Singer implements java.io.Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "singer")
-	public Set<Song> getSongs() {
-		return this.songs;
-	}
-
-	public void setSongs(Set<Song> songs) {
-		this.songs = songs;
 	}
 
 }

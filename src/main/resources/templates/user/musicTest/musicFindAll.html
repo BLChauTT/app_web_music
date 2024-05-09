@@ -5,22 +5,27 @@
 </head>
 
 <body>
+	<a href="http://localhost:8087/songDetail/add">Add</a>
 	<h3>Music List - Find All</h3>
+	<p th:text="${msg}"></p>
 	<table border="1">
 		<tr>
 			<th>No</th>
 			<th>Song_Id</th>
-			<th>Account_Id</th>
+			<th>Album_Id</th>
 			<th>Song_Detail_Id</th>
-			<th>Author_Id</th>9
+			<th>Author_Id</th>
 		</tr>
 		<tr th:each="song, i : ${songs}">
 			<td th:text="${i.index + 1}"></td>
 			<td th:text="${song.songId}"></td>
-			<td>
+			<!--<td>
 				<span th:each="accountSong : ${song.accountSongs}" th:text="${accountSong.account.accountId}">
 				</span>
-			</td>
+			</td>-->
+			<td th:if="${song.album != null}" th:text="${song.album.albumId}"></td>
+			<td th:unless="${song.album != null}">null</td>
+
 			<td>
 				<a th:text="${song.songdetail.songDetailId}"
 					th:href="@{'/song/details/' + ${song.songdetail.songDetailId}}">
@@ -29,7 +34,6 @@
 			<td th:text="${song.author.authorId}"></td>
 		</tr>
 	</table>
-
 </body>
 
 </html>

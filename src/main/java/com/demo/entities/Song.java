@@ -24,23 +24,20 @@ import jakarta.persistence.Table;
 public class Song implements java.io.Serializable {
 
 	private Integer songId;
+	private Category category;
 	private Album album;
 	private Author author;
-	private Singer singer;
 	private Songdetail songdetail;
 	private Set<AccountSong> accountSongs = new HashSet<>(0);
 
 	public Song() {
 	}
 
-	public Song(Singer singer) {
-		this.singer = singer;
-	}
 
-	public Song(Album album, Author author, Singer singer, Songdetail songdetail, Set<AccountSong> accountSongs) {
+	public Song(Category category, Album album, Author author, Songdetail songdetail, Set<AccountSong> accountSongs) {
+		this.category = category;
 		this.album = album;
 		this.author = author;
-		this.singer = singer;
 		this.songdetail = songdetail;
 		this.accountSongs = accountSongs;
 	}
@@ -78,16 +75,6 @@ public class Song implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "singer_id", nullable = false)
-	public Singer getSinger() {
-		return this.singer;
-	}
-
-	public void setSinger(Singer singer) {
-		this.singer = singer;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "song_detail_id")
 	public Songdetail getSongdetail() {
 		return this.songdetail;
@@ -104,6 +91,16 @@ public class Song implements java.io.Serializable {
 
 	public void setAccountSongs(Set<AccountSong> accountSongs) {
 		this.accountSongs = accountSongs;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id")
+	public Category getCategory() {
+		return this.category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 }

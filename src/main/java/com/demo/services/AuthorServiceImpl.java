@@ -36,7 +36,7 @@ public class AuthorServiceImpl implements AuthorService{
 
     @Override
     public Author findAuthorByKeyword(String keyword) {
-        return null;
+    	return authorRepository.findAuthorByKeyword(keyword);
     }
 
     @Override

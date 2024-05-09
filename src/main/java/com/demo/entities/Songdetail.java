@@ -27,15 +27,14 @@ import jakarta.persistence.TemporalType;
 public class Songdetail implements java.io.Serializable {
 
 	private Integer songDetailId;
-	private Category category;
 	private String title;
 	private String lyric;
 	private String songTime;
 	private Date releaseDate;
-	private String fileUrl;
-	private Integer listenCount;
+	private String fileUrl; //tự set
+	private Integer listenCount; //tự set
 	private Integer status;
-	private String songCoverUrl;
+	private String songCoverUrl; //tự set image
 	private Set<Song> songs = new HashSet<>(0);
 
 	public Songdetail() {
@@ -45,9 +44,8 @@ public class Songdetail implements java.io.Serializable {
 		this.title = title;
 	}
 
-	public Songdetail(Category category, String title, String lyric, String songTime, Date releaseDate, String fileUrl,
+	public Songdetail(String title, String lyric, String songTime, Date releaseDate, String fileUrl,
 			Integer listenCount, Integer status, String songCoverUrl, Set<Song> songs) {
-		this.category = category;
 		this.title = title;
 		this.lyric = lyric;
 		this.songTime = songTime;
@@ -69,16 +67,6 @@ public class Songdetail implements java.io.Serializable {
 
 	public void setSongDetailId(Integer songDetailId) {
 		this.songDetailId = songDetailId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_id")
-	public Category getCategory() {
-		return this.category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
 	}
 
 	@Column(name = "title", nullable = false)

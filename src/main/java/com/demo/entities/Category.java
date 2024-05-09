@@ -24,7 +24,7 @@ public class Category implements java.io.Serializable {
 
 	private Integer categoryId;
 	private String categoryName;
-	private Set<Songdetail> songdetails = new HashSet<>(0);
+	private Set<Song> song = new HashSet<>(0);
 
 	public Category() {
 	}
@@ -32,10 +32,10 @@ public class Category implements java.io.Serializable {
 	public Category(String categoryName) {
 		this.categoryName = categoryName;
 	}
-
-	public Category(String categoryName, Set<Songdetail> songdetails) {
+	
+	public Category(String categoryName, Set<Song> song) {
 		this.categoryName = categoryName;
-		this.songdetails = songdetails;
+		this.song = song;
 	}
 
 	@Id
@@ -58,14 +58,14 @@ public class Category implements java.io.Serializable {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
-	public Set<Songdetail> getSongdetails() {
-		return this.songdetails;
+	public Set<Song> getSong() {
+		return this.song;
 	}
 
-	public void setSongdetails(Set<Songdetail> songdetails) {
-		this.songdetails = songdetails;
+	public void setSong(Set<Song> song) {
+		this.song = song;
 	}
 
 }

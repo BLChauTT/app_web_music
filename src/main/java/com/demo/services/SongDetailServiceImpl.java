@@ -58,4 +58,9 @@ public class SongDetailServiceImpl implements SongDetailService {
 	public List<Songdetail> findByKeywordAjax(String keyword) {
 		return null;
 	}
+	
+	@Override
+	public Songdetail findByFileUrlAndSongCoverUrl(String fileUrl, String songCoverUrl) {
+		return songDetailRepository.findByFileUrlAndSongCoverUrl(fileUrl, songCoverUrl);
+	}
 }

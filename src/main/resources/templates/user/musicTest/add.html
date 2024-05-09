@@ -29,13 +29,28 @@
 			document.getElementById('releaseDate').value = formattedDate;
 		}
 	</script>
+	<script>
+		function validateForm() {
+			var fileMusic = document.getElementsByName("fileMusic")[0].files[0];
+			var fileImage = document.getElementsByName("fileImage")[0].files[0];
+			if (!fileMusic) {
+				alert("File âm nhạc không được rỗng");
+				return false; // Ngăn chặn việc gửi biểu mẫu nếu file âm nhạc rỗng
+			}
+			if (!fileImage) {
+				alert("File hình ảnh không được rỗng");
+				return false; // Ngăn chặn việc gửi biểu mẫu nếu file hình ảnh rỗng
+			}
+			return true; // Cho phép gửi biểu mẫu nếu cả hai file không rỗng
+		}
+	</script>
 </head>
 
 <body>
 	<a th:href="@{/song/findAll}">Back</a>
 	<h3>Add Song</h3>
 	<th:block th:text="${msg}"></th:block>
-	<form method="post" th:action="@{/songDetail/add}" enctype="multipart/form-data">
+	<form method="post" th:action="@{/songDetail/add}" enctype="multipart/form-data" onsubmit="return validateForm()">
 		<table border="0">
 			<tr>
 				<td valign="top">Title</td>
@@ -50,6 +65,12 @@
 				</td>
 			</tr>
 			<tr>
+				<td>Author</td>
+				<td>
+					<input type="text" th:field="${author.authorName}">
+				</td>
+			</tr>
+			<tr>
 				<td>SongTime</td>
 				<td>
 					<input type="text" th:field="${songDetail.songTime}">
@@ -58,9 +79,9 @@
 			<tr>
 				<td>Category</td>
 				<td>
-					<select th:field="${songDetail}">
-						<option th:each="category : ${categories}"
-								th:value="${category.categoryId}" th:text="${category.categoryName}"></option>
+					<select th:field="${category.categoryId}">
+						<option th:each="category : ${categories}" th:value="${category.categoryId}"
+							th:text="${category.categoryName}"></option>
 					</select>
 				</td>
 			</tr>

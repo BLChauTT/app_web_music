@@ -48,7 +48,7 @@ public class AccountController {
 	public String login(@RequestParam("username") String username, @RequestParam("password") String password,
 			HttpSession session, RedirectAttributes redirectAttributes) {
 		if (accountService.login(username, password)) {
-			session.setAttribute("username", username);
+			session.setAttribute("email", username);
 			return "redirect:/account/welcome";
 		} else {
 			redirectAttributes.addFlashAttribute("mistake", "Invalid");
@@ -57,7 +57,8 @@ public class AccountController {
 	}
 
 	@GetMapping("welcome")
-	public String welcome() {
+	public String welcome(HttpSession session, ModelMap modelMap) {
+		modelMap.put("username", session.getAttribute("email").toString());
 		return "account/welcome";
 	}
 
