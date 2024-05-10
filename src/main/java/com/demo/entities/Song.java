@@ -44,6 +44,7 @@ public class Song implements java.io.Serializable {
 	public void setSingers(Set<Singer> singers) {
 		this.singers = singers;
 	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "song_id", unique = true, nullable = false)
