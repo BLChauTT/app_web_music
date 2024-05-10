@@ -3,6 +3,7 @@ package com.demo.repositories;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -16,6 +17,6 @@ public interface SongRepository extends JpaRepository<Song, Integer> {
 //    public List<Song> findByCategoryId(@Param("categoryId") int categoryId);
     @Query("from Song where songdetail.title LIKE %:partialTitle%")
     public List<Song> findBySongDetail(@Param("partialTitle") String partialTitle);
-
+    
 
 }

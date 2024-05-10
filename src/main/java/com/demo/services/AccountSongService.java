@@ -15,4 +15,5 @@ public interface AccountSongService {
 	public List<AccountSong> findAll();
 	public List<AccountSong> findByTitle(String title);
 	public List<AccountSong> findSongsWithPagination(int offset, int pageSize);
+	public boolean deleteAccountSongAndRelatedData(int accountSongId);
 }

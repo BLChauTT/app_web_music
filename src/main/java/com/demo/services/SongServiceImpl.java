@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.demo.entities.Song;
+import com.demo.repositories.AccountSongRepository;
+import com.demo.repositories.SongDetailRepository;
 import com.demo.repositories.SongRepository;
 
 @Service
@@ -16,6 +18,12 @@ public class SongServiceImpl implements SongService{
 
     @Autowired
     public SongRepository songRepository;
+    
+    @Autowired
+    public SongDetailRepository songDetailRepository;
+    
+    @Autowired
+    public AccountSongRepository accountSongRepository;
 
     @Override
     public boolean save(Song song) throws Exception {
@@ -41,8 +49,14 @@ public class SongServiceImpl implements SongService{
         return null;
     }
     @Override
-    public void deleteSong(int id) {
-
+    public boolean deleteSong(int id) {  		
+        try {
+        	songDetailRepository.deleteBySongId(id);
+            songRepository.deleteById(id);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
     }
     @Override
     public Iterable<Song> findAll() {

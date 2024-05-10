@@ -95,9 +95,19 @@ public class AdminController {
 		modelMap.addAttribute("pageSize", pageSize);
 		return "admin/musics/music";
 	}
+	
+	@GetMapping("music/deletesong/{id}")
+	public String deleteSongDetail(@PathVariable("id") int id, RedirectAttributes attr) {
+		if (accountSongService.deleteAccountSongAndRelatedData(id)) {
+			attr.addFlashAttribute("next", "Removed successfully.");
+		} else {
+			attr.addFlashAttribute("error", "Remove Failued.");
+		}
+		return "redirect:/admin/music";
+	}
 
 	@GetMapping(value = "remove/{id}")
-	private String remove(@PathVariable int id, RedirectAttributes attr) {
+	private String removeAccount(@PathVariable("id") int id, RedirectAttributes attr) {
 		Account account = accountJPAService.findById(id);
 		if (accountJPAService.remove(account)) {
 			attr.addFlashAttribute("next", "Removed successfully.");
@@ -128,7 +138,7 @@ public class AdminController {
 	}
 
 	@GetMapping("/comment/delete/{id}")
-	public String delete(@PathVariable("id") int id, RedirectAttributes redirectAttributes,
+	public String deleteComment(@PathVariable("id") int id, RedirectAttributes redirectAttributes,
 			HttpServletRequest request) {
 		String referer = request.getHeader("Referer");
 		if (notificationService.delete(id)) {
@@ -138,7 +148,8 @@ public class AdminController {
 		}
 		return "redirect:" + referer;
 	}
-
+	
+	
 	@GetMapping("rating/{accountId}")
 	public String getRatingandComment(@PathVariable("accountId") int accountId, ModelMap modelMap) {
 		modelMap.put("ratings", accountSongService.ratingByAccountId(accountId));

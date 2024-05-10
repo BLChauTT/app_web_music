@@ -7,13 +7,22 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.demo.entities.AccountSong;
 import com.demo.entities.Comment;
 import com.demo.entities.Rating;
 import com.demo.repositories.AccountSongRepository;
 import com.demo.repositories.CommentRepository;
+import com.demo.repositories.FavoriteRepository;
 import com.demo.repositories.RatingRepository;
+import com.demo.repositories.SongDetailRepository;
+import com.demo.repositories.SongRepository;
+import com.demo.repositories.SongSingerRepository;
 
 @Service
 public class AccountSongServiceImpl implements AccountSongService {
@@ -23,6 +32,16 @@ public class AccountSongServiceImpl implements AccountSongService {
 	private RatingRepository ratingRepository;
 	@Autowired
 	private CommentRepository commentRepository;
+	@Autowired
+	private FavoriteRepository favoriteRepository;
+	@Autowired
+	private SongRepository songRepository;
+	@Autowired
+	private SongSingerRepository songSingerRepository;
+
+	@Autowired
+	private SongDetailRepository songDetailRepository;
+
 	@Override
 	public List<AccountSong> findByAccountId(int accountId) {
 		return accountSongRepository.findByAccountId(accountId);
@@ -71,5 +90,32 @@ public class AccountSongServiceImpl implements AccountSongService {
 		Page<AccountSong> pageSongs = accountSongRepository.findAll(pageable);
 		List<AccountSong> songs = pageSongs.getContent();
 		return songs;
+	}
+
+	@Transactional
+	@Override
+	public boolean deleteAccountSongAndRelatedData(int accountSongId) {
+		try {
+
+			AccountSong accountSong = accountSongRepository.findById(accountSongId).orElse(null);
+			if (accountSong != null) {
+				// Xóa các bình luận liên quan trước
+				favoriteRepository.deleteByAccountSong_AccountSongId(accountSongId);
+				commentRepository.deleteByAccountSong_AccountSongId(accountSongId);
+				ratingRepository.deleteByAccountSong_AccountSongId(accountSongId);
+
+				int songId = accountSong.getSong().getSongId();
+				accountSongRepository.deleteById(accountSongId);
+				songSingerRepository.deleteBySongId(songId);
+				songRepository.deleteById(songId);
+				songDetailRepository.deleteBySongId(songId);
+
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }
