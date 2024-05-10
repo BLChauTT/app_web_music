@@ -132,8 +132,7 @@ INSERT INTO `author` (`author_id`, `author_name`) VALUES
 (4, 'Author Four'),
 (1, 'Author One'),
 (3, 'Author Three'),
-(2, 'Author Two'),
-(6, 'Chau');
+(2, 'Author Two');
 
 -- --------------------------------------------------------
 
@@ -352,10 +351,7 @@ INSERT INTO `song` (`song_id`, `song_detail_id`, `author_id`, `album_id`, `categ
 (2, 2, 2, 1, 2),
 (3, 3, 3, 1, 3),
 (4, 4, 4, 1, 4),
-(5, 5, 5, 1, 5),
-(6, 7, 6, NULL, 2),
-(8, 11, 6, NULL, 4),
-(9, 12, 6, NULL, 4);
+(5, 5, 5, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -385,9 +381,7 @@ INSERT INTO `songdetail` (`song_detail_id`, `title`, `lyric`, `song_time`, `rele
 (3, 'Song Three', 'Lyrics of Song Three', '00:04:15', '2023-01-01', 'https://example.com/song/song3.mp3', 200, 1, 'https://example.com/songcover/song3.jpg'),
 (4, 'Song Four', 'Lyrics of Song Four', '00:03:50', '2023-01-01', 'https://example.com/song/song4.mp3', 120, 1, 'https://example.com/songcover/song4.jpg'),
 (5, 'Song Five', 'Lyrics of Song Five', '00:05:00', '2023-01-01', 'https://example.com/song/song5.mp3', 180, 1, 'https://example.com/songcover/song5.jpg'),
-(7, 'Test', 'asd', '1:00', '2024-09-05', '33975208d562424c961c45e31dfbbcad.mp3', 1, 1, '4670660867424ca08f435198feba289c.jpg'),
-(11, 'Bài Hát của Châu', 'asdasd', '00:01:00', '2024-09-05', 'c4602db121f14346b8b603257cba4a9f.mp3', 1, 1, '6b3278b0061e4949a473f8590d432fe0.mp3'),
-(12, 'Bài Hát của Châu 02', 'asdasd', '00:01:00', '2024-09-05', 'c6381a764a81493e93d539de8a922ac2.mp3', 1, 1, 'e46e48e14e484fd7a690ec3f8ecea971.jpg');
+(7, 'Test', 'asd', '1:00', '2024-09-05', '33975208d562424c961c45e31dfbbcad.mp3', 1, 1, '4670660867424ca08f435198feba289c.jpg');
 
 -- --------------------------------------------------------
 
