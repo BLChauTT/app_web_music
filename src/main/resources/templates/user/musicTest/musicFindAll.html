@@ -26,7 +26,6 @@
 			</td>-->
 			<td th:if="${song.album != null}" th:text="${song.album.albumId}"></td>
 			<td th:unless="${song.album != null}">null</td>
-			<!--<td th:text="${singer.singerId}">-->
 			<td>
 				<span th:each="singer : ${song.singers}" th:text="${singer.singerName}"></span>
 			</td>
