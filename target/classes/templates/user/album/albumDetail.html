@@ -1,0 +1,33 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Author Detail</title>
+</head>
+<body>
+
+<a th:href="@{/album/findAll}">Back</a>
+<h3>Author Details</h3>
+<table border="1">
+    <tr>
+        <td>Id</td>
+        <td th:text="${album.albumId}"></td>
+    </tr>
+    <tr>
+        <td>Name</td>
+        <td th:text="${album.albumName}"></td>
+    </tr>
+    <tr>
+        <td>Name</td>
+        <td th:text="${album.albumCoverUrl}"></td>
+    </tr>
+    <tr>
+        <td>Name</td>
+        <td th:text="${album.releaseDate}"></td>
+    </tr>
+    <tr>
+        <td>Name</td>
+        <td th:text="${album.account.accountId}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

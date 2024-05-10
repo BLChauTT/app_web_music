@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Index</title>
+</head>
+<body>
+<h3>Album List - Find All</h3>
+<table border="1">
+    <tr>
+        <th>No</th>
+        <th>Album_Id</th>
+        <th>Album_Name</th>
+        <th>Release Date</th>
+        <th>Album_Cover_Url</th>
+        <th>AccountId</th>
+    </tr>
+    <tr th:each="album, i : ${albums}">
+        <td th:text="${i.index + 1}"></td>
+        <td th:text="${album.albumId}"></td>
+        <td>
+            <a th:text="${album.albumName}"
+               th:href="@{'/album/details/' + ${album.albumId}}">
+            </a>
+        </td>
+        <td th:text="${album.releaseDate}"></td>
+        <td th:text="${album.albumCoverUrl}"></td>
+        <td th:text="${album.account.accountId}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
