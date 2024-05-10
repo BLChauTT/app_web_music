@@ -13,6 +13,7 @@
 			<th>No</th>
 			<th>Song_Id</th>
 			<th>Album_Id</th>
+			<th>Singer</th>
 			<th>Song_Detail_Id</th>
 			<th>Author_Id</th>
 		</tr>
@@ -25,7 +26,9 @@
 			</td>-->
 			<td th:if="${song.album != null}" th:text="${song.album.albumId}"></td>
 			<td th:unless="${song.album != null}">null</td>
-
+			<td>
+				<span th:each="singer : ${song.singers}" th:text="${singer.singerName}"></span>
+			</td>
 			<td>
 				<a th:text="${song.songdetail.songDetailId}"
 					th:href="@{'/song/details/' + ${song.songdetail.songDetailId}}">

@@ -32,7 +32,7 @@ public class Category implements java.io.Serializable {
 	public Category(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	
+
 	public Category(String categoryName, Set<Song> song) {
 		this.categoryName = categoryName;
 		this.song = song;
@@ -58,7 +58,7 @@ public class Category implements java.io.Serializable {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
 	public Set<Song> getSong() {
 		return this.song;

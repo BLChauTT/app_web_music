@@ -19,16 +19,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.demo.entities.AccountSong;
-import com.demo.entities.Album;
 import com.demo.entities.Author;
 import com.demo.entities.Category;
+import com.demo.entities.Singer;
 import com.demo.entities.Song;
 import com.demo.entities.Songdetail;
 import com.demo.helpers.FileHelper;
-import com.demo.services.AccountSongService;
 import com.demo.services.AuthorService;
 import com.demo.services.CategoryService;
+import com.demo.services.SingerService;
 import com.demo.services.SongDetailService;
 import com.demo.services.SongService;
 
@@ -45,15 +44,23 @@ public class SongDetailController {
     private CategoryService categoryService;
     @Autowired
     private SongService songService;
+    @Autowired
+    private SingerService singerService;
     private static final String DIRECTORY = "C://Users//T14s//Desktop//app_web_music//target//classes//static//assets//music//";
     @GetMapping("add")
     public String add(ModelMap modelMap) {
         Songdetail songDetail = new Songdetail();
         Category category = new Category();
         Author author = new Author();
+        Singer singer = new Singer();
+        Song song = new Song();
         modelMap.put("songDetail", songDetail);
         modelMap.put("category", category);
         modelMap.put("author", author);
+        modelMap.put("authors", authorService.findAll());
+        modelMap.put("song", song);
+        modelMap.put("singer", singer);
+        modelMap.put("singers", singerService.findAll());
         modelMap.put("categories", categoryService.findAll());
         return "user/musicTest/add";
     }
@@ -62,17 +69,21 @@ public class SongDetailController {
     public String add(@ModelAttribute("songDetail") Songdetail songdetail,
     				  @ModelAttribute("category") Category category,
     				  @ModelAttribute("author") Author author,
+                      @ModelAttribute("singer") Singer singer,
                       @RequestParam("fileImage") MultipartFile fileImage,
                       @RequestParam("fileMusic") MultipartFile fileMusic,
+                      ModelMap modelMap,
                       RedirectAttributes redirectAttributes) {
         try {
             //set file url + listenCount + songCoverURL (image)
             try {
-    			File uploadFolderForMusic = new File(new ClassPathResource(".").getFile().getPath() + "/static/assets/music");
+    			File uploadFolderForMusic = new File(new ClassPathResource(".").getFile().getPath()
+                        + "/static/assets/music");
     			if (!uploadFolderForMusic.exists()) {
     				uploadFolderForMusic.mkdirs();
     			}
-    			File uploadFolderForImage = new File(new ClassPathResource(".").getFile().getPath() + "/static/assets/images");
+    			File uploadFolderForImage = new File(new ClassPathResource(".").getFile().getPath()
+                        + "/static/assets/images");
     			if (!uploadFolderForImage.exists()) {
     				uploadFolderForImage.mkdirs();
     			}
@@ -89,8 +100,9 @@ public class SongDetailController {
     			System.out.println("File name for image: " + FilenameForImage);
     			System.out.println("File path for Music: " + pathForMusic);
     			System.out.println("File path for Image: " + pathForImage);
-    			
-    			songdetail.setFileUrl(FilenameForMusic); //cái này chỉ lưu file name. DB never save url b/c mỗi máy sẽ có 1 DIRECTORY khác nhau
+
+    			songdetail.setFileUrl(FilenameForMusic);
+                //cái này chỉ lưu file name. DB never save url b/c mỗi máy sẽ có 1 DIRECTORY khác nhau
     			songdetail.setListenCount(1);
     			songdetail.setSongCoverUrl(FilenameForImage);
             } catch (Exception e) {
@@ -105,6 +117,7 @@ public class SongDetailController {
                 System.out.println("Cate Id: " + categoryObject.getCategoryId());
                 song.setCategory(categoryObject);
                 //end lấy object category
+
                 //lấy object author
                 Author authorObject = authorService.findAuthorByKeyword(author.getAuthorName());
                 if (authorObject != null) { // Kiểm tra xem tác giả đã tồn tại hay chưa
@@ -125,26 +138,35 @@ public class SongDetailController {
                     }
                 }
             	//end lấy object author
+
+                //lấy object Singer
+//                Singer singerObject = new Singer();
+//                singerObject = singerService.findSingerById(singer.getSingerId());
+//                System.out.println("Singer Id "+ singerObject.getSingerId());
+//                singer.setSingerName(String.valueOf(singerObject));
+
+
             	//lấy object songDetail vừa tạo
             	Songdetail songDetailObject = new Songdetail();
             	songDetailObject = songDetailService.findByFileUrlAndSongCoverUrl(songdetail.getFileUrl(), songdetail.getSongCoverUrl());
             	System.out.println("Song detail Id: " + songDetailObject.getSongDetailId());
             	song.setSongdetail(songDetailObject);
+
             	//end lấy object songDetail vừa tạo
             	//set default album
 //            	Album albumObject = new Album();
-//            	albumObject = 
+//            	albumObject =
 //            	song.setAlbum(null);
             	//end set default album
-            	
+
             	songService.save(song);
-            	
+
             	return "redirect:/song/findAll";
             } else {
             	redirectAttributes.addFlashAttribute("msg", "Error");
             	return "redirect:/songDetail/add";
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("msg", "Failed");

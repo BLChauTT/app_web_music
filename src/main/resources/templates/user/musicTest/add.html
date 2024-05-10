@@ -47,80 +47,95 @@
 </head>
 
 <body>
-	<a th:href="@{/song/findAll}">Back</a>
-	<h3>Add Song</h3>
-	<th:block th:text="${msg}"></th:block>
-	<form method="post" th:action="@{/songDetail/add}" enctype="multipart/form-data" onsubmit="return validateForm()">
-		<table border="0">
-			<tr>
-				<td valign="top">Title</td>
-				<td valign="top">
-					<input type="text" th:field="${songDetail.title}">
-				</td>
-			</tr>
-			<tr>
-				<td>Lyric</td>
-				<td>
-					<textarea cols="20" rows="5" th:field="${songDetail.lyric}"></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td>Author</td>
-				<td>
-					<input type="text" th:field="${author.authorName}">
-				</td>
-			</tr>
-			<tr>
-				<td>SongTime</td>
-				<td>
-					<input type="text" th:field="${songDetail.songTime}">
-				</td>
-			</tr>
-			<tr>
-				<td>Category</td>
-				<td>
-					<select th:field="${category.categoryId}">
-						<option th:each="category : ${categories}" th:value="${category.categoryId}"
+<a th:href="@{/song/findAll}">Back</a>
+<h3>Add Song</h3>
+<th:block th:text="${msg}"></th:block>
+<form method="post" th:action="@{/songDetail/add}" enctype="multipart/form-data" onsubmit="return validateForm()">
+	<table border="0">
+		<tr>
+			<td valign="top">Title</td>
+			<td valign="top">
+				<input type="text" th:field="${songDetail.title}">
+			</td>
+		</tr>
+		<tr>
+			<td>Lyric</td>
+			<td>
+				<textarea cols="20" rows="5" th:field="${songDetail.lyric}"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">Author</td>
+			<td>
+				<th:block th:each="author: ${authors}">
+					<input type="checkbox" th:value="${author.authorId}"
+						   th:field="${songDetail.songs}">
+					<th:block th:text="${author.authorName}"></th:block>
+					<br>
+				</th:block>
+			</td>
+		</tr>
+		<tr>
+			<td>Singer</td>
+			<td>
+				<select th:field="${singer.singerId}">
+				<option th:each="singer : ${singers}" th:value="${singer.singerId}"
+						th:text="${singer.singerName}"></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>SongTime</td>
+			<td>
+				<input type="text" th:field="${songDetail.songTime}">
+			</td>
+		</tr>
+		<tr>
+			<td>Category</td>
+			<td>
+				<select th:field="${category.categoryId}">
+					<option th:each="category : ${categories}" th:value="${category.categoryId}"
 							th:text="${category.categoryName}"></option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>Release Date</td>
-				<td>
-					<input type="text" id="releaseDate" th:field="${songDetail.releaseDate}">
-					<button type="button" onclick="setReleaseDate()">Set Current Date</button>
-				</td>
-			</tr>
-			<tr>
-				<td>Status</td>
-				<td>
-					<select th:field="${songDetail.status}">
-						<option value="1">1</option>
-						<option value="2">2</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>Photo</td>
-				<td>
-					<input type="file" name="fileImage">
-				</td>
-			</tr>
-			<tr>
-				<td>Song</td>
-				<td>
-					<input type="file" name="fileMusic">
-				</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td>
-					<input type="submit" value="Save">
-				</td>
-			</tr>
-		</table>
-	</form>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Release Date</td>
+			<td>
+				<input type="hidden" id="releaseDate" th:field="${songDetail.releaseDate}">
+				<button type="button" onclick="setReleaseDate()">Post Now</button>
+			</td>
+		</tr>
+		<tr>
+			<td>Status</td>
+			<td>
+				<select th:field="${songDetail.status}">
+					<option value="1">1</option>
+					<option value="2">2</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Photo</td>
+			<td>
+				<input type="file" name="fileImage">
+			</td>
+		</tr>
+		<tr>
+			<td>Song</td>
+			<td>
+				<input type="file" name="fileMusic">
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>
+				<input type="submit" value="Save">
+			</td>
+		</tr>
+<!--		<input type="hidden" th:field="${songDetail.songDetailId}">-->
+	</table>
+</form>
 
 </body>
 

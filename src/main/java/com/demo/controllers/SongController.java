@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.demo.entities.Author;
+import com.demo.entities.Singer;
 import com.demo.entities.Song;
 import com.demo.services.AuthorService;
+import com.demo.services.SingerService;
 import com.demo.services.SongService;
 import com.demo.services.UserProfileService;
 
@@ -22,15 +24,19 @@ public class SongController {
     @Autowired
     private SongService songService;
     @Autowired
+    private SingerService singerService;
+    @Autowired
     private AuthorService authorService;
     @Autowired
     private UserProfileService userProfileService;
     @Autowired
     public SongController(SongService _songService,
-                          UserProfileService _userProfileService
+                          UserProfileService _userProfileService,
+                          SingerService _singerService
                           ) {
         this.songService = _songService;
         this.userProfileService = _userProfileService;
+        this.singerService = _singerService;
     }
 
     @GetMapping({"index", "","/"})
@@ -51,7 +57,9 @@ public class SongController {
     }
     @GetMapping("findAll")
     public String findAll(ModelMap modelMap) {
+        Singer singer = new Singer();
         modelMap.put("songs", songService.findAll());
+        modelMap.put("singers", singerService.findAll());
         return "user/musicTest/musicFindAll";
     }
     @GetMapping("details/{id}")

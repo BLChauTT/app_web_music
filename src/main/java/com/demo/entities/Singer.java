@@ -10,7 +10,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -26,7 +28,7 @@ public class Singer implements java.io.Serializable {
 	private String singerName;
 	private String singerAvatarUrl;
 	private String description;
-
+	private Set<Song> songs = new HashSet<>(0);
 	public Singer() {
 	}
 
@@ -34,10 +36,11 @@ public class Singer implements java.io.Serializable {
 		this.singerName = singerName;
 	}
 
-	public Singer(String singerName, String singerAvatarUrl, String description) {
+	public Singer(String singerName, String singerAvatarUrl, String description, Set<Song> songs) {
 		this.singerName = singerName;
 		this.singerAvatarUrl = singerAvatarUrl;
 		this.description = description;
+		this.songs = songs;
 	}
 
 	@Id
@@ -77,6 +80,16 @@ public class Singer implements java.io.Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "song_singer", joinColumns = {
+			@JoinColumn(name = "singer_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+			@JoinColumn(name = "song_id", nullable = false, updatable = false) })
+	public Set<Song> getSongs() {
+		return this.songs;
+	}
+	public void setSongs(Set<Song> songs) {
+		this.songs = songs;
 	}
 
 }
