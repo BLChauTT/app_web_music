@@ -59,6 +59,7 @@ public class SongController {
     public String findAll(ModelMap modelMap) {
         Singer singer = new Singer();
         modelMap.put("songs", songService.findAll());
+        modelMap.put("singer", singer);
         modelMap.put("singers", singerService.findAll());
         return "user/musicTest/musicFindAll";
     }

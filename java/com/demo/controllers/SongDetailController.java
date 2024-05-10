@@ -6,6 +6,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+import com.demo.entities.*;
+import com.demo.services.*;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
@@ -19,17 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.demo.entities.Author;
-import com.demo.entities.Category;
-import com.demo.entities.Singer;
-import com.demo.entities.Song;
-import com.demo.entities.Songdetail;
 import com.demo.helpers.FileHelper;
-import com.demo.services.AuthorService;
-import com.demo.services.CategoryService;
-import com.demo.services.SingerService;
-import com.demo.services.SongDetailService;
-import com.demo.services.SongService;
 
 import jakarta.servlet.ServletContext;
 
@@ -46,6 +39,8 @@ public class SongDetailController {
     private SongService songService;
     @Autowired
     private SingerService singerService;
+    @Autowired
+    private AlbumService albumService;
     private static final String DIRECTORY = "C://Users//T14s//Desktop//app_web_music//target//classes//static//assets//music//";
     @GetMapping("add")
     public String add(ModelMap modelMap) {
@@ -54,8 +49,11 @@ public class SongDetailController {
         Author author = new Author();
         Singer singer = new Singer();
         Song song = new Song();
+        Album album = new Album();
         modelMap.put("songDetail", songDetail);
         modelMap.put("category", category);
+        modelMap.put("album", album);
+        modelMap.put("albums", albumService.findAll());
         modelMap.put("author", author);
         modelMap.put("authors", authorService.findAll());
         modelMap.put("song", song);
@@ -68,11 +66,12 @@ public class SongDetailController {
     @PostMapping("add")
     public String add(@ModelAttribute("songDetail") Songdetail songdetail,
     				  @ModelAttribute("category") Category category,
+                      @ModelAttribute("album") Album album,
     				  @ModelAttribute("author") Author author,
                       @ModelAttribute("singer") Singer singer,
                       @RequestParam("fileImage") MultipartFile fileImage,
                       @RequestParam("fileMusic") MultipartFile fileMusic,
-                      ModelMap modelMap,
+                      HttpSession session,
                       RedirectAttributes redirectAttributes) {
         try {
             //set file url + listenCount + songCoverURL (image)
@@ -139,25 +138,21 @@ public class SongDetailController {
                 }
             	//end lấy object author
 
-                //lấy object Singer
-//                Singer singerObject = new Singer();
-//                singerObject = singerService.findSingerById(singer.getSingerId());
-//                System.out.println("Singer Id "+ singerObject.getSingerId());
-//                singer.setSingerName(String.valueOf(singerObject));
-
-
             	//lấy object songDetail vừa tạo
             	Songdetail songDetailObject = new Songdetail();
             	songDetailObject = songDetailService.findByFileUrlAndSongCoverUrl(songdetail.getFileUrl(), songdetail.getSongCoverUrl());
             	System.out.println("Song detail Id: " + songDetailObject.getSongDetailId());
             	song.setSongdetail(songDetailObject);
-
             	//end lấy object songDetail vừa tạo
+
             	//set default album
-//            	Album albumObject = new Album();
-//            	albumObject =
-//            	song.setAlbum(null);
+            	Album albumObject = new Album();
+            	albumObject = albumService.find(album.getAlbumId());
+                System.out.println("Cate Id: " + categoryObject.getCategoryId());
+                song.setAlbum(albumObject);
             	//end set default album
+
+
 
             	songService.save(song);
 

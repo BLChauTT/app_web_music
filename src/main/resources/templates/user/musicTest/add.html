@@ -67,21 +67,23 @@
 		<tr>
 			<td valign="top">Author</td>
 			<td>
-				<th:block th:each="author: ${authors}">
-					<input type="checkbox" th:value="${author.authorId}"
-						   th:field="${songDetail.songs}">
-					<th:block th:text="${author.authorName}"></th:block>
-					<br>
-				</th:block>
+<!--				<th:block th:each="author: ${authors}">-->
+<!--					<input type="checkbox" th:value="${author.authorId}"-->
+<!--						   th:field="${songDetail.songs.authors}">-->
+<!--					<th:block th:text="${author.authorName}"></th:block>-->
+<!--					<br>-->
+<!--				</th:block>-->
+				<input type="text" th:field="${author.authorName}">
 			</td>
 		</tr>
 		<tr>
 			<td>Singer</td>
 			<td>
-				<select th:field="${singer.singerId}">
-				<option th:each="singer : ${singers}" th:value="${singer.singerId}"
-						th:text="${singer.singerName}"></option>
-				</select>
+<!--				<select th:field="${singer.singerId}">-->
+<!--				<option th:each="singer : ${singers}" th:value="${singer.singerId}"-->
+<!--						th:text="${singer.singerName}"></option>-->
+<!--				</select>-->
+				<input type="text" th:field="${singer.singerName}">
 			</td>
 		</tr>
 		<tr>
@@ -112,6 +114,15 @@
 				<select th:field="${songDetail.status}">
 					<option value="1">1</option>
 					<option value="2">2</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">Album</td>
+			<td>
+				<select th:field="${album.albumId}">
+					<option th:each="album : ${albums}" th:value="${album.albumId}"
+							th:text="${album.albumName}"></option>
 				</select>
 			</td>
 		</tr>
