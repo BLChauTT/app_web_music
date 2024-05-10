@@ -7,6 +7,18 @@
 
 <body>
 	<div class="card-body">
+		<div class="alert alert-success alert-dismissible" th:if="${next != null}">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+			<h5><i class="icon fas fa-check"></i> Notification</h5>
+			<p th:text="${next}"></p>
+
+		</div>
+
+		<div class="alert alert-dismissible bg-maroon color-palette" th:if="${mistake != null}">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="color: white">×</button>
+			<h5><i class="icon fas fa-ban"></i> Alert!</h5>
+			<p th:text="${mistake}"></p>
+		</div>
 		<div id="content" class="flex"><!-- ############ Main START-->
 			<div>
 				<div class="page-hero page-container" id="page-hero">
@@ -18,9 +30,11 @@
 					</div>
 				</div>
 				<div class="page-content page-container" id="page-content">
+
 					<div class="padding">
 						<div id="invoice-list" data-plugin="invoice">
 							<div class="toolbar">
+
 								<div class="btn-group"><button class="btn btn-sm btn-icon btn-white"
 										data-toggle="tooltip" title="Trash" id="btn-trash"><i data-feather="trash"
 											class="text-muted"></i></button> <button
@@ -90,7 +104,9 @@
 													<div class="dropdown-menu dropdown-menu-right bg-black" role="menu">
 														<a class="dropdown-item" href="#">See detail </a>
 														<div class="dropdown-divider"></div><a
-															class="dropdown-item trash">Delete item</a>
+															class="dropdown-item trash"
+															th:href="@{'/admin/music/deletesong/' + ${ac.accountSongId}}">Delete
+															item</a>
 													</div>
 												</div>
 											</td>
