@@ -18,10 +18,10 @@ public class SongServiceImpl implements SongService{
 
     @Autowired
     public SongRepository songRepository;
-    
+
     @Autowired
     public SongDetailRepository songDetailRepository;
-    
+
     @Autowired
     public AccountSongRepository accountSongRepository;
 
@@ -49,7 +49,7 @@ public class SongServiceImpl implements SongService{
         return null;
     }
     @Override
-    public boolean deleteSong(int id) {  		
+    public boolean deleteSong(int id) {
         try {
         	songDetailRepository.deleteBySongId(id);
             songRepository.deleteById(id);

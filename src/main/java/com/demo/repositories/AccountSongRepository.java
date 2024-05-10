@@ -19,7 +19,7 @@ public interface AccountSongRepository extends JpaRepository<AccountSong, Intege
 
 	@Query("from AccountSong where song.songdetail.title LIKE %:partialTitle%")
     public List<AccountSong> findBySongDetail(@Param("partialTitle") String partialTitle);
-	
+
 	 @Query("DELETE FROM AccountSong a WHERE a.song.songId = :songId")
 	 public void deleteBySongId(@Param("songId") int songId);
 }

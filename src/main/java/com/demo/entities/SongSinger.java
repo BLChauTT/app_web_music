@@ -12,12 +12,12 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "song_singer", catalog = "bachu_database")
 public class SongSinger {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    
+
     @ManyToOne
     @JoinColumn(name = "song_id", referencedColumnName = "song_id")
     private Song song;
@@ -51,6 +51,6 @@ public class SongSinger {
 	public void setSinger(Singer singer) {
 		this.singer = singer;
 	}
-    
-    
+
+
 }

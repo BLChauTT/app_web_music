@@ -13,7 +13,7 @@ public interface RatingRepository extends JpaRepository<Rating, Integer> {
 
 	@Query("from Rating where accountSong.account.accountId = :accountId")
     public List<Rating> findByAccountId(@Param("accountId") int accountId);
-	
+
 	@Modifying
 	@Query("DELETE FROM Rating where accountSong.accountSongId = :accountSongId")
 	 public void deleteByAccountSong_AccountSongId(@Param("accountSongId") int accountSongId);

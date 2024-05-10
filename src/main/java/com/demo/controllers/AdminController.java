@@ -95,7 +95,7 @@ public class AdminController {
 		modelMap.addAttribute("pageSize", pageSize);
 		return "admin/musics/music";
 	}
-	
+
 	@GetMapping("music/deletesong/{id}")
 	public String deleteSongDetail(@PathVariable("id") int id, RedirectAttributes attr) {
 		if (accountSongService.deleteAccountSongAndRelatedData(id)) {
@@ -148,8 +148,8 @@ public class AdminController {
 		}
 		return "redirect:" + referer;
 	}
-	
-	
+
+
 	@GetMapping("rating/{accountId}")
 	public String getRatingandComment(@PathVariable("accountId") int accountId, ModelMap modelMap) {
 		modelMap.put("ratings", accountSongService.ratingByAccountId(accountId));
