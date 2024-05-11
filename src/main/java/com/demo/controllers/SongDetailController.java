@@ -224,10 +224,9 @@ public String add(@ModelAttribute("songDetail") Songdetail songdetail,
                   @ModelAttribute("author") Author author,
                   @ModelAttribute("singer") Singer singer,
                   @RequestParam(value = "singerIds", required = false) List<Integer> singerIds,
-                  @RequestParam(value = "authorIds", required = false) List<Integer> authorIds,
                   @RequestParam("fileImage") MultipartFile fileImage,
                   @RequestParam("fileMusic") MultipartFile fileMusic,
-                  HttpSession session,
+                  HttpSession httpSession,
                   RedirectAttributes redirectAttributes) {
     try {
         //set file url + listenCount + songCoverURL (image)
@@ -250,14 +249,8 @@ public String add(@ModelAttribute("songDetail") Songdetail songdetail,
             Path pathForImage = Paths.get(saveFileForImage.getAbsolutePath() + File.separator + FilenameForImage);
             Files.copy(fileMusic.getInputStream(), pathForMusic, StandardCopyOption.REPLACE_EXISTING);
             Files.copy(fileImage.getInputStream(), pathForImage, StandardCopyOption.REPLACE_EXISTING);
-            //http://localhost:8087/assets/music/ + tên image
-            System.out.println("File name for music: " + FilenameForMusic);
-            System.out.println("File name for image: " + FilenameForImage);
-            System.out.println("File path for Music: " + pathForMusic);
-            System.out.println("File path for Image: " + pathForImage);
 
             songdetail.setFileUrl(FilenameForMusic);
-            //cái này chỉ lưu file name. DB never save url b/c mỗi máy sẽ có 1 DIRECTORY khác nhau
             songdetail.setListenCount(1);
             songdetail.setSongCoverUrl(FilenameForImage);
         } catch (Exception e) {
@@ -267,24 +260,18 @@ public String add(@ModelAttribute("songDetail") Songdetail songdetail,
 
         if (songDetailService.save(songdetail)) {
             Song song = new Song();
-            //lấy object category
-            Category categoryObject = categoryService.find(category.getCategoryId());
-            System.out.println("Cate Id: " + categoryObject.getCategoryId());
-            song.setCategory(categoryObject);
-            //end lấy object category
 
-            //lấy object author
+            Category categoryObject = categoryService.find(category.getCategoryId());
+            song.setCategory(categoryObject);
+
             Author authorObject = authorService.findAuthorByKeyword(author.getAuthorName());
-            if (authorObject != null) { // Kiểm tra xem tác giả đã tồn tại hay chưa
-                System.out.println("Author found, Id: " + authorObject.getAuthorId());
+            if (authorObject != null) {
                 song.setAuthor(authorObject);
             } else {
-                // Tạo một tác giả mới nếu không tìm thấy
                 if (authorService.save(author)) {
-                    Author newAuthor = authorService.findAuthorByKeyword(author.getAuthorName());
-                    if (newAuthor != null) {
-                        System.out.println("New Author created, Id: " + newAuthor.getAuthorId());
-                        song.setAuthor(newAuthor);
+                    authorObject = authorService.findAuthorByKeyword(author.getAuthorName());
+                    if (authorObject != null) {
+                        song.setAuthor(authorObject);
                     } else {
                         System.out.println("Failed to create new Author.");
                     }
@@ -292,21 +279,13 @@ public String add(@ModelAttribute("songDetail") Songdetail songdetail,
                     System.out.println("Failed to save Author.");
                 }
             }
-            //end lấy object author
 
-            //lấy object songDetail vừa tạo
-            Songdetail songDetailObject = new Songdetail();
-            songDetailObject = songDetailService.findByFileUrlAndSongCoverUrl(songdetail.getFileUrl(), songdetail.getSongCoverUrl());
-            System.out.println("Song detail Id: " + songDetailObject.getSongDetailId());
+            Songdetail songDetailObject = songDetailService.findByFileUrlAndSongCoverUrl(songdetail.getFileUrl(), songdetail.getSongCoverUrl());
             song.setSongdetail(songDetailObject);
-            //end lấy object songDetail vừa tạo
 
-            Album albumObject = new Album();
-            albumObject = albumService.find(album.getAlbumId());
+            Album albumObject = albumService.find(album.getAlbumId());
             song.setAlbum(albumObject);
-            //end set default album
 
-            // Lấy danh sách các ca sĩ và gắn vào bài hát
             Set<Singer> singers = new HashSet<>();
             if (singerIds != null) {
                 for (Integer singerId : singerIds) {
@@ -317,12 +296,10 @@ public String add(@ModelAttribute("songDetail") Songdetail songdetail,
                 }
             }
             song.setSingers(singers);
-            // End lấy danh sách các ca sĩ và gắn vào bài hát
 
             songService.save(song);
 
-            // Lưu thông tin về người dùng đăng bài hát vào bảng account_song
-            Account loggedInUser = (Account) session.getAttribute("loggedInUser");
+            Account loggedInUser = (Account) httpSession.getAttribute("loggedInUser");
             if (loggedInUser == null) {
                 redirectAttributes.addFlashAttribute("msg", "Please login");
                 return "redirect:/account/login";
@@ -330,11 +307,12 @@ public String add(@ModelAttribute("songDetail") Songdetail songdetail,
             int accountId = loggedInUser.getAccountId();
 
             AccountSong accountSong = new AccountSong();
-            accountSong.setAccount(accountService.findById(accountId)); // Lưu accountId vào bảng Account_Song
+            accountSong.setAccount(accountService.findById(accountId));
             accountSong.setSong(song);
             accountSong.setPostDate(songdetail.getReleaseDate());
             accountSongService.save(accountSong);
 
+            redirectAttributes.addFlashAttribute("msg", "Song added successfully");
             return "redirect:/song/findAll";
         } else {
             redirectAttributes.addFlashAttribute("msg", "Error");
@@ -347,5 +325,6 @@ public String add(@ModelAttribute("songDetail") Songdetail songdetail,
         return "redirect:/song/findAll";
     }
 }
+
 
 }
