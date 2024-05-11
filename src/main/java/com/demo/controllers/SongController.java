@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.demo.entities.Author;
-import com.demo.entities.Singer;
 import com.demo.entities.Song;
 import com.demo.services.AuthorService;
 import com.demo.services.SingerService;
@@ -57,7 +56,6 @@ public class SongController {
     }
     @GetMapping("findAll")
     public String findAll(ModelMap modelMap) {
-        Singer singer = new Singer();
         modelMap.put("songs", songService.findAll());
         modelMap.put("singers", singerService.findAll());
         return "user/musicTest/musicFindAll";

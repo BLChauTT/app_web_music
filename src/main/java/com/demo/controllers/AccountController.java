@@ -44,11 +44,25 @@ public class AccountController {
 		return "account/login";
 	}
 
+	//login cũ
+//	@PostMapping("login")
+//	public String login(@RequestParam("username") String username, @RequestParam("password") String password,
+//			HttpSession session, RedirectAttributes redirectAttributes) {
+//		if (accountService.login(username, password)) {
+//			session.setAttribute("email", username);
+//			return "redirect:/account/welcome";
+//		} else {
+//			redirectAttributes.addFlashAttribute("mistake", "Invalid");
+//			return "redirect:/account/login";
+//		}
+//	}
+
 	@PostMapping("login")
 	public String login(@RequestParam("username") String username, @RequestParam("password") String password,
-			HttpSession session, RedirectAttributes redirectAttributes) {
-		if (accountService.login(username, password)) {
-			session.setAttribute("email", username);
+						HttpSession session, RedirectAttributes redirectAttributes) {
+		Account loggedInUser = accountService.findByEmail(username);
+		if (loggedInUser != null && loggedInUser.getPassword().equals(password)) {
+			session.setAttribute("loggedInUser", loggedInUser);
 			return "redirect:/account/welcome";
 		} else {
 			redirectAttributes.addFlashAttribute("mistake", "Invalid");
@@ -58,8 +72,14 @@ public class AccountController {
 
 	@GetMapping("welcome")
 	public String welcome(HttpSession session, ModelMap modelMap) {
-		modelMap.put("username", session.getAttribute("email").toString());
-		return "account/welcome";
+		Object email = session.getAttribute("email");
+		if (email != null) {
+			modelMap.put("username", email.toString());
+			return "account/welcome";
+		} else {
+			// Nếu không có giá trị "email" trong session, redirect về trang login
+			return "redirect:/account/login";
+		}
 	}
 
 	@GetMapping("logout")
