@@ -15,13 +15,10 @@ import com.demo.repositories.SongRepository;
 
 @Service
 public class SongServiceImpl implements SongService{
-
     @Autowired
     public SongRepository songRepository;
-
     @Autowired
     public SongDetailRepository songDetailRepository;
-
     @Autowired
     public AccountSongRepository accountSongRepository;
 
@@ -43,6 +40,10 @@ public class SongServiceImpl implements SongService{
             }
         }
         return null;
+    }
+    @Override
+    public List<Song> findByTitleContainingIgnoreCase(String title) {
+        return songRepository.findByTitleContainingIgnoreCase(title);
     }
     @Override
     public Song updateSong(int id, Song song) {

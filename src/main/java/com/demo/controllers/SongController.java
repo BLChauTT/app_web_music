@@ -16,6 +16,7 @@ import com.demo.services.AuthorService;
 import com.demo.services.SingerService;
 import com.demo.services.SongService;
 import com.demo.services.UserProfileService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("song")
@@ -42,7 +43,7 @@ public class SongController {
     public String song(ModelMap modelMap) {
         return "user/music";
     }
-    @GetMapping({"cat","filter","search"})
+    @GetMapping({"cat","filter"})
     public String cat(ModelMap modelMap) {
         return "user/music.cat";
     }
@@ -79,5 +80,10 @@ public class SongController {
 //        model.addAttribute("songs", songs);
         return "user/singer/songs-by-singer";
     }
-
+    @GetMapping("/song/search")
+    public String search(Model model, @RequestParam("title") String title) {
+        List<Song> songs = songService.findByTitleContainingIgnoreCase(title);
+        model.addAttribute("songs", songs);
+        return "user/musicTest/search";
+    }
 }

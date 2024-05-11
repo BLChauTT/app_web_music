@@ -81,7 +81,7 @@ public class AccountController {
 
 	@GetMapping("logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute("email");
+		session.removeAttribute("loggedInUser");
 		return "redirect:/account/login";
 	}
 
