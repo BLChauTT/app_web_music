@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Song Search</title>
+</head>
+<body>
+<h2>Search Results</h2>
+<form action="#" th:action="@{/song/search}" th:object="${searchForm}" method="get">
+    <input type="text" th:field="*{title}" placeholder="Enter song title..." required>
+    <button type="submit">Search</button>
+</form>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Author</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="song : ${songs}">
+        <td th:text="${song.songdetail.title}"></td>
+        <td th:text="${song.category.categoryName}"></td>
+        <td th:text="${song.author.authorName}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

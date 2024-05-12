@@ -61,7 +61,7 @@ public class SongDetailController {
     @Autowired
     private AccountJPAService accountService;
 
-    private static final String DIRECTORY = "C://Users//T14s//Desktop//app_web_music//target//classes//static//assets//music//";
+    private static final String DIRECTORY = "D:\\DoAnKy4\\app_web_music\\target\\classes\\static\\assets\\music";
     @GetMapping("add")
     public String add(ModelMap modelMap, HttpSession httpSession) {
         Songdetail songDetail = new Songdetail();

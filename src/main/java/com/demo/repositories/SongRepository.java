@@ -2,6 +2,8 @@ package com.demo.repositories;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,6 +19,6 @@ public interface SongRepository extends JpaRepository<Song, Integer> {
     List<Song> findByTitleContainingIgnoreCase(String title);
     @Query("from Song where songdetail.title LIKE %:partialTitle%")
     public List<Song> findBySongDetail(@Param("partialTitle") String partialTitle);
-
-
+    @Query("SELECT s FROM Song s")
+    public Page<Song> findAllPaged(Pageable pageable);
 }

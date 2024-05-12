@@ -1,6 +1,8 @@
 package com.demo.controllers;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,14 +11,18 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.demo.entities.Album;
 import com.demo.entities.Author;
+import com.demo.entities.Singer;
 import com.demo.entities.Song;
+import com.demo.entities.Songdetail;
+import com.demo.services.AlbumService;
 import com.demo.services.AuthorService;
 import com.demo.services.SingerService;
 import com.demo.services.SongService;
 import com.demo.services.UserProfileService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("song")
@@ -27,6 +33,8 @@ public class SongController {
     private SingerService singerService;
     @Autowired
     private AuthorService authorService;
+    @Autowired
+    private AlbumService albumService;
     @Autowired
     private UserProfileService userProfileService;
     @Autowired
@@ -40,7 +48,43 @@ public class SongController {
     }
 
     @GetMapping({"index", "","/"})
-    public String song(ModelMap modelMap) {
+    public String song(ModelMap modelMap,
+                       @RequestParam(name = "keyword", required = false) String keyword,
+                       @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+                       @RequestParam(value = "pageSize", defaultValue = "6", required = false) int pageSize,
+                       @RequestParam(value = "singerIds", required = false) List<Integer> singerIds) {
+        Song song = new Song();
+        Songdetail songdetail = new Songdetail();
+        Song hotSong = songService.findSongById(24);
+        List<Song> listSongs;
+        List<Album> listAlbums;
+        List<Singer> listSingers;
+        listSongs = songService.findSongsWithPagination(pageNo, pageSize);
+        listAlbums = albumService.findSongsWithPagination(pageNo,pageSize);
+        listSingers = singerService.findSingersWithPagination(pageNo, pageSize);
+
+
+        Set<Singer> singers = new HashSet<>();
+        if (!listSongs.isEmpty()) {
+            // Lấy ra id của bài hát đầu tiên trong danh sách
+            int firstSongId = listSongs.get(0).getSongId();
+            // Tìm các ca sĩ của bài hát đầu tiên
+            singers = singerService.findSingersBySongId(firstSongId);
+        }
+        // Lấy ra một Singer từ Set singers
+        Singer singer = singers.isEmpty() ? new Singer() : singers.iterator().next();
+
+        modelMap.put("listSingers", listSingers);
+        modelMap.put("listAlbums", listAlbums);
+        modelMap.put("listSongs", listSongs);
+        modelMap.put("song", song);
+        modelMap.put("singer", singer);
+        modelMap.put("songdetail", songdetail);
+        modelMap.put("songs", songService.findAll());
+        modelMap.put("hotSong", hotSong.getSongdetail());
+        modelMap.put("albums", albumService.findAll());
+
+
         return "user/music";
     }
     @GetMapping({"cat","filter"})
