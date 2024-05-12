@@ -14,6 +14,7 @@ public interface SongDetailService {
     public boolean save(Songdetail songdetail);
     public Songdetail find(int id);
     public List<Songdetail> findByKeywordAjax(String keyword);
-
 	public Songdetail findByFileUrlAndSongCoverUrl(String fileUrl, String songCoverUrl);
+    public Songdetail findByFileUrl(String fileUrl);
+    public Songdetail findBySongCoverUrl(String songCoverUrl);
 }

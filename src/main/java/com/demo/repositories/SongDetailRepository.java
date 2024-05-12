@@ -27,6 +27,10 @@ public interface SongDetailRepository extends JpaRepository<Songdetail, Integer>
     @Query("from Songdetail where fileUrl = :fileUrl and songCoverUrl = :songCoverUrl")
     public Songdetail findByFileUrlAndSongCoverUrl(@Param("fileUrl") String file_url, @Param("songCoverUrl") String songCoverUrl);
 
+    @Query("from Songdetail where fileUrl = :fileUrl")
+    public Songdetail findByFileUrl(String fileUrl);
+    @Query("from Songdetail where songCoverUrl = :songCoverUrl")
+    public Songdetail findBySongCoverUrl(String songCoverUrl);
     @Modifying
     @Query("DELETE FROM Songdetail sd WHERE sd.songDetailId IN (SELECT s.songdetail.songDetailId FROM Song s WHERE s.songId = :songId)")
     public void deleteBySongId(@Param("songId") int songId);

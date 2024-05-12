@@ -21,4 +21,6 @@ public interface SongRepository extends JpaRepository<Song, Integer> {
     public List<Song> findBySongDetail(@Param("partialTitle") String partialTitle);
     @Query("SELECT s FROM Song s")
     public Page<Song> findAllPaged(Pageable pageable);
+    @Query("SELECT s FROM Song s")
+    List<Song> findAudioByUploader(String uploader);
 }

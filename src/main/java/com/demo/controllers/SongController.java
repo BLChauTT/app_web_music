@@ -13,20 +13,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.demo.entities.Account;
+import com.demo.entities.AccountSong;
 import com.demo.entities.Album;
 import com.demo.entities.Author;
 import com.demo.entities.Singer;
 import com.demo.entities.Song;
 import com.demo.entities.Songdetail;
+import com.demo.entities.Userprofile;
+import com.demo.services.AccountJPAService;
 import com.demo.services.AlbumService;
 import com.demo.services.AuthorService;
 import com.demo.services.SingerService;
 import com.demo.services.SongService;
 import com.demo.services.UserProfileService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("song")
 public class SongController {
+    private static final String DIRECTORY = "D:\\DoAnKy4\\app_web_music\\target\\classes\\static\\assets";
+    private static final String DEFAULT_FILE_NAME = "";
     @Autowired
     private SongService songService;
     @Autowired
@@ -35,6 +43,8 @@ public class SongController {
     private AuthorService authorService;
     @Autowired
     private AlbumService albumService;
+    @Autowired
+    private AccountJPAService accountJPAService;
     @Autowired
     private UserProfileService userProfileService;
     @Autowired
@@ -95,8 +105,27 @@ public class SongController {
     public String artist(ModelMap modelMap) {
         return "user/music.artist";
     }
-    @GetMapping({"detail"})
-    public String detail(ModelMap modelMap) {
+    @GetMapping({"detailMusic"})
+    public String detailMusic(ModelMap modelMap) {
+        return "user/music.detail";
+    }
+    @GetMapping({"detail/{id}"})
+    public String detail(@PathVariable("id") int id, ModelMap modelMap,
+                         HttpSession httpSession) {
+        Songdetail songdetail = new Songdetail();
+        AccountSong accountSong = new AccountSong();
+        Account account = new Account();
+        Userprofile userprofile = new Userprofile();
+        Account loggedInUser = (Account) httpSession.getAttribute("loggedInUser");
+        int accountId = loggedInUser.getAccountId();
+        accountSong.setAccount(accountJPAService.findById(accountId));
+
+        modelMap.put("userprofile", userprofile);
+        modelMap.put("accountSong", accountSong);
+        modelMap.put("account", account);
+        modelMap.put("songdetail", songdetail);
+        modelMap.put("loggedInUser", loggedInUser);
+        modelMap.put("song", songService.findSongById(id));
         return "user/music.detail";
     }
     @GetMapping("findAll")

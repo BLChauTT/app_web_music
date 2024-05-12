@@ -7,6 +7,7 @@
 </head>
 
 <body>
+<input type="hidden" name="accountId" th:value="${loggedInUser.accountId}">
 		<div id="content" class="flex"><!-- ############ Main START-->
 			<div class="page-container">
 				<div class="bg-light">
@@ -15,21 +16,18 @@
 							data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview62/v4/bd/6b/34/bd6b3443-d4c3-26fd-91c8-d0b31ab47ee3/mzaf_8046559398209773051.plus.aac.p.m4a">
 							<div class="media r w w-auto-xs mb-4">
 								<div class="media-content"
-									 th:style="'background-image: url(' + @{/assets/user/img/b4.jpg} + ')'"></div>
+									 th:style="'background-image: url(' + ${song.songdetail.songCoverUrl} + ')'"></div>
 							</div>
 							<div class="d-md-flex flex">
 								<div class="mx-sm-4 flex">
-									<h1 class="h4 font-weight-bold mb-0 text-highlight title">The Chainsmokers Feat.
-										Halsey</h1>
-									<div class="py-4 toolbar align-items-center"><button
-											class="btn btn-play btn-icon btn-md btn-rounded btn-primary"></button> <span
-											class="text-muted">32,000</span> <button
-											class="btn no-bg text-muted btn-icon btn-rounded" data-toggle-class><i
-												data-feather="heart" class="active-solid active-danger"></i></button>
-										<span class="text-muted">502</span> <button
-											class="btn no-bg text-muted btn-icon btn-rounded btn-more"
-											data-toggle="dropdown"><i data-feather="more-horizontal"></i></button>
-										<div class="dropdown-menu dropdown-menu-right"></div>
+									<h1 class="h4 font-weight-bold mb-0 text-highlight title">
+										<th:block th:text="${song.songdetail.title}"></th:block>
+									</h1>
+									<div class="py-4 toolbar align-items-center">
+											<audio controls>
+												<source th:src="@{${songdetail.fileUrl}}" type="audio/mpeg">
+											</audio>
+										<p th:text="${songdetail.fileUrl}"></p>
 									</div>
 									<div class="mb-4"><span class="text-muted">In: </span><a th:href="@{song/cat}"
 											class="text-color ajax">Classical</a>, <a th:href="@{song/cat}"
@@ -40,10 +38,14 @@
 									<div class="d-flex align-items-center">
 										<div class="media w-56 circle"><a th:href="@{/song/artist}"
 												class="media-content ajax"
-																		  th:style="'background-image: url(' + @{/assets/user/img/a5.jpg} + ')'"></a></div>
-										<div class="px-3"><a th:href="@{/song/artist}" class="text-color ajax">Jacqueline
-												Reid</a>
-											<div class="text-sm text-muted">Published: 04,19 2019</div>
+																		  th:style="'background-image: url(' + ${userprofile.avatarUrl} + ')'"></a></div>
+										<div class="px-3">
+											<a th:href="@{/song/artist}" class="text-color ajax">
+												<th:block th:text="${loggedInUser.username}"></th:block>
+											</a>
+											<div class="text-sm text-muted">Published:
+												<th:block th:text="${song.songdetail.releaseDate}"></th:block>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -56,8 +58,8 @@
 						<div class="py-4">
 							<div class="heading py-2 d-flex">
 								<div>
-									<div class="text-muted text-sm sr-item">Album</div>
-									<h5 class="text-highlight sr-item">Tracks</h5>
+									<div class="text-muted text-sm sr-item">Music</div>
+									<h5 class="text-highlight sr-item">Recommended</h5>
 								</div><span class="flex"></span>
 							</div>
 							<div class="row list-row list-index">

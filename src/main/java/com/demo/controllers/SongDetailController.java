@@ -61,7 +61,8 @@ public class SongDetailController {
     @Autowired
     private AccountJPAService accountService;
 
-    private static final String DIRECTORY = "D:\\DoAnKy4\\app_web_music\\target\\classes\\static\\assets\\music";
+    private static final String DIRECTORY = "D:\\DoAnKy4\\app_web_music\\target\\classes\\static\\assets";
+    private static final String DEFAULT_FILE_NAME = "";
     @GetMapping("add")
     public String add(ModelMap modelMap, HttpSession httpSession) {
         Songdetail songDetail = new Songdetail();
@@ -85,246 +86,116 @@ public class SongDetailController {
         modelMap.put("loggedInUser", loggedInUser);
         return "user/musicTest/add";
     }
-
-//    @PostMapping("add")
-//    public String add(@ModelAttribute("songDetail") Songdetail songdetail,
-//    				  @ModelAttribute("category") Category category,
-//                      @ModelAttribute("album") Album album,
-//    				  @ModelAttribute("author") Author author,
-//                      @ModelAttribute("singer") Singer singer,
-//                      @RequestParam(value = "singerIds", required = false) List<Integer> singerIds,
-//                      @RequestParam(value = "authorIds", required = false) List<Integer> authorIds,
-//                      @RequestParam("accountId") int accountId,
-//                      @RequestParam("fileImage") MultipartFile fileImage,
-//                      @RequestParam("fileMusic") MultipartFile fileMusic,
-//                      HttpSession httpSession,
-//                      RedirectAttributes redirectAttributes) {
-//        try {
-//            //set file url + listenCount + songCoverURL (image)
-//            try {
-//    			File uploadFolderForMusic = new File(new ClassPathResource(".").getFile().getPath()
-//                        + "/static/assets/music");
-//    			if (!uploadFolderForMusic.exists()) {
-//    				uploadFolderForMusic.mkdirs();
-//    			}
-//    			File uploadFolderForImage = new File(new ClassPathResource(".").getFile().getPath()
-//                        + "/static/assets/images");
-//    			if (!uploadFolderForImage.exists()) {
-//    				uploadFolderForImage.mkdirs();
-//    			}
-//    			String FilenameForMusic = FileHelper.generateFileName(fileMusic.getOriginalFilename());
-//    			String FilenameForImage = FileHelper.generateFileName(fileImage.getOriginalFilename());
-//    			File saveFileForMusic = new ClassPathResource("static/assets/music").getFile();
-//    			File saveFileForImage = new ClassPathResource("static/assets/images").getFile();
-//    			Path pathForMusic = Paths.get(saveFileForMusic.getAbsolutePath() + File.separator + FilenameForMusic);
-//    			Path pathForImage = Paths.get(saveFileForImage.getAbsolutePath() + File.separator + FilenameForImage);
-//    			Files.copy(fileMusic.getInputStream(), pathForMusic, StandardCopyOption.REPLACE_EXISTING);
-//    			Files.copy(fileImage.getInputStream(), pathForImage, StandardCopyOption.REPLACE_EXISTING);
-//    			//http://localhost:8087/assets/music/ + tên image
-//    			System.out.println("File name for music: " + FilenameForMusic);
-//    			System.out.println("File name for image: " + FilenameForImage);
-//    			System.out.println("File path for Music: " + pathForMusic);
-//    			System.out.println("File path for Image: " + pathForImage);
-//
-//    			songdetail.setFileUrl(FilenameForMusic);
-//                //cái này chỉ lưu file name. DB never save url b/c mỗi máy sẽ có 1 DIRECTORY khác nhau
-//    			songdetail.setListenCount(1);
-//    			songdetail.setSongCoverUrl(FilenameForImage);
-//            } catch (Exception e) {
-//    			e.printStackTrace();
-//    		}
-//            //end set file url + listenCount + songCoverURL (image)
-//
-//            // Lấy thông tin về người dùng đăng bài hát từ HttpSession
-//            Account account = (Account) httpSession.getAttribute("loggedInUser");
-//
-//            if (songDetailService.save(songdetail)) {
-//            	Song song = new Song();
-//                //lấy object category
-//                Category categoryObject = new Category();
-//                categoryObject = categoryService.find(category.getCategoryId());
-//                System.out.println("Cate Id: " + categoryObject.getCategoryId());
-//                song.setCategory(categoryObject);
-//                //end lấy object category
-//
-//                //lấy object author
-//                Author authorObject = authorService.findAuthorByKeyword(author.getAuthorName());
-//                if (authorObject != null) { // Kiểm tra xem tác giả đã tồn tại hay chưa
-//                    System.out.println("Author found, Id: " + authorObject.getAuthorId());
-//                    song.setAuthor(authorObject);
-//                } else {
-//                    // Tạo một tác giả mới nếu không tìm thấy
-//                    if (authorService.save(author)) {
-//                        Author newAuthor = authorService.findAuthorByKeyword(author.getAuthorName());
-//                        if (newAuthor != null) {
-//                            System.out.println("New Author created, Id: " + newAuthor.getAuthorId());
-//                            song.setAuthor(newAuthor);
-//                        } else {
-//                            System.out.println("Failed to create new Author.");
-//                        }
-//                    } else {
-//                        System.out.println("Failed to save Author.");
-//                    }
-//                }
-//            	//end lấy object author
-//
-//
-//            	//lấy object songDetail vừa tạo
-//            	Songdetail songDetailObject = new Songdetail();
-//            	songDetailObject = songDetailService.findByFileUrlAndSongCoverUrl(songdetail.getFileUrl(), songdetail.getSongCoverUrl());
-//            	System.out.println("Song detail Id: " + songDetailObject.getSongDetailId());
-//            	song.setSongdetail(songDetailObject);
-//            	//end lấy object songDetail vừa tạo
-//
-//                Album albumObject = new Album();
-//            	albumObject = albumService.find(album.getAlbumId());
-//            	song.setAlbum(albumObject);
-//            	//end set default album
-//
-//                // Lấy danh sách các ca sĩ và gắn vào bài hát
-//                Set<Singer> singers = new HashSet<>();
-//                if (singerIds != null) {
-//                    for (Integer singerId : singerIds) {
-//                        singer = singerService.findSingerById(singerId);
-//                        if (singer != null) {
-//                            singers.add(singer);
-//                        }
-//                    }
-//                }
-//                song.setSingers(singers);
-//                // End lấy danh sách các ca sĩ và gắn vào bài hát
-//                songService.save(song);
-//
-//                //Account account = accountService.find(accountId);
-//
-//                // Lưu thông tin về người dùng đăng bài hát vào bảng account_song
-//                AccountSong accountSong = new AccountSong();
-//                accountSong.setAccount(account);
-//                accountSong.setSong(song);
-//                accountSong.setPostDate(songdetail.getReleaseDate());
-//                accountSongService.save(accountSong);
-//
-//
-//            	return "redirect:/song/findAll";
-//            } else {
-//            	redirectAttributes.addFlashAttribute("msg", "Error");
-//            	return "redirect:/songDetail/add";
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            redirectAttributes.addFlashAttribute("msg", "Failed");
-//            return "redirect:/song/findAll";
-//        }
-//    }
-@PostMapping("add")
-public String add(@ModelAttribute("songDetail") Songdetail songdetail,
-                  @ModelAttribute("category") Category category,
-                  @ModelAttribute("album") Album album,
-                  @ModelAttribute("author") Author author,
-                  @ModelAttribute("singer") Singer singer,
-                  @RequestParam(value = "singerIds", required = false) List<Integer> singerIds,
-                  @RequestParam("fileImage") MultipartFile fileImage,
-                  @RequestParam("fileMusic") MultipartFile fileMusic,
-                  HttpSession httpSession,
-                  RedirectAttributes redirectAttributes) {
-    try {
-        //set file url + listenCount + songCoverURL (image)
+    @PostMapping("add")
+    public String add(@ModelAttribute("songDetail") Songdetail songdetail,
+                      @ModelAttribute("category") Category category,
+                      @ModelAttribute("album") Album album,
+                      @ModelAttribute("author") Author author,
+                      @ModelAttribute("singer") Singer singer,
+                      @RequestParam(value = "singerIds", required = false) List<Integer> singerIds,
+                      @RequestParam("fileImage") MultipartFile fileImage,
+                      @RequestParam("fileMusic") MultipartFile fileMusic,
+                      HttpSession httpSession,
+                      RedirectAttributes redirectAttributes) {
         try {
-            File uploadFolderForMusic = new File(new ClassPathResource(".").getFile().getPath()
-                    + "/static/assets/music");
-            if (!uploadFolderForMusic.exists()) {
-                uploadFolderForMusic.mkdirs();
-            }
-            File uploadFolderForImage = new File(new ClassPathResource(".").getFile().getPath()
-                    + "/static/assets/images");
-            if (!uploadFolderForImage.exists()) {
-                uploadFolderForImage.mkdirs();
-            }
-            String FilenameForMusic = FileHelper.generateFileName(fileMusic.getOriginalFilename());
-            String FilenameForImage = FileHelper.generateFileName(fileImage.getOriginalFilename());
-            File saveFileForMusic = new ClassPathResource("static/assets/music").getFile();
-            File saveFileForImage = new ClassPathResource("static/assets/images").getFile();
-            Path pathForMusic = Paths.get(saveFileForMusic.getAbsolutePath() + File.separator + FilenameForMusic);
-            Path pathForImage = Paths.get(saveFileForImage.getAbsolutePath() + File.separator + FilenameForImage);
-            Files.copy(fileMusic.getInputStream(), pathForMusic, StandardCopyOption.REPLACE_EXISTING);
-            Files.copy(fileImage.getInputStream(), pathForImage, StandardCopyOption.REPLACE_EXISTING);
-
-            songdetail.setFileUrl(FilenameForMusic);
-            songdetail.setListenCount(1);
-            songdetail.setSongCoverUrl(FilenameForImage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //end set file url + listenCount + songCoverURL (image)
-
-        if (songDetailService.save(songdetail)) {
-            Song song = new Song();
-
-            Category categoryObject = categoryService.find(category.getCategoryId());
-            song.setCategory(categoryObject);
-
-            Author authorObject = authorService.findAuthorByKeyword(author.getAuthorName());
-            if (authorObject != null) {
-                song.setAuthor(authorObject);
-            } else {
-                if (authorService.save(author)) {
-                    authorObject = authorService.findAuthorByKeyword(author.getAuthorName());
-                    if (authorObject != null) {
-                        song.setAuthor(authorObject);
-                    } else {
-                        System.out.println("Failed to create new Author.");
-                    }
-                } else {
-                    System.out.println("Failed to save Author.");
+            //set file url + listenCount + songCoverURL (image)
+            try {
+                File uploadFolderForMusic = new File(new ClassPathResource("static/assets/musics").getFile().getPath());
+                if (!uploadFolderForMusic.exists()) {
+                    uploadFolderForMusic.mkdirs();
                 }
+                File uploadFolderForImage = new File(new ClassPathResource(".").getFile().getPath()
+                        + "/static/assets/images");
+                if (!uploadFolderForImage.exists()) {
+                    uploadFolderForImage.mkdirs();
+                }
+                String FilenameForMusic = FileHelper.generateFileName(fileMusic.getOriginalFilename());
+                String FilenameForImage = FileHelper.generateFileName(fileImage.getOriginalFilename());
+                File saveFileForMusic = new ClassPathResource("static/assets/musics").getFile();
+                File saveFileForImage = new ClassPathResource("static/assets/images").getFile();
+                Path pathForMusic = Paths.get(saveFileForMusic.getAbsolutePath() + File.separator + FilenameForMusic);
+                Path pathForImage = Paths.get(saveFileForImage.getAbsolutePath() + File.separator + FilenameForImage);
+                Files.copy(fileMusic.getInputStream(), pathForMusic, StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(fileImage.getInputStream(), pathForImage, StandardCopyOption.REPLACE_EXISTING);
+
+                songdetail.setFileUrl(FilenameForMusic);
+                songdetail.setListenCount(1);
+                songdetail.setSongCoverUrl(FilenameForImage);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+            //end set file url + listenCount + songCoverURL (image)
 
             Songdetail songDetailObject = songDetailService.findByFileUrlAndSongCoverUrl(songdetail.getFileUrl(), songdetail.getSongCoverUrl());
-            song.setSongdetail(songDetailObject);
+            if (songDetailObject == null) {
+                redirectAttributes.addFlashAttribute("msg", "Song Detail not found");
+                return "redirect:/songDetail/add";
+            }
 
-            Album albumObject = albumService.find(album.getAlbumId());
-            song.setAlbum(albumObject);
+            if (songDetailService.save(songdetail)) {
+                Song song = new Song();
 
-            Set<Singer> singers = new HashSet<>();
-            if (singerIds != null) {
-                for (Integer singerId : singerIds) {
-                    singer = singerService.findSingerById(singerId);
-                    if (singer != null) {
-                        singers.add(singer);
+                Category categoryObject = categoryService.find(category.getCategoryId());
+                song.setCategory(categoryObject);
+
+                Author authorObject = authorService.findAuthorByKeyword(author.getAuthorName());
+                if (authorObject != null) {
+                    song.setAuthor(authorObject);
+                } else {
+                    if (authorService.save(author)) {
+                        authorObject = authorService.findAuthorByKeyword(author.getAuthorName());
+                        if (authorObject != null) {
+                            song.setAuthor(authorObject);
+                        } else {
+                            System.out.println("Failed to create new Author.");
+                        }
+                    } else {
+                        System.out.println("Failed to save Author.");
                     }
                 }
+
+                song.setSongdetail(songDetailObject);
+
+                Album albumObject = albumService.find(album.getAlbumId());
+                song.setAlbum(albumObject);
+
+                Set<Singer> singers = new HashSet<>();
+                if (singerIds != null) {
+                    for (Integer singerId : singerIds) {
+                        singer = singerService.findSingerById(singerId);
+                        if (singer != null) {
+                            singers.add(singer);
+                        }
+                    }
+                }
+                song.setSingers(singers);
+
+                songService.save(song);
+
+                Account loggedInUser = (Account) httpSession.getAttribute("loggedInUser");
+                if (loggedInUser == null) {
+                    redirectAttributes.addFlashAttribute("msg", "Please login");
+                    return "redirect:/account/login";
+                }
+                int accountId = loggedInUser.getAccountId();
+
+                AccountSong accountSong = new AccountSong();
+                accountSong.setAccount(accountService.findById(accountId));
+                accountSong.setSong(song);
+                accountSong.setPostDate(songdetail.getReleaseDate());
+                accountSongService.save(accountSong);
+
+                redirectAttributes.addFlashAttribute("msg", "Song added successfully");
+                return "redirect:/song/findAll";
+            } else {
+                redirectAttributes.addFlashAttribute("msg", "Error");
+                return "redirect:/songDetail/add";
             }
-            song.setSingers(singers);
 
-            songService.save(song);
-
-            Account loggedInUser = (Account) httpSession.getAttribute("loggedInUser");
-            if (loggedInUser == null) {
-                redirectAttributes.addFlashAttribute("msg", "Please login");
-                return "redirect:/account/login";
-            }
-            int accountId = loggedInUser.getAccountId();
-
-            AccountSong accountSong = new AccountSong();
-            accountSong.setAccount(accountService.findById(accountId));
-            accountSong.setSong(song);
-            accountSong.setPostDate(songdetail.getReleaseDate());
-            accountSongService.save(accountSong);
-
-            redirectAttributes.addFlashAttribute("msg", "Song added successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("msg", "Failed");
             return "redirect:/song/findAll";
-        } else {
-            redirectAttributes.addFlashAttribute("msg", "Error");
-            return "redirect:/songDetail/add";
         }
-
-    } catch (Exception e) {
-        e.printStackTrace();
-        redirectAttributes.addFlashAttribute("msg", "Failed");
-        return "redirect:/song/findAll";
     }
-}
-
-
 }
