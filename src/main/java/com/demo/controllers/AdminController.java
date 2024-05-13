@@ -15,7 +15,9 @@ import com.demo.entities.Account;
 import com.demo.entities.AccountSong;
 import com.demo.services.AccountJPAService;
 import com.demo.services.AccountSongService;
+import com.demo.services.CommentService;
 import com.demo.services.NotificationService;
+import com.demo.services.RatingService;
 import com.demo.services.SongDetailService;
 import com.demo.services.SongService;
 import com.demo.services.UserProfileService;
@@ -37,7 +39,12 @@ public class AdminController {
 	private AccountSongService accountSongService;
 	@Autowired
 	private SongService songService;
+	// rating
+	@Autowired
+	private RatingService ratingService;
 	// comment
+	@Autowired
+	private CommentService commentService;
 	@Autowired
 	private NotificationService notificationService;
 
@@ -130,14 +137,14 @@ public class AdminController {
 		return "admin/musics/profileMusic";
 	}
 
-	@GetMapping("comment/{accountId}")
-	public String getComment(@PathVariable("accountId") int accountId, ModelMap modelMap) {
+	@GetMapping("notification/{accountId}")
+	public String getNotifications(@PathVariable("accountId") int accountId, ModelMap modelMap) {
 		modelMap.put("notifications", notificationService.findByAccountId(accountId));
 		modelMap.put("profile", userProfileService.findByAccountId(accountId));
 		return "admin/evaluate/comment";
 	}
 
-	@GetMapping("/comment/delete/{id}")
+	@GetMapping("/notification/delete/{id}")
 	public String deleteComment(@PathVariable("id") int id, RedirectAttributes redirectAttributes,
 			HttpServletRequest request) {
 		String referer = request.getHeader("Referer");
@@ -152,9 +159,41 @@ public class AdminController {
 
 	@GetMapping("rating/{accountId}")
 	public String getRatingandComment(@PathVariable("accountId") int accountId, ModelMap modelMap) {
-		modelMap.put("ratings", accountSongService.ratingByAccountId(accountId));
-		modelMap.put("comments", accountSongService.commentByAccountId(accountId));
+		modelMap.put("ratings", ratingService.ratingByAccountId(accountId));
+		modelMap.put("comments", commentService.commentByAccountId(accountId));
 		modelMap.put("profile", userProfileService.findByAccountId(accountId));
 		return "admin/evaluate/rating";
+	}
+	
+	@GetMapping("ratingfindall")
+	public String getRatingfindall( ModelMap modelMap) {
+		modelMap.put("ratings", ratingService.findAll());
+		return "admin/evaluate/ratingFindAll";
+	}
+	
+	@GetMapping("rating/delete/{id}")
+	public String deleteRating(@PathVariable("id") int id, RedirectAttributes attr) {
+		if (ratingService.delete(id)) {
+			attr.addFlashAttribute("next", "Removed successfully.");
+		} else {
+			attr.addFlashAttribute("error", "Remove Failued.");
+		}
+		return "redirect:/admin/ratingfindall";
+	}
+	
+	@GetMapping("commentfindall")
+	public String getCommentfindall( ModelMap modelMap) {
+		modelMap.put("comments", commentService.findAll());
+		return "admin/evaluate/commentFindAll";
+	}
+	
+	@GetMapping("comment/delete/{id}")
+	public String deleteComment(@PathVariable("id") int id, RedirectAttributes attr) {
+		if (commentService.delete(id)) {
+			attr.addFlashAttribute("next", "Removed successfully.");
+		} else {
+			attr.addFlashAttribute("error", "Remove Failued.");
+		}
+		return "redirect:/admin/commentfindall";
 	}
 }

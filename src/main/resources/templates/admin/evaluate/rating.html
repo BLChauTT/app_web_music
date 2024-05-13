@@ -38,7 +38,8 @@
 									<thead>
 										<tr>
 											<th style="width:20px"></th>
-											<th class="text-muted sort sortable" data-sort="item-company">Name music</th>
+											<th class="text-muted sort sortable" data-sort="item-company">Name music
+											</th>
 											<th class="text-muted sort sortable" data-sort="item-company">Full Name</th>
 											<th class="text-muted sort sortable" data-sort="item-company">Rating</th>
 											<th class="text-muted" style="width:120px">Rating Date</th>
@@ -59,15 +60,18 @@
 											<td style="min-width:30px;text-align:center" th:text="${profile.fullName}">
 												<small class="text-muted"></small>
 											</td>
-											<td style="min-width:30px;" th:text="${rating.rating}">
-												<small class="text-muted"></small>
+											<td style="min-width:30px;">
+												<small class="text-muted">
+													<span
+														th:each="star : ${#numbers.sequence(1, rating.rating)}" style="color: gold;">&#9733;</span>
+												</small>
 											</td>
 											<td class="no-wrap">
 												<div class="item-date text-muted text-sm d-none d-md-block"
 													th:text="${#dates.format(rating.ratingDate, 'dd/MM/yyyy')}">
 												</div>
 											</td>
-											
+
 											<td>
 												<div class="item-action dropdown"><a href="#" data-toggle="dropdown"
 														class="text-muted"><i data-feather="more-vertical"></i></a>
@@ -88,7 +92,8 @@
 									<thead>
 										<tr>
 											<th style="width:20px"></th>
-											<th class="text-muted sort sortable"  data-sort="item-company">Name music</th>
+											<th class="text-muted sort sortable" data-sort="item-company">Name music
+											</th>
 											<th class="text-muted sort sortable" data-sort="item-company">Full Name</th>
 											<th class="text-muted sort sortable" data-sort="item-company">Comment</th>
 											<th class="text-muted" style="width:120px">Comment Date</th>
@@ -117,7 +122,7 @@
 													th:text="${#dates.format(comment.commentDate, 'dd/MM/yyyy')}">
 												</div>
 											</td>
-											
+
 											<td>
 												<div class="item-action dropdown"><a href="#" data-toggle="dropdown"
 														class="text-muted"><i data-feather="more-vertical"></i></a>

@@ -44,17 +44,6 @@ public class AccountSongServiceImpl implements AccountSongService {
 	}
 
 	@Override
-	public List<Rating> ratingByAccountId(int accountId) {
-
-		return ratingRepository.findByAccountId(accountId);
-	}
-
-	@Override
-	public List<Comment> commentByAccountId(int accountId) {
-		return commentRepository.findByAccountId(accountId);
-	}
-
-	@Override
 	public boolean save(AccountSong accountSong) {
 		try {
 			accountSongRepository.save(accountSong);
