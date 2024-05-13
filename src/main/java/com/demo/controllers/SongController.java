@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.demo.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +32,6 @@ import com.demo.entities.Singer;
 import com.demo.entities.Song;
 import com.demo.entities.Songdetail;
 import com.demo.entities.Userprofile;
-import com.demo.services.AccountJPAService;
-import com.demo.services.AlbumService;
-import com.demo.services.AuthorService;
-import com.demo.services.SingerService;
-import com.demo.services.SongService;
-import com.demo.services.UserProfileService;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
@@ -51,6 +46,8 @@ public class SongController {
     private static final Logger logger = LoggerFactory.getLogger(SongController.class);
     @Autowired
     private SongService songService;
+    @Autowired
+    private AccountSongService accountSongService;
     @Autowired
     private SingerService singerService;
     @Autowired
@@ -127,7 +124,14 @@ public class SongController {
         return "user/music";
     }
     @GetMapping({"cat","filter"})
-    public String cat(ModelMap modelMap) {
+    public String cat(ModelMap modelMap,@RequestParam(name = "keyword", required = false) String keyword) {
+//        List<AccountSong> accountSongs;
+//        if (keyword != null && !keyword.isEmpty()) {
+//            accountSongs = accountSongService.findByTitle(keyword);
+//        } else {
+//            accountSongs = accountSongService.findSongsWithPagination(pageNo, pageSize);
+//        }
+//        modelMap.put("accountSongs", accountSongs);
         return "user/music.cat";
     }
     @GetMapping({"artist","allsinger"})
@@ -156,6 +160,8 @@ public class SongController {
 
         String musicUrl = environment.getProperty("musicUrl");
         String fileUrl = songService.findFileUrlBySongId(id);
+        String url = musicUrl + fileUrl;
+        modelMap.put("urlMusic", url);
         songdetail.setFileUrl(fileUrl);
 
         modelMap.put("userprofile", userprofile);

@@ -15,8 +15,9 @@
 						<div class="d-sm-flex page-heading" data-id="102011"
 							data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview62/v4/bd/6b/34/bd6b3443-d4c3-26fd-91c8-d0b31ab47ee3/mzaf_8046559398209773051.plus.aac.p.m4a">
 							<div class="media r w w-auto-xs mb-4">
-								<div class="media-content"
-									 th:style="'background-image: url(' + ${song.songdetail.songCoverUrl} + ')'"></div>
+								<!--<div class="media-content"
+									 th:style="'background-image: url(D:\DoAnKy4\app_web_music\target\classes\static\assets\images\a1.jpg)'"></div>-->
+								<img src="<c:url value=/resources/static/images/no_img.jpg" />" alt="image" />
 							</div>
 							<div class="d-md-flex flex">
 								<div class="mx-sm-4 flex">
@@ -25,7 +26,7 @@
 									</h1>
 									<div class="py-4 toolbar align-items-center">
 										<audio controls>
-											<source th:src="@{${musicUrl + '/' + songdetail.fileUrl}}" type="audio/mpeg">
+											<source th:src="@{urlMusic}" type="audio/mpeg">
 										</audio>
 									</div>
 									<div class="mb-4">
