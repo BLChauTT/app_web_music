@@ -61,6 +61,8 @@ public class SongDetailServiceImpl implements SongDetailService {
 
 	@Override
 	public Songdetail findByFileUrlAndSongCoverUrl(String fileUrl, String songCoverUrl) {
+		System.out.println("File URL in Repository: " + fileUrl);
+		System.out.println("Song Cover URL in Repository: " + songCoverUrl);
 		return songDetailRepository.findByFileUrlAndSongCoverUrl(fileUrl, songCoverUrl);
 	}
 	@Override

@@ -62,8 +62,11 @@ public class SongController {
                        @RequestParam(name = "keyword", required = false) String keyword,
                        @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
                        @RequestParam(value = "pageSize", defaultValue = "6", required = false) int pageSize,
+                       HttpSession httpSession,
                        @RequestParam(value = "singerIds", required = false) List<Integer> singerIds) {
         Song song = new Song();
+        Account account = new Account();
+        Userprofile userprofile = new Userprofile();
         Songdetail songdetail = new Songdetail();
         Song hotSong = songService.findSongById(24);
         List<Song> listSongs;
@@ -72,6 +75,11 @@ public class SongController {
         listSongs = songService.findSongsWithPagination(pageNo, pageSize);
         listAlbums = albumService.findSongsWithPagination(pageNo,pageSize);
         listSingers = singerService.findSingersWithPagination(pageNo, pageSize);
+
+        Account loggedInUser = (Account) httpSession.getAttribute("loggedInUser");
+        int accountId = loggedInUser.getAccountId();
+        AccountSong accountSong = new AccountSong();
+        accountSong.setAccount(accountJPAService.findById(accountId));
 
 
         Set<Singer> singers = new HashSet<>();
@@ -84,6 +92,9 @@ public class SongController {
         // Lấy ra một Singer từ Set singers
         Singer singer = singers.isEmpty() ? new Singer() : singers.iterator().next();
 
+        modelMap.put("userprofile", userprofile);
+        modelMap.put("accountSong", accountSong);
+        modelMap.put("account", account);
         modelMap.put("listSingers", listSingers);
         modelMap.put("listAlbums", listAlbums);
         modelMap.put("listSongs", listSongs);

@@ -86,6 +86,7 @@ public class SongDetailController {
         modelMap.put("loggedInUser", loggedInUser);
         return "user/musicTest/add";
     }
+
     @PostMapping("add")
     public String add(@ModelAttribute("songDetail") Songdetail songdetail,
                       @ModelAttribute("category") Category category,
@@ -97,10 +98,17 @@ public class SongDetailController {
                       @RequestParam("fileMusic") MultipartFile fileMusic,
                       HttpSession httpSession,
                       RedirectAttributes redirectAttributes) {
+
+        if(fileImage.isEmpty() && fileMusic.isEmpty()) {
+            redirectAttributes.addFlashAttribute("msg", "File is Empty");
+            return "redirect:/songDetail/add";
+        }
+
         try {
             //set file url + listenCount + songCoverURL (image)
             try {
-                File uploadFolderForMusic = new File(new ClassPathResource("static/assets/musics").getFile().getPath());
+                File uploadFolderForMusic = new File(new ClassPathResource(".").getFile().getPath()
+                        + "/static/assets/musics");
                 if (!uploadFolderForMusic.exists()) {
                     uploadFolderForMusic.mkdirs();
                 }
@@ -126,12 +134,6 @@ public class SongDetailController {
             }
             //end set file url + listenCount + songCoverURL (image)
 
-            Songdetail songDetailObject = songDetailService.findByFileUrlAndSongCoverUrl(songdetail.getFileUrl(), songdetail.getSongCoverUrl());
-            if (songDetailObject == null) {
-                redirectAttributes.addFlashAttribute("msg", "Song Detail not found");
-                return "redirect:/songDetail/add";
-            }
-
             if (songDetailService.save(songdetail)) {
                 Song song = new Song();
 
@@ -154,6 +156,7 @@ public class SongDetailController {
                     }
                 }
 
+                Songdetail songDetailObject = songDetailService.findByFileUrlAndSongCoverUrl(songdetail.getFileUrl(), songdetail.getSongCoverUrl());
                 song.setSongdetail(songDetailObject);
 
                 Album albumObject = albumService.find(album.getAlbumId());
@@ -198,4 +201,6 @@ public class SongDetailController {
             return "redirect:/song/findAll";
         }
     }
+
+
 }
