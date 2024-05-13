@@ -1,0 +1,111 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:replace="~{layout/admin/index :: renderBody('Comment', ~{this::.card-body})}">
+
+<head>
+	<title>Index</title>
+</head>
+
+<body>
+	<div class="card-body">
+		<div id="content" class="flex"><!-- ############ Main START-->
+			<div>
+				<div class="page-hero page-container" id="page-hero">
+					<div class="padding d-flex">
+						<div class="flex">
+							<a th:href="@{'/admin/index'}" class="btn btn-md text-muted">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+									fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+									stroke-linejoin="round" class="feather feather-arrow-left">
+									<line x1="19" y1="12" x2="5" y2="12"></line>
+									<polyline points="12 19 5 12 12 5"></polyline>
+								</svg>
+								<span class="d-none d-sm-inline mx-1">Back Account</span>
+							</a>
+						</div>
+						<div class="page-title">
+							<h2 class="text-md text-highlight">Comment</h2><small class="text-muted"
+								th:text="${profile.fullName}"></small>
+						</div>
+						<div class="flex"></div>
+					</div>
+				</div>
+				<div class="page-content page-container" id="page-content">
+					<div class="padding">
+						<div id="invoice-list" data-plugin="invoice">
+
+							<div class="table-responsive">
+								<table class="table table-theme table-row v-middle">
+									<thead>
+										<tr>
+											<th style="width:20px"></th>
+											<th class="text-muted sort sortable" data-sort="id" style="width:80px">User
+												Id</th>
+											<th class="text-muted sort sortable" data-sort="item-company">Full Name</th>
+											<th class="text-muted sort sortable" data-sort="item-company">Comment</th>
+											<th class="text-muted" style="width:120px">Comment Date</th>
+											<th style="width:50px"></th>
+										</tr>
+									</thead>
+									<tbody class="list">
+										<tr class="v-middle" data-id="2" th:each="n : ${notifications}">
+											<td>
+												<label class="ui-check m-0"><input type="checkbox" name="id" value="2">
+													<i></i></label>
+											</td>
+											<td style="min-width:30px;text-align:center"
+												th:text="${n.account.accountId}"><small class="text-muted"></small>
+											</td>
+											<td style="min-width:30px;text-align:center" th:text="${profile.fullName}">
+												<small class="text-muted"></small>
+											</td>
+											<td style="min-width:30px;" th:text="${n.message}"><small
+													class="text-muted"></small>
+											</td>
+											<td class="no-wrap">
+												<div class="item-date text-muted text-sm d-none d-md-block"
+													th:text="${#dates.format(n.createdAt, 'dd/MM/yyyy')}">
+												</div>
+											</td>
+											<td>
+												<div class="item-action dropdown"><a href="#" data-toggle="dropdown"
+														class="text-muted"><i data-feather="more-vertical"></i></a>
+													<div class="dropdown-menu dropdown-menu-right bg-black" role="menu">
+														<a class="dropdown-item" href="#">See detail </a>
+														<div class="dropdown-divider"></div>
+														<a class="dropdown-item delete"
+															th:href="@{'/admin/comment/delete/' + ${n.notificationId}}">Delete
+															comment
+														</a>
+													</div>
+												</div>
+											</td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+							<div class="d-flex">
+								<ul class="pagination">
+									<li class="page-item disabled"><a class="page-link" href="#"
+											aria-label="Previous"><span aria-hidden="true">&laquo;</span> <span
+												class="sr-only">Previous</span></a></li>
+									<li class="page-item active"><a class="page-link" href="#">1 <span
+												class="sr-only">(current)</span></a></li>
+									<li class="page-item"><a class="page-link" href="#">2</a></li>
+									<li class="page-item"><a class="page-link" href="#">3</a></li>
+									<li class="page-item"><a class="page-link" href="#">4</a></li>
+									<li class="page-item"><a class="page-link" href="#">5</a></li>
+									<li class="page-item"><a class="page-link" href="#" aria-label="Next"><span
+												aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span></a>
+									</li>
+								</ul><small class="text-muted py-2 mx-2">Total <span id="count">15</span> items</small>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- ############ Main END-->
+		</div>
+	</div>
+</body>
+
+</html>

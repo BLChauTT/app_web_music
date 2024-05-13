@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Index</title>
+</head>
+<body>
+
+	<h3>Welcome <th:block th:text="${username}"></th:block></h3>
+	<a th:href="@{/accountjpa/logout}">Logout</a>
+	
+</body>
+</html>

@@ -1,0 +1,10 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Verify</title>
+	</head>
+	<body>
+		<h3>Verify</h3>
+		<a th:href="@{/account/login}">Login</a><br><br>
+		Status: <th:block th:text="${msg}"></th:block>
+	</body>
+</html>

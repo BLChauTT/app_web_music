@@ -163,6 +163,11 @@ public class SongController {
         String url = musicUrl + fileUrl;
         modelMap.put("urlMusic", url);
         songdetail.setFileUrl(fileUrl);
+        
+        String imageUrl = environment.getProperty("imageUrl");
+        String fileImageUrl = "no-image.jpg";
+        String urlImage = imageUrl + fileImageUrl;
+        modelMap.put("urlImage", urlImage);
 
         modelMap.put("userprofile", userprofile);
         modelMap.put("musicUrl", musicUrl);

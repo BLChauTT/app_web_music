@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Index</title>
+</head>
+<body>
+
+	<h3>Login</h3>
+	<span th:text="${msg}" style="color: red"></span>
+	<br>
+	<form method="post" th:action="@{/accountjpa/login}">
+		Username <input type="text" name="username"> 
+		<br> 
+		Password <input type="password" name="password">
+		<br> 
+		<button type="submit">Login</button>
+		<br>
+		<a th:href="@{/accountjpa/register}">Register</a> | 
+		<a th:href="@{/accountjpa/forgetPassword}">Forget Password</a>
+	</form>
+	
+</body>
+</html>

@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Index</title>
+</head>
+<body>
+<h3>Author List - Find All</h3>
+<table border="1">
+    <tr>
+        <th>No</th>
+        <th>Author_Id</th>
+        <th>Author_Name</th>
+        <th>Song_Id</th>
+    </tr>
+    <tr th:each="author, i : ${authors}">
+        <td th:text="${i.index + 1}"></td>
+        <td th:text="${author.authorId}"></td>
+        <td>
+            <a th:text="${author.authorName}"
+               th:href="@{'/author/details/' + ${author.authorId}}">
+            </a>
+        </td>
+
+    </tr>
+</table>
+
+</body>
+</html>

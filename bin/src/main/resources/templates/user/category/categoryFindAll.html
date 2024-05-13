@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Index</title>
+</head>
+<body>
+<h3>Category List - Find All</h3>
+<table border="1">
+    <tr>
+        <th>No</th>
+        <th>Category_Id</th>
+        <th>Category_Name</th>
+        <th>Song_Id</th>
+    </tr>
+    <tr th:each="category, i : ${categories}">
+        <td th:text="${i.index + 1}"></td>
+        <td th:text="${category.categoryId}"></td>
+        <td>
+            <a th:text="${category.categoryName}"
+               th:href="@{'/category/details/' + ${category.categoryId}}">
+            </a>
+        </td>
+
+    </tr>
+</table>
+
+</body>
+</html>

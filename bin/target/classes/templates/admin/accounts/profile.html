@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:replace="~{layout/admin/index :: renderBody('Profile', ~{this::.card-body})}">
+
+<head>
+	<title>Index</title>
+</head>
+
+<body>
+	<div class="card-body">
+		<div class="mb-5">
+			<div>
+				<a th:href="@{'/admin/index'}" class="btn btn-md text-muted">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+						stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+						class="feather feather-arrow-left">
+						<line x1="19" y1="12" x2="5" y2="12"></line>
+						<polyline points="12 19 5 12 12 5"></polyline>
+					</svg>
+					<span class="d-none d-sm-inline mx-1">Back Account</span>			
+				</a>
+			</div>
+
+			<table class="table table-theme table-row v-middle">
+
+				<tr>
+					<td>Full Name</td>
+					<td th:text="${profile.fullName}"></td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td th:text="${profile.address}"></td>
+				</tr>
+				<tr>
+					<td valign="top">Avatar</td>
+					<td>
+						<img th:src="@{ ${profile.avatarUrl} != null ? '/assets/images/' + ${profile.avatarUrl} : '/assets/images/no-image.jpg'}"
+							width="120" height="100">
+					</td>
+				</tr>
+				<tr>
+					<td>Phone</td>
+					<td th:text="${profile.phoneNumber}"></td>
+				</tr>
+
+			</table>
+		</div>
+	</div>
+</body>
+
+</html>

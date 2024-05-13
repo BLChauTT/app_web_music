@@ -1,0 +1,100 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:replace="~{template/authen :: renderBody('Register', ~{this::.card-body})}">
+
+<head>
+	<title>Index</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script>
+		$(function () {
+			$("#dob").datepicker({
+				dateFormat: 'dd/mm/yy'
+			});
+		});
+	</script>
+
+</head>
+
+<body>
+	<div class="card-body">
+		<span th:text="${msg}" style="color: red"></span>
+		<br>
+		
+		<form th:action="@{/account/register}" method="post">
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" th:field="${account.username}" placeholder="User Name">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-user"></span>
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<input type="email" class="form-control" th:field="${account.email}" placeholder="Email">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-envelope"></span>
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<input type="password" class="form-control" th:field="${account.password}" placeholder="Password">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-lock"></span>
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" th:field="${userprofile.fullName}" placeholder="Full Name">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-user"></span>
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" th:field="${userprofile.address}" placeholder="Address">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-map-marker-alt"></span>
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" th:field="${userprofile.phoneNumber}" placeholder="Phone">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-phone"></span>
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<input type="file" class="form-control" th:field="${userprofile.avatarUrl}" placeholder="Avata">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-user-circle"></span>
+					</div>
+					<span class="input-group-text">Avatar</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-2">
+
+				</div>
+				<!-- /.col -->
+				<div class="col-8">
+					<button type="submit" class="btn btn-primary btn-block">Register</button>
+				</div>
+				<!-- /.col -->
+			</div>
+		</form>
+		<div class="social-auth-links text-center">
+			<p>- OR -</p>
+			<a th:href="@{/account/login}" class="btn btn-block btn-danger">I already have an account</a>
+		</div>
+	</div>
+</body>
+
+</html>
