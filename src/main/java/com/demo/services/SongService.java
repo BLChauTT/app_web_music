@@ -16,4 +16,5 @@ public interface SongService {
     public List<Song> findByTitle(String title);
     public List<Song> findSongsWithPagination(int offset, int pageSize);
     public String findFileUrlBySongId(int songId);
+    public String findSongCoverUrlBySongId(int songId);
 }
