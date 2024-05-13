@@ -23,8 +23,7 @@
 							</a>
 						</div>
 						<div class="page-title">
-							<h2 class="text-md text-highlight">Rating</h2><small class="text-muted"
-								th:text="${profile.fullName}"></small>
+							<h2 class="text-md text-highlight">Rating</h2>
 						</div>
 						<div class="flex"></div>
 					</div>
@@ -37,10 +36,9 @@
 								<table class="table table-theme table-row v-middle">
 									<thead>
 										<tr>
-											<th style="width:20px"></th>
 											<th class="text-muted sort sortable" data-sort="item-company">Name music
 											</th>
-											<th class="text-muted sort sortable" data-sort="item-company">Full Name</th>
+											<th class="text-muted sort sortable" data-sort="item-company">User Name</th>
 											<th class="text-muted sort sortable" data-sort="item-company">Rating</th>
 											<th class="text-muted" style="width:120px">Rating Date</th>
 											<th style="width:50px"></th>
@@ -49,15 +47,13 @@
 									<tbody class="list">
 										<!-- Sử dụng Thymeleaf để lặp qua danh sách ratings -->
 										<tr class="v-middle" th:each="rating : ${ratings}">
-											<td>
-												<label class="ui-check m-0"><input type="checkbox" name="id" value="2">
-													<i></i></label>
-											</td>
+
 											<td style="min-width:30px;text-align:center"
 												th:text="${rating.accountSong.song.songdetail.title}">
 												<small class="text-muted"></small>
 											</td>
-											<td style="min-width:30px;text-align:center" th:text="${profile.fullName}">
+											<td style="min-width:30px;text-align:center"
+												th:text="${rating.accountSong.account.username}">
 												<small class="text-muted"></small>
 											</td>
 											<td style="min-width:30px;">
@@ -66,6 +62,7 @@
 														th:each="star : ${#numbers.sequence(1, rating.rating)}" style="color: gold;">&#9733;</span>
 												</small>
 											</td>
+
 											<td class="no-wrap">
 												<div class="item-date text-muted text-sm d-none d-md-block"
 													th:text="${#dates.format(rating.ratingDate, 'dd/MM/yyyy')}">
@@ -76,60 +73,10 @@
 												<div class="item-action dropdown"><a href="#" data-toggle="dropdown"
 														class="text-muted"><i data-feather="more-vertical"></i></a>
 													<div class="dropdown-menu dropdown-menu-right bg-black" role="menu">
-														<a class="dropdown-item" href="#">See detail </a>
-														<div class="dropdown-divider"></div>
-														<a class="dropdown-item delete">Delete comment</a>
-													</div>
-												</div>
-											</td>
-										</tr>
-									</tbody>
 
-								</table>
-							</div>
-							<div class="table-responsive">
-								<table class="table table-theme table-row v-middle">
-									<thead>
-										<tr>
-											<th style="width:20px"></th>
-											<th class="text-muted sort sortable" data-sort="item-company">Name music
-											</th>
-											<th class="text-muted sort sortable" data-sort="item-company">Full Name</th>
-											<th class="text-muted sort sortable" data-sort="item-company">Comment</th>
-											<th class="text-muted" style="width:120px">Comment Date</th>
-											<th style="width:50px"></th>
-										</tr>
-									</thead>
-									<tbody class="list">
-										<!-- Sử dụng Thymeleaf để lặp qua danh sách comments -->
-										<tr class="v-middle" th:each="comment : ${comments}">
-											<td>
-												<label class="ui-check m-0"><input type="checkbox" name="id" value="2">
-													<i></i></label>
-											</td>
-											<td style="min-width:30px;text-align:center"
-												th:text="${comment.accountSong.song.songdetail.title}">
-												<small class="text-muted"></small>
-											</td>
-											<td style="min-width:30px;text-align:center" th:text="${profile.fullName}">
-												<small class="text-muted"></small>
-											</td>
-											<td style="min-width:30px;" th:text="${comment.commentText}">
-												<small class="text-muted"></small>
-											</td>
-											<td class="no-wrap">
-												<div class="item-date text-muted text-sm d-none d-md-block"
-													th:text="${#dates.format(comment.commentDate, 'dd/MM/yyyy')}">
-												</div>
-											</td>
-
-											<td>
-												<div class="item-action dropdown"><a href="#" data-toggle="dropdown"
-														class="text-muted"><i data-feather="more-vertical"></i></a>
-													<div class="dropdown-menu dropdown-menu-right bg-black" role="menu">
-														<a class="dropdown-item" href="#">See detail </a>
-														<div class="dropdown-divider"></div>
-														<a class="dropdown-item delete">Delete comment</a>
+														<a class="dropdown-item delete"
+															th:href="@{'/admin/rating/delete/' + ${rating.ratingId}}">Delete
+															rating</a>
 													</div>
 												</div>
 											</td>

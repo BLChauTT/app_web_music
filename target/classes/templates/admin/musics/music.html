@@ -35,11 +35,7 @@
 						<div id="invoice-list" data-plugin="invoice">
 							<div class="toolbar">
 
-								<div class="btn-group"><button class="btn btn-sm btn-icon btn-white"
-										data-toggle="tooltip" title="Trash" id="btn-trash"><i data-feather="trash"
-											class="text-muted"></i></button> <button
-										class="btn btn-sm btn-icon btn-white sort hide" data-sort="item-title"
-										data-toggle="tooltip" title="Sort"><i class="sorting"></i></button></div>
+								
 								<form class="flex" method="GET" th:action="@{/admin/music}">
 									<div class="input-group">
 										<input type="text" name="keyword"
@@ -55,7 +51,6 @@
 								<table class="table table-theme table-row v-middle">
 									<thead>
 										<tr>
-											<th style="width:20px"></th>
 											<th class="text-muted sort sortable" data-sort="id"
 												style="width:40px;text-align:center">No.</th>
 											<th class="text-muted sort sortable" data-sort="item-company">User Name
@@ -74,10 +69,7 @@
 									</thead>
 									<tbody class="list">
 										<tr class="v-middle" data-id="2" th:each="ac : ${accountSongs}">
-											<td>
-												<label class="ui-check m-0"><input type="checkbox" name="id" value="2">
-													<i></i></label>
-											</td>
+											
 											<td style="min-width:30px;text-align:center"
 												th:text="${ac.song.songdetail.songDetailId}"><small
 													class="text-muted"></small>
