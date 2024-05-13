@@ -90,10 +90,11 @@ public class AccountSongServiceImpl implements AccountSongService {
 				ratingRepository.deleteByAccountSong_AccountSongId(accountSongId);
 
 				int songId = accountSong.getSong().getSongId();
+				int songDetailId = accountSong.getSong().getSongdetail().getSongDetailId();
 				accountSongRepository.deleteById(accountSongId);
 				songSingerRepository.deleteBySongId(songId);
 				songRepository.deleteById(songId);
-				songDetailRepository.deleteBySongId(songId);
+				songDetailRepository.deleteById(songDetailId);
 
 				return true;
 			}

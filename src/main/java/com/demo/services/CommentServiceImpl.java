@@ -49,9 +49,9 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public List<Comment> findSongsWithPagination(int pageNo, int pageSize) {
 		Pageable pageable = PageRequest.of(pageNo, pageSize);
-		Page<Comment> pageSongs = commentRepository.findAll(pageable);
-		List<Comment> songs = pageSongs.getContent();
-		return songs;
+		Page<Comment> pageComments = commentRepository.findAll(pageable);
+		List<Comment> comments = pageComments.getContent();
+		return comments;
 	}
 	
 }

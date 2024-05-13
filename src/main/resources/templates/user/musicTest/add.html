@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/user/index :: renderBody('Song', ~{this::.page-container})}">
 
 <head>
 	<title>Index</title>
@@ -47,98 +48,87 @@
 </head>
 
 <body>
-<a th:href="@{/song/findAll}">Back</a>
-<h3>Add Song</h3>
-<p th:text="${msg}" th:if="${msg != null}"></p>
-<form method="post" th:action="@{/songDetail/add}" enctype="multipart/form-data" onsubmit="return validateForm()">
-	<table border="0">
-		<tr>
-			<td valign="top">Title</td>
-			<td valign="top">
-				<input type="text" th:field="${songDetail.title}">
-			</td>
-		</tr>
-		<tr>
-			<td>Lyric</td>
-			<td>
-				<textarea cols="20" rows="5" th:field="${songDetail.lyric}"></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td>Author</td>
-			<td><input type="text" th:field="${author.authorName}"></td>
-		</tr>
-		<tr>
-			<td>Singer</td>
-			<td>
-				<select multiple="multiple" name="singerIds">
-					<option th:each="singer : ${singers}" th:value="${singer.singerId}"
-							th:text="${singer.singerName}"></option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>SongTime</td>
-			<td>
-				<input type="text" th:field="${songDetail.songTime}">
-			</td>
-		</tr>
-		<tr>
-			<td>Category</td>
-			<td>
-				<select th:field="${category.categoryId}">
-					<option th:each="category : ${categories}" th:value="${category.categoryId}"
-							th:text="${category.categoryName}"></option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>Album</td>
-			<td>
-				<select th:field="${album.albumId}">
-					<option th:each="album : ${albums}" th:value="${album.albumId}"
-							th:text="${album.albumName}"></option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>Release Date</td>
-			<td>
-				<input type="hidden" id="releaseDate" th:field="${songDetail.releaseDate}">
-				<button type="button" onclick="setReleaseDate()">Post Now</button>
-			</td>
-		</tr>
-		<tr>
-			<td>Status</td>
-			<td>
-				<select th:field="${songDetail.status}">
-					<option value="1">1</option>
-					<option value="2">2</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>Photo</td>
-			<td>
-				<input type="file" name="fileImage">
-			</td>
-		</tr>
-		<tr>
-			<td>Song</td>
-			<td>
-				<input type="file" name="fileMusic">
-			</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>
-				<input type="submit" value="Save">
-			</td>
-		</tr>
-		<input type="hidden" name="accountId" th:value="${loggedInUser.accountId}">
-	</table>
-</form>
+	<div class="page-content page-container" id="page-content">
+		<div class="padding">
+			<div class="row">
+				<div class="col-md-6">
 
+					<div class="card">
+						<div class="card-header"><strong>Add Detail</strong></div>
+						<div class="card-body">
+							<form method="post" th:action="@{/songDetail/add}" enctype="multipart/form-data"
+								onsubmit="return validateForm()">
+								<div class="form-group row"><label class="col-sm-4 col-form-label">Title</label>
+									<div class="col-sm-8"><input type="text" class="form-control"
+											th:field="${songDetail.title}"></div>
+								</div>
+
+								<div class="form-group row"><label class="col-sm-4 col-form-label">Lyric</label>
+									<div class="col-sm-8"><textarea class="form-control" rows="7"
+											th:field="${songDetail.lyric}"></textarea></div>
+								</div>
+								<div class="form-group row"><label class="col-sm-4 col-form-label">Author</label>
+									<div class="col-sm-8"><input type="text" class="form-control circle"
+											th:field="${author.authorName}"></div>
+								</div>
+								<div class="form-group row"><label class="col-sm-4 col-form-label">Singer</label>
+									<div class="col-lg-4"><select multiple="multiple" class="form-control" name="singerIds">
+											<option th:each="singer : ${singers}" th:value="${singer.singerId}"
+												th:text="${singer.singerName}"></option>
+										</select></div>
+								</div>
+								<div class="form-group row"><label class="col-sm-4 col-form-label">SongTime</label>
+									<div class="col-sm-8"><input type="text" class="form-control"
+											th:field="${songDetail.songTime}"></div>
+								</div>
+								<div class="form-group row"><label class="col-sm-4 col-form-label">Category</label>
+									<div class="col-sm-8"><select class="custom-select"
+											th:field="${category.categoryId}">
+											<option th:each="category : ${categories}" th:value="${category.categoryId}"
+												th:text="${category.categoryName}"></option>
+										</select></div>
+								</div>
+								<div class="form-group row"><label class="col-sm-4 col-form-label">Album</label>
+									<div class="col-sm-8"><select class="custom-select" th:field="${album.albumId}">
+											<option th:each="album : ${albums}" th:value="${album.albumId}"
+												th:text="${album.albumName}"></option>
+										</select></div>
+								</div>
+								<div class="form-group row"><label class="col-sm-4 col-form-label">Status</label>
+									<div class="col-sm-8"><select class="custom-select" th:field="${songDetail.status}">
+											<option value="1">1</option>
+											<option value="2">2</option>
+										</select></div>
+								</div>
+								<div class="form-group row"><label class="col-sm-4 col-form-label">Photo</label>
+									<div class="col-sm-8">
+										<div class="custom-file"><input type="file" class="custom-file-input"
+												id="customFile" name="fileImage"><label class="custom-file-label"
+												for="customFile">Choose
+												image</label></div>
+									</div>
+								</div>
+								<div class="form-group row"><label class="col-sm-4 col-form-label">Song</label>
+									<div class="col-sm-8">
+										<div class="custom-file"><input type="file" class="custom-file-input"
+												id="customFile" name="fileMusic"><label class="custom-file-label"
+												for="customFile">Choose
+												music</label></div>
+									</div>
+								</div>
+								<div class="form-group row"><label class="col-sm-3"></label>
+									<div class="col-sm-9"><button type="submit" id="btn-save"
+											class="btn gd-primary text-white btn-rounded" value="Save">Save</button></div>
+								</div>
+								<input type="hidden" th:field="*{loggedInUser.accountId}">
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>

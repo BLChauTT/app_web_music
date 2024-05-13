@@ -49,9 +49,9 @@ public class RatingServiceImpl implements RatingService {
 	@Override
 	public List<Rating> findSongsWithPagination(int pageNo, int pageSize) {
 		Pageable pageable = PageRequest.of(pageNo, pageSize);
-		Page<Rating> pageSongs = ratingRepository.findAll(pageable);
-		List<Rating> songs = pageSongs.getContent();
-		return songs;
+		Page<Rating> pageRatings = ratingRepository.findAll(pageable);
+		List<Rating> ratings = pageRatings.getContent();
+		return ratings;
 	}
 	
 }

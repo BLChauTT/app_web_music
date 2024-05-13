@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -127,6 +129,8 @@ public class SongDetailController {
                 Files.copy(fileImage.getInputStream(), pathForImage, StandardCopyOption.REPLACE_EXISTING);
 
                 songdetail.setFileUrl(FilenameForMusic);
+                Date today = new Date();
+                songdetail.setReleaseDate(today);
                 songdetail.setListenCount(1);
                 songdetail.setSongCoverUrl(FilenameForImage);
             } catch (Exception e) {
