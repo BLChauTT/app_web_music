@@ -1,10 +1,20 @@
 package com.demo.controllers;
 
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -28,6 +38,8 @@ import com.demo.services.SingerService;
 import com.demo.services.SongService;
 import com.demo.services.UserProfileService;
 
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -35,6 +47,8 @@ import jakarta.servlet.http.HttpSession;
 public class SongController {
     private static final String DIRECTORY = "D:\\DoAnKy4\\app_web_music\\target\\classes\\static\\assets";
     private static final String DEFAULT_FILE_NAME = "";
+    private static final String UPLOAD_DIR = "src/main/resources/static/assets/musics";
+    private static final Logger logger = LoggerFactory.getLogger(SongController.class);
     @Autowired
     private SongService songService;
     @Autowired
@@ -47,6 +61,10 @@ public class SongController {
     private AccountJPAService accountJPAService;
     @Autowired
     private UserProfileService userProfileService;
+    @Autowired
+    private Environment environment;
+    @Autowired
+    ServletContext context;
     @Autowired
     public SongController(SongService _songService,
                           UserProfileService _userProfileService,
@@ -68,7 +86,7 @@ public class SongController {
         Account account = new Account();
         Userprofile userprofile = new Userprofile();
         Songdetail songdetail = new Songdetail();
-        Song hotSong = songService.findSongById(24);
+        Song hotSong = songService.findSongById(25);
         List<Song> listSongs;
         List<Album> listAlbums;
         List<Singer> listSingers;
@@ -114,6 +132,7 @@ public class SongController {
     }
     @GetMapping({"artist","allsinger"})
     public String artist(ModelMap modelMap) {
+
         return "user/music.artist";
     }
     @GetMapping({"detailMusic"})
@@ -122,7 +141,11 @@ public class SongController {
     }
     @GetMapping({"detail/{id}"})
     public String detail(@PathVariable("id") int id, ModelMap modelMap,
-                         HttpSession httpSession) {
+                         HttpSession httpSession,
+                         @RequestParam(name = "keyword", required = false) String keyword,
+                         @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+                         @RequestParam(value = "pageSize", defaultValue = "6", required = false) int pageSize) {
+
         Songdetail songdetail = new Songdetail();
         AccountSong accountSong = new AccountSong();
         Account account = new Account();
@@ -131,12 +154,46 @@ public class SongController {
         int accountId = loggedInUser.getAccountId();
         accountSong.setAccount(accountJPAService.findById(accountId));
 
+        String musicUrl = environment.getProperty("musicUrl");
+        String fileUrl = songService.findFileUrlBySongId(id);
+        songdetail.setFileUrl(fileUrl);
+
         modelMap.put("userprofile", userprofile);
+        modelMap.put("musicUrl", musicUrl);
         modelMap.put("accountSong", accountSong);
         modelMap.put("account", account);
         modelMap.put("songdetail", songdetail);
         modelMap.put("loggedInUser", loggedInUser);
         modelMap.put("song", songService.findSongById(id));
+
+        //Phần bên dưới
+        List<Song> listSongs;
+        List<Album> listAlbums;
+        List<Singer> listSingers;
+        listSongs = songService.findSongsWithPagination(pageNo, pageSize);
+        listAlbums = albumService.findSongsWithPagination(pageNo,pageSize);
+        listSingers = singerService.findSingersWithPagination(pageNo, pageSize);
+
+        Set<Singer> singers = new HashSet<>();
+        if (!listSongs.isEmpty()) {
+            int firstSongId = listSongs.get(0).getSongId();
+            singers = singerService.findSingersBySongId(firstSongId);
+        }
+        Singer singer = singers.isEmpty() ? new Singer() : singers.iterator().next();
+
+        modelMap.put("accountSong", accountSong);
+        modelMap.put("account", account);
+        modelMap.put("listSingers", listSingers);
+        modelMap.put("listAlbums", listAlbums);
+        modelMap.put("listSongs", listSongs);
+        modelMap.put("singer", singer);
+        modelMap.put("songs", songService.findAll());
+        modelMap.put("albums", albumService.findAll());
+
+        System.out.println("fileURL: " + fileUrl);
+        System.out.println("musicURL: " +musicUrl );
+        System.out.println();
+
         return "user/music.detail";
     }
     @GetMapping("findAll")
@@ -169,5 +226,68 @@ public class SongController {
         List<Song> songs = songService.findByTitleContainingIgnoreCase(title);
         model.addAttribute("songs", songs);
         return "user/musicTest/search";
+    }
+
+    @GetMapping("download")
+    public String download() {
+        System.out.println("Call");
+        return "file/download";
+    }
+
+    //đang lấy tên file mặc định cho trước, anh em sửa thì fileName từ db vào là được
+//    @GetMapping("/downloadFile")
+//    public ResponseEntity<InputStreamResource> downloadFile1(@RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName)
+//            throws IOException {
+//        MediaType mediaType = getMediaTypeForFileName(context, fileName);
+//        System.out.println("fileName: " + fileName);
+//        System.out.println("mediaType: " + mediaType);
+//
+//        File file = new File(DIRECTORY + "/" + fileName);
+//        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+//
+//        return ResponseEntity.ok()
+//                // Content-Disposition
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
+//                // Content-Type
+//                .contentType(mediaType)
+//                // Contet-Length
+//                .contentLength(file.length()) //
+//                .body(resource);
+//    }
+//
+//    private MediaType getMediaTypeForFileName(ServletContext servletContext, String fileName) {
+//        // application/pdf
+//        // application/xml
+//        // image/gif, ...
+//        String mineType = servletContext.getMimeType(fileName);
+//        try {
+//            MediaType mediaType = MediaType.parseMediaType(mineType);
+//            return mediaType;
+//        } catch (Exception e) {
+//            return MediaType.APPLICATION_OCTET_STREAM;
+//        }
+//    }
+    @GetMapping("/download/{fileName:.+}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
+        // Load file as Resource
+        Resource resource = new FileSystemResource(Paths.get(UPLOAD_DIR).resolve(fileName).toAbsolutePath().toString());
+
+        // Try to determine file's content type
+        String contentType = null;
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException ex) {
+            logger.info("Could not determine file type.");
+        }
+
+        // Fallback to the default content type if type could not be determined
+        if (contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
     }
 }

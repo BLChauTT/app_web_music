@@ -11,7 +11,7 @@
     <link rel="stylesheet" th:href="@{/assets/user/css/site.min.css}">
 </head>
 
-<body class="layout-row touch" style="height: 1600;">
+<body class="layout-row touch" style="height: 1700;">
 <!-- ############ Aside START-->
 <div id="aside" class="page-sidenav no-shrink bg-light nav-dropdown fade">
     <div class="sidenav h-100 modal-dialog bg-light">
@@ -57,18 +57,18 @@
                         <span class="text-muted">Music</span>
                     </li>
                     <li>
-                        <a th:href="@{/music.html}">
+                        <a th:href="@{/song/index}">
 								<span class="nav-icon">
-									<i data-feather="disc"></i>
+									<i data-feather="home"></i>
 								</span>
-                            <span class="nav-text">Discover</span>
+                            <span class="nav-text">Home</span>
                         </a>
                     </li>
                     <li>
                         <a th:href="@{/music.charts.html}">
 								<span class="nav-icon">
 									<i data-feather="trending-up"></i>
-								</span><span class="nav-text">Charts</span>
+								</span><span class="nav-text">Album</span>
                         </a>
                     </li>
                     <li>
@@ -87,22 +87,30 @@
                             <span class="nav-text">Artists</span>
                         </a>
                     </li>
-                    <li class="nav-header d-flex nav-fold"><span class="py-2 text-muted hidden-folded">Your
-								Playlist</span> <span class="flex hidden-folded"></span> <a class="text-md"
-                                                                                            data-toggle="tooltip" data-placement="right" title="Create playlist"><i
-                            data-feather="plus" width="12" height="12"></i></a></li>
-                    <li class="open">
-                        <ul class="nav nav-sub">
-                            <li><a th:href="@{/music.detail.html}" class="px-2"><span class="nav-text">Classic
-											Jazz</span></a></li>
-                            <li><a th:href="@{/music.detail.html#id=1}" class="px-2"><span
-                                    class="nav-text">Hips</span></a></li>
-                            <li><a th:href="@{/music.detail.html#id=2}" class="px-2"><span class="nav-text">50 top
-											albums</span></a></li>
-                            <li><a th:href="@{/music.detail.html#id=3}" class="px-2"><span class="nav-text">DJ
-											2018</span></a></li>
-                        </ul>
+                    <li>
+                        <a th:href="@{/songDetail/add}">
+								<span class="nav-icon">
+									<i data-feather="disc"></i>
+								</span>
+                            <span class="nav-text">Add Music</span>
+                        </a>
                     </li>
+<!--                    <li class="nav-header d-flex nav-fold"><span class="py-2 text-muted hidden-folded">Your-->
+<!--								Playlist</span> <span class="flex hidden-folded"></span> <a class="text-md"-->
+<!--                                                                                            data-toggle="tooltip" data-placement="right" title="Create playlist"><i-->
+<!--                            data-feather="plus" width="12" height="12"></i></a></li>-->
+<!--                    <li class="open">-->
+<!--                        <ul class="nav nav-sub">-->
+<!--                            <li><a th:href="@{/music.detail.html}" class="px-2"><span class="nav-text">Classic-->
+<!--											Jazz</span></a></li>-->
+<!--                            <li><a th:href="@{/music.detail.html#id=1}" class="px-2"><span-->
+<!--                                    class="nav-text">Hips</span></a></li>-->
+<!--                            <li><a th:href="@{/music.detail.html#id=2}" class="px-2"><span class="nav-text">50 top-->
+<!--											albums</span></a></li>-->
+<!--                            <li><a th:href="@{/music.detail.html#id=3}" class="px-2"><span class="nav-text">DJ-->
+<!--											2018</span></a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
                 </ul>
             </div>
         </div>
