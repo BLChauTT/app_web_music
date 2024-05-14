@@ -157,25 +157,7 @@ public class SingerController {
         return "user/singer/singerDetail";
     }
 
-    @Autowired
-    private SingerService singerService;
 
-    @Autowired
-    public SingerController(SingerService singerService) {
-        this.singerService = singerService;
-    }
-
-    @GetMapping("findAll")
-    public String findAll(ModelMap modelMap) {
-        modelMap.put("singers", singerService.findAll());
-        return "user/singer/singerFindAll";
-    }
-
-    @GetMapping("details/{id}")
-    public String details(@PathVariable("id") int id, ModelMap modelMap) {
-        modelMap.put("singer", singerService.findSingerById(id));
-        return "user/singer/singerDetail";
-    }
 
     @GetMapping("add")
     public String add(ModelMap modelMap) {

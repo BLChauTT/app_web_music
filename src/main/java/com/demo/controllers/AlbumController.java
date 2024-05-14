@@ -40,41 +40,10 @@ public class AlbumController {
 	@Autowired
 	private Environment environment;
 
-	@Autowired
-	public AlbumController(AlbumService _albumService) {
-		this.albumService = _albumService;
-	}
-
 	@GetMapping("findAll")
 	public String findAll(ModelMap modelMap) {
 		String imageUrl = environment.getProperty("imageUrl");
 		modelMap.put("imageUrl", imageUrl);
-		modelMap.put("albums", albumService.findAll());
-		return "user/album/albumFindAll2";
-	}
-
-	@GetMapping("details/{id}")
-	public String details(@PathVariable("id") int id, ModelMap modelMap) {
-		modelMap.put("album", albumService.find(id));
-		return "user/album/albumDetail";
-	}
-
-	@GetMapping("add")
-	public String add(ModelMap modelMap) {
-		modelMap.put("album", new Album());
-		return "album/add";
-	}
-
-	@Autowired
-	private AlbumService albumService;
-
-	@Autowired
-	public AlbumController(AlbumService _albumService) {
-		this.albumService = _albumService;
-	}
-
-	@GetMapping("findAll")
-	public String findAll(ModelMap modelMap) {
 		modelMap.put("albums", albumService.findAll());
 		return "user/album/albumFindAll2";
 	}
