@@ -9,4 +9,5 @@ public interface AlbumService {
     public Iterable<Album> findAll();
     public Album find(int id);
     public List<Album> findSongsWithPagination(int offset, int pageSize);
+    public long countTotalAlbums();
 }

@@ -8,11 +8,8 @@ import java.nio.file.StandardCopyOption;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.core.env.Environment;
-
 import org.springframework.core.io.ClassPathResource;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,17 +31,28 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("album")
 public class AlbumController {
-
 	@Autowired
 	private AlbumService albumService;
 	@Autowired
 	private Environment environment;
 
 	@GetMapping("findAll")
-	public String findAll(ModelMap modelMap) {
+	public String findAll(ModelMap modelMap,
+						  HttpSession httpSession,
+						  @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+						  @RequestParam(value = "pageSize", defaultValue = "5", required = false) int pageSize
+						  ) {
 		String imageUrl = environment.getProperty("imageUrl");
 		modelMap.put("imageUrl", imageUrl);
 		modelMap.put("albums", albumService.findAll());
+
+		long totalSongs = albumService.countTotalAlbums();
+		int totalPages = (int) Math.ceil((double) totalSongs / pageSize);
+		modelMap.addAttribute("totalSongs", totalSongs);
+		modelMap.addAttribute("totalPages", totalPages);
+		modelMap.addAttribute("pageNo", pageNo);
+		modelMap.addAttribute("pageSize", pageSize);
+
 		return "user/album/albumFindAll2";
 	}
 

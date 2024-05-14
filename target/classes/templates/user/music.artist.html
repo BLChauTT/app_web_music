@@ -37,16 +37,9 @@
 								<div class="col-12" data-id="274510331" data-category="Pop" data-tag="all"
 									data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview18/v4/08/88/4e/08884e55-a919-5115-cea7-e64f6d5a7000/mzaf_4233156385128356622.plus.aac.p.m4a">
 									<div class="list-item r">
-										<div class="media">
-											<div>
-												<div>
 													<p>
 														<th:block th:text="${singer.description}"></th:block>
 													</p>
-												</div>
-											</div>
-										</div>
-
 									</div>
 								</div>
 							</div>
@@ -112,18 +105,18 @@
 										</div>
 									</div>
 								</div>
-								<div class="pagination">
-									<a th:href="@{/singer/detail?pageNo=0&amp;pageSize=18}"
-									   th:class="${pageNo == 0} ? 'disabled' : ''">First</a>
-									<a th:each="pageItem : ${#numbers.sequence(0, totalPagesSongsBySinger - 1)}"
-									   th:href="@{'/singer/detail?pageNo=' + ${pageItem} + '&pageSize=' +${pageSize}}"
-									   th:text="${pageItem + 1}" th:class="${pageItem == pageNo} ? 'active' : ''"></a>
-									<a th:if="${pageNo < totalPagesSongsBySinger -1}"
-									   th:href="@{'/singer/detail?pageNo=' + ${pageNo + 1} + '&pageSize=' + ${pageSize}}">Next
-										&raquo;</a>
-									<a th:href="@{'/singer/detail?pageNo=' + ${totalPagesSongsBySinger - 1} + '&pageSize=' + ${pageSize}}"
-									   th:class="${pageNo == totalPagesSongsBySinger - 1} ? 'disabled' : ''">Last</a>
-								</div>
+<!--								<div class="pagination">-->
+<!--									<a th:href="@{/singer/detail?pageNo=0&amp;pageSize=18}"-->
+<!--									   th:class="${pageNo == 0} ? 'disabled' : ''">First</a>-->
+<!--									<a th:each="pageItem : ${#numbers.sequence(0, totalPagesSongsBySinger - 1)}"-->
+<!--									   th:href="@{'/singer/detail?pageNo=' + ${pageItem} + '&pageSize=' +${pageSize}}"-->
+<!--									   th:text="${pageItem + 1}" th:class="${pageItem == pageNo} ? 'active' : ''"></a>-->
+<!--									<a th:if="${pageNo < totalPagesSongsBySinger -1}"-->
+<!--									   th:href="@{'/singer/detail?pageNo=' + ${pageNo + 1} + '&pageSize=' + ${pageSize}}">Next-->
+<!--										&raquo;</a>-->
+<!--									<a th:href="@{'/singer/detail?pageNo=' + ${totalPagesSongsBySinger - 1} + '&pageSize=' + ${pageSize}}"-->
+<!--									   th:class="${pageNo == totalPagesSongsBySinger - 1} ? 'disabled' : ''">Last</a>-->
+<!--								</div>-->
 							</div>
 
 

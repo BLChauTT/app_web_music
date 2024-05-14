@@ -1,21 +1,17 @@
 package com.demo.controllers;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.Account;
 import com.demo.entities.AccountSong;
@@ -32,17 +30,11 @@ import com.demo.entities.Singer;
 import com.demo.entities.Song;
 import com.demo.entities.Songdetail;
 import com.demo.entities.Userprofile;
+import com.demo.helpers.FileHelper;
 import com.demo.services.AccountJPAService;
 import com.demo.services.AccountSongService;
 import com.demo.services.AlbumService;
 import com.demo.services.AuthorService;
-
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.demo.entities.Singer;
-import com.demo.helpers.FileHelper;
-
 import com.demo.services.SingerService;
 import com.demo.services.SongDetailService;
 import com.demo.services.SongService;
@@ -88,15 +80,11 @@ public class SingerController {
         this.songService = _songService;
         this.userProfileService = _userProfileService;
     }
-<<<<<<< Updated upstream
-
     @GetMapping("singers")
     public String singer(ModelMap modelMap) {
         modelMap.put("singers", singerService.findAll());
         return "user/singer/singerFindAll";
     }
-=======
->>>>>>> Stashed changes
 
     @GetMapping({ "cat", "filter" })
     public String cat(ModelMap modelMap,
@@ -149,8 +137,6 @@ public class SingerController {
         return "user/music.artists";
     }
 
-<<<<<<< Updated upstream
-=======
     @GetMapping({"detail/{id}"})
     public String detail(@PathVariable("id") int id, ModelMap modelMap,
                          HttpSession httpSession,
@@ -207,8 +193,6 @@ public class SingerController {
 
         return "user/music.artist";
     }
-
->>>>>>> Stashed changes
     @GetMapping("findAll")
     public String findAll(ModelMap modelMap) {
         modelMap.put("singers", singerService.findAll());
@@ -245,7 +229,7 @@ public class SingerController {
             }
             if (singerService.save(singer)) {
                 redirectAttributes.addFlashAttribute("msg", "Success");
-                return "redirect:/singer/findAll";
+                return "redirect:/singer/cat";
             } else {
                 redirectAttributes.addFlashAttribute("msg", "Failed");
                 return "redirect:/singer/add";
