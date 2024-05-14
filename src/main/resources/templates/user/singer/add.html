@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/user/index :: renderBody('Song', ~{this::.page-container})}">
 
 <head>
 	<title>Index</title>
@@ -11,76 +12,84 @@
 				dateFormat: 'dd/mm/yy'
 			});
 		});
+		function setReleaseDate() {
+			var currentDate = new Date();
+			var day = currentDate.getDate();
+			var month = currentDate.getMonth() + 1;
+			var year = currentDate.getFullYear();
+
+			if (day < 10) {
+				day = '0' + day;
+			}
+			if (month < 10) {
+				month = '0' + month;
+			}
+
+			var formattedDate = day + '/' + month + '/' + year;
+
+			document.getElementById('releaseDate').value = formattedDate;
+		}
+	</script>
+	<script>
+		function validateForm() {
+			var fileMusic = document.getElementsByName("fileMusic")[0].files[0];
+			var fileImage = document.getElementsByName("fileImage")[0].files[0];
+			if (!fileMusic) {
+				alert("File âm nhạc không được rỗng");
+				return false; // Ngăn chặn việc gửi biểu mẫu nếu file âm nhạc rỗng
+			}
+			if (!fileImage) {
+				alert("File hình ảnh không được rỗng");
+				return false; // Ngăn chặn việc gửi biểu mẫu nếu file hình ảnh rỗng
+			}
+			return true; // Cho phép gửi biểu mẫu nếu cả hai file không rỗng
+		}
 	</script>
 </head>
 
 <body>
+	<div class="page-content page-container" id="page-content">
+		<div class="padding">
+			<div class="row">
+				<div class="col-md-6">
 
-	<a th:href="@{/productjpa/index}">Back</a>
-	<h3>Add Product</h3>
-	<th:block th:text="${msg}"></th:block>
-	<form method="post" th:action="@{/productjpa/add}" enctype="multipart/form-data">
-		<table border="0">
-			<tr>
-				<td>Name</td>
-				<td>
-					<input type="text" th:field="${product.name}">
-				</td>
-			</tr>
-			<tr>
-				<td>Price</td>
-				<td>
-					<input type="text" th:field="${product.price}">
-				</td>
-			</tr>
-			<tr>
-				<td>Quantity</td>
-				<td>
-					<input type="text" th:field="${product.quantity}">
-				</td>
-			</tr>
-			<tr>
-				<td>Created</td>
-				<td>
-					<input type="text" th:field="${product.created}">
-				</td>
-			</tr>
-			<tr>
-				<td valign="top">Description</td>
-				<td valign="top">
-					<textarea cols="20" rows="5" th:field="${product.description}"></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td>Status</td>
-				<td>
-					<input type="checkbox" th:field="${product.status}">
-				</td>
-			</tr>
-			<tr>
-				<td>Category</td>
-				<td>
-					<select th:field="${product.category.id}">
-						<option th:each="category : ${categories}" 
-							th:value="${category.id}" th:text="${category.name}"></option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>Photo</td>
-				<td>
-					<input type="file" name="file">
-				</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td>
-					<input type="submit" value="Save">
-				</td>
-			</tr>
-		</table>
-	</form>
+					<div class="card">
+						<div class="card-header"><strong>Add Singer</strong></div>
+						<div class="card-body">
+							<form method="post" th:action="@{/singer/add}" enctype="multipart/form-data"
+								onsubmit="return validateForm()">
+								<div class="form-group row"><label class="col-sm-4 col-form-label">Singer Name</label>
+									<div class="col-sm-8"><input type="text" class="form-control"
+											th:field="${Singer.singerName}"></div>
+								</div>
 
+								
+								
+								<div class="form-group row"><label class="col-sm-4 col-form-label">Singer Avatar Url</label>
+									<div class="col-sm-8">
+										<div class="custom-file"><input type="file" class="custom-file-input"
+												id="customFile" name="fileImage"><label class="custom-file-label"
+												for="customFile">Choose
+												image</label></div>
+									</div>
+								</div>
+								<div class="form-group row"><label class="col-sm-4 col-form-label">Description</label>
+									<div class="col-sm-8"><input type="text" class="form-control"
+											th:field="${Singer.description}"></div>
+								</div>
+								<div class="form-group row"><label class="col-sm-3"></label>
+									<div class="col-sm-9"><button type="submit" id="btn-save"
+											class="btn gd-primary text-white btn-rounded" value="Save">Save</button></div>
+								</div>
+								<input type="hidden" th:field="*{loggedInUser.accountId}">
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>

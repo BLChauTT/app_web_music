@@ -54,18 +54,16 @@
 				<div class="col-md-6">
 
 					<div class="card">
-						<div class="card-header"><strong>Add Singer</strong></div>
+						<div class="card-header"><strong>Add Album</strong></div>
 						<div class="card-body">
-							<form method="post" th:action="@{/singer/add}" enctype="multipart/form-data"
+							<form method="post" th:action="@{/album/add}" enctype="multipart/form-data"
 								onsubmit="return validateForm()">
-								<div class="form-group row"><label class="col-sm-4 col-form-label">Singer Name</label>
+								<div class="form-group row"><label class="col-sm-4 col-form-label">Album Name</label>
 									<div class="col-sm-8"><input type="text" class="form-control"
-											th:field="${Singer.singerName}"></div>
+											th:field="${album.albumName}"></div>
 								</div>
-
 								
-								
-								<div class="form-group row"><label class="col-sm-4 col-form-label">Singer Avatar Url</label>
+								<div class="form-group row"><label class="col-sm-4 col-form-label">Album Cover Url</label>
 									<div class="col-sm-8">
 										<div class="custom-file"><input type="file" class="custom-file-input"
 												id="customFile" name="fileImage"><label class="custom-file-label"
@@ -73,15 +71,11 @@
 												image</label></div>
 									</div>
 								</div>
-								<div class="form-group row"><label class="col-sm-4 col-form-label">Description</label>
-									<div class="col-sm-8"><input type="text" class="form-control"
-											th:field="${Singer.description}"></div>
-								</div>
 								<div class="form-group row"><label class="col-sm-3"></label>
 									<div class="col-sm-9"><button type="submit" id="btn-save"
 											class="btn gd-primary text-white btn-rounded" value="Save">Save</button></div>
 								</div>
-								<input type="hidden" th:field="*{loggedInUser.accountId}">
+								<input type="hidden" name="accountId" th:value="${loggedInUser.accountId}">
 							</form>
 						</div>
 					</div>
