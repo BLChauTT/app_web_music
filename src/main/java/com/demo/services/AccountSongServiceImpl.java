@@ -32,7 +32,6 @@ public class AccountSongServiceImpl implements AccountSongService {
 	private SongRepository songRepository;
 	@Autowired
 	private SongSingerRepository songSingerRepository;
-
 	@Autowired
 	private SongDetailRepository songDetailRepository;
 
@@ -40,7 +39,6 @@ public class AccountSongServiceImpl implements AccountSongService {
 	public List<AccountSong> findByAccountId(int accountId) {
 		return accountSongRepository.findByAccountId(accountId);
 	}
-
 	@Override
 	public boolean save(AccountSong accountSong) {
 		try {
@@ -51,7 +49,6 @@ public class AccountSongServiceImpl implements AccountSongService {
 			return false;
 		}
 	}
-
 	@Override
 	public List<AccountSong> findBySongId(int songId) {
 		return accountSongRepository.findBySongId(songId);

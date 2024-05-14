@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Songs</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>My Songs</h1>
+    <div class="songs-list">
+        <ul>
+            <li th:each="accountSong : ${accountSongs}">
+                <span th:text="${accountSong.song.songdetail.title}"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
