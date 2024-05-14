@@ -16,6 +16,18 @@
 				</div>
 				<span class="flex"></span>
 			</div>
+			<div class="toolbar">
+				<form class="flex" method="GET" th:action="@{/song/cat}">
+					<div class="input-group">
+						<input type="text" name="keyword"
+							   class="form-control form-control-theme form-control-sm search"
+							   placeholder="Search">
+						<span class="input-group-append"><button class="btn btn-white no-border btn-sm"
+																 type="button"><span class="d-flex text-muted"><i
+								data-feather="search"></i></span></button></span>
+					</div>
+				</form>
+			</div>
 			<div class="pb-4 d-flex sr-item" id="filter-category">
 				<div class="text-muted no-shrink my-2">Genres</div>
 				<div class="mx-3">

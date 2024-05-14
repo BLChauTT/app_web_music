@@ -9,6 +9,7 @@ public interface SongService {
     public Song findSongById(int id);
     public List<Song> findByTitleContainingIgnoreCase(String keyword);
     public Song updateSong(int id, Song song);
+    public long countTotalSongs();
     public boolean deleteSong(int id);
     public Iterable<Song> findAll();
     public List<Song> getSongsByAuthor(int authorId);
