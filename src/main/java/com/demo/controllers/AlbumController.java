@@ -26,7 +26,7 @@ public class AlbumController {
     @GetMapping("findAll")
     public String findAll(ModelMap modelMap) {
         modelMap.put("albums", albumService.findAll());
-        return "user/album/albumFindAll";
+        return "user/album/albumFindAll2";
     }
     @GetMapping("details/{id}")
     public String details(@PathVariable("id") int id, ModelMap modelMap) {

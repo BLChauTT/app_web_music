@@ -1,27 +1,59 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/user/index :: renderBody('Song', ~{this::.card-body})}">
+
 <head>
-    <title>Index</title>
+	<title>Index</title>
 </head>
+
 <body>
-<h3>Category List - Find All</h3>
-<table border="1">
-    <tr>
-        <th>No</th>
-        <th>Category_Id</th>
-        <th>Category_Name</th>
-        <th>Song_Id</th>
-    </tr>
-    <tr th:each="category, i : ${categories}">
-        <td th:text="${i.index + 1}"></td>
-        <td th:text="${category.categoryId}"></td>
-        <td>
-            <a th:text="${category.categoryName}"
-               th:href="@{'/category/details/' + ${category.categoryId}}">
-            </a>
-        </td>
+	<div class="card-body">
+		<div id="content" class="flex"><!-- ############ Main START-->
+			<div>
+				<div class="page-hero page-container" id="page-hero">
+					<div class="padding d-flex">
+						<div class="page-title">
+							<h2 class="text-md text-highlight">Category</h2></small>
+						</div>
+						<div class="flex"></div>
+					</div>
+				</div>
+				<div class="page-content page-container" id="page-content">
+					<div class="padding">
+						<div id="invoice-list" data-plugin="invoice">
 
-    </tr>
-</table>
+							<div class="table-responsive">
+								
+								<table class="table table-theme table-row v-middle">
+									<thead>
+										<tr>
+											<th style="width:20px">No</th>
+											<th class="text-muted sort sortable" data-sort="item-company">Category_Name
+											</th>
+										</tr>
+									</thead>
+									<tbody class="list">
+										<!-- Sử dụng Thymeleaf để lặp qua danh sách ratings -->
+										<tr class="v-middle" th:each="category, i : ${categories}">
+											<td th:text="${i.index + 1}">
+											</td>
+											<td class="flex"><a
+													th:href="@{'/category/details/' + ${category.categoryId}}"
+													class="item-company ajax h-1x"
+													th:text="${category.categoryName}"></a>
 
+											</td>
+											
+										</tr>
+									</tbody>
+
+								</table>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div><!-- ############ Main END-->
+		</div>
+	</div>
 </body>
+
 </html>
