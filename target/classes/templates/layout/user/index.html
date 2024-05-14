@@ -13,7 +13,6 @@
 
 
 <body class="layout-row touch" style="height: 1600;">
-<input type="hidden" name="accountId" th:value="${loggedInUser.accountId}">
 <!-- ############ Aside START-->
 <div id="aside" class="page-sidenav no-shrink bg-light nav-dropdown fade">
     <div class="sidenav h-100 modal-dialog bg-light">
@@ -203,7 +202,8 @@
                 <!-- Notification -->
                 <li class="nav-item dropdown">
                     <a class="nav-link px-2 mr-lg-2" data-toggle="dropdown"><i data-feather="bell"></i> <span
-                            class="badge badge-pill badge-up bg-primary">8</span> </a><!-- dropdown -->
+                            class="badge badge-pill badge-up bg-primary">8</span>
+                    </a><!-- dropdown -->
                     <div class="dropdown-menu dropdown-menu-right mt-3 w-md animate fadeIn p-0">
                         <div class="scrollable hover" style="max-height: 250px">
                             <div class="list list-row">
@@ -274,7 +274,7 @@
                 </li>
                 <!-- User dropdown menu -->
                 <li class="nav-item dropdown">
-                    <a th:href="@{'/admin/profile/' + ${loggedInUser.accountId}}" data-toggle="dropdown"
+                    <a th:href="@{#}" data-toggle="dropdown"
                        class="nav-link d-flex align-items-center px-2 text-color">
                         <span
                             class="dropdown-toggle mx-2 d-none l-h-1x d-lg-block text-right">

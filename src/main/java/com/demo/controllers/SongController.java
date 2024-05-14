@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.demo.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +32,14 @@ import com.demo.entities.Singer;
 import com.demo.entities.Song;
 import com.demo.entities.Songdetail;
 import com.demo.entities.Userprofile;
+import com.demo.services.AccountJPAService;
+import com.demo.services.AccountSongService;
+import com.demo.services.AlbumService;
+import com.demo.services.AuthorService;
+import com.demo.services.SingerService;
+import com.demo.services.SongDetailService;
+import com.demo.services.SongService;
+import com.demo.services.UserProfileService;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
@@ -171,6 +178,7 @@ public class SongController {
 //        String urlImage = imageUrl + fileImageUrl;
 //        modelMap.put("urlImage", urlImage);
 
+        modelMap.put("loggedInUser", loggedInUser);
         modelMap.put("userprofile", userprofile);
         modelMap.put("accountSong", accountSong);
         modelMap.put("account", account);
