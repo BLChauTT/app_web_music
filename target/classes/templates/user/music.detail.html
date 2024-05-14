@@ -70,7 +70,7 @@
 									 data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music/v4/fa/37/1c/fa371cea-559d-f418-506a-5fdf64bed3fe/mzaf_1505180730434746810.plus.aac.p.m4a">
 									<div class="list-item r">
 										<div class="media">
-											<a th:href="@{'song/detail/' + ${song.songId}}" class="ajax media-content"
+											<a th:href="@{'/song/detail/' + ${song.songId}}" class="ajax media-content"
 											   th:style="'background-image: url(' + ${imageUrl + song.songdetail.songCoverUrl} + ')'">
 <!--												th:style="'background-image: url(/assets/images/' + song.songdetail + ')'">-->
 											</a>
@@ -88,11 +88,11 @@
 										</div>
 										<div class="list-content text-center">
 											<div class="list-body">
-												<a th:href="@{'song/detail/' + ${song.songId}}"
+												<a th:href="@{'/song/detail/' + ${song.songId}}"
 												   class="list-title title ajax h-1x">
 													<th:block th:text="${song.songdetail.title}"></th:block>
 												</a>
-												<a th:href="@{'song/detail/' + ${song.songId}}"
+												<a th:href="@{'/song/detail/' + ${song.songId}}"
 												   class="list-subtitle d-block text-muted subtitle ajax h-1x">
 													<th:block th:text="${singer.singerName}"></th:block>
 												</a>
@@ -140,7 +140,7 @@
 										</div>
 										<div class="list-content text-center">
 											<div class="list-body">
-												<a th:href="@{/a/details/1}" class="list-title title ajax h-1x">
+												<a th:href="@{/album/details/1}" class="list-title title ajax h-1x">
 													<th:block th:text="${album.albumName}"></th:block>
 												</a>
 											</div>

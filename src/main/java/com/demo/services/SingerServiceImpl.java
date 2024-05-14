@@ -44,6 +44,15 @@ public class SingerServiceImpl implements SingerService{
     }
 
     @Override
+    public List<Singer> findByNameContainingIgnoreCase(String keyword) {
+        return singerRepository.findByNameContainingIgnoreCase(keyword);
+    }
+    @Override
+    public long countTotalSingers() {
+        return singerRepository.count();
+    }
+
+    @Override
     public Singer findSingerByKeyword(String keyword) {
         return null;
     }

@@ -27,25 +27,25 @@
 									<thead>
 										<tr>
 											<th style="width:20px">No</th>
-											<th class="text-muted sort " >Album_Id
-											</th>
+<!--											<th class="text-muted sort " >Album_Id-->
+<!--											</th>-->
 											<th class="text-muted sort">Album_Name
 											</th>
 											<th class="text-muted sort ">Release Date
 											</th>
-											<th class="text-muted sort ">Album_Cover_Url
+											<th class="text-muted sort ">
 											</th>
-											<th class="text-muted sort ">AccountId
-											</th>
+<!--											<th class="text-muted sort ">AccountId-->
+<!--											</th>-->
 										</tr>
 									</thead>
 									<tbody class="list">
 										<tr class="v-middle" th:each="album, i : ${albums}">
 											<td th:text="${i.index + 1}">
 											</td>
-											<td style="min-width:30px;text-align:center"
-												th:text="${album.albumId}">
-											</td>
+<!--											<td style="min-width:30px;text-align:center"-->
+<!--												th:text="${album.albumId}">-->
+<!--											</td>-->
 											<td class="flex"><a
 													th:href="@{'/album/details/' + ${album.albumId}}"
 													class="item-company ajax h-1x"
@@ -57,14 +57,14 @@
 													th:text="${#dates.format(album.releaseDate, 'dd/MM/yyyy')}">
 												</div>
 											</td>
-											<td style="min-width:30px;text-align:center"
-												th:text="${album.albumCoverUrl}">
+											<td style="min-width:30px;text-align:center">
+												<img width="30px" height="30px" th:src="${imageUrl + album.albumCoverUrl}" alt=""/>
 												<small class="text-muted"></small>
 											</td>
-											<td style="min-width:30px;text-align:center"
-												th:text="${album.account.accountId}">
-												<small class="text-muted"></small>
-											</td>
+<!--											<td style="min-width:30px;text-align:center"-->
+<!--												th:text="${album.account.accountId}">-->
+<!--												<small class="text-muted"></small>-->
+<!--											</td>-->
 										</tr>
 									</tbody>
 

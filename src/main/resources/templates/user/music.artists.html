@@ -1,24 +1,75 @@
 <html xmlns:th="http://www.thymeleaf.org"
-	  th:replace="~{layout/user/index :: renderBody('Song', ~{this::.page-container})}">
+      th:replace="~{layout/user/index :: renderBody('Cat Music', ~{this::.page-container})}">
 
 <head>
-	<meta charset="utf-8">
-	<title>Artist | Basik - Bootstrap 4 Web Application</title>
+    <meta charset="utf-8">
+    <title>Music | Basik - Bootstrap 4 Web Application</title>
 </head>
 
-<body >
-			<div class="page-container">
-				<div class="padding sr" id="list" data-plugin="musicapp">
-					<div class="heading py-2 d-flex">
-						<div>
-							<div class="text-muted text-sm sr-item">Featured</div>
-							<h5 class="text-highlight sr-item">Artists</h5>
-						</div><span class="flex"></span>
-					</div>
-
-				</div>
-			</div><!-- ############ Main END-->
-		<!-- ############ Content END-->
+<body>
+<div class="page-container">
+    <div class="padding sr" id="list" data-plugin="musicapp">
+        <div class="heading py-2 d-flex">
+            <div>
+                <div class="text-muted text-sm sr-item"></div>
+                <h5 class="text-highlight sr-item">Filter</h5>
+            </div>
+            <span class="flex"></span>
+        </div>
+        <div class="toolbar">
+            <form class="flex" method="GET" th:action="@{/singer/cat}">
+                <div class="input-group">
+                    <input type="text" name="keyword"
+                           class="form-control form-control-theme form-control-sm search"
+                           placeholder="Search">
+                    <span class="input-group-append"><button class="btn btn-white no-border btn-sm"
+                                                             type="button"><span class="d-flex text-muted"><i
+                            data-feather="search"></i></span></button></span>
+                </div>
+            </form>
+        </div>
+        <br><br>
+        <div class="row row-md list">
+            <div class="col-4 col-sm-4 col-md-3 col-lg-2" data-id="312058991" data-category="all" data-tag="France"
+                 th:each="singer : ${singerList}"
+                 data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview62/v4/04/b6/28/04b62834-121f-b3af-47b3-2485ff499e14/mzaf_4474193750897158038.plus.aac.p.m4a">
+                <div class="list-item r">
+                    <div class="media">
+                        <a th:href="@{'/singer/detail/' + ${singer.singerId}}" class="ajax media-content"
+                           th:style="'background-image: url(' + ${imageUrl + singer.singerAvatarUrl} + ')'"></a>
+                        <div class="media-action media-action-overlay">
+                            <button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class>
+                                <i data-feather="heart" class="active-danger"></i>
+                            </button>
+                            <button class="btn btn-raised btn-icon btn-rounded bg--white btn-play"></button>
+                            <button class="btn btn-icon no-bg no-shadow hide-row btn-more" data-toggle="dropdown">
+                                <i data-feather="more-horizontal"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right"></div>
+                        </div>
+                    </div>
+                    <div class="list-content text-center">
+                        <div class="list-body">
+                            <a th:href="@{'/singer/detail/' + ${singer.singerId}}" class="list-title title ajax h-1x">
+                                <th:block th:text="${singer.singerName}"></th:block>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pagination">
+        <a th:href="@{/singer/cat?pageNo=0&amp;pageSize=4}"
+           th:class="${pageNo == 0} ? 'disabled' : ''">First</a>
+        <a th:each="pageItem : ${#numbers.sequence(0, totalPages - 1)}"
+           th:href="@{'/singer/cat?pageNo=' + ${pageItem} + '&pageSize=' +${pageSize}}"
+           th:text="${pageItem + 1}" th:class="${pageItem == pageNo} ? 'active' : ''"></a>
+        <a th:if="${pageNo < totalPages -1}"
+           th:href="@{'/singer/cat?pageNo=' + ${pageNo + 1} + '&pageSize=' + ${pageSize}}">Next
+            &raquo;</a>
+        <a th:href="@{'/singer/cat?pageNo=' + ${totalPages - 1} + '&pageSize=' + ${pageSize}}"
+           th:class="${pageNo == totalPages - 1} ? 'disabled' : ''">Last</a>
+    </div>
+</div>
 </body>
-
-</html>

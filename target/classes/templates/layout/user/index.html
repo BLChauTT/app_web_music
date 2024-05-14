@@ -66,7 +66,7 @@
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{/album/index}">
+                        <a th:href="@{/album/findAll}">
                             <span class="nav-icon">
                                 <i data-feather="trending-up"></i>
                             </span>
@@ -74,7 +74,7 @@
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{/singer/findAll}">
+                        <a th:href="@{/singer/cat}">
                             <span class="nav-icon">
                                 <i data-feather="user"></i>
                             </span>
@@ -185,14 +185,11 @@
                             </div>
                             <div class="mb-2 text-muted"><strong>Apps:</strong></div>
                             <div>
-                                <a th:href="@{/dashboard.html}" class="btn btn-sm btn-white no-ajax mb-1">
+                                <a th:href="@{/song/index}" class="btn btn-sm btn-white no-ajax mb-1">
                                     Dashboard
                                 </a>
-                                <a th:href="@{/votrangsearchnhac}" class="btn btn-sm btn-white no-ajax mb-1">
+                                <a th:href="@{/song/cat}" class="btn btn-sm btn-white no-ajax mb-1">
                                     Music
-                                </a>
-                                <a th:href="@{/votrangvideo}" class="btn btn-sm btn-white no-ajax mb-1">
-                                    Video
                                 </a>
                             </div>
                         </div>
@@ -208,7 +205,7 @@
                         <div class="scrollable hover" style="max-height: 250px">
                             <div class="list list-row">
                                 <div class="list-item" data-id="7">
-                                    <div><a th:href="@{/music.detail.html}"><span
+                                    <div><a th:href="@{/song/index}"><span
                                             class="w-32 avatar gd-primary"><img src="../assets/img/a7.jpg"
                                                                                 alt="."></span></a></div>
                                     <div class="flex">

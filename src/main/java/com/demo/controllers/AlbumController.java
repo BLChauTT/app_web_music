@@ -1,6 +1,7 @@
 package com.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +20,16 @@ public class AlbumController {
     @Autowired
     private AlbumService albumService;
     @Autowired
+    private Environment environment;
+    @Autowired
     public AlbumController(AlbumService _albumService) {
     	this.albumService = _albumService;
     }
 
     @GetMapping("findAll")
     public String findAll(ModelMap modelMap) {
+        String imageUrl = environment.getProperty("imageUrl");
+        modelMap.put("imageUrl",imageUrl);
         modelMap.put("albums", albumService.findAll());
         return "user/album/albumFindAll2";
     }

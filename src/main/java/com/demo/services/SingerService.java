@@ -9,9 +9,9 @@ public interface SingerService {
     public boolean save(Singer singer) throws Exception;
 
     public Singer findSingerById(int id);
-
+    public List<Singer> findByNameContainingIgnoreCase(String keyword);
+    public long countTotalSingers();
     public Singer findSingerByKeyword(String keyword);
-
     public Singer updateSinger(int id, Singer singer);
 
     public void deleteSinger(int id);
