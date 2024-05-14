@@ -1,0 +1,82 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/user/index :: renderBody('Song', ~{this::.card-body})}">
+
+<head>
+	<title>Index</title>
+</head>
+
+<body>
+	<div class="card-body">
+		<div id="content" class="flex"><!-- ############ Main START-->
+			<div>
+				<div class="page-hero page-container" id="page-hero">
+					<div class="padding d-flex">
+						<div class="page-title">
+							<h2 class="text-md text-highlight">Album List - Find All</h2></small>
+						</div>
+						<div class="flex"></div>
+					</div>
+				</div>
+				<div class="page-content page-container" id="page-content">
+					<div class="padding">
+						<div id="invoice-list" data-plugin="invoice">
+
+							<div class="table-responsive">
+
+								
+								<table class="table table-theme table-row v-middle">
+									<thead>
+										<tr>
+											<th style="width:20px">No</th>
+											<th class="text-muted sort " >Album_Id
+											</th>
+											<th class="text-muted sort">Album_Name
+											</th>
+											<th class="text-muted sort ">Release Date
+											</th>
+											<th class="text-muted sort ">Album_Cover_Url
+											</th>
+											<th class="text-muted sort ">AccountId
+											</th>
+										</tr>
+									</thead>
+									<tbody class="list">
+										<tr class="v-middle" th:each="album, i : ${albums}">
+											<td th:text="${i.index + 1}">
+											</td>
+											<td style="min-width:30px;text-align:center"
+												th:text="${album.albumId}">
+											</td>
+											<td class="flex"><a
+													th:href="@{'/album/details/' + ${album.albumId}}"
+													class="item-company ajax h-1x"
+													th:text="${album.albumName}"></a>
+
+											</td>
+											<td class="no-wrap">
+												<div class="item-date text-muted text-sm d-none d-md-block"
+													th:text="${#dates.format(album.releaseDate, 'dd/MM/yyyy')}">
+												</div>
+											</td>
+											<td style="min-width:30px;text-align:center"
+												th:text="${album.albumCoverUrl}">
+												<small class="text-muted"></small>
+											</td>
+											<td style="min-width:30px;text-align:center"
+												th:text="${album.account.accountId}">
+												<small class="text-muted"></small>
+											</td>
+										</tr>
+									</tbody>
+
+								</table>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div><!-- ############ Main END-->
+		</div>
+	</div>
+</body>
+
+</html>
