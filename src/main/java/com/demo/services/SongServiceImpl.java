@@ -42,8 +42,8 @@ public class SongServiceImpl implements SongService{
         return null;
     }
     @Override
-    public List<Song> findByTitleContainingIgnoreCase(String title) {
-        return songRepository.findByTitleContainingIgnoreCase(title);
+    public List<Song> findByTitleContainingIgnoreCase(String keyword) {
+        return songRepository.findByTitleContainingIgnoreCase(keyword);
     }
     @Override
     public Song updateSong(int id, Song song) {
@@ -77,6 +77,7 @@ public class SongServiceImpl implements SongService{
 	public List<Song> findByTitle(String title) {
 		return songRepository.findBySongDetail(title);
 	}
+
 
 	@Override
 	public List<Song> findSongsWithPagination(int pageNo, int pageSize) {

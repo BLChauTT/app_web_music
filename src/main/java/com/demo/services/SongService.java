@@ -7,7 +7,7 @@ import com.demo.entities.Song;
 public interface SongService {
     public boolean save(Song song) throws Exception;
     public Song findSongById(int id);
-    public List<Song> findByTitleContainingIgnoreCase(String title);
+    public List<Song> findByTitleContainingIgnoreCase(String keyword);
     public Song updateSong(int id, Song song);
     public boolean deleteSong(int id);
     public Iterable<Song> findAll();

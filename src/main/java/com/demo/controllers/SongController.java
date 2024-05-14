@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.demo.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +33,6 @@ import com.demo.entities.Singer;
 import com.demo.entities.Song;
 import com.demo.entities.Songdetail;
 import com.demo.entities.Userprofile;
-import com.demo.services.AccountJPAService;
-import com.demo.services.AccountSongService;
-import com.demo.services.AlbumService;
-import com.demo.services.AuthorService;
-import com.demo.services.SingerService;
-import com.demo.services.SongService;
-import com.demo.services.UserProfileService;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
@@ -55,6 +49,8 @@ public class SongController {
     private SongService songService;
     @Autowired
     private AccountSongService accountSongService;
+    @Autowired
+    private SongDetailService songDetailService;
     @Autowired
     private SingerService singerService;
     @Autowired
@@ -134,15 +130,124 @@ public class SongController {
 
         return "user/music";
     }
+
+    @GetMapping({"layout"})
+    public String layout(ModelMap modelMap,
+                       @RequestParam(name = "keyword", required = false) String keyword,
+                       @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+                       @RequestParam(value = "pageSize", defaultValue = "6", required = false) int pageSize,
+                       HttpSession httpSession,
+                       @RequestParam(value = "singerIds", required = false) List<Integer> singerIds) {
+        Song song = new Song();
+        Account account = new Account();
+        Userprofile userprofile = new Userprofile();
+        Songdetail songdetail = new Songdetail();
+        Song hotSong = songService.findSongById(25);
+        List<Song> listSongs;
+        List<Album> listAlbums;
+        List<Singer> listSingers;
+        listSongs = songService.findSongsWithPagination(pageNo, pageSize);
+        listAlbums = albumService.findSongsWithPagination(pageNo,pageSize);
+        listSingers = singerService.findSingersWithPagination(pageNo, pageSize);
+
+        Account loggedInUser = (Account) httpSession.getAttribute("loggedInUser");
+        int accountId = loggedInUser.getAccountId();
+        AccountSong accountSong = new AccountSong();
+        accountSong.setAccount(accountJPAService.findById(accountId));
+
+        Set<Singer> singers = new HashSet<>();
+        if (!listSongs.isEmpty()) {
+            // Lấy ra id của bài hát đầu tiên trong danh sách
+            int firstSongId = listSongs.get(0).getSongId();
+            // Tìm các ca sĩ của bài hát đầu tiên
+            singers = singerService.findSingersBySongId(firstSongId);
+        }
+        // Lấy ra một Singer từ Set singers
+        Singer singer = singers.isEmpty() ? new Singer() : singers.iterator().next();
+
+        String imageUrl = environment.getProperty("imageUrl");
+        modelMap.put("imageUrl", imageUrl);
+//        String fileImageUrl = "no-image.jpg"; //set động
+//        String urlImage = imageUrl + fileImageUrl;
+//        modelMap.put("urlImage", urlImage);
+
+        modelMap.put("userprofile", userprofile);
+        modelMap.put("accountSong", accountSong);
+        modelMap.put("account", account);
+        modelMap.put("listSingers", listSingers);
+        modelMap.put("listAlbums", listAlbums);
+        modelMap.put("listSongs", listSongs);
+        modelMap.put("song", song);
+        modelMap.put("singer", singer);
+        modelMap.put("songdetail", songdetail);
+        modelMap.put("songs", songService.findAll());
+        modelMap.put("hotSong", hotSong.getSongdetail());
+        modelMap.put("albums", albumService.findAll());
+
+        return "layout/user/index";
+    }
     @GetMapping({"cat","filter"})
-    public String cat(ModelMap modelMap,@RequestParam(name = "keyword", required = false) String keyword) {
-//        List<AccountSong> accountSongs;
-//        if (keyword != null && !keyword.isEmpty()) {
-//            accountSongs = accountSongService.findByTitle(keyword);
-//        } else {
-//            accountSongs = accountSongService.findSongsWithPagination(pageNo, pageSize);
-//        }
-//        modelMap.put("accountSongs", accountSongs);
+    public String cat(ModelMap modelMap,
+                      @RequestParam(name = "keyword", required = false) String keyword,
+                      HttpSession httpSession,
+                      @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+                      @RequestParam(value = "pageSize", defaultValue = "18", required = false) int pageSize,
+                      RedirectAttributes redirectAttributes
+                      ) {
+        //lấy session
+        Account account = new Account();
+        AccountSong accountSong = new AccountSong();
+        Userprofile userprofile = new Userprofile();
+        Account loggedInUser = (Account) httpSession.getAttribute("loggedInUser");
+        int accountId = loggedInUser.getAccountId();
+        accountSong.setAccount(accountJPAService.findById(accountId));
+
+        //lấy ảnh
+        String imageUrl = environment.getProperty("imageUrl");
+        modelMap.put("imageUrl", imageUrl);
+
+        //search
+        List<Song> songLists;
+        List<Singer> singerList;
+        List<Songdetail> songdetailList;
+        List<AccountSong> accountSongList;
+        List<Album> albumList;
+        List<Songdetail> songdetails;
+        songLists = songService.findSongsWithPagination(pageNo, pageSize);
+        albumList = albumService.findSongsWithPagination(pageNo,pageSize);
+        singerList = singerService.findSingersWithPagination(pageNo, pageSize);
+        songdetailList = songDetailService.findSongsWithPagination(pageNo, pageSize);
+
+        if (keyword != null && !keyword.isEmpty()) {
+            accountSongList = accountSongService.findByTitle(keyword);
+        } else {
+            accountSongList = accountSongService.findSongsWithPagination(pageNo, pageSize);
+        }
+        modelMap.put("accountSongList", accountSongList);
+        modelMap.put("songdetailList", songdetailList);
+        modelMap.put("songLists", songLists);
+        modelMap.put("singerList", singerList);
+
+        //lấy danh sách ca si
+        Set<Singer> singers = new HashSet<>();
+        if (!songLists.isEmpty()) {
+            int firstSongId = songLists.get(0).getSongId();
+            singers = singerService.findSingersBySongId(firstSongId);
+        }
+        Singer singer = singers.isEmpty() ? new Singer() : singers.iterator().next();
+        for (Song song:songLists) {
+            song.getSongdetail().getSongCoverUrl();
+        }
+        modelMap.put("singer", singer);
+
+        //phân trang
+        long totalSongs = songDetailService.countTotalSongs();
+        int totalPages = (int) Math.ceil((double) totalSongs / pageSize);
+        modelMap.addAttribute("totalSongs", totalSongs);
+        modelMap.addAttribute("totalPages", totalPages);
+        modelMap.addAttribute("pageNo", pageNo);
+        modelMap.addAttribute("pageSize", pageSize);
+
         return "user/music.cat";
     }
     @GetMapping({"artist","allsinger"})
