@@ -36,6 +36,7 @@ import com.demo.entities.Userprofile;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("song")
@@ -106,7 +107,10 @@ public class SongController {
         }
         // Lấy ra một Singer từ Set singers
         Singer singer = singers.isEmpty() ? new Singer() : singers.iterator().next();
-
+        String imageUrl = environment.getProperty("imageUrl");
+        String fileImageUrl = "no-image.jpg"; //set động
+        String urlImage = imageUrl + fileImageUrl;
+        modelMap.put("urlImage", urlImage);
         modelMap.put("userprofile", userprofile);
         modelMap.put("accountSong", accountSong);
         modelMap.put("account", account);
@@ -148,7 +152,8 @@ public class SongController {
                          HttpSession httpSession,
                          @RequestParam(name = "keyword", required = false) String keyword,
                          @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-                         @RequestParam(value = "pageSize", defaultValue = "6", required = false) int pageSize) {
+                         @RequestParam(value = "pageSize", defaultValue = "6", required = false) int pageSize,
+                         RedirectAttributes redirectAttributes) {
 
         Songdetail songdetail = new Songdetail();
         AccountSong accountSong = new AccountSong();
@@ -158,16 +163,44 @@ public class SongController {
         int accountId = loggedInUser.getAccountId();
         accountSong.setAccount(accountJPAService.findById(accountId));
 
+        //bài chính
         String musicUrl = environment.getProperty("musicUrl");
         String fileUrl = songService.findFileUrlBySongId(id);
         String url = musicUrl + fileUrl;
         modelMap.put("urlMusic", url);
         songdetail.setFileUrl(fileUrl);
-        
+
         String imageUrl = environment.getProperty("imageUrl");
-        String fileImageUrl = "no-image.jpg";
+        String fileImageUrl = songService.findSongCoverUrlBySongId(id);
+        System.out.println(fileImageUrl);
         String urlImage = imageUrl + fileImageUrl;
         modelMap.put("urlImage", urlImage);
+
+        //Recommended
+//        String fileImageUrl2 = songService.findSongCoverUrlBySongId(2);
+//        System.out.println(fileImageUrl);
+//        String urlImage2 = imageUrl + fileImageUrl2;
+//        modelMap.put("urlImage2", urlImage2);
+//
+//        String fileImageUrl3 = songService.findSongCoverUrlBySongId(3);
+//        System.out.println(fileImageUrl);
+//        String urlImage3 = imageUrl + fileImageUrl3;
+//        modelMap.put("urlImage3", urlImage3);
+//
+//        String fileImageUrl4 = songService.findSongCoverUrlBySongId(4);
+//        System.out.println(fileImageUrl);
+//        String urlImage4 = imageUrl + fileImageUrl4;
+//        modelMap.put("urlImage4", urlImage4);
+//
+//        String fileImageUrl5 = songService.findSongCoverUrlBySongId(5);
+//        System.out.println(fileImageUrl);
+//        String urlImage5 = imageUrl + fileImageUrl5;
+//        modelMap.put("urlImage5", urlImage5);
+//
+//        String fileImageUrl6 = songService.findSongCoverUrlBySongId(6);
+//        System.out.println(fileImageUrl);
+//        String urlImage6 = imageUrl + fileImageUrl6;
+//        modelMap.put("urlImage6", urlImage6);
 
         modelMap.put("userprofile", userprofile);
         modelMap.put("musicUrl", musicUrl);
@@ -191,7 +224,9 @@ public class SongController {
             singers = singerService.findSingersBySongId(firstSongId);
         }
         Singer singer = singers.isEmpty() ? new Singer() : singers.iterator().next();
-
+        for (Song song:listSongs) {
+            song.getSongdetail().getSongCoverUrl();
+        }
         modelMap.put("accountSong", accountSong);
         modelMap.put("account", account);
         modelMap.put("listSingers", listSingers);

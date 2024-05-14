@@ -25,4 +25,7 @@ public interface SongRepository extends JpaRepository<Song, Integer> {
     List<Song> findAudioByUploader(String uploader);
     @Query("SELECT sd.fileUrl FROM Song s JOIN s.songdetail sd WHERE s.songId = :songId")
     public String findFileUrlBySongId(@Param("songId") int songId);
+    @Query("SELECT sd.songCoverUrl FROM Song s JOIN s.songdetail sd WHERE s.songId = :songId")
+    public String findSongCoverUrlBySongId(@Param("songId") int songId);
+
 }

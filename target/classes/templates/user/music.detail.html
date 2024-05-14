@@ -15,9 +15,8 @@
 						<div class="d-sm-flex page-heading" data-id="102011"
 							data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview62/v4/bd/6b/34/bd6b3443-d4c3-26fd-91c8-d0b31ab47ee3/mzaf_8046559398209773051.plus.aac.p.m4a">
 							<div class="media r w w-auto-xs mb-4">
-								<!--<div class="media-content"
-									 th:style="'background-image: url(D:\DoAnKy4\app_web_music\target\classes\static\assets\images\a1.jpg)'"></div>-->
-								<img th:src="${urlImage}" alt="" />
+								<div class="media-content"
+									 th:style="'background-image: url(' + ${urlImage} + ')'"></div>
 							</div>
 							<div class="d-md-flex flex">
 								<div class="mx-sm-4 flex">
@@ -26,25 +25,24 @@
 									</h1>
 									<div class="py-4 toolbar align-items-center">
 										<audio controls>
-											<source th:src="@{urlMusic}" type="audio/mpeg">
+											<source th:src="${urlMusic}" type="audio/mpeg">
 										</audio>
 									</div>
 									<div class="mb-4">
-										<span class="text-muted">In: </span>
-										<a th:href="@{song/cat}" class="text-color ajax">
-											Classical
+										<span class="text-muted">Singer: </span>
+										<a th:href="@{/song/artist}" class="text-color ajax">
+											<th:block th:text="${singer.singerName}"></th:block>
 										</a>
 									</div>
-									<a th:href="@{'/download/' + ${songdetail.fileUrl}}">Download</a>
 									<div id="waveform" class="mb-3"></div>
 								</div>
 								<div class="py-3 py-sm-4 mx-sm-4">
 									<div class="d-flex align-items-center">
-										<div class="media w-56 circle"><a th:href="@{/song/artist}"
+										<div class="media w-56 circle"><a th:href="@{'/admin/profile/' + ${loggedInUser.accountId}}"
 												class="media-content ajax"
 																		  th:style="'background-image: url(' + ${userprofile.avatarUrl} + ')'"></a></div>
 										<div class="px-3">
-											<a th:href="@{/song/artist}" class="text-color ajax">
+											<a th:href="@{'/admin/profile/' + ${loggedInUser.accountId}}" class="text-color ajax">
 												<th:block th:text="${loggedInUser.username}"></th:block>
 											</a>
 											<div class="text-sm text-muted">Published:
@@ -73,7 +71,9 @@
 									<div class="list-item r">
 										<div class="media">
 											<a th:href="@{'song/detail/' + ${song.songId}}" class="ajax media-content"
-											   th:style="'background-image: url(' + ${song.songdetail.songCoverUrl} + ')'"></a>
+											   th:style="'background-image: url(' + ${urlImage} + ')'">
+<!--												th:style="'background-image: url(/assets/images/' + song.songdetail + ')'">-->
+											</a>
 											<div class="media-action media-action-overlay">
 												<button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class>
 													<i data-feather="heart" class="active-danger"></i>
@@ -127,7 +127,7 @@
 									<div class="list-item r">
 										<div class="media">
 											<a th:href="@{'/album/details/' + ${album.albumId}}" class="ajax media-content"
-											   th:style="'background-image: url(' + ${album.albumCoverUrl} + ')'"></a>
+											   th:style="'background-image: url(' + ${urlImage} + ')'"></a>
 											<div class="media-action media-action-overlay"><button
 													class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
 														data-feather="heart" class="active-danger"></i></button> <button
