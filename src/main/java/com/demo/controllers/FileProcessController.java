@@ -76,7 +76,8 @@ public class FileProcessController {
 
 	//đang lấy tên file mặc định cho trước, anh em sửa thì fileName từ db vào là được
 	@GetMapping("/downloadFile")
-    public ResponseEntity<InputStreamResource> downloadFile1(@RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
+    public ResponseEntity<InputStreamResource> downloadFile1(
+			@RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
         MediaType mediaType = getMediaTypeForFileName(context, fileName);
         System.out.println("fileName: " + fileName);
         System.out.println("mediaType: " + mediaType);

@@ -1,0 +1,144 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Index</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script>
+		$(function () {
+			$("#created").datepicker({
+				dateFormat: 'dd/mm/yy'
+			});
+		});
+		function setReleaseDate() {
+			var currentDate = new Date();
+			var day = currentDate.getDate();
+			var month = currentDate.getMonth() + 1;
+			var year = currentDate.getFullYear();
+
+			if (day < 10) {
+				day = '0' + day;
+			}
+			if (month < 10) {
+				month = '0' + month;
+			}
+
+			var formattedDate = day + '/' + month + '/' + year;
+
+			document.getElementById('releaseDate').value = formattedDate;
+		}
+	</script>
+	<script>
+		function validateForm() {
+			var fileMusic = document.getElementsByName("fileMusic")[0].files[0];
+			var fileImage = document.getElementsByName("fileImage")[0].files[0];
+			if (!fileMusic) {
+				alert("File âm nhạc không được rỗng");
+				return false; // Ngăn chặn việc gửi biểu mẫu nếu file âm nhạc rỗng
+			}
+			if (!fileImage) {
+				alert("File hình ảnh không được rỗng");
+				return false; // Ngăn chặn việc gửi biểu mẫu nếu file hình ảnh rỗng
+			}
+			return true; // Cho phép gửi biểu mẫu nếu cả hai file không rỗng
+		}
+	</script>
+</head>
+
+<body>
+<a th:href="@{/song/findAll}">Back</a>
+<h3>Add Song</h3>
+<p th:text="${msg}" th:if="${msg != null}"></p>
+<form method="post" th:action="@{/songDetail/add}" enctype="multipart/form-data" onsubmit="return validateForm()">
+	<table border="0">
+		<tr>
+			<td valign="top">Title</td>
+			<td valign="top">
+				<input type="text" th:field="${songDetail.title}">
+			</td>
+		</tr>
+		<tr>
+			<td>Lyric</td>
+			<td>
+				<textarea cols="20" rows="5" th:field="${songDetail.lyric}"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>Author</td>
+			<td><input type="text" th:field="${author.authorName}"></td>
+		</tr>
+		<tr>
+			<td>Singer</td>
+			<td>
+				<select multiple="multiple" name="singerIds">
+					<option th:each="singer : ${singers}" th:value="${singer.singerId}"
+							th:text="${singer.singerName}"></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>SongTime</td>
+			<td>
+				<input type="text" th:field="${songDetail.songTime}">
+			</td>
+		</tr>
+		<tr>
+			<td>Category</td>
+			<td>
+				<select th:field="${category.categoryId}">
+					<option th:each="category : ${categories}" th:value="${category.categoryId}"
+							th:text="${category.categoryName}"></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Album</td>
+			<td>
+				<select th:field="${album.albumId}">
+					<option th:each="album : ${albums}" th:value="${album.albumId}"
+							th:text="${album.albumName}"></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Release Date</td>
+			<td>
+				<input type="hidden" id="releaseDate" th:field="${songDetail.releaseDate}">
+				<button type="button" onclick="setReleaseDate()">Post Now</button>
+			</td>
+		</tr>
+		<tr>
+			<td>Status</td>
+			<td>
+				<select th:field="${songDetail.status}">
+					<option value="1">1</option>
+					<option value="2">2</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Photo</td>
+			<td>
+				<input type="file" name="fileImage">
+			</td>
+		</tr>
+		<tr>
+			<td>Song</td>
+			<td>
+				<input type="file" name="fileMusic">
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>
+				<input type="submit" value="Save">
+			</td>
+		</tr>
+		<input type="hidden" name="accountId" th:value="${loggedInUser.accountId}">
+	</table>
+</form>
+
+</body>
+
+</html>

@@ -15,8 +15,9 @@
 						<div class="d-sm-flex page-heading" data-id="102011"
 							data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview62/v4/bd/6b/34/bd6b3443-d4c3-26fd-91c8-d0b31ab47ee3/mzaf_8046559398209773051.plus.aac.p.m4a">
 							<div class="media r w w-auto-xs mb-4">
-								<div class="media-content"
-									 th:style="'background-image: url(' + ${song.songdetail.songCoverUrl} + ')'"></div>
+								<!--<div class="media-content"
+									 th:style="'background-image: url(D:\DoAnKy4\app_web_music\target\classes\static\assets\images\a1.jpg)'"></div>-->
+								<img th:src="${urlImage}" alt="" />
 							</div>
 							<div class="d-md-flex flex">
 								<div class="mx-sm-4 flex">
@@ -24,14 +25,17 @@
 										<th:block th:text="${song.songdetail.title}"></th:block>
 									</h1>
 									<div class="py-4 toolbar align-items-center">
-											<audio controls>
-												<source th:src="@{${songdetail.fileUrl}}" type="audio/mpeg">
-											</audio>
-										<p th:text="${songdetail.fileUrl}"></p>
+										<audio controls>
+											<source th:src="@{urlMusic}" type="audio/mpeg">
+										</audio>
 									</div>
-									<div class="mb-4"><span class="text-muted">In: </span><a th:href="@{song/cat}"
-											class="text-color ajax">Classical</a>, <a th:href="@{song/cat}"
-											class="text-color ajax">World</a></div>
+									<div class="mb-4">
+										<span class="text-muted">In: </span>
+										<a th:href="@{song/cat}" class="text-color ajax">
+											Classical
+										</a>
+									</div>
+									<a th:href="@{'/download/' + ${songdetail.fileUrl}}">Download</a>
 									<div id="waveform" class="mb-3"></div>
 								</div>
 								<div class="py-3 py-sm-4 mx-sm-4">
@@ -63,181 +67,48 @@
 								</div><span class="flex"></span>
 							</div>
 							<div class="row list-row list-index">
-								<div class="col-12" data-id="312058991" data-category="all" data-tag="France"
-									data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview62/v4/04/b6/28/04b62834-121f-b3af-47b3-2485ff499e14/mzaf_4474193750897158038.plus.aac.p.m4a">
+								<div class="col-12" data-id="82924078" data-category="France" data-tag="Electronic"
+									 th:each="song : ${listSongs}"
+									 data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music/v4/fa/37/1c/fa371cea-559d-f418-506a-5fdf64bed3fe/mzaf_1505180730434746810.plus.aac.p.m4a">
 									<div class="list-item r">
-										<div class="media"><a th:href="@{/song/singer/1/songs}"
-												class="ajax media-content"
-															  th:style="'background-image: url(' + @{/assets/user/img/a5.jpg} + ')'"></a>
-											<div class="media-action media-action-overlay"><button
-													class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
-														data-feather="heart" class="active-danger"></i></button> <button
-													class="btn btn-raised btn-icon btn-rounded bg--white btn-play"></button>
+										<div class="media">
+											<a th:href="@{'song/detail/' + ${song.songId}}" class="ajax media-content"
+											   th:style="'background-image: url(' + ${song.songdetail.songCoverUrl} + ')'"></a>
+											<div class="media-action media-action-overlay">
+												<button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class>
+													<i data-feather="heart" class="active-danger"></i>
+												</button>
+												<button class="btn btn-raised btn-icon btn-rounded bg--white btn-play"></button>
 												<button class="btn btn-icon no-bg no-shadow hide-row btn-more"
-													data-toggle="dropdown"><i
-														data-feather="more-horizontal"></i></button>
+														data-toggle="dropdown">
+													<i data-feather="more-horizontal"></i>
+												</button>
 												<div class="dropdown-menu dropdown-menu-right"></div>
 											</div>
 										</div>
 										<div class="list-content text-center">
-											<div class="list-body"><a th:href="@{/song/details/1}"
-													class="list-title title ajax h-1x">This Girl </a><a
-													th:href="@{/song/artist}"
-													class="list-subtitle d-block text-muted subtitle ajax h-1x">Kungs
-													&amp; Cookin&#x27; On 3 Burners</a></div>
+											<div class="list-body">
+												<a th:href="@{'song/detail/' + ${song.songId}}"
+												   class="list-title title ajax h-1x">
+													<th:block th:text="${song.songdetail.title}"></th:block>
+												</a>
+												<a th:href="@{'song/detail/' + ${song.songId}}"
+												   class="list-subtitle d-block text-muted subtitle ajax h-1x">
+													<th:block th:text="${singer.singerName}"></th:block>
+												</a>
+											</div>
 										</div>
 										<div class="list-action show-row">
 											<div class="d-flex align-items-center">
-												<div class="px-3 text-sm d-none d-md-block">04:37</div><button
-													class="btn btn-icon no-bg no-shadow" data-toggle-class><i
-														data-feather="heart" class="active-danger"></i></button> <button
-													class="btn btn-icon no-bg no-shadow btn-more"
-													data-toggle="dropdown"><i
-														data-feather="more-horizontal"></i></button>
-												<div class="dropdown-menu dropdown-menu-right"></div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-12" data-id="86035248" data-category="R&amp;B" data-tag="USA"
-									data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music1/v4/ca/8c/3d/ca8c3dc7-51cf-78b8-4fbc-7607893c155f/mzaf_6545808409327260529.plus.aac.p.m4a">
-									<div class="list-item r">
-										<div class="media"><a th:href="@{/song/details/1}"
-												class="ajax media-content"
-															  th:style="'background-image: url(' + @{/assets/user/img/c7.jpg} + ')'"></a>
-											<div class="media-action media-action-overlay"><button
-													class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
-														data-feather="heart" class="active-danger"></i></button> <button
-													class="btn btn-raised btn-icon btn-rounded bg--white btn-play"></button>
-												<button class="btn btn-icon no-bg no-shadow hide-row btn-more"
-													data-toggle="dropdown"><i
-														data-feather="more-horizontal"></i></button>
-												<div class="dropdown-menu dropdown-menu-right"></div>
-											</div>
-										</div>
-										<div class="list-content text-center">
-											<div class="list-body"><a th:href="@{/song/details/1}"
-													class="list-title title ajax h-1x">Blurred Lines </a><a
-													th:href="@{/song/details/1}"
-													class="list-subtitle d-block text-muted subtitle ajax h-1x">Robin
-													Thicke Feat. T.I. &amp; Pharrell</a></div>
-										</div>
-										<div class="list-action show-row">
-											<div class="d-flex align-items-center">
-												<div class="px-3 text-sm d-none d-md-block">03:46</div><button
-													class="btn btn-icon no-bg no-shadow" data-toggle-class><i
-														data-feather="heart" class="active-danger"></i></button> <button
-													class="btn btn-icon no-bg no-shadow btn-more"
-													data-toggle="dropdown"><i
-														data-feather="more-horizontal"></i></button>
-												<div class="dropdown-menu dropdown-menu-right"></div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-12" data-id="312058991" data-category="all" data-tag="France"
-									 data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview62/v4/04/b6/28/04b62834-121f-b3af-47b3-2485ff499e14/mzaf_4474193750897158038.plus.aac.p.m4a">
-									<div class="list-item r">
-										<div class="media"><a th:href="@{/song/singer/1/songs}"
-															  class="ajax media-content"
-															  th:style="'background-image: url(' + @{/assets/user/img/a5.jpg} + ')'"></a>
-											<div class="media-action media-action-overlay"><button
-													class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
-													data-feather="heart" class="active-danger"></i></button> <button
-													class="btn btn-raised btn-icon btn-rounded bg--white btn-play"></button>
-												<button class="btn btn-icon no-bg no-shadow hide-row btn-more"
-														data-toggle="dropdown"><i
-														data-feather="more-horizontal"></i></button>
-												<div class="dropdown-menu dropdown-menu-right"></div>
-											</div>
-										</div>
-										<div class="list-content text-center">
-											<div class="list-body"><a th:href="@{/song/details/1}"
-																	  class="list-title title ajax h-1x">This Girl </a><a
-													th:href="@{/song/artist}"
-													class="list-subtitle d-block text-muted subtitle ajax h-1x">Kungs
-												&amp; Cookin&#x27; On 3 Burners</a></div>
-										</div>
-										<div class="list-action show-row">
-											<div class="d-flex align-items-center">
-												<div class="px-3 text-sm d-none d-md-block">04:37</div><button
-													class="btn btn-icon no-bg no-shadow" data-toggle-class><i
-													data-feather="heart" class="active-danger"></i></button> <button
-													class="btn btn-icon no-bg no-shadow btn-more"
-													data-toggle="dropdown"><i
-													data-feather="more-horizontal"></i></button>
-												<div class="dropdown-menu dropdown-menu-right"></div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-12" data-id="312058991" data-category="all" data-tag="France"
-									 data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview62/v4/04/b6/28/04b62834-121f-b3af-47b3-2485ff499e14/mzaf_4474193750897158038.plus.aac.p.m4a">
-									<div class="list-item r">
-										<div class="media"><a th:href="@{/song/singer/1/songs}"
-															  class="ajax media-content"
-															  th:style="'background-image: url(' + @{/assets/user/img/a5.jpg} + ')'"></a>
-											<div class="media-action media-action-overlay"><button
-													class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
-													data-feather="heart" class="active-danger"></i></button> <button
-													class="btn btn-raised btn-icon btn-rounded bg--white btn-play"></button>
-												<button class="btn btn-icon no-bg no-shadow hide-row btn-more"
-														data-toggle="dropdown"><i
-														data-feather="more-horizontal"></i></button>
-												<div class="dropdown-menu dropdown-menu-right"></div>
-											</div>
-										</div>
-										<div class="list-content text-center">
-											<div class="list-body"><a th:href="@{/song/details/1}"
-																	  class="list-title title ajax h-1x">This Girl </a><a
-													th:href="@{/song/artist}"
-													class="list-subtitle d-block text-muted subtitle ajax h-1x">Kungs
-												&amp; Cookin&#x27; On 3 Burners</a></div>
-										</div>
-										<div class="list-action show-row">
-											<div class="d-flex align-items-center">
-												<div class="px-3 text-sm d-none d-md-block">04:37</div><button
-													class="btn btn-icon no-bg no-shadow" data-toggle-class><i
-													data-feather="heart" class="active-danger"></i></button> <button
-													class="btn btn-icon no-bg no-shadow btn-more"
-													data-toggle="dropdown"><i
-													data-feather="more-horizontal"></i></button>
-												<div class="dropdown-menu dropdown-menu-right"></div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-12" data-id="312058991" data-category="all" data-tag="France"
-									 data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview62/v4/04/b6/28/04b62834-121f-b3af-47b3-2485ff499e14/mzaf_4474193750897158038.plus.aac.p.m4a">
-									<div class="list-item r">
-										<div class="media"><a th:href="@{/song/singer/1/songs}"
-															  class="ajax media-content"
-															  th:style="'background-image: url(' + @{/assets/user/img/a5.jpg} + ')'"></a>
-											<div class="media-action media-action-overlay"><button
-													class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
-													data-feather="heart" class="active-danger"></i></button> <button
-													class="btn btn-raised btn-icon btn-rounded bg--white btn-play"></button>
-												<button class="btn btn-icon no-bg no-shadow hide-row btn-more"
-														data-toggle="dropdown"><i
-														data-feather="more-horizontal"></i></button>
-												<div class="dropdown-menu dropdown-menu-right"></div>
-											</div>
-										</div>
-										<div class="list-content text-center">
-											<div class="list-body"><a th:href="@{/song/details/1}"
-																	  class="list-title title ajax h-1x">This Girl </a><a
-													th:href="@{/song/artist}"
-													class="list-subtitle d-block text-muted subtitle ajax h-1x">Kungs
-												&amp; Cookin&#x27; On 3 Burners</a></div>
-										</div>
-										<div class="list-action show-row">
-											<div class="d-flex align-items-center">
-												<div class="px-3 text-sm d-none d-md-block">04:37</div><button
-													class="btn btn-icon no-bg no-shadow" data-toggle-class><i
-													data-feather="heart" class="active-danger"></i></button> <button
-													class="btn btn-icon no-bg no-shadow btn-more"
-													data-toggle="dropdown"><i
-													data-feather="more-horizontal"></i></button>
+												<div class="px-3 text-sm d-none d-md-block">
+													<th:block th:text="${song.songdetail.songTime}"></th:block>
+												</div>
+												<button class="btn btn-icon no-bg no-shadow" data-toggle-class>
+													<i data-feather="heart" class="active-danger"></i>
+												</button>
+												<button class="btn btn-icon no-bg no-shadow btn-more" data-toggle="dropdown">
+													<i data-feather="more-horizontal"></i>
+												</button>
 												<div class="dropdown-menu dropdown-menu-right"></div>
 											</div>
 										</div>
@@ -251,12 +122,12 @@
 								</div><span class="flex"></span>
 							</div>
 							<div class="row list mb-4">
-								<div class="col-6 col-md-3" data-id="92570808" data-category="Pop" data-tag="Canada"
+								<div class="col-6 col-md-3" th:each="album : ${listAlbums}" data-id="92570808" data-category="Pop" data-tag="Canada"
 									data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music4/v4/64/3d/c1/643dc113-29d1-08de-78e2-a4ab4c3f1730/mzaf_5420937162202173294.plus.aac.p.m4a">
 									<div class="list-item r">
-										<div class="media"><a th:href="@{/song/details/1}"
-												class="ajax media-content"
-															  th:style="'background-image: url(' + @{/assets/user/img/a5.jpg} + ')'"></a>
+										<div class="media">
+											<a th:href="@{'/album/details/' + ${album.albumId}}" class="ajax media-content"
+											   th:style="'background-image: url(' + ${album.albumCoverUrl} + ')'"></a>
 											<div class="media-action media-action-overlay"><button
 													class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
 														data-feather="heart" class="active-danger"></i></button> <button
@@ -268,85 +139,10 @@
 											</div>
 										</div>
 										<div class="list-content text-center">
-											<div class="list-body"><a th:href="@{/song/details/1}"
-													class="list-title title ajax h-1x">Rude </a><a
-													th:href="@{/song/artist}"
-													class="list-subtitle d-block text-muted subtitle ajax h-1x">Magic!</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-6 col-md-3" data-id="92570808" data-category="Pop" data-tag="Canada"
-									 data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music4/v4/64/3d/c1/643dc113-29d1-08de-78e2-a4ab4c3f1730/mzaf_5420937162202173294.plus.aac.p.m4a">
-									<div class="list-item r">
-										<div class="media"><a th:href="@{/song/details/1}"
-															  class="ajax media-content"
-															  th:style="'background-image: url(' + @{/assets/user/img/a5.jpg} + ')'"></a>
-											<div class="media-action media-action-overlay"><button
-													class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
-													data-feather="heart" class="active-danger"></i></button> <button
-													class="btn btn-raised btn-icon btn-rounded bg--white btn-play"></button>
-												<button class="btn btn-icon no-bg no-shadow hide-row btn-more"
-														data-toggle="dropdown"><i
-														data-feather="more-horizontal"></i></button>
-												<div class="dropdown-menu dropdown-menu-right"></div>
-											</div>
-										</div>
-										<div class="list-content text-center">
-											<div class="list-body"><a th:href="@{/song/details/1}"
-																	  class="list-title title ajax h-1x">Rude </a><a
-													th:href="@{/song/artist}"
-													class="list-subtitle d-block text-muted subtitle ajax h-1x">Magic!</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-6 col-md-3" data-id="92570808" data-category="Pop" data-tag="Canada"
-									 data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music4/v4/64/3d/c1/643dc113-29d1-08de-78e2-a4ab4c3f1730/mzaf_5420937162202173294.plus.aac.p.m4a">
-									<div class="list-item r">
-										<div class="media"><a th:href="@{/song/details/1}"
-															  class="ajax media-content"
-															  th:style="'background-image: url(' + @{/assets/user/img/a5.jpg} + ')'"></a>
-											<div class="media-action media-action-overlay"><button
-													class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
-													data-feather="heart" class="active-danger"></i></button> <button
-													class="btn btn-raised btn-icon btn-rounded bg--white btn-play"></button>
-												<button class="btn btn-icon no-bg no-shadow hide-row btn-more"
-														data-toggle="dropdown"><i
-														data-feather="more-horizontal"></i></button>
-												<div class="dropdown-menu dropdown-menu-right"></div>
-											</div>
-										</div>
-										<div class="list-content text-center">
-											<div class="list-body"><a th:href="@{/song/details/1}"
-																	  class="list-title title ajax h-1x">Rude </a><a
-													th:href="@{/song/artist}"
-													class="list-subtitle d-block text-muted subtitle ajax h-1x">Magic!</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-6 col-md-3" data-id="92570808" data-category="Pop" data-tag="Canada"
-									 data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music4/v4/64/3d/c1/643dc113-29d1-08de-78e2-a4ab4c3f1730/mzaf_5420937162202173294.plus.aac.p.m4a">
-									<div class="list-item r">
-										<div class="media"><a th:href="@{/song/details/1}"
-															  class="ajax media-content"
-															  th:style="'background-image: url(' + @{/assets/user/img/a5.jpg} + ')'"></a>
-											<div class="media-action media-action-overlay"><button
-													class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
-													data-feather="heart" class="active-danger"></i></button> <button
-													class="btn btn-raised btn-icon btn-rounded bg--white btn-play"></button>
-												<button class="btn btn-icon no-bg no-shadow hide-row btn-more"
-														data-toggle="dropdown"><i
-														data-feather="more-horizontal"></i></button>
-												<div class="dropdown-menu dropdown-menu-right"></div>
-											</div>
-										</div>
-										<div class="list-content text-center">
-											<div class="list-body"><a th:href="@{/song/details/1}"
-																	  class="list-title title ajax h-1x">Rude </a><a
-													th:href="@{/song/artist}"
-													class="list-subtitle d-block text-muted subtitle ajax h-1x">Magic!</a>
+											<div class="list-body">
+												<a th:href="@{/a/details/1}" class="list-title title ajax h-1x">
+													<th:block th:text="${album.albumName}"></th:block>
+												</a>
 											</div>
 										</div>
 									</div>
@@ -394,14 +190,14 @@
 						</div>
 						<div class="w-xl w-auto-sm no-shrink">
 							<div class="padding sticky">
-								<h6 class="text text-muted">Top tracks</h6>
+								<h6 class="text text-muted">Top Singers</h6>
 								<div class="row list-row">
-									<div class="col-12" data-id="92570808" data-category="Pop" data-tag="Canada"
+									<div class="col-12" data-id="92570808" th:each="singer : ${listSingers}" data-category="Pop" data-tag="Canada"
 										data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music4/v4/64/3d/c1/643dc113-29d1-08de-78e2-a4ab4c3f1730/mzaf_5420937162202173294.plus.aac.p.m4a">
 										<div class="list-item r">
 											<div class="media"><a th:href="@{/song/details/1}"
 													class="ajax media-content"
-																  th:style="'background-image: url(' + @{/assets/user/img/a5.jpg} + ')'"></a>
+																  th:style="'background-image: url(' + ${singer.singerAvatarUrl} + ')'"></a>
 												<div class="media-action"><button
 														class="btn btn-icon no-bg no-shadow hide-row"
 														data-toggle-class><i data-feather="heart"
@@ -414,140 +210,10 @@
 												</div>
 											</div>
 											<div class="list-content">
-												<div class="list-body"><a th:href="@{/song/details/1}"
-														class="list-title title ajax h-1x">Rude </a><a
-														th:href="@{/song/artist}"
-														class="list-subtitle d-block text-muted subtitle ajax h-1x">Magic!</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-12" data-id="92570808" data-category="Pop" data-tag="Canada"
-										 data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music4/v4/64/3d/c1/643dc113-29d1-08de-78e2-a4ab4c3f1730/mzaf_5420937162202173294.plus.aac.p.m4a">
-										<div class="list-item r">
-											<div class="media"><a th:href="@{/song/details/1}"
-																  class="ajax media-content"
-																  th:style="'background-image: url(' + @{/assets/user/img/a5.jpg} + ')'"></a>
-												<div class="media-action"><button
-														class="btn btn-icon no-bg no-shadow hide-row"
-														data-toggle-class><i data-feather="heart"
-																			 class="active-danger"></i></button> <button
-														class="btn btn-raised btn-icon btn-rounded bg--white btn-play"></button>
-													<button class="btn btn-icon no-bg no-shadow hide-row btn-more"
-															data-toggle="dropdown"><i
-															data-feather="more-horizontal"></i></button>
-													<div class="dropdown-menu dropdown-menu-right"></div>
-												</div>
-											</div>
-											<div class="list-content">
-												<div class="list-body"><a th:href="@{/song/details/1}"
-																		  class="list-title title ajax h-1x">Rude </a><a
-														th:href="@{/song/artist}"
-														class="list-subtitle d-block text-muted subtitle ajax h-1x">Magic!</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-12" data-id="92570808" data-category="Pop" data-tag="Canada"
-										 data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music4/v4/64/3d/c1/643dc113-29d1-08de-78e2-a4ab4c3f1730/mzaf_5420937162202173294.plus.aac.p.m4a">
-										<div class="list-item r">
-											<div class="media"><a th:href="@{/song/details/1}"
-																  class="ajax media-content"
-																  th:style="'background-image: url(' + @{/assets/user/img/a5.jpg} + ')'"></a>
-												<div class="media-action"><button
-														class="btn btn-icon no-bg no-shadow hide-row"
-														data-toggle-class><i data-feather="heart"
-																			 class="active-danger"></i></button> <button
-														class="btn btn-raised btn-icon btn-rounded bg--white btn-play"></button>
-													<button class="btn btn-icon no-bg no-shadow hide-row btn-more"
-															data-toggle="dropdown"><i
-															data-feather="more-horizontal"></i></button>
-													<div class="dropdown-menu dropdown-menu-right"></div>
-												</div>
-											</div>
-											<div class="list-content">
-												<div class="list-body"><a th:href="@{/song/details/1}"
-																		  class="list-title title ajax h-1x">Rude </a><a
-														th:href="@{/song/artist}"
-														class="list-subtitle d-block text-muted subtitle ajax h-1x">Magic!</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-12" data-id="92570808" data-category="Pop" data-tag="Canada"
-										 data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music4/v4/64/3d/c1/643dc113-29d1-08de-78e2-a4ab4c3f1730/mzaf_5420937162202173294.plus.aac.p.m4a">
-										<div class="list-item r">
-											<div class="media"><a th:href="@{/song/details/1}"
-																  class="ajax media-content"
-																  th:style="'background-image: url(' + @{/assets/user/img/a5.jpg} + ')'"></a>
-												<div class="media-action"><button
-														class="btn btn-icon no-bg no-shadow hide-row"
-														data-toggle-class><i data-feather="heart"
-																			 class="active-danger"></i></button> <button
-														class="btn btn-raised btn-icon btn-rounded bg--white btn-play"></button>
-													<button class="btn btn-icon no-bg no-shadow hide-row btn-more"
-															data-toggle="dropdown"><i
-															data-feather="more-horizontal"></i></button>
-													<div class="dropdown-menu dropdown-menu-right"></div>
-												</div>
-											</div>
-											<div class="list-content">
-												<div class="list-body"><a th:href="@{/song/details/1}"
-																		  class="list-title title ajax h-1x">Rude </a><a
-														th:href="@{/song/artist}"
-														class="list-subtitle d-block text-muted subtitle ajax h-1x">Magic!</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-12" data-id="92570808" data-category="Pop" data-tag="Canada"
-										 data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music4/v4/64/3d/c1/643dc113-29d1-08de-78e2-a4ab4c3f1730/mzaf_5420937162202173294.plus.aac.p.m4a">
-										<div class="list-item r">
-											<div class="media"><a th:href="@{/song/details/1}"
-																  class="ajax media-content"
-																  th:style="'background-image: url(' + @{/assets/user/img/a5.jpg} + ')'"></a>
-												<div class="media-action"><button
-														class="btn btn-icon no-bg no-shadow hide-row"
-														data-toggle-class><i data-feather="heart"
-																			 class="active-danger"></i></button> <button
-														class="btn btn-raised btn-icon btn-rounded bg--white btn-play"></button>
-													<button class="btn btn-icon no-bg no-shadow hide-row btn-more"
-															data-toggle="dropdown"><i
-															data-feather="more-horizontal"></i></button>
-													<div class="dropdown-menu dropdown-menu-right"></div>
-												</div>
-											</div>
-											<div class="list-content">
-												<div class="list-body"><a th:href="@{/song/details/1}"
-																		  class="list-title title ajax h-1x">Rude </a><a
-														th:href="@{/song/artist}"
-														class="list-subtitle d-block text-muted subtitle ajax h-1x">Magic!</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-12" data-id="92570808" data-category="Pop" data-tag="Canada"
-										 data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music4/v4/64/3d/c1/643dc113-29d1-08de-78e2-a4ab4c3f1730/mzaf_5420937162202173294.plus.aac.p.m4a">
-										<div class="list-item r">
-											<div class="media"><a th:href="@{/song/details/1}"
-																  class="ajax media-content"
-																  th:style="'background-image: url(' + @{/assets/user/img/a5.jpg} + ')'"></a>
-												<div class="media-action"><button
-														class="btn btn-icon no-bg no-shadow hide-row"
-														data-toggle-class><i data-feather="heart"
-																			 class="active-danger"></i></button> <button
-														class="btn btn-raised btn-icon btn-rounded bg--white btn-play"></button>
-													<button class="btn btn-icon no-bg no-shadow hide-row btn-more"
-															data-toggle="dropdown"><i
-															data-feather="more-horizontal"></i></button>
-													<div class="dropdown-menu dropdown-menu-right"></div>
-												</div>
-											</div>
-											<div class="list-content">
-												<div class="list-body"><a th:href="@{/song/details/1}"
-																		  class="list-title title ajax h-1x">Rude </a><a
-														th:href="@{/song/artist}"
-														class="list-subtitle d-block text-muted subtitle ajax h-1x">Magic!</a>
+												<div class="list-body">
+													<a th:href="@{/song/details/1}" class="list-title title ajax h-1x">
+														<th:block th:text="${singer.singerName}"></th:block>
+													</a>
 												</div>
 											</div>
 										</div>

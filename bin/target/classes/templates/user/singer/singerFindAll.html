@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Index</title>
+</head>
+<body>
+<h3>Sing List - Find All</h3>
+<table border="1">
+    <tr>
+        <th>No</th>
+        <th>Singer_Id</th>
+        <th>Sing_Name</th>
+        <th>Song_Id</th>
+    </tr>
+    <tr th:each="singer, i : ${singers}">
+        <td th:text="${i.index + 1}"></td>
+        <td th:text="${singer.singerId}"></td>
+        <td>
+            <a th:text="${singer.singerName}"
+               th:href="@{'/singer/details/' + ${singer.singerId}}">
+            </a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

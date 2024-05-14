@@ -85,4 +85,8 @@ public class SongServiceImpl implements SongService{
 		List<Song> songs = pageSongs.getContent();
 		return songs;
 	}
+    @Override
+    public String findFileUrlBySongId(int songId) {
+        return songRepository.findFileUrlBySongId(songId);
+    }
 }

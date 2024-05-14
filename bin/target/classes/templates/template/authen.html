@@ -1,0 +1,53 @@
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:fragment="renderBody(title, renderContent)">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title th:text="${title}"></title>
+
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	<script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
+    <script>
+        // Đợi cho thư viện reCAPTCHA được tải xong
+        window.onload = function () {
+            // Bắt sự kiện submit của form
+            document.getElementById("form").addEventListener("submit", function (event) {
+                var recaptchaResponse = grecaptcha.getResponse();
+                if (recaptchaResponse.length == 0) { // Nếu reCAPTCHA chưa được hoàn thành
+                    event.preventDefault(); // Ngăn chặn form được gửi đi
+                    alert("Vui lòng hoàn thành reCAPTCHA trước khi nhấn Submit.");
+                }
+            });
+        };
+    </script>
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+	<link rel="stylesheet" th:href="@{/assets/admin/plugins/fontawesome-free/css/all.min.css}">
+	<link rel="stylesheet" th:href="@{/assets/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/assets/admin/dist/css/adminlte.min.css}">
+</head>
+
+<body class="hold-transition login-page">
+	<div class="login-box">
+		<div class="card card-outline card-primary">
+			<div class="card-header text-center">
+				<a class="h1">
+					<b th:text="${title}"></b>
+				</a>
+			</div>
+			<div class="row">
+				<th:block th:replace="${renderContent}"></th:block>				
+			</div>
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script th:src="@{/assets/admin/plugins/jquery/jquery.min.js}"></script>
+	<!-- Bootstrap 4 -->
+	<script th:src="@{/assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<!-- AdminLTE App -->
+	<script th:src="@{/assets/admin/dist/js/adminlte.min.js}"></script>
+</body>
+</html>

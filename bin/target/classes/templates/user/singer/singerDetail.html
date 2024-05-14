@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chi tiết Ca sĩ</title>
+</head>
+<body>
+
+<a th:href="@{/singer/findAll}">Quay lại</a>
+<h3>Chi tiết Ca sĩ</h3>
+<table border="1" th:if="${singer != null}">
+    <tr>
+        <td>Id</td>
+        <td th:text="${singer.singerId}"></td>
+    </tr>
+    <tr>
+        <td>Tên</td>
+        <td th:text="${singer.singerName}"></td>
+    </tr>
+</table>
+</body>
+</html>

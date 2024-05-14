@@ -1,0 +1,120 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:replace="~{layout/admin/index :: renderBody('Music', ~{this::.card-body})}">
+
+<head>
+	<title>Index</title>
+</head>
+
+<body>
+	<div class="card-body">
+		<div id="content" class="flex"><!-- ############ Main START-->
+			<div>
+				<div class="page-hero page-container" id="page-hero">
+					<div class="padding d-flex">
+						<div class="flex">
+							<a th:href="@{'/admin/index'}" class="btn btn-md text-muted">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+									fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+									stroke-linejoin="round" class="feather feather-arrow-left">
+									<line x1="19" y1="12" x2="5" y2="12"></line>
+									<polyline points="12 19 5 12 12 5"></polyline>
+								</svg>
+								<span class="d-none d-sm-inline mx-1">Back Account</span>
+							</a>
+						</div>
+						<div class="page-title">
+							<h2 class="text-md text-highlight">List Music</h2><small class="text-muted"
+								th:text="${profile.fullName}"></small>
+						</div>
+						<div class="flex"></div>
+					</div>
+				</div>
+				<div class="page-content page-container" id="page-content">
+					<div class="padding">
+						<div id="invoice-list" data-plugin="invoice">
+							<div class="toolbar">
+								<div class="btn-group"><button class="btn btn-sm btn-icon btn-white"
+										data-toggle="tooltip" title="Trash" id="btn-trash"><i data-feather="trash"
+											class="text-muted"></i></button> <button
+										class="btn btn-sm btn-icon btn-white sort hide" data-sort="item-title"
+										data-toggle="tooltip" title="Sort"><i class="sorting"></i></button></div>
+								<form class="flex">
+									<div class="input-group"><input type="text"
+											class="form-control form-control-theme form-control-sm search"
+											placeholder="Search" required> <span class="input-group-append"><button
+												class="btn btn-white no-border btn-sm" type="button"><span
+													class="d-flex text-muted"><i
+														data-feather="search"></i></span></button></span></div>
+								</form>
+							</div>
+							<div class="table-responsive">
+								<table class="table table-theme table-row v-middle">
+									<thead>
+										<tr>
+											<th style="width:20px"></th>
+											<th class="text-muted sort sortable" data-sort="id" style="width:80px">User
+												Id</th>
+											<th class="text-muted sort sortable" data-sort="item-company">Full Name</th>
+											<th class="text-muted sort sortable" data-sort="item-company">Title</th>
+											<th class="text-muted sort sortable" data-sort="item-amount"
+												style="width:60px">Album</th>
+											<th class="text-muted sort sortable" data-sort="item-badge"
+												style="width:60px">Status</th>
+											<th class="text-muted" style="width:120px">Date Submitted</th>
+											<th style="width:50px"></th>
+										</tr>
+									</thead>
+									<tbody class="list">
+										<tr class="v-middle" data-id="2" th:each="a : ${asongs}">
+											<td>
+												<label class="ui-check m-0"><input type="checkbox" name="id" value="2">
+													<i></i></label>
+											</td>
+											<td style="min-width:30px;text-align:center"
+												th:text="${a.account.accountId}"><small class="text-muted"></small>
+											</td>
+											<td style="min-width:30px;text-align:center" th:text="${profile.fullName}">
+												<small class="text-muted"></small>
+											</td>
+											<td class="flex" th:text="${a.song.songdetail.title}">
+												<small class="text-muted"></small>
+											</td>
+											<td>
+												<span class="item-amount d-none d-sm-block text-sm"
+													th:text="${a.song.songdetail.genre}"></span>
+											</td>
+											<td>
+												<span class="item-badge badge text-uppercase bg-secondary"
+													th:text="${a.song.songdetail.status} ? 'Present' : 'Lock'"></span>
+											</td>
+											<td class="no-wrap">
+												<div class="item-date text-muted text-sm d-none d-md-block"
+													th:text="${#dates.format(a.song.songdetail.releaseDate, 'dd/MM/yyyy')}">
+												</div>
+											</td>
+											<td>
+												<div class="item-action dropdown"><a href="#" data-toggle="dropdown"
+														class="text-muted"><i data-feather="more-vertical"></i></a>
+													<div class="dropdown-menu dropdown-menu-right bg-black" role="menu">
+														<a class="dropdown-item" href="#">See detail </a>
+														<div class="dropdown-divider"></div><a
+															class="dropdown-item trash">Delete item</a>
+													</div>
+												</div>
+											</td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+							
+						</div><!-- .modal -->
+
+					</div>
+				</div>
+			</div><!-- ############ Main END-->
+		</div>
+	</div>
+</body>
+
+</html>
