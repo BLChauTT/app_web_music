@@ -71,7 +71,7 @@
 									<div class="list-item r">
 										<div class="media">
 											<a th:href="@{'song/detail/' + ${song.songId}}" class="ajax media-content"
-											   th:style="'background-image: url(' + ${urlImage} + ')'">
+											   th:style="'background-image: url(' + ${imageUrl + song.songdetail.songCoverUrl} + ')'">
 <!--												th:style="'background-image: url(/assets/images/' + song.songdetail + ')'">-->
 											</a>
 											<div class="media-action media-action-overlay">
@@ -127,7 +127,7 @@
 									<div class="list-item r">
 										<div class="media">
 											<a th:href="@{'/album/details/' + ${album.albumId}}" class="ajax media-content"
-											   th:style="'background-image: url(' + ${urlImage} + ')'"></a>
+											   th:style="'background-image: url(' + ${imageUrl + album.albumCoverUrl} + ')'"></a>
 											<div class="media-action media-action-overlay"><button
 													class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class><i
 														data-feather="heart" class="active-danger"></i></button> <button
@@ -197,7 +197,7 @@
 										<div class="list-item r">
 											<div class="media"><a th:href="@{/song/details/1}"
 													class="ajax media-content"
-																  th:style="'background-image: url(' + ${singer.singerAvatarUrl} + ')'"></a>
+																  th:style="'background-image: url(' + ${imageUrl + singer.singerAvatarUrl} + ')'"></a>
 												<div class="media-action"><button
 														class="btn btn-icon no-bg no-shadow hide-row"
 														data-toggle-class><i data-feather="heart"

@@ -95,7 +95,7 @@
                     <div class="list-item slick-item r mb-3">
                         <div class="media">
                             <a th:href="@{'/album/details/' + ${album.albumId}}" class="ajax media-content"
-                               th:style="'background-image: url(' + ${urlImage} + ')'"></a>
+                               th:style="'background-image: url(' + ${imageUrl} + ${album.albumCoverUrl} + ')'"></a>
                             <div class="media-action media-action-overlay">
                                 <button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class>
                                     <i data-feather="heart" class="active-danger"></i>
@@ -161,8 +161,8 @@
                 <div class="col-2" th:each="singer : ${listSingers}">
                     <div class="list-item slick-item r mb-3">
                         <div class="media">
-                            <a th:href="@{'/song/details/' + ${song.songId}}" class="ajax media-content"
-                               th:style="'background-image: url(' + ${singer.singerAvatarUrl} + ')'"></a>
+                            <a th:href="@{'/singer/detail/' + ${singer.singerId}}" class="ajax media-content"
+                               th:style="'background-image: url(' + ${imageUrl + singer.singerAvatarUrl} + ')'"></a>
                             <div class="media-action media-action-overlay">
                                 <button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class>
                                     <i data-feather="heart" class="active-danger"></i>
@@ -188,8 +188,8 @@
                 <div class="col-md-6">
                     <div class="heading py-2 d-flex">
                         <div>
-                            <div class="text-muted text-sm sr-item">User</div>
-                            <h5 class="text-highlight sr-item">Recently added</h5>
+                            <div class="text-muted text-sm sr-item">Hot</div>
+                            <h5 class="text-highlight sr-item">Best Song</h5>
                         </div>
                         <span class="flex"></span>
                     </div>
@@ -200,7 +200,7 @@
                             <div class="list-item r">
                                 <div class="media">
                                     <a th:href="@{'song/detail/' + ${song.songId}}" class="ajax media-content"
-                                        th:style="'background-image: url(' + ${song.songdetail.songCoverUrl} + ')'"></a>
+                                        th:style="'background-image: url(' + ${imageUrl + song.songdetail.songCoverUrl} + ')'"></a>
                                     <div class="media-action media-action-overlay">
                                         <button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class>
                                             <i data-feather="heart" class="active-danger"></i>

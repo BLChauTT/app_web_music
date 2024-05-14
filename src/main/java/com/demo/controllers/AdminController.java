@@ -164,13 +164,13 @@ public class AdminController {
 		modelMap.put("profile", userProfileService.findByAccountId(accountId));
 		return "admin/evaluate/rating";
 	}
-	
+
 	@GetMapping("ratingfindall")
 	public String getRatingfindall( ModelMap modelMap) {
 		modelMap.put("ratings", ratingService.findAll());
 		return "admin/evaluate/ratingFindAll";
 	}
-	
+
 	@GetMapping("rating/delete/{id}")
 	public String deleteRating(@PathVariable("id") int id, RedirectAttributes attr) {
 		if (ratingService.delete(id)) {
@@ -180,13 +180,13 @@ public class AdminController {
 		}
 		return "redirect:/admin/ratingfindall";
 	}
-	
+
 	@GetMapping("commentfindall")
 	public String getCommentfindall( ModelMap modelMap) {
 		modelMap.put("comments", commentService.findAll());
 		return "admin/evaluate/commentFindAll";
 	}
-	
+
 	@GetMapping("comment/delete/{id}")
 	public String deleteComment(@PathVariable("id") int id, RedirectAttributes attr) {
 		if (commentService.delete(id)) {

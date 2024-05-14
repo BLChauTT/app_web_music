@@ -2,7 +2,6 @@ package com.demo.services;
 
 import java.util.List;
 
-import com.demo.entities.AccountSong;
 import com.demo.entities.Comment;
 
 public interface CommentService {

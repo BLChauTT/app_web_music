@@ -7,18 +7,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.demo.entities.AccountSong;
-import com.demo.entities.Comment;
 import com.demo.entities.Rating;
-import com.demo.repositories.AccountSongRepository;
-import com.demo.repositories.CommentRepository;
-import com.demo.repositories.FavoriteRepository;
 import com.demo.repositories.RatingRepository;
-import com.demo.repositories.SongDetailRepository;
-import com.demo.repositories.SongRepository;
-import com.demo.repositories.SongSingerRepository;
 
 @Service
 public class RatingServiceImpl implements RatingService {
@@ -53,5 +44,5 @@ public class RatingServiceImpl implements RatingService {
 		List<Rating> ratings = pageRatings.getContent();
 		return ratings;
 	}
-	
+
 }

@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.demo.entities.AccountSong;
-import com.demo.entities.Comment;
-import com.demo.entities.Rating;
 import com.demo.repositories.AccountSongRepository;
 import com.demo.repositories.CommentRepository;
 import com.demo.repositories.FavoriteRepository;

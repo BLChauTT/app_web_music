@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.demo.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.Account;
 import com.demo.entities.AccountSong;
@@ -32,11 +32,17 @@ import com.demo.entities.Singer;
 import com.demo.entities.Song;
 import com.demo.entities.Songdetail;
 import com.demo.entities.Userprofile;
+import com.demo.services.AccountJPAService;
+import com.demo.services.AccountSongService;
+import com.demo.services.AlbumService;
+import com.demo.services.AuthorService;
+import com.demo.services.SingerService;
+import com.demo.services.SongService;
+import com.demo.services.UserProfileService;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("song")
@@ -97,7 +103,6 @@ public class SongController {
         AccountSong accountSong = new AccountSong();
         accountSong.setAccount(accountJPAService.findById(accountId));
 
-
         Set<Singer> singers = new HashSet<>();
         if (!listSongs.isEmpty()) {
             // Lấy ra id của bài hát đầu tiên trong danh sách
@@ -107,10 +112,13 @@ public class SongController {
         }
         // Lấy ra một Singer từ Set singers
         Singer singer = singers.isEmpty() ? new Singer() : singers.iterator().next();
+
         String imageUrl = environment.getProperty("imageUrl");
-        String fileImageUrl = "no-image.jpg"; //set động
-        String urlImage = imageUrl + fileImageUrl;
-        modelMap.put("urlImage", urlImage);
+        modelMap.put("imageUrl", imageUrl);
+//        String fileImageUrl = "no-image.jpg"; //set động
+//        String urlImage = imageUrl + fileImageUrl;
+//        modelMap.put("urlImage", urlImage);
+
         modelMap.put("userprofile", userprofile);
         modelMap.put("accountSong", accountSong);
         modelMap.put("account", account);
@@ -123,7 +131,6 @@ public class SongController {
         modelMap.put("songs", songService.findAll());
         modelMap.put("hotSong", hotSong.getSongdetail());
         modelMap.put("albums", albumService.findAll());
-
 
         return "user/music";
     }
@@ -176,31 +183,8 @@ public class SongController {
         String urlImage = imageUrl + fileImageUrl;
         modelMap.put("urlImage", urlImage);
 
-        //Recommended
-//        String fileImageUrl2 = songService.findSongCoverUrlBySongId(2);
-//        System.out.println(fileImageUrl);
-//        String urlImage2 = imageUrl + fileImageUrl2;
-//        modelMap.put("urlImage2", urlImage2);
-//
-//        String fileImageUrl3 = songService.findSongCoverUrlBySongId(3);
-//        System.out.println(fileImageUrl);
-//        String urlImage3 = imageUrl + fileImageUrl3;
-//        modelMap.put("urlImage3", urlImage3);
-//
-//        String fileImageUrl4 = songService.findSongCoverUrlBySongId(4);
-//        System.out.println(fileImageUrl);
-//        String urlImage4 = imageUrl + fileImageUrl4;
-//        modelMap.put("urlImage4", urlImage4);
-//
-//        String fileImageUrl5 = songService.findSongCoverUrlBySongId(5);
-//        System.out.println(fileImageUrl);
-//        String urlImage5 = imageUrl + fileImageUrl5;
-//        modelMap.put("urlImage5", urlImage5);
-//
-//        String fileImageUrl6 = songService.findSongCoverUrlBySongId(6);
-//        System.out.println(fileImageUrl);
-//        String urlImage6 = imageUrl + fileImageUrl6;
-//        modelMap.put("urlImage6", urlImage6);
+//        String imageUrl = environment.getProperty("imageUrl");
+        modelMap.put("imageUrl", imageUrl);
 
         modelMap.put("userprofile", userprofile);
         modelMap.put("musicUrl", musicUrl);
