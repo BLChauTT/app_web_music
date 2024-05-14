@@ -10,6 +10,7 @@ public interface SongService {
     public List<Song> findByTitleContainingIgnoreCase(String keyword);
     public Song updateSong(int id, Song song);
     public long countTotalSongs();
+    public long countTotalSongsBySinger(int singerId);
     public boolean deleteSong(int id);
     public Iterable<Song> findAll();
     public List<Song> getSongsByAuthor(int authorId);
@@ -18,4 +19,5 @@ public interface SongService {
     public List<Song> findSongsWithPagination(int offset, int pageSize);
     public String findFileUrlBySongId(int songId);
     public String findSongCoverUrlBySongId(int songId);
+    public List<Song> findSongsBySingerId(int singerId);
 }

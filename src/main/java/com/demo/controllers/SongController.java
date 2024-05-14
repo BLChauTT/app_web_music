@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.Account;
 import com.demo.entities.AccountSong;
@@ -285,10 +284,8 @@ public class SongController {
     @GetMapping({"detail/{id}"})
     public String detail(@PathVariable("id") int id, ModelMap modelMap,
                          HttpSession httpSession,
-                         @RequestParam(name = "keyword", required = false) String keyword,
                          @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-                         @RequestParam(value = "pageSize", defaultValue = "6", required = false) int pageSize,
-                         RedirectAttributes redirectAttributes) {
+                         @RequestParam(value = "pageSize", defaultValue = "6", required = false) int pageSize) {
 
         Songdetail songdetail = new Songdetail();
         AccountSong accountSong = new AccountSong();

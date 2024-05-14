@@ -17,7 +17,6 @@ import com.demo.repositories.SongRepository;
 
 @Service
 public class SingerServiceImpl implements SingerService{
-
     @Autowired
     public SingerRepository singerRepository;
     @Autowired
@@ -32,10 +31,9 @@ public class SingerServiceImpl implements SingerService{
             return false;
         }
     }
-
     @Override
     public Singer findSingerById(int id) {
-        for (Singer singer : singerRepository.findAll()) {
+        for (Singer singer : findAll()) {
             if (singer.getSingerId() == id) {
                 return singer;
             }
@@ -66,15 +64,17 @@ public class SingerServiceImpl implements SingerService{
     public void deleteSinger(int id) {
 
     }
-
     @Override
     public List<Singer> searchByKeyword(String keyword) {
         return null;
     }
-
     @Override
     public Iterable<Singer> findAll() {
         return singerRepository.findAll();
+    }
+    @Override
+    public String findSingerCoverUrlBySingerId(int singerId) {
+        return singerRepository.findSingerCoverUrlBySingerId(singerId);
     }
     @Override
 	public Set<Singer> findSingersBySongId(int songId) {
@@ -84,7 +84,6 @@ public class SingerServiceImpl implements SingerService{
         }
         return Collections.emptySet();
     }
-
     @Override
     public List<Singer> findSingersWithPagination(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);

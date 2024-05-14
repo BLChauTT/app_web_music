@@ -15,4 +15,6 @@ public interface SingerRepository extends JpaRepository<Singer, Integer> {
     public Page<Singer> findAllPaged(Pageable pageable);
     @Query("SELECT s FROM Singer s WHERE LOWER(s.singerName) LIKE LOWER(CONCAT('%', :name, '%'))")
     List<Singer> findByNameContainingIgnoreCase(@Param("name") String name);
+    @Query("SELECT s.singerAvatarUrl FROM Singer s WHERE s.singerId = :singerId")
+    public String findSingerCoverUrlBySingerId(@Param("singerId") int singerId);
 }

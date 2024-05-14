@@ -95,9 +95,21 @@ public class SongServiceImpl implements SongService{
     public String findSongCoverUrlBySongId(int songId) {
         return songRepository.findSongCoverUrlBySongId(songId);
     }
+
+    @Override
+    public List<Song> findSongsBySingerId(int singerId) {
+        return songRepository.findSongsBySingerId(singerId);
+    }
+
     @Override
 	public long countTotalSongs() {
         // TODO Auto-generated method stub
         return songDetailRepository.count();
     }
+
+    @Override
+    public long countTotalSongsBySinger(int singerId) {
+        return 0;
+    }
+
 }
