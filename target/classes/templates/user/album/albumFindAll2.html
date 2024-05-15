@@ -44,7 +44,7 @@
 										<tr class="v-middle" th:each="album, i : ${albums}">
 											<td th:text="${i.index + 1}">
 											</td>
-											<td class="flex"><a th:href="@{'/album/details/' + ${album.albumId}}"
+											<td class="flex"><a th:href="@{'/album/detail/' + ${album.albumId}}"
 													class="item-company ajax h-1x" th:text="${album.albumName}"></a>
 
 											</td>

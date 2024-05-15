@@ -20,4 +20,6 @@ public interface SongService {
     public String findFileUrlBySongId(int songId);
     public String findSongCoverUrlBySongId(int songId);
     public List<Song> findSongsBySingerId(int singerId);
+    public List<Song> findSongsByAlbumId(int albumId);
+    public List<Song> findSongsByCategoryId(int categoryId);
 }

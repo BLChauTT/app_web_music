@@ -6,7 +6,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
+import java.util.List;
 
+import com.demo.entities.Singer;
+import com.demo.entities.Song;
+import com.demo.services.SingerService;
+import com.demo.services.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
@@ -33,6 +38,10 @@ import jakarta.servlet.http.HttpSession;
 public class AlbumController {
 	@Autowired
 	private AlbumService albumService;
+	@Autowired
+	private SongService songService;
+	@Autowired
+	private SingerService singerService;
 	@Autowired
 	private Environment environment;
 
@@ -62,6 +71,16 @@ public class AlbumController {
 		return "user/album/albumDetail";
 	}
 
+	@GetMapping("detail/{id}")
+	public String detail(@PathVariable("id") int id, ModelMap modelMap) {
+		String imageUrl = environment.getProperty("imageUrl");
+		List<Song> songList = songService.findSongsByAlbumId(id);
+		modelMap.put("songList", songList);
+		modelMap.put("imageUrl", imageUrl);
+		modelMap.put("albums", albumService.findAll());
+		modelMap.put("album", albumService.find(id));
+		return "user/album/albumDetail";
+	}
 	@GetMapping("add")
 	public String add(ModelMap modelMap, HttpSession httpSession) {
 		Account loggedInUser = (Account) httpSession.getAttribute("loggedInUser");
