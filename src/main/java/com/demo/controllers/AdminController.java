@@ -3,6 +3,7 @@ package com.demo.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,6 +50,8 @@ public class AdminController {
 	private CommentService commentService;
 	@Autowired
 	private NotificationService notificationService;
+	@Autowired
+	private Environment environment;
 
 	// có phân trang
 	@GetMapping("index")
@@ -127,6 +130,8 @@ public class AdminController {
 
 	@GetMapping("profile/{accountId}")
 	public String getUserProfile(@PathVariable("accountId") int accountId, ModelMap modelMap) {
+		String imageUrl = environment.getProperty("imageUrl");
+		modelMap.put("imageUrl", imageUrl);
 		modelMap.put("profile", userProfileService.findByAccountId(accountId));
 		return "admin/accounts/profile";
 	}

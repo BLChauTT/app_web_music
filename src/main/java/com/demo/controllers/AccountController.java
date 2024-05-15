@@ -1,22 +1,35 @@
 package com.demo.controllers;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.Account;
 import com.demo.entities.Role;
 import com.demo.entities.Userprofile;
+import com.demo.helpers.FileHelper;
 import com.demo.helpers.RandomHelper;
 import com.demo.services.AccountJPAService;
 import com.demo.services.MailService;
+import com.demo.services.UserProfileService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -38,6 +51,8 @@ public class AccountController {
 	private MailService mailService;
 	@Autowired
 	private Environment environment;
+	@Autowired
+    private UserProfileService userProfileService;
 
 	@GetMapping({"login", ""})
 	public String login() {
@@ -215,5 +230,45 @@ public class AccountController {
 		}
 		return "redirect:/account/login";
 	}
+	
+	@GetMapping("edit/{accountId}")
+    public String showEditForm(@PathVariable("accountId") int accountId, ModelMap model) {
+        Optional<Userprofile> profileOpt = userProfileService.updateFindByAccountId(accountId);
+        if (profileOpt.isPresent()) {
+            model.addAttribute("userProfile", profileOpt.get());
+            return "admin/accounts/editProfile";
+        } else {
+            // Handle the case where the profile is not found
+            return "redirect:/error";
+        }
+    }
 
+    @PostMapping("/update")
+    public String updateUserProfile(@ModelAttribute("userProfile") Userprofile userProfile, @RequestParam("fileImage") MultipartFile fileImage) {
+    	try {
+            if (!fileImage.isEmpty()) {
+                // Save the file locally
+                String fileName = FileHelper.generateFileName(fileImage.getOriginalFilename());
+                File imagesFolder = new ClassPathResource("static/assets/images").getFile();
+                Path path = Paths.get(imagesFolder.getAbsolutePath() + File.separator + fileName);
+                Files.createDirectories(path.getParent());
+                Files.copy(fileImage.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+                // Set the file path in the userProfile object
+                userProfile.setAvatarUrl(fileName);
+            } else {
+                // Keep existing avatar URL if no new file is uploaded
+                String existingAvatarUrl = userProfileService.getAvatarUrlByAccountId(userProfile.getAccount().getAccountId());
+                userProfile.setAvatarUrl(existingAvatarUrl);
+            }
+
+            // Update the user profile
+            userProfileService.updateProfile(userProfile.getAccount().getAccountId(), userProfile);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "redirect:/error";
+        }
+        return "redirect:/admin/profile/" + userProfile.getAccount().getAccountId();
+    }
 }
