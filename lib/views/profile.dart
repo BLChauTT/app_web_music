@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:spocify/app/globals.dart';
 import 'package:spocify/utils/global.colors.dart';
 import 'package:spocify/views/home.dart';
 import 'package:spocify/views/uploadmusic.dart';
@@ -121,7 +122,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    "TDUmi#2024",
+                    usernameinlogin,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: GlobalColors.textColor,
                           fontWeight: FontWeight.bold,
