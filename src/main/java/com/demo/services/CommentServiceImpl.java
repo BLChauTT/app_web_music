@@ -36,6 +36,10 @@ public class CommentServiceImpl implements CommentService {
 			return false;
 		}
 	}
+	@Override
+	public long countTotalComments() {
+		return commentRepository.count();
+	}
 
 	@Override
 	public List<Comment> findSongsWithPagination(int pageNo, int pageSize) {

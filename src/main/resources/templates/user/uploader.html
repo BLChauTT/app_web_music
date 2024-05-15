@@ -1,20 +1,42 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/user/index :: renderBody('Upload', ~{this::.card-body})}">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Account Songs</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+	<meta charset="UTF-8">
+	<title>Account Songs</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
+
 <body>
-<div class="container">
-    <h1>My Songs</h1>
-    <div class="songs-list">
-        <ul>
-            <li th:each="accountSong : ${accountSongs}">
-                <span th:text="${accountSong.song.songdetail.title}"></span>
-            </li>
-        </ul>
-    </div>
-</div>
+	<div class="card-body">
+		<div class="container">
+			<h2>My Songs</h2>
+		</div>
+		<div class="padding">
+			<div class="table-responsive">
+				<table id="datatable" class="table table-theme table-row v-middle">
+					<thead>
+						<tr>
+							<th style="width:20px"><label class="ui-check m-0"><input type="checkbox"><i></i></label>
+							</th>
+							<th><span class="text-muted">My Song</span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="" data-id="16" th:each="accountSong : ${accountSongs}">
+							<td><label class="ui-check m-0">
+									<input type="checkbox" name="id" value="15"> <i></i></label>
+							</td>
+							<td><span th:text="${accountSong.song.songdetail.title}"></span>
+							</td>
+
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </body>
+
 </html>

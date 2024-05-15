@@ -9,4 +9,5 @@ public interface CommentService {
 	public List<Comment> commentByAccountId(int accountId);
 	public boolean delete(int id);
 	public List<Comment> findSongsWithPagination(int offset, int pageSize);
+	public long countTotalComments();
 }

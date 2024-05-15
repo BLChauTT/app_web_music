@@ -44,5 +44,10 @@ public class RatingServiceImpl implements RatingService {
 		List<Rating> ratings = pageRatings.getContent();
 		return ratings;
 	}
+	
+	@Override
+	public long countTotalRatngs() {
+		return ratingRepository.count();
+	}
 
 }

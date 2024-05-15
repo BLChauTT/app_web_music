@@ -13,6 +13,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.Account;
 import com.demo.entities.AccountSong;
+import com.demo.entities.Comment;
+import com.demo.entities.Rating;
 import com.demo.services.AccountJPAService;
 import com.demo.services.AccountSongService;
 import com.demo.services.CommentService;
@@ -48,11 +50,11 @@ public class AdminController {
 	@Autowired
 	private NotificationService notificationService;
 
-	//có phân trang
+	// có phân trang
 	@GetMapping("index")
 	public String admin(ModelMap modelMap, @RequestParam(name = "name", required = false) String name,
-						@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-						@RequestParam(value = "pageSize", defaultValue = "5", required = false) int pageSize) {
+			@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+			@RequestParam(value = "pageSize", defaultValue = "5", required = false) int pageSize) {
 		List<Account> listAccounts;
 		long totalItems;
 
@@ -82,10 +84,9 @@ public class AdminController {
 //	}
 
 	@GetMapping("music")
-	public String music(ModelMap modelMap,
-						@RequestParam(name = "keyword", required = false) String keyword,
-						@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-						@RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
+	public String music(ModelMap modelMap, @RequestParam(name = "keyword", required = false) String keyword,
+			@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+			@RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
 		List<AccountSong> songs;
 
 		if (keyword != null && !keyword.isEmpty()) {
@@ -156,7 +157,6 @@ public class AdminController {
 		return "redirect:" + referer;
 	}
 
-
 	@GetMapping("rating/{accountId}")
 	public String getRatingandComment(@PathVariable("accountId") int accountId, ModelMap modelMap) {
 		modelMap.put("ratings", ratingService.ratingByAccountId(accountId));
@@ -166,8 +166,20 @@ public class AdminController {
 	}
 
 	@GetMapping("ratingfindall")
-	public String getRatingfindall( ModelMap modelMap) {
-		modelMap.put("ratings", ratingService.findAll());
+	public String getRatingfindall(ModelMap modelMap,
+			@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+			@RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
+		List<Rating> ratings;
+		ratings = ratingService.findSongsWithPagination(pageNo, pageSize);
+		modelMap.put("ratings", ratings);
+		
+		Long totalItems = ratingService.countTotalRatngs();
+		int totalPages = (int) Math.ceil((double) totalItems / pageSize);
+		modelMap.addAttribute("totalItems", totalItems);
+		modelMap.addAttribute("totalPages", totalPages);
+		modelMap.addAttribute("pageNo", pageNo);
+		modelMap.addAttribute("pageSize", pageSize);
+		
 		return "admin/evaluate/ratingFindAll";
 	}
 
@@ -182,8 +194,19 @@ public class AdminController {
 	}
 
 	@GetMapping("commentfindall")
-	public String getCommentfindall( ModelMap modelMap) {
-		modelMap.put("comments", commentService.findAll());
+	public String getCommentfindall(ModelMap modelMap,
+			@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+			@RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
+		List<Comment> comments;
+		comments = commentService.findSongsWithPagination(pageNo, pageSize);
+
+		modelMap.put("comments", comments);
+		Long totalItems = commentService.countTotalComments();
+		int totalPages = (int) Math.ceil((double) totalItems / pageSize);
+		modelMap.addAttribute("totalItems", totalItems);
+		modelMap.addAttribute("totalPages", totalPages);
+		modelMap.addAttribute("pageNo", pageNo);
+		modelMap.addAttribute("pageSize", pageSize);
 		return "admin/evaluate/commentFindAll";
 	}
 

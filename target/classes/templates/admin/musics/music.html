@@ -109,7 +109,7 @@
 							</div>
 							<!--Phân trang here-->
 							<div class="pagination">
-								<a th:href="@{/admin/music?pageNo=0&amp;pageSize=2}"
+								<a th:href="@{'/admin/music?pageNo=' + ${pageNo} + '&pageSize=' + ${pageSize}}"
 									th:class="${pageNo == 0} ? 'disabled' : ''">First</a>
 								<a th:each="pageItem : ${#numbers.sequence(0, totalPages - 1)}"
 									th:href="@{'/admin/music?pageNo=' + ${pageItem} + '&pageSize=' +${pageSize}}"

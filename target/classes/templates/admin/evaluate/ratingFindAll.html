@@ -85,7 +85,18 @@
 
 								</table>
 							</div>
-
+							<div class="pagination">
+								<a th:href="@{'/admin/ratingfindall?pageNo=' + ${pageNo} + '&pageSize=' + ${pageSize}}"
+									th:class="${pageNo == 0} ? 'disabled' : ''">First</a>
+								<a th:each="pageItem : ${#numbers.sequence(0, totalPages - 1)}"
+									th:href="@{'/admin/ratingfindall?pageNo=' + ${pageItem} + '&pageSize=' +${pageSize}}"
+									th:text="${pageItem + 1}" th:class="${pageItem == pageNo} ? 'active' : ''"></a>
+								<a th:if="${pageNo < totalPages -1}"
+									th:href="@{'/admin/ratingfindall?pageNo=' + ${pageNo + 1} + '&pageSize=' + ${pageSize}}">Next
+									&raquo;</a>
+								<a th:href="@{'/admin/ratingfindall?pageNo=' + ${totalPages - 1} + '&pageSize=' + ${pageSize}}"
+									th:class="${pageNo == totalPages - 1} ? 'disabled' : ''">Last</a>
+							</div>
 						</div>
 					</div>
 				</div>

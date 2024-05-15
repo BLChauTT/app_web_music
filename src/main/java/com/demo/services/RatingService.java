@@ -9,4 +9,5 @@ public interface RatingService {
 	public List<Rating> ratingByAccountId(int accountId);
 	public boolean delete(int id);
 	public List<Rating> findSongsWithPagination(int offset, int pageSize);
+	public long countTotalRatngs();
 }
