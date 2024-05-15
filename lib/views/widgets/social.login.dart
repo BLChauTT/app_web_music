@@ -24,7 +24,7 @@ class _SocialLoginState extends State<SocialLogin> {
           child: Text(
             widget.text,
             style: TextStyle(
-              color: GlobalColors.textColor,
+              color: GlobalColors.mainColor.withOpacity(0.7),
               fontWeight: FontWeight.w600,
             ),
           ),

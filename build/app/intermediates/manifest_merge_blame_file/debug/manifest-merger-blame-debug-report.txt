@@ -13,114 +13,176 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->D:\Code\Ki4\Android\app_web_music\android\app\src\debug\AndroidManifest.xml:6:5-66
-15-->D:\Code\Ki4\Android\app_web_music\android\app\src\debug\AndroidManifest.xml:6:22-64
-16    <!--
-17     Required to query activities that can process text, see:
-18         https://developer.android.com/training/package-visibility?hl=en and
-19         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
-20
-21         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
-22    -->
-23    <queries>
-23-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:38:5-43:15
-24        <intent>
-24-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:39:9-42:18
-25            <action android:name="android.intent.action.PROCESS_TEXT" />
-25-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:40:13-72
-25-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:40:21-70
-26
-27            <data android:mimeType="text/plain" />
-27-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:41:13-50
-27-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:41:19-48
-28        </intent>
+15-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:2:5-66
+15-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:2:22-64
+16    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+16-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:3:5-81
+16-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:3:22-78
+17    <uses-permission
+17-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:4:5-80
+18        android:name="android.permission.READ_EXTERNAL_STORAGE"
+18-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:4:22-77
+19        android:maxSdkVersion="32" />
+19-->[:file_picker] D:\Code\Ki4\Android\app_web_music\build\file_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:11:9-35
+20    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+20-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:5:5-82
+20-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:5:22-79
+21    <!--
+22 Required to query activities that can process text, see:
+23         https://developer.android.com/training/package-visibility?hl=en and
+24         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+25
+26         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
+27    -->
+28    <queries>
+28-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:42:5-47:15
 29        <intent>
-29-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:25:9-27:18
-30            <action android:name="android.media.browse.MediaBrowserService" />
-30-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:26:13-79
-30-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:26:21-76
-31        </intent>
-32        <intent>
-32-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:28:9-30:18
-33            <action android:name="androidx.media2.session.MediaSessionService" />
-33-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:29:13-82
-33-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:29:21-79
-34        </intent>
-35        <intent>
-35-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:31:9-33:18
-36            <action android:name="androidx.media2.session.MediaLibraryService" />
-36-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:32:13-82
-36-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:32:21-79
-37        </intent>
-38    </queries>
-39
-40    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-40-->[com.google.android.exoplayer:exoplayer-core:2.18.7] C:\Users\ADMIN\.gradle\caches\transforms-3\1c54749537a4d1ff3f2079d73b98930f\transformed\jetified-exoplayer-core-2.18.7\AndroidManifest.xml:24:5-79
-40-->[com.google.android.exoplayer:exoplayer-core:2.18.7] C:\Users\ADMIN\.gradle\caches\transforms-3\1c54749537a4d1ff3f2079d73b98930f\transformed\jetified-exoplayer-core-2.18.7\AndroidManifest.xml:24:22-76
-41
-42    <permission
-42-->[androidx.core:core:1.9.0] C:\Users\ADMIN\.gradle\caches\transforms-3\75f115a0f1013408c24b813aa08b99f3\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
-43        android:name="com.example.spocify.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-43-->[androidx.core:core:1.9.0] C:\Users\ADMIN\.gradle\caches\transforms-3\75f115a0f1013408c24b813aa08b99f3\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
-44        android:protectionLevel="signature" />
-44-->[androidx.core:core:1.9.0] C:\Users\ADMIN\.gradle\caches\transforms-3\75f115a0f1013408c24b813aa08b99f3\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
-45
-46    <uses-permission android:name="com.example.spocify.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-46-->[androidx.core:core:1.9.0] C:\Users\ADMIN\.gradle\caches\transforms-3\75f115a0f1013408c24b813aa08b99f3\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
-46-->[androidx.core:core:1.9.0] C:\Users\ADMIN\.gradle\caches\transforms-3\75f115a0f1013408c24b813aa08b99f3\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
-47
-48    <application
-49        android:name="android.app.Application"
-50        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-50-->[androidx.core:core:1.9.0] C:\Users\ADMIN\.gradle\caches\transforms-3\75f115a0f1013408c24b813aa08b99f3\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
-51        android:debuggable="true"
-52        android:icon="@mipmap/ic_launcher"
-53        android:label="spocify" >
-54        <activity
-55            android:name="com.example.spocify.MainActivity"
-56            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-57            android:exported="true"
-58            android:hardwareAccelerated="true"
-59            android:launchMode="singleTop"
-60            android:theme="@style/LaunchTheme"
-61            android:windowSoftInputMode="adjustResize" >
-62
-63            <!--
-64                 Specifies an Android theme to apply to this Activity as soon as
-65                 the Android process has started. This theme is visible to the user
-66                 while the Flutter UI initializes. After that, this theme continues
-67                 to determine the Window background behind the Flutter UI.
-68            -->
-69            <meta-data
-70                android:name="io.flutter.embedding.android.NormalTheme"
-71                android:resource="@style/NormalTheme" />
+29-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:43:9-46:18
+30            <action android:name="android.intent.action.PROCESS_TEXT" />
+30-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:44:13-72
+30-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:44:21-70
+31
+32            <data android:mimeType="text/plain" />
+32-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:45:13-50
+32-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:45:19-48
+33        </intent>
+34        <intent>
+34-->[:file_picker] D:\Code\Ki4\Android\app_web_music\build\file_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:14:9-18:18
+35            <action android:name="android.intent.action.GET_CONTENT" />
+35-->[:file_picker] D:\Code\Ki4\Android\app_web_music\build\file_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-72
+35-->[:file_picker] D:\Code\Ki4\Android\app_web_music\build\file_picker\intermediates\merged_manifest\debug\AndroidManifest.xml:15:21-69
+36
+37            <data android:mimeType="*/*" />
+37-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:45:13-50
+37-->D:\Code\Ki4\Android\app_web_music\android\app\src\main\AndroidManifest.xml:45:19-48
+38        </intent>
+39        <intent>
+39-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:25:9-27:18
+40            <action android:name="android.media.browse.MediaBrowserService" />
+40-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:26:13-79
+40-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:26:21-76
+41        </intent>
+42        <intent>
+42-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:28:9-30:18
+43            <action android:name="androidx.media2.session.MediaSessionService" />
+43-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:29:13-82
+43-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:29:21-79
+44        </intent>
+45        <intent>
+45-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:31:9-33:18
+46            <action android:name="androidx.media2.session.MediaLibraryService" />
+46-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:32:13-82
+46-->[androidx.media2:media2-session:1.2.1] C:\Users\ADMIN\.gradle\caches\transforms-3\af72863ed300a57bffb75b18c0d4fe34\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:32:21-79
+47        </intent>
+48    </queries>
+49
+50    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+50-->[com.google.android.exoplayer:exoplayer-core:2.18.7] C:\Users\ADMIN\.gradle\caches\transforms-3\1c54749537a4d1ff3f2079d73b98930f\transformed\jetified-exoplayer-core-2.18.7\AndroidManifest.xml:24:5-79
+50-->[com.google.android.exoplayer:exoplayer-core:2.18.7] C:\Users\ADMIN\.gradle\caches\transforms-3\1c54749537a4d1ff3f2079d73b98930f\transformed\jetified-exoplayer-core-2.18.7\AndroidManifest.xml:24:22-76
+51
+52    <permission
+52-->[androidx.core:core:1.9.0] C:\Users\ADMIN\.gradle\caches\transforms-3\75f115a0f1013408c24b813aa08b99f3\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+53        android:name="com.example.spocify.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+53-->[androidx.core:core:1.9.0] C:\Users\ADMIN\.gradle\caches\transforms-3\75f115a0f1013408c24b813aa08b99f3\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+54        android:protectionLevel="signature" />
+54-->[androidx.core:core:1.9.0] C:\Users\ADMIN\.gradle\caches\transforms-3\75f115a0f1013408c24b813aa08b99f3\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+55
+56    <uses-permission android:name="com.example.spocify.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+56-->[androidx.core:core:1.9.0] C:\Users\ADMIN\.gradle\caches\transforms-3\75f115a0f1013408c24b813aa08b99f3\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+56-->[androidx.core:core:1.9.0] C:\Users\ADMIN\.gradle\caches\transforms-3\75f115a0f1013408c24b813aa08b99f3\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+57
+58    <application
+59        android:name="android.app.Application"
+60        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+60-->[androidx.core:core:1.9.0] C:\Users\ADMIN\.gradle\caches\transforms-3\75f115a0f1013408c24b813aa08b99f3\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+61        android:debuggable="true"
+62        android:icon="@mipmap/ic_launcher"
+63        android:label="spocify" >
+64        <activity
+65            android:name="com.example.spocify.MainActivity"
+66            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+67            android:exported="true"
+68            android:hardwareAccelerated="true"
+69            android:launchMode="singleTop"
+70            android:theme="@style/LaunchTheme"
+71            android:windowSoftInputMode="adjustResize" >
 72
-73            <intent-filter>
-74                <action android:name="android.intent.action.MAIN" />
-75
-76                <category android:name="android.intent.category.LAUNCHER" />
-77            </intent-filter>
-78        </activity>
-79        <!--
-80             Don't delete the meta-data below.
-81             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
-82        -->
-83        <meta-data
-84            android:name="flutterEmbedding"
-85            android:value="2" />
-86
-87        <uses-library
-87-->[androidx.window:window:1.0.0-beta04] C:\Users\ADMIN\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
-88            android:name="androidx.window.extensions"
-88-->[androidx.window:window:1.0.0-beta04] C:\Users\ADMIN\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
-89            android:required="false" />
-89-->[androidx.window:window:1.0.0-beta04] C:\Users\ADMIN\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
-90        <uses-library
-90-->[androidx.window:window:1.0.0-beta04] C:\Users\ADMIN\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
-91            android:name="androidx.window.sidecar"
-91-->[androidx.window:window:1.0.0-beta04] C:\Users\ADMIN\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
-92            android:required="false" />
-92-->[androidx.window:window:1.0.0-beta04] C:\Users\ADMIN\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
-93    </application>
-94
-95</manifest>
+73            <!--
+74                 Specifies an Android theme to apply to this Activity as soon as
+75                 the Android process has started. This theme is visible to the user
+76                 while the Flutter UI initializes. After that, this theme continues
+77                 to determine the Window background behind the Flutter UI.
+78            -->
+79            <meta-data
+80                android:name="io.flutter.embedding.android.NormalTheme"
+81                android:resource="@style/NormalTheme" />
+82
+83            <intent-filter>
+84                <action android:name="android.intent.action.MAIN" />
+85
+86                <category android:name="android.intent.category.LAUNCHER" />
+87            </intent-filter>
+88        </activity>
+89        <!--
+90             Don't delete the meta-data below.
+91             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+92        -->
+93        <meta-data
+94            android:name="flutterEmbedding"
+95            android:value="2" />
+96
+97        <provider
+97-->[:open_file] D:\Code\Ki4\Android\app_web_music\build\open_file\intermediates\merged_manifest\debug\AndroidManifest.xml:11:9-20:20
+98            android:name="com.crazecoder.openfile.FileProvider"
+98-->[:open_file] D:\Code\Ki4\Android\app_web_music\build\open_file\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-64
+99            android:authorities="com.example.spocify.fileProvider.com.crazecoder.openfile"
+99-->[:open_file] D:\Code\Ki4\Android\app_web_music\build\open_file\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-88
+100            android:exported="false"
+100-->[:open_file] D:\Code\Ki4\Android\app_web_music\build\open_file\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-37
+101            android:grantUriPermissions="true" >
+101-->[:open_file] D:\Code\Ki4\Android\app_web_music\build\open_file\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-47
+102            <meta-data
+102-->[:open_file] D:\Code\Ki4\Android\app_web_music\build\open_file\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-19:53
+103                android:name="android.support.FILE_PROVIDER_PATHS"
+103-->[:open_file] D:\Code\Ki4\Android\app_web_music\build\open_file\intermediates\merged_manifest\debug\AndroidManifest.xml:18:17-67
+104                android:resource="@xml/filepaths" />
+104-->[:open_file] D:\Code\Ki4\Android\app_web_music\build\open_file\intermediates\merged_manifest\debug\AndroidManifest.xml:19:17-50
+105        </provider>
+106
+107        <uses-library
+107-->[androidx.window:window:1.0.0-beta04] C:\Users\ADMIN\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+108            android:name="androidx.window.extensions"
+108-->[androidx.window:window:1.0.0-beta04] C:\Users\ADMIN\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+109            android:required="false" />
+109-->[androidx.window:window:1.0.0-beta04] C:\Users\ADMIN\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+110        <uses-library
+110-->[androidx.window:window:1.0.0-beta04] C:\Users\ADMIN\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+111            android:name="androidx.window.sidecar"
+111-->[androidx.window:window:1.0.0-beta04] C:\Users\ADMIN\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+112            android:required="false" />
+112-->[androidx.window:window:1.0.0-beta04] C:\Users\ADMIN\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+113
+114        <provider
+114-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ADMIN\.gradle\caches\transforms-3\98f8115e8f56ec67d96e5a388c46890f\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+115            android:name="androidx.startup.InitializationProvider"
+115-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ADMIN\.gradle\caches\transforms-3\98f8115e8f56ec67d96e5a388c46890f\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
+116            android:authorities="com.example.spocify.androidx-startup"
+116-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ADMIN\.gradle\caches\transforms-3\98f8115e8f56ec67d96e5a388c46890f\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
+117            android:exported="false" >
+117-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ADMIN\.gradle\caches\transforms-3\98f8115e8f56ec67d96e5a388c46890f\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
+118            <meta-data
+118-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ADMIN\.gradle\caches\transforms-3\98f8115e8f56ec67d96e5a388c46890f\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+119                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+119-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ADMIN\.gradle\caches\transforms-3\98f8115e8f56ec67d96e5a388c46890f\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
+120                android:value="androidx.startup" />
+120-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ADMIN\.gradle\caches\transforms-3\98f8115e8f56ec67d96e5a388c46890f\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
+121            <meta-data
+121-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\ADMIN\.gradle\caches\transforms-3\ad7c0a20bbe18e7cdd98dd28f81a36c8\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+122                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+122-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\ADMIN\.gradle\caches\transforms-3\ad7c0a20bbe18e7cdd98dd28f81a36c8\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+123                android:value="androidx.startup" />
+123-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\ADMIN\.gradle\caches\transforms-3\ad7c0a20bbe18e7cdd98dd28f81a36c8\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+124        </provider>
+125    </application>
+126
+127</manifest>

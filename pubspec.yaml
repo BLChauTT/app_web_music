@@ -41,6 +41,11 @@ dependencies:
   get: ^4.6.6
   rx: ^0.4.0
   just_audio: ^0.9.36
+  file_picker: ^8.0.3
+  dio: ^5.4.3+1
+  open_file: ^3.3.2
+  permission_handler: ^11.3.1
+  external_path: ^1.0.3
 
 
 
@@ -62,15 +67,15 @@ flutter_native_splash:
   android: true
   ios: true
   web: false
-  color: "#C1151A"
-  color_dark: "#C1151A"
+  color: "#CCC5D9"
+  color_dark: "#CCC5D9"
   image: "assets/images/UM-ICON.png"
   android_12:
-    color: "#C1151A"
-    color_dark: "#C1151A"
-    image: "assets/images/UM-ICON.png"
-    image_dark: "assets/images/UM-ICON.png"
-    icon_background_color_dark: "#C1151A"
+    color: "#CCC5D9"
+    color_dark: "#CCC5D9"
+    image: "assets/images/UM-ICON-ANDR12.png"
+    image_dark: "assets/images/UM-ICON-ANDR12.png"
+    icon_background_color_dark: "#CCC5D9"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -89,6 +94,7 @@ flutter:
   assets:
     - assets/images/
     - assets/music/
+    - assets/images/category/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

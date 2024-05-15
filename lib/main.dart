@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:spocify/views/home.dart';
 import 'package:spocify/views/login.dart';
+import 'package:spocify/views/playlist_screen.dart';
 import 'package:spocify/views/register.dart';
 import 'package:spocify/views/splash.dart';
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:HomePage(),
+      home:LoginPage(),
       debugShowCheckedModeBanner: false,
     );
   }
