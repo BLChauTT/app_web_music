@@ -5,11 +5,13 @@ import 'package:flutter/widgets.dart';
 import 'package:spocify/app/globals.dart';
 import 'package:spocify/entities/account_details.dart';
 import 'package:spocify/utils/global.colors.dart';
+import 'package:spocify/views/changepassword.dart';
 import 'package:spocify/views/home.dart';
 import 'package:spocify/views/widgets/number.form.global.dart';
 import 'package:spocify/views/widgets/text.form.global.dart';
 
 import '../Helpers/account_detail_helpers.dart';
+import '../Helpers/account_helpers.dart';
 
 class AccountDetailsPage extends StatefulWidget {
   @override
@@ -18,6 +20,7 @@ class AccountDetailsPage extends StatefulWidget {
 
 class _AccountDetailsPageState extends State<AccountDetailsPage> {
   var dbAccountDetails = AccountDetailDBHelper();
+  var dbAccount = AccountDBHelper();
 
   final TextEditingController firstName = TextEditingController();
   final TextEditingController lastName = TextEditingController();
@@ -25,6 +28,7 @@ class _AccountDetailsPageState extends State<AccountDetailsPage> {
   final TextEditingController age = TextEditingController();
   final TextEditingController country = TextEditingController();
   dynamic current_id;
+
   @override
   void initState() {
     super.initState();
@@ -221,7 +225,14 @@ class _AccountDetailsPageState extends State<AccountDetailsPage> {
                       ),
                     ),
                   ),
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChangePasswordPage(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -265,5 +276,6 @@ class _AccountDetailsPageState extends State<AccountDetailsPage> {
       ),
     );
   }
+
 
 }

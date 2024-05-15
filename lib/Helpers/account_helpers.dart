@@ -123,5 +123,29 @@ class AccountDBHelper {
     return maps.isNotEmpty;
   }
 
+  Future<bool> changePassword(String username, String newPassword) async {
+    var dbClient = await db;
+    Account? account = await getAccountByUsername(username);
+    if (account != null) {
+      account.password = newPassword;
+      return await update(account);
+    }
+    return false;
+  }
+
+  Future<Account?> getAccountByUsername(String username) async {
+    var dbClient = await db;
+    var maps = await dbClient.query(
+      accountTable,
+      where: "$usernameColumn = ?",
+      whereArgs: [username],
+    );
+    if (maps.isNotEmpty) {
+      return Account.fromMap(maps.first);
+    }
+    return null;
+  }
+
+
 
 }
