@@ -44,7 +44,7 @@ public class AlbumController {
 						  ) {
 		String imageUrl = environment.getProperty("imageUrl");
 		modelMap.put("imageUrl", imageUrl);
-		modelMap.put("albums", albumService.findAll());
+		modelMap.put("albums", albumService.findSongsWithPagination(pageNo, pageSize));
 
 		long totalSongs = albumService.countTotalAlbums();
 		int totalPages = (int) Math.ceil((double) totalSongs / pageSize);
