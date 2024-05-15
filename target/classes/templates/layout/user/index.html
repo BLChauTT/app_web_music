@@ -14,6 +14,9 @@
 
 <body class="layout-row touch" style="height: 1600;">
 <!-- ############ Aside START-->
+<div th:if="${loggedInUser == null}">
+    <p>Please <a th:href="@{/account/login}">log in</a>.</p>
+</div>
 <div id="aside" class="page-sidenav no-shrink bg-light nav-dropdown fade">
     <div class="sidenav h-100 modal-dialog bg-light">
         <!-- sidenav top -->
@@ -46,12 +49,12 @@
                                 <i data-feather="bar-chart-2" width="12" height="12"></i>
                                 <span class="mx-1 hidden-folded">Basik top charts</span>
                             </a>
-                            <div class="dropdown-menu text-sm">
-                                <a class="dropdown-item" th:href="@{/music.charts.html#pop}">Pop chart</a>
-                                <a class="dropdown-item" th:href="@{/music.charts.html#hip-pop}">Hip-Hop chart</a>
-                                <a class="dropdown-item" th:href="@{/music.charts.html#country}">Country chart</a>
-                                <a class="dropdown-item" th:href="@{/music.charts.html#global}">Global top 50</a>
-                            </div>
+<!--                            <div class="dropdown-menu text-sm">-->
+<!--                                <a class="dropdown-item" th:href="@{/music.charts.html#pop}">Pop chart</a>-->
+<!--                                <a class="dropdown-item" th:href="@{/music.charts.html#hip-pop}">Hip-Hop chart</a>-->
+<!--                                <a class="dropdown-item" th:href="@{/music.charts.html#country}">Country chart</a>-->
+<!--                                <a class="dropdown-item" th:href="@{/music.charts.html#global}">Global top 50</a>-->
+<!--                            </div>-->
                         </div>
                     </li>
                     <li class="nav-header hidden-folded">
@@ -106,7 +109,7 @@
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{/uploader/}">
+                        <a th:href="@{'/uploader/upSongs/' + ${loggedInUser.accountId}}">
 									<span class="nav-icon">
 										<i data-feather="upload"></i>
 									</span>
@@ -291,15 +294,15 @@
                        class="nav-link d-flex align-items-center px-2 text-color">
                         <span
                             class="dropdown-toggle mx-2 d-none l-h-1x d-lg-block text-right">
-                            Jacqueline Reid
+                            <th:block th:text="${loggedInUser.username}"></th:block>
                         </span>
                         <span class="avatar w-24" style="margin: -2px">
-                            <img th:src="@{/assets/user/img/a0.jpg}">
+                            <img th:src="${stringPath}">
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right w mt-3 animate fadeIn">
                         <a class="dropdown-item" th:href="@{/music.artist.html}">
-                            <span>Jacqueline Reid</span>
+                            <span><th:block th:text="${loggedInUser.username}"></th:block></span>
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" th:href="@{/account/userProfile}"><span>Profile</span> </a>

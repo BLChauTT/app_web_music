@@ -12,4 +12,7 @@ public interface UserProfileRepository extends CrudRepository<Userprofile, Integ
 
 	@Query("from Userprofile where account.accountId = :accountId")
 	public Userprofile findByAccountId(@Param("accountId") int accountId);
+
+	@Query("SELECT up.avatarUrl FROM Userprofile up WHERE up.account.accountId = :accountId")
+	String findAvatarUrlByAccountId(@Param("accountId") int accountId);
 }

@@ -8,28 +8,21 @@ import com.demo.repositories.UserProfileRepository;
 
 @Service
 public class UserprofileServiceImpl implements UserProfileService {
-
 	@Autowired
 	private UserProfileRepository userProfileRepository;
-
 
 	@Override
 	public Userprofile findByAccountId(int accountId) {
 
 		return userProfileRepository.findByAccountId(accountId);
 	}
-
-
 	@Override
 	public Userprofile updateProfile(int id, Userprofile userprofile) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-
-
-
-
-
+	@Override
+	public String getAvatarUrlByAccountId(int accountId) {
+		return userProfileRepository.findAvatarUrlByAccountId(accountId);
+	}
 }

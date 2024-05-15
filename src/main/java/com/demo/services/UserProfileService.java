@@ -7,4 +7,5 @@ public interface UserProfileService {
 	public Userprofile findByAccountId(int accountId);
 
 	public Userprofile updateProfile(int id, Userprofile userprofile);
+	public String getAvatarUrlByAccountId(int accountId);
 }
