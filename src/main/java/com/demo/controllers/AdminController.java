@@ -172,14 +172,14 @@ public class AdminController {
 		List<Rating> ratings;
 		ratings = ratingService.findSongsWithPagination(pageNo, pageSize);
 		modelMap.put("ratings", ratings);
-		
+
 		Long totalItems = ratingService.countTotalRatngs();
 		int totalPages = (int) Math.ceil((double) totalItems / pageSize);
 		modelMap.addAttribute("totalItems", totalItems);
 		modelMap.addAttribute("totalPages", totalPages);
 		modelMap.addAttribute("pageNo", pageNo);
 		modelMap.addAttribute("pageSize", pageSize);
-		
+
 		return "admin/evaluate/ratingFindAll";
 	}
 
