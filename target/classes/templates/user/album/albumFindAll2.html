@@ -27,34 +27,25 @@
 
 							<div class="table-responsive">
 
-								
+
 								<table class="table table-theme table-row v-middle">
 									<thead>
 										<tr>
 											<th style="width:20px">No</th>
-<!--											<th class="text-muted sort " >Album_Id-->
-<!--											</th>-->
 											<th class="text-muted sort">Album_Name
 											</th>
 											<th class="text-muted sort ">Release Date
 											</th>
 											<th class="text-muted sort ">
 											</th>
-<!--											<th class="text-muted sort ">AccountId-->
-<!--											</th>-->
 										</tr>
 									</thead>
 									<tbody class="list">
 										<tr class="v-middle" th:each="album, i : ${albums}">
 											<td th:text="${i.index + 1}">
 											</td>
-<!--											<td style="min-width:30px;text-align:center"-->
-<!--												th:text="${album.albumId}">-->
-<!--											</td>-->
-											<td class="flex"><a
-													th:href="@{'/album/details/' + ${album.albumId}}"
-													class="item-company ajax h-1x"
-													th:text="${album.albumName}"></a>
+											<td class="flex"><a th:href="@{'/album/details/' + ${album.albumId}}"
+													class="item-company ajax h-1x" th:text="${album.albumName}"></a>
 
 											</td>
 											<td class="no-wrap">
@@ -63,36 +54,33 @@
 												</div>
 											</td>
 											<td style="min-width:30px;text-align:center">
-												<img width="30px" height="30px" th:src="${imageUrl + album.albumCoverUrl}" alt=""/>
+												<img width="30px" height="30px"
+													th:src="${imageUrl + album.albumCoverUrl}" alt="" />
 												<small class="text-muted"></small>
 											</td>
-<!--											<td style="min-width:30px;text-align:center"-->
-<!--												th:text="${album.account.accountId}">-->
-<!--												<small class="text-muted"></small>-->
-<!--											</td>-->
 										</tr>
 									</tbody>
 
 								</table>
 							</div>
-
+							<div class="pagination">
+								<a th:href="@{/album/findAll?pageNo=0&amp;pageSize=4}"
+									th:class="${pageNo == 0} ? 'disabled' : ''">First</a>
+								<a th:each="pageItem : ${#numbers.sequence(0, totalPages - 1)}"
+									th:href="@{'/album/findAll?pageNo=' + ${pageItem} + '&pageSize=' +${pageSize}}"
+									th:text="${pageItem + 1}" th:class="${pageItem == pageNo} ? 'active' : ''"></a>
+								<a th:if="${pageNo < totalPages -1}"
+									th:href="@{'/album/findAll?pageNo=' + ${pageNo + 1} + '&pageSize=' + ${pageSize}}">Next
+									&raquo;</a>
+								<a th:href="@{'/album/findAll?pageNo=' + ${totalPages - 1} + '&pageSize=' + ${pageSize}}"
+									th:class="${pageNo == totalPages - 1} ? 'disabled' : ''">Last</a>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div><!-- ############ Main END-->
 		</div>
-		<div class="pagination">
-			<a th:href="@{/album/findAll?pageNo=0&amp;pageSize=4}"
-			   th:class="${pageNo == 0} ? 'disabled' : ''">First</a>
-			<a th:each="pageItem : ${#numbers.sequence(0, totalPages - 1)}"
-			   th:href="@{'/album/findAll?pageNo=' + ${pageItem} + '&pageSize=' +${pageSize}}"
-			   th:text="${pageItem + 1}" th:class="${pageItem == pageNo} ? 'active' : ''"></a>
-			<a th:if="${pageNo < totalPages -1}"
-			   th:href="@{'/album/findAll?pageNo=' + ${pageNo + 1} + '&pageSize=' + ${pageSize}}">Next
-				&raquo;</a>
-			<a th:href="@{'/album/findAll?pageNo=' + ${totalPages - 1} + '&pageSize=' + ${pageSize}}"
-			   th:class="${pageNo == totalPages - 1} ? 'disabled' : ''">Last</a>
-		</div>
+
 	</div>
 </body>
 
