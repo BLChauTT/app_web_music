@@ -1,0 +1,96 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:replace="~{layout/user/index :: renderBody('music detail', ~{this::.card-body})}">
+
+<head>
+	<title>Index</title>
+</head>
+
+<body>
+	<div class="card-body">
+		<div id="content" class="flex"><!-- ############ Main START-->
+			<div>
+				<div class="page-hero page-container" id="page-hero">
+					<div class="padding d-flex">
+						<div class="page-title">
+							<h2 class="text-md text-highlight">Album</h2>
+						</div>
+						<div class="flex"></div>
+					</div>
+				</div>
+				<div class="page-content page-container" id="page-content">
+					<div class="padding">
+						<div id="invoice-list" data-plugin="invoice">
+
+							<div class="table-responsive">
+								<table class="table table-theme table-row v-middle">
+									<thead>
+										<tr>
+											<th style="width:20px"></th>
+											<th class="text-muted sort sortable" data-sort="item-company">Name album
+											</th>
+											<th class="text-muted">Photo album</th>
+											<th class="text-muted sort sortable" data-sort="item-company">Name Song</th>
+											<th class="text-muted sort sortable" data-sort="item-company">Song Time</th>
+											<th class="text-muted" style="width:120px">Release_date</th>
+											<th style="width:50px"></th>
+										</tr>
+									</thead>
+									<tbody class="list">
+										<tr class="v-middle" data-id="15">
+											<td><label class="ui-check m-0"><input type="checkbox" name="id" value="15">
+													<i></i></label></td>
+											<td class="flex">Weekend Fun
+												Project
+
+											</td>
+											<td>
+												<div class="avatar-group"><a href="#" class="avatar ajax w-32"
+														data-toggle="tooltip" title="" data-pjax-state=""
+														data-original-title="Eu"><img src="../assets/img/a8.jpg"
+															alt="."></a></div>
+											</td>
+
+											<td class="flex">Weekend Fun
+												Project
+
+											</td>
+											<td><span
+													class="item-amount d-none d-sm-block text-sm [object Object]">50</span>
+											</td>
+											<td><span
+													class="item-amount d-none d-sm-block text-sm [object Object]">50</span>
+											</td>
+											<td>
+												<div class="item-action dropdown"><a href="#" data-toggle="dropdown"
+														class="text-muted"><svg xmlns="http://www.w3.org/2000/svg"
+															width="16" height="16" viewBox="0 0 24 24" fill="none"
+															stroke="currentColor" stroke-width="2"
+															stroke-linecap="round" stroke-linejoin="round"
+															class="feather feather-more-vertical">
+															<circle cx="12" cy="12" r="1"></circle>
+															<circle cx="12" cy="5" r="1"></circle>
+															<circle cx="12" cy="19" r="1"></circle>
+														</svg></a>
+													<div class="dropdown-menu dropdown-menu-right bg-black" role="menu">
+														<a class="dropdown-item" href="#">See detail </a><a
+															class="dropdown-item download">Download </a><a
+															class="dropdown-item edit">Edit</a>
+														<div class="dropdown-divider"></div><a
+															class="dropdown-item trash">Delete item</a>
+													</div>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- ############ Main END-->
+		</div>
+	</div>
+</body>
+
+</html>
