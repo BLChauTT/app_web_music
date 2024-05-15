@@ -48,22 +48,27 @@ public class AccountController {
 	@PostMapping("login")
 	public String login(@RequestParam("email") String email, @RequestParam("password") String password,
 	                    HttpSession session, RedirectAttributes redirectAttributes) {
-	    if (accountService.login(email, password)) {
+		if (accountService.login(email, password)) {
 	        Account loggedInUser = accountService.findByEmail(email);
 	        if (loggedInUser != null) {
 	            session.setAttribute("loggedInUser", loggedInUser);
 	            System.out.println("Đăng nhập thành công. Email: " + email);
-	            return "redirect:/account/welcome";
+
+	            // Kiểm tra vai trò của người dùng và chuyển hướng
+	            if (loggedInUser.getRole().getRoleId() == 1) {
+	                return "redirect:/admin/index";
+	            } else if (loggedInUser.getRole().getRoleId() == 2) {
+	                return "redirect:/song/index";
+	            }
 	        } else {
 	            System.out.println("Không tìm thấy người dùng với email này: " + email);
 	            redirectAttributes.addFlashAttribute("mistake", "Invalid email or password");
-	            return "redirect:/account/login";
 	        }
 	    } else {
 	        System.out.println("Sai mật khẩu cho email: " + email);
 	        redirectAttributes.addFlashAttribute("mistake", "Invalid email or password");
-	        return "redirect:/account/login";
 	    }
+	    return "redirect:/account/login";
 	}
 
 	@GetMapping("welcome")
