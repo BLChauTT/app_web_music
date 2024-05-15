@@ -128,13 +128,6 @@ public class AdminController {
 		return "redirect:/admin/index";
 	}
 
-	@GetMapping("profile/{accountId}")
-	public String getUserProfile(@PathVariable("accountId") int accountId, ModelMap modelMap) {
-		String imageUrl = environment.getProperty("imageUrl");
-		modelMap.put("imageUrl", imageUrl);
-		modelMap.put("profile", userProfileService.findByAccountId(accountId));
-		return "admin/accounts/profile";
-	}
 
 	@GetMapping("music/{accountId}")
 	public String getMusicProfile(@PathVariable("accountId") int accountId, ModelMap modelMap) {

@@ -269,6 +269,14 @@ public class AccountController {
             e.printStackTrace();
             return "redirect:/error";
         }
-        return "redirect:/admin/profile/" + userProfile.getAccount().getAccountId();
+        return "redirect:/account/profile/" + userProfile.getAccount().getAccountId();
     }
+    
+    @GetMapping("profile/{accountId}")
+	public String getUserProfile(@PathVariable("accountId") int accountId, ModelMap modelMap) {
+		String imageUrl = environment.getProperty("imageUrl");
+		modelMap.put("imageUrl", imageUrl);
+		modelMap.put("profile", userProfileService.findByAccountId(accountId));
+		return "admin/accounts/profile";
+	}
 }
