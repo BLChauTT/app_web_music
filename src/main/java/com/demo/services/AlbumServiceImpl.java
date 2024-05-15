@@ -44,7 +44,6 @@ public class AlbumServiceImpl implements AlbumService {
         List<Album> albums = pageAlbums.getContent();
         return albums;
     }
-
     @Override
     public long countTotalAlbums() {
         return albumRepository.count();

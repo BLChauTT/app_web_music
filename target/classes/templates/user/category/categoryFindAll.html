@@ -29,29 +29,34 @@
 								<table class="table table-theme table-row v-middle">
 									<thead>
 										<tr>
-											<th style="width:20px">No</th>
-											<th class="text-muted sort sortable" data-sort="item-company">Category_Name
+											<th class="text-muted sort sortable" data-sort="item-company">
+												Category Name
 											</th>
 										</tr>
 									</thead>
 									<tbody class="list">
-										<!-- Sử dụng Thymeleaf để lặp qua danh sách ratings -->
-										<tr class="v-middle" th:each="category, i : ${categories}">
-											<td th:text="${i.index + 1}">
-											</td>
+										<tr class="v-middle" th:each="category : ${categories}">
 											<td class="flex"><a
-													th:href="@{'/category/details/' + ${category.categoryId}}"
+													th:href="@{'/category/detail/' + ${category.categoryId}}"
 													class="item-company ajax h-1x"
 													th:text="${category.categoryName}"></a>
-
 											</td>
-											
 										</tr>
 									</tbody>
-
 								</table>
 							</div>
-
+							<div class="pagination">
+								<a th:href="@{/category/findAll?pageNo=0&amp;pageSize=4}"
+								   th:class="${pageNo == 0} ? 'disabled' : ''">First</a>
+								<a th:each="pageItem : ${#numbers.sequence(0, totalPages - 1)}"
+								   th:href="@{'/category/findAll?pageNo=' + ${pageItem} + '&pageSize=' +${pageSize}}"
+								   th:text="${pageItem + 1}" th:class="${pageItem == pageNo} ? 'active' : ''"></a>
+								<a th:if="${pageNo < totalPages -1}"
+								   th:href="@{'/category/findAll?pageNo=' + ${pageNo + 1} + '&pageSize=' + ${pageSize}}">Next
+									&raquo;</a>
+								<a th:href="@{'/category/findAll?pageNo=' + ${totalPages - 1} + '&pageSize=' + ${pageSize}}"
+								   th:class="${pageNo == totalPages - 1} ? 'disabled' : ''">Last</a>
+							</div>
 						</div>
 					</div>
 				</div>

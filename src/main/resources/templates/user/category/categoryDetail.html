@@ -1,21 +1,70 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/user/index :: renderBody('Song', ~{this::.card-body})}">
+
 <head>
-    <title>Category Detail</title>
+    <title>Index</title>
 </head>
+
 <body>
+<div class="card-body">
+    <div id="content" class="flex"><!-- ############ Main START-->
+        <div>
+            <div class="page-hero page-container" id="page-hero">
+                <div class="padding d-flex">
+                    <div class="page-title">
+                        <h4 class="text-md text-highlight">
+                            <a th:href="@{/category/add}">Add New Category</a>
+                        </h4></small>
+                        <br>
+                        <h2 class="text-md text-highlight">
+                            <th:block th:text="${category.categoryName}"></th:block>
+                        </h2></small>
+                    </div>
+                    <div class="flex"></div>
+                </div>
+            </div>
+            <div class="page-content page-container" id="page-content">
+                <div class="padding">
+                    <div id="invoice-list" data-plugin="invoice">
+                        <div class="table-responsive">
+                            <table class="table table-theme table-row v-middle">
+                                <thead>
+                                <tr>
+                                    <th class="text-muted sort">
+                                        Title
+                                    </th>
+                                    <th class="text-muted sort ">
+                                        Time
+                                    </th>
+                                    <th class="text-muted sort ">
+                                        Cover
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="list">
+                                <tr class="v-middle" th:each="song : ${songList}">
+                                    <td class="flex">
+                                        <a th:href="@{'/song/detail/' + ${song.songId}}"
+                                           class="item-company ajax h-1x" th:text="${song.songdetail.title}">
+                                        </a>
+                                    </td>
+                                    <td class="flex">
+                                            <th:block th:text="${song.songdetail.songTime}"></th:block>
+                                    </td>
+                                    <td style="min-width:30px;">
+                                        <img width="40px" height="40px"
+                                             th:src="${imageUrl + song.songdetail.songCoverUrl}" alt="" />
+                                        <small class="text-muted"></small>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- ############ Main END-->
+    </div>
 
-<a th:href="@{/category/findAll}">Back</a>
-<h3>Category Details</h3>
-<table border="1">
-    <tr>
-        <td>Id</td>
-        <td th:text="${category.categoryId}"></td>
-    </tr>
-    <tr>
-        <td>Name</td>
-        <td th:text="${category.categoryName}"></td>
-    </tr>
-</table>
-
-</body> 
+</div>
+</body>
 </html>

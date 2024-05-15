@@ -43,15 +43,12 @@
                                 <tbody class="list">
                                 <tr class="v-middle" th:each="song : ${songList}">
                                     <td class="flex">
-                                        <a th:href="@{'/song/cat/' + ${song.songId}}"
+                                        <a th:href="@{'/song/detail/' + ${song.songId}}"
                                            class="item-company ajax h-1x" th:text="${song.songdetail.title}">
                                         </a>
                                     </td>
                                     <td class="flex">
-                                        <a th:href="@{'/singer/cat/' + ${song.songdetail.songTime}}"
-                                           class="item-company ajax h-1x" th:text="${song.songdetail.songTime}">
-
-                                        </a>
+                                        <th:block th:text="${song.songdetail.songTime}"></th:block>
                                     </td>
                                     <td style="min-width:30px;">
                                         <img width="40px" height="40px"

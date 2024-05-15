@@ -31,7 +31,6 @@
 								<table class="table table-theme table-row v-middle">
 									<thead>
 										<tr>
-											<th style="width:20px">No</th>
 											<th class="text-muted sort">Album_Name
 											</th>
 											<th class="text-muted sort ">Release Date
@@ -42,8 +41,6 @@
 									</thead>
 									<tbody class="list">
 										<tr class="v-middle" th:each="album, i : ${albums}">
-											<td th:text="${i.index + 1}">
-											</td>
 											<td class="flex"><a th:href="@{'/album/detail/' + ${album.albumId}}"
 													class="item-company ajax h-1x" th:text="${album.albumName}"></a>
 
