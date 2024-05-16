@@ -193,7 +193,7 @@ public class SongDetailController {
                 accountSongService.save(accountSong);
 
                 redirectAttributes.addFlashAttribute("msg", "Song added successfully");
-                return "redirect:/song/findAll";
+                return "redirect:/song/cat";
             } else {
                 redirectAttributes.addFlashAttribute("msg", "Error");
                 return "redirect:/songDetail/add";
@@ -202,7 +202,7 @@ public class SongDetailController {
         } catch (Exception e) {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("msg", "Failed");
-            return "redirect:/song/findAll";
+            return "redirect:/song/cat";
         }
     }
 
@@ -232,7 +232,7 @@ public class SongDetailController {
         songDetail.setTitle(updatedSongDetail.getTitle());
         songDetailService.save(songDetail);
         modelMap.addAttribute("songDetail", songDetail);
-        return "redirect:/song/findAll";
+        return "redirect:/song/cat";
     }
 
 }
