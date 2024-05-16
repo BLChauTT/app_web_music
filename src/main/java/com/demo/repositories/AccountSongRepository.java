@@ -2,6 +2,8 @@ package com.demo.repositories;
 
 import java.util.List;
 
+import com.demo.entities.Account;
+import com.demo.entities.Song;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,4 +22,5 @@ public interface AccountSongRepository extends JpaRepository<AccountSong, Intege
     public List<AccountSong> findBySongDetail(@Param("partialTitle") String partialTitle);
 	 @Query("DELETE FROM AccountSong a WHERE a.song.songId = :songId")
 	 public void deleteBySongId(@Param("songId") int songId);
+	AccountSong findByAccountAndSong(Account account, Song song);
 }

@@ -1,6 +1,5 @@
 package com.demo.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +20,12 @@ public class UserprofileServiceImpl implements UserProfileService {
 
 		return userProfileRepository.findByAccountId(accountId);
 	}
-	
+
 	@Override
 	public Optional<Userprofile> updateFindByAccountId(int accountId) {
         return userProfileRepository.updateFindByAccountId(accountId);
     }
-	
+
 	@Override
 	public Userprofile updateProfile(int accountId, Userprofile updatedProfile) {
 		Optional<Userprofile> existingProfileOpt = userProfileRepository.updateFindByAccountId(accountId);
@@ -41,7 +40,7 @@ public class UserprofileServiceImpl implements UserProfileService {
             throw new EntityNotFoundException("Profile not found for account id: " + accountId);
         }
 	}
-	
+
 	@Override
 	public String getAvatarUrlByAccountId(int accountId) {
 		return userProfileRepository.findAvatarUrlByAccountId(accountId);

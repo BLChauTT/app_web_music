@@ -18,25 +18,19 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "favorite", catalog = "bachu_database")
 public class Favorite implements java.io.Serializable {
-
 	private Integer favoriteId;
 	private AccountSong accountSong;
-
 	public Favorite() {
 	}
-
 	public Favorite(AccountSong accountSong) {
 		this.accountSong = accountSong;
 	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	@Column(name = "favorite_id", unique = true, nullable = false)
 	public Integer getFavoriteId() {
 		return this.favoriteId;
 	}
-
 	public void setFavoriteId(Integer favoriteId) {
 		this.favoriteId = favoriteId;
 	}

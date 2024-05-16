@@ -8,10 +8,6 @@ import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
 
-import com.demo.entities.Singer;
-import com.demo.entities.Song;
-import com.demo.services.SingerService;
-import com.demo.services.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
@@ -28,8 +24,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.Account;
 import com.demo.entities.Album;
+import com.demo.entities.Song;
 import com.demo.helpers.FileHelper;
 import com.demo.services.AlbumService;
+import com.demo.services.SingerService;
+import com.demo.services.SongService;
 
 import jakarta.servlet.http.HttpSession;
 

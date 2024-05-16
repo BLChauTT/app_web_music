@@ -14,14 +14,14 @@
                 <div class="col-sm-6">
                     <div class="list-item list-overlay r mb-3">
                         <div class="media media-4x3">
-                            <a th:href="@{/song/details/1}"
+                            <a th:href="@{/song/detail/1}"
                                 class="ajax media-content"
                                 th:style="'background-image: url(' + @{/assets/user/img/char1.jpg} + ')'"></a>
                             <div class="media-action"></div>
                         </div>
                         <div class="list-content p-5">
                             <div class="list-body">
-                                <a th:href="@{/song/details/1}"
+                                <a th:href="@{/song/detail/1}"
                                     class="list-title title ajax h4 font-weight-bold">Amazing Song with Charlie Puth </a>
                                 <a href="music.artist.html#"
                                     class="list-subtitle d-block text-muted subtitle ajax h-1x">
@@ -40,10 +40,10 @@
                         </div>
                         <div class="list-content p-5">
                             <div class="list-body">
-                                <a th:href="@{nentrara1album}" class="list-title title ajax h4 font-weight-bold">
+                                <a th:href="@{/album/findAll}" class="list-title title ajax h4 font-weight-bold">
                                     Top Album Local
                                 </a>
-                                <a th:href="@{nentrara1danhsachbaihatcasidohat}"
+                                <a th:href="@{/album/findAll}"
                                     class="list-subtitle d-block text-muted subtitle ajax h-1x">
                                 Son Tung MTP
                                 </a>
@@ -95,7 +95,7 @@
                      data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music4/v4/64/3d/c1/643dc113-29d1-08de-78e2-a4ab4c3f1730/mzaf_5420937162202173294.plus.aac.p.m4a">
                     <div class="list-item slick-item r mb-3">
                         <div class="media">
-                            <a th:href="@{'/album/details/' + ${album.albumId}}" class="ajax media-content"
+                            <a th:href="@{'/album/detail/' + ${album.albumId}}" class="ajax media-content"
                                th:style="'background-image: url(' + ${imageUrl} + ${album.albumCoverUrl} + ')'"></a>
                             <div class="media-action media-action-overlay">
                                 <button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class>
@@ -110,7 +110,7 @@
                         </div>
                         <div class="list-content text-center">
                             <div class="list-body">
-                                <a th:href="@{'/song/details/' + ${album.albumId}}" class="list-title title ajax h-1x" th:text="${album.albumName}">Rude</a>
+                                <a th:href="@{'/song/detail/' + ${album.albumId}}" class="list-title title ajax h-1x" th:text="${album.albumName}">Rude</a>
                             </div>
                         </div>
                     </div>
@@ -177,7 +177,7 @@
                         </div>
                         <div class="list-content text-center">
                             <div class="list-body">
-                                <a th:href="@{'/song/details/' + ${singer.singerId}}" class="list-title title ajax h-1x" th:text="${singer.singerName}">Rude</a>
+                                <a th:href="@{'/song/detail/' + ${singer.singerId}}" class="list-title title ajax h-1x" th:text="${singer.singerName}">Rude</a>
 <!--                                <a th:href="@{'/song/singer/' + ${singer.singerId} + '/songs'}"
                                 class="list-subtitle d-block text-muted subtitle ajax h-1x" th:text="${singer.singerName}">Magic!</a>-->
                             </div>
@@ -263,7 +263,7 @@
                                 </div>
                                 <div class="list-content p-4">
                                     <div class="list-body">
-                                        <a th:href="@{song/details/1}"
+                                        <a th:href="@{song/detail/1}"
                                             class="list-title title ajax h5 font-weight-bold">Spring Festival</a>
                                     </div>
                                     <div class="list-footer">
@@ -275,13 +275,13 @@
                         <div class="col-6">
                             <div class="list-item list-overlay r mb-3 gd-primary">
                                 <div class="media media-4x3">
-                                    <a th:href="@{song/details/1}" class="ajax media-content"
+                                    <a th:href="@{song/detail/1}" class="ajax media-content"
                                         th:style="'background-image: url()'"></a>
                                     <div class="media-action"></div>
                                 </div>
                                 <div class="list-content p-4">
                                     <div class="list-body">
-                                        <a th:href="@{song/details/1}"
+                                        <a th:href="@{song/detail/1}"
                                             class="list-title title ajax h5 font-weight-bold">Spring Festival</a>
                                     </div>
                                     <div class="list-footer">
@@ -302,13 +302,13 @@
                         <div class="col-4">
                             <div class="list-item r">
                                 <div class="media media-16x9">
-                                    <a th:href="@{song/details/1}" class="ajax media-content"
+                                    <a th:href="@{song/detail/1}" class="ajax media-content"
                                         th:style="'background-image: url(' + @{/assets/user/img/b7.jpg} + ')'"></a>
                                     <div class="media-action"></div>
                                 </div>
                                 <div class="list-content">
                                     <div class="list-body">
-                                        <a th:href="@{song/details/1}" class="list-title title ajax">Et purus vulputate
+                                        <a th:href="@{song/detail/1}" class="list-title title ajax">Et purus vulputate
                                             adipiscing</a>
                                     </div>
                                     <div class="list-footer">
@@ -320,13 +320,13 @@
                         <div class="col-4">
                             <div class="list-item r">
                                 <div class="media media-16x9">
-                                    <a th:href="@{song/details/1}" class="ajax media-content"
+                                    <a th:href="@{song/detail/1}" class="ajax media-content"
                                         th:style="'background-image: url(' + @{/assets/user/img/b7.jpg} + ')'"></a>
                                     <div class="media-action"></div>
                                 </div>
                                 <div class="list-content">
                                     <div class="list-body">
-                                        <a th:href="@{song/details/1}" class="list-title title ajax">Nibh massa sit
+                                        <a th:href="@{song/detail/1}" class="list-title title ajax">Nibh massa sit
                                             morbi tortor</a>
                                     </div>
                                     <div class="list-footer">
@@ -338,13 +338,13 @@
                         <div class="col-4">
                             <div class="list-item r">
                                 <div class="media media-16x9">
-                                    <a th:href="@{song/details/1}" class="ajax media-content"
+                                    <a th:href="@{song/detail/1}" class="ajax media-content"
                                         th:style="'background-image: url(' + @{/assets/user/img/b9.jpg} + ')'"></a>
                                     <div class="media-action"></div>
                                 </div>
                                 <div class="list-content">
                                     <div class="list-body">
-                                        <a th:href="@{song/details/1}" class="list-title title ajax">Id sit vitae</a>
+                                        <a th:href="@{song/detail/1}" class="list-title title ajax">Id sit vitae</a>
                                     </div>
                                     <div class="list-footer">
                                         <div class="text-muted text-sm">Feb 26, 4:44 am</div>

@@ -1,7 +1,7 @@
 package com.demo.controllers;
 
-import com.demo.entities.Song;
-import com.demo.services.SongService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.Category;
+import com.demo.entities.Song;
 import com.demo.services.CategoryService;
+import com.demo.services.SongService;
 
 import jakarta.servlet.http.HttpSession;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("category")

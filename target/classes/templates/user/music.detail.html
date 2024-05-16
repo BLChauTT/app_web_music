@@ -157,7 +157,7 @@
 									<div class="col-12" data-id="92570808" th:each="singer : ${listSingers}" data-category="Pop" data-tag="Canada"
 										data-source="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music4/v4/64/3d/c1/643dc113-29d1-08de-78e2-a4ab4c3f1730/mzaf_5420937162202173294.plus.aac.p.m4a">
 										<div class="list-item r">
-											<div class="media"><a th:href="@{/song/detail/1}"
+											<div class="media"><a th:href="@{/singer/detail/1}"
 													class="ajax media-content"
 																  th:style="'background-image: url(' + ${imageUrl + singer.singerAvatarUrl} + ')'"></a>
 												<div class="media-action"><button
@@ -173,7 +173,7 @@
 											</div>
 											<div class="list-content">
 												<div class="list-body">
-													<a th:href="@{/song/detail/1}" class="list-title title ajax h-1x">
+													<a th:href="@{/singer/detail/1}" class="list-title title ajax h-1x">
 														<th:block th:text="${singer.singerName}"></th:block>
 													</a>
 												</div>

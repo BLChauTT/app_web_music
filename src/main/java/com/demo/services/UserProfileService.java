@@ -10,6 +10,6 @@ public interface UserProfileService {
 
 	public Userprofile updateProfile(int accountId, Userprofile updatedProfile);
 	public String getAvatarUrlByAccountId(int accountId);
-	
+
 	public Optional<Userprofile> updateFindByAccountId(int accountId);
 }

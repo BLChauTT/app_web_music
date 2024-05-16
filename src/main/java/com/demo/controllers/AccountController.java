@@ -230,7 +230,7 @@ public class AccountController {
 		}
 		return "redirect:/account/login";
 	}
-	
+
 	@GetMapping("edit/{accountId}")
     public String showEditForm(@PathVariable("accountId") int accountId, ModelMap model) {
         Optional<Userprofile> profileOpt = userProfileService.updateFindByAccountId(accountId);
@@ -239,7 +239,7 @@ public class AccountController {
             return "admin/accounts/editProfile";
         } else {
             // Handle the case where the profile is not found
-            return "redirect:/error";
+            return "admin/accounts/editProfile";
         }
     }
 
@@ -267,11 +267,11 @@ public class AccountController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            return "redirect:/error";
+            return "admin/accounts/editProfile";
         }
         return "redirect:/account/profile/" + userProfile.getAccount().getAccountId();
     }
-    
+
     @GetMapping("profile/{accountId}")
 	public String getUserProfile(@PathVariable("accountId") int accountId, ModelMap modelMap) {
 		String imageUrl = environment.getProperty("imageUrl");

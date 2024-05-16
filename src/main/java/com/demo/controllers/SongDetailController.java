@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -210,4 +211,28 @@ public class SongDetailController {
 
 		return "user/musicDetail/find";
 	}
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") int id, ModelMap modelMap) {
+        Songdetail songDetail = songDetailService.find(id);
+        if (songDetail == null) {
+            return "user/musicTest/edit";
+        }
+        modelMap.addAttribute("songDetail", songDetail);
+        return "user/musicTest/edit";
+    }
+
+    // Xử lý khi submit form chỉnh sửa thông tin bài hát
+    @PostMapping("/edit")
+    public String edit(@ModelAttribute("songDetail") Songdetail updatedSongDetail, ModelMap modelMap) {
+        Songdetail songDetail = songDetailService.find(updatedSongDetail.getSongDetailId());
+        if (songDetail == null) {
+            return "user/musicTest/edit";
+        }
+        // Cập nhật thông tin bài hát
+        songDetail.setTitle(updatedSongDetail.getTitle());
+        songDetailService.save(songDetail);
+        modelMap.addAttribute("songDetail", songDetail);
+        return "redirect:/song/findAll";
+    }
+
 }

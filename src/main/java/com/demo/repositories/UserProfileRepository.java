@@ -14,7 +14,7 @@ public interface UserProfileRepository extends CrudRepository<Userprofile, Integ
 
 	@Query("from Userprofile where account.accountId = :accountId")
 	public Userprofile findByAccountId(@Param("accountId") int accountId);
-	
+
 	@Query("from Userprofile where account.accountId = :accountId")
 	public Optional<Userprofile> updateFindByAccountId(@Param("accountId") int accountId);
 
