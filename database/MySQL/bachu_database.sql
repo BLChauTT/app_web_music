@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 09, 2024 at 09:07 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: 127.0.0.1:3307
+-- Generation Time: May 16, 2024 at 07:06 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -46,8 +46,9 @@ INSERT INTO `account` (`account_id`, `username`, `email`, `password`, `status`, 
 (1, 'admin', 'admin@example.com', 'adminpassword', 1, NULL, NULL, 1),
 (2, 'user1', 'user1@example.com', 'user1password', 1, NULL, NULL, 2),
 (3, 'user2', 'user2@example.com', 'user2password', 1, NULL, NULL, 2),
-(4, 'user3', 'user3@example.com', 'user3password', 1, NULL, NULL, 2),
-(5, 'user4', 'user4@example.com', 'user4password', 1, NULL, NULL, 2);
+(4, 'user3', 'user3@example.com', '123', 1, NULL, NULL, 2),
+(5, 'user4', 'user4@example.com', 'user4password', 1, NULL, NULL, 2),
+(6, 'Toan Nguyen', 'zz09ndt02zz@gmail.com', '123456789', 1, NULL, 'f8224eb8687c4471bfac7e9b1847dc68', 2);
 
 -- --------------------------------------------------------
 
@@ -85,7 +86,12 @@ INSERT INTO `account_song` (`account_song_id`, `account_id`, `song_id`, `post_da
 (2, 3, 2, '2024-05-03'),
 (3, 4, 3, '2024-05-03'),
 (4, 5, 4, '2024-05-03'),
-(5, 2, 5, '2024-05-03');
+(5, 2, 5, '2024-05-03'),
+(9, 1, 22, '2024-11-05'),
+(10, 1, 23, '2024-11-05'),
+(11, 4, 24, '2024-11-05'),
+(12, 4, 25, '2025-01-05'),
+(13, 4, 27, '2024-05-15');
 
 -- --------------------------------------------------------
 
@@ -106,11 +112,12 @@ CREATE TABLE `album` (
 --
 
 INSERT INTO `album` (`album_id`, `album_name`, `release_date`, `album_cover_url`, `account_id`) VALUES
-(1, 'Album One', '2023-01-01', 'https://example.com/album/album1.jpg', 2),
-(2, 'Album Two', '2023-02-01', 'https://example.com/album/album2.jpg', 3),
-(3, 'Album Three', '2023-03-01', 'https://example.com/album/album3.jpg', 4),
-(4, 'Album Four', '2023-04-01', 'https://example.com/album/album4.jpg', 5),
-(5, 'Album Five', '2023-05-01', 'https://example.com/album/album5.jpg', 2);
+(1, 'Love', '2023-01-01', 'c1.jpg', 2),
+(2, 'Sad', '2023-02-01', 'c2.jpg', 3),
+(3, 'Enjoy', '2023-03-01', 'c3.jpg', 4),
+(4, 'You', '2023-04-01', 'c4.jpg', 5),
+(5, 'The Rain', '2023-05-01', 'c5.jpg', 2),
+(6, 'Album Charlie Puth', '2024-05-15', '24131d1c701749db8caf612a92158a22.jpg', 4);
 
 -- --------------------------------------------------------
 
@@ -132,7 +139,11 @@ INSERT INTO `author` (`author_id`, `author_name`) VALUES
 (4, 'Author Four'),
 (1, 'Author One'),
 (3, 'Author Three'),
-(2, 'Author Two');
+(2, 'Author Two'),
+(10, 'bai so 6'),
+(13, 'Bonnie Leigh McKee'),
+(11, 'Nguyễn Văn Chung'),
+(12, 'Sơn Tùng MTP');
 
 -- --------------------------------------------------------
 
@@ -150,8 +161,11 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`category_id`, `category_name`) VALUES
+(6, 'Another'),
+(7, 'Bolero'),
 (5, 'Country'),
 (4, 'Hip Hop'),
+(8, 'Nhạc Xưa'),
 (1, 'Pop'),
 (3, 'R&B'),
 (2, 'Rock');
@@ -322,11 +336,13 @@ CREATE TABLE `singer` (
 --
 
 INSERT INTO `singer` (`singer_id`, `singer_name`, `singer_avatar_url`, `description`) VALUES
-(1, 'Singer One', 'https://example.com/avatar/singer1.jpg', 'Description of Singer One'),
-(2, 'Singer Two', 'https://example.com/avatar/singer2.jpg', 'Description of Singer Two'),
-(3, 'Singer Three', 'https://example.com/avatar/singer3.jpg', 'Description of Singer Three'),
-(4, 'Singer Four', 'https://example.com/avatar/singer4.jpg', 'Description of Singer Four'),
-(5, 'Singer Five', 'https://example.com/avatar/singer5.jpg', 'Description of Singer Five');
+(1, 'Charlie Puth', 'charlie.jpg', 'Charlie Puth is a Singer'),
+(2, 'Son Tung MTP', 'sontung.jpg', 'Song Tung is a singer'),
+(3, 'Katy Perry', 'katy.jpg', 'Katy Perry is a singer'),
+(4, 'Taylor Swift', 'taylor.jpg', 'Taylor is a singer'),
+(5, 'Ed Sheeran', 'ed.jpg', 'Ed Sheeran is a Singer ...'),
+(6, 'My Tam', 'mytam.jpg', 'My Tam is a singer ...'),
+(7, 'Justin Bierber', 'bcb4bcba78c4498e8f5594dce56a96fc.jpg', 'Justin Drew Bieber là một nam ca sĩ kiêm sáng tác nhạc người Canada.');
 
 -- --------------------------------------------------------
 
@@ -351,7 +367,25 @@ INSERT INTO `song` (`song_id`, `song_detail_id`, `author_id`, `album_id`, `categ
 (2, 2, 2, 1, 2),
 (3, 3, 3, 1, 3),
 (4, 4, 4, 1, 4),
-(5, 5, 5, 1, 5);
+(5, 5, 5, 1, 5),
+(10, 13, 10, NULL, 4),
+(11, 14, 2, NULL, 5),
+(12, 15, 2, NULL, 5),
+(13, 16, 2, NULL, 4),
+(14, 17, 1, NULL, 5),
+(15, 18, 4, NULL, 5),
+(16, 19, 2, NULL, 5),
+(17, 20, 2, 3, 5),
+(18, 22, 10, 4, 4),
+(19, 23, 2, 3, 4),
+(20, 24, 1, 3, 4),
+(21, 25, 2, 3, 5),
+(22, 26, 2, 3, 4),
+(23, 27, 2, 2, 5),
+(24, 28, 11, 2, 4),
+(25, 29, 12, 1, 5),
+(26, 30, 13, 3, 1),
+(27, 31, 12, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -376,12 +410,31 @@ CREATE TABLE `songdetail` (
 --
 
 INSERT INTO `songdetail` (`song_detail_id`, `title`, `lyric`, `song_time`, `release_date`, `file_url`, `listen_count`, `status`, `song_cover_url`) VALUES
-(1, 'Song One', 'Lyrics of Song One', '00:04:30', '2023-01-01', 'https://example.com/song/song1.mp3', 100, 1, 'https://example.com/songcover/song1.jpg'),
-(2, 'Song Two', 'Lyrics of Song Two', '00:03:45', '2023-01-01', 'https://example.com/song/song2.mp3', 150, 1, 'https://example.com/songcover/song2.jpg'),
-(3, 'Song Three', 'Lyrics of Song Three', '00:04:15', '2023-01-01', 'https://example.com/song/song3.mp3', 200, 1, 'https://example.com/songcover/song3.jpg'),
-(4, 'Song Four', 'Lyrics of Song Four', '00:03:50', '2023-01-01', 'https://example.com/song/song4.mp3', 120, 1, 'https://example.com/songcover/song4.jpg'),
-(5, 'Song Five', 'Lyrics of Song Five', '00:05:00', '2023-01-01', 'https://example.com/song/song5.mp3', 180, 1, 'https://example.com/songcover/song5.jpg'),
-(7, 'Test', 'asd', '1:00', '2024-09-05', '33975208d562424c961c45e31dfbbcad.mp3', 1, 1, '4670660867424ca08f435198feba289c.jpg');
+(1, 'See You Again', 'See You Again ...', '03:49', '2023-01-01', 'seeyouagain.mp3', 100, 1, 'c15.jpg'),
+(2, 'Attention', 'Attention', '05:23', '2023-01-01', 'attention.mp3', 150, 1, 'c11.jpg'),
+(3, 'Low', 'Lyrics of Song Three', '04:15', '2023-01-01', 'low.mp3', 200, 1, 'c3.jpg'),
+(4, 'Liar', 'Lyrics of Song Four', '03:50', '2023-01-01', 'liar.mp3', 120, 1, 'c4.jpg'),
+(5, 'Perfect', 'Lyrics of Song Five', '05:00', '2023-01-01', 'attention.mp3', 180, 1, 'c5.jpg'),
+(7, 'Shap Of You', 'Shap Of You ...', '06:23', '2024-09-05', 'shape.mp3', 1, 1, 'c6.jpg'),
+(13, 'Let\'s me Lowly', 'Let\'s me Lowly', '05:04', '2024-10-05', 'slowly.mp3', 1, 1, 'c7.jpg'),
+(14, 'Alone', 'Alone ...', '05:04', '2024-10-05', 'Alone.mp3', 1, 1, 'c8.jpg'),
+(15, 'Wolves', 'Wolves', '05:04', '2024-10-05', 'wolves.mp3', 1, 1, 'c9.jpg'),
+(16, 'Believer', 'Believer', '05:04', '2024-10-05', 'believer.mp3', 1, 1, 'c10.jpg'),
+(17, 'Faded', 'Faded', '05:04', '2024-10-05', 'faded.mp3', 1, 1, 'c11.jpg'),
+(18, 'Dreams', 'Dreams ...', '05:04', '2024-10-05', 'dreams.mp3', 1, 1, 'c12.jpg'),
+(19, 'Working', 'Working', '05:04', '2024-10-05', 'wdtam.mp3', 1, 1, 'c13.jpg'),
+(20, 'I Can Do It With a Broken Heart', 'I Can Do It With a Broken Heart ...', '05:04', '2024-10-05', 'broken.mp3', 1, 1, 'c14.jpg'),
+(21, 'Blank Space', 'Blank Space ..', '05:04', '2024-11-05', 'blank.mp3', 1, 1, 'c15.jpg'),
+(22, 'Shiver', 'Shiver ...', '05:04', '2024-11-05', 'shiver.mp3', 1, 1, 'c16.jpg'),
+(23, 'Hot N Cold', 'Hot N Cold ...', '05:04', '2024-11-05', 'hot.mp3', 1, 1, 'c17.jpg'),
+(24, 'FireWork', 'FireWork ...', '05:04', '2024-11-05', 'fire.mp3', 1, 1, 'c18.jpg'),
+(25, 'Wide Awake', 'Wide Awake ...', '05:04', '2024-11-05', 'wide.mp3', 1, 1, 'c19.jpg'),
+(26, 'Diary', 'Nhật Ký Của Mẹ ...', '05:04', '2024-11-05', 'nhatkycuame.mp3', 1, 1, 'c20.jpg'),
+(27, 'Later', 'Muộn Rồi Sao Mà Con', '05:04', '2024-11-05', 'muonroisaomacon.mp3', 1, 1, 'a3.jpg'),
+(28, 'I\'m here', 'I\'m here ...', '08:15', '2024-11-05', 'noinaycoanh.mp3', 1, 1, 'a4.jpg'),
+(29, 'Now', 'Now ...', '06:27', '2025-01-05', 'chungtacuahientai.mp3', 1, 1, 'a2.jpg'),
+(30, 'Roar', 'Roar ..', '03:45', '2024-05-14', 'roar.mp3', 1, 1, 'roar.jpg'),
+(31, 'Follow You', 'Follow You', '05:26', '2024-05-15', '3a33bbe6fefe422fbe9b0bd8932da66c.mp3', 1, 1, 'feca0e4327d6475fafc15df772d3e4c2.jpg');
 
 -- --------------------------------------------------------
 
@@ -400,10 +453,20 @@ CREATE TABLE `song_singer` (
 
 INSERT INTO `song_singer` (`song_id`, `singer_id`) VALUES
 (1, 1),
-(2, 2),
-(3, 3),
+(2, 1),
+(3, 2),
 (4, 4),
-(5, 5);
+(5, 5),
+(18, 1),
+(19, 3),
+(20, 3),
+(21, 3),
+(22, 3),
+(23, 1),
+(24, 2),
+(25, 1),
+(26, 3),
+(27, 2);
 
 -- --------------------------------------------------------
 
@@ -439,11 +502,12 @@ CREATE TABLE `userprofile` (
 --
 
 INSERT INTO `userprofile` (`profile_id`, `account_id`, `full_name`, `avatar_url`, `address`, `phone_number`) VALUES
-(1, 1, 'Admin User', 'https://example.com/avatar/admin.jpg', '123 Admin Street, Admin City', '+123456789'),
-(2, 2, 'User One', 'https://example.com/avatar/user1.jpg', '123 User1 Street, User1 City', '+123456789'),
-(3, 3, 'User Two', 'https://example.com/avatar/user2.jpg', '123 User2 Street, User2 City', '+123456789'),
-(4, 4, 'User Three', 'https://example.com/avatar/user3.jpg', '123 User3 Street, User3 City', '+123456789'),
-(5, 5, 'User Four', 'https://example.com/avatar/user4.jpg', '123 User4 Street, User4 City', '+123456789');
+(1, 1, 'Admin User', 'a0.jpg', '123 Admin Street, Admin City', '+123456789'),
+(2, 2, 'User One', 'a4.jpg', '123 User1 Street, User1 City', '+123456789'),
+(3, 3, 'User Two', 'a19.jpg', '123 User2 Street, User2 City', '+123456789'),
+(4, 4, 'Toan Nguyen', 'abdd1580e2204d8cbc7ef935fe075db4.jpg', 'Ho Chi Minh', '0906420345'),
+(5, 5, 'User Four', 'a18.jpg', '123 User4 Street, User4 City', '+123456789'),
+(6, 6, 'Toan Nguyen ', 'noimage.jpg', 'HCM', '0906420348');
 
 --
 -- Indexes for dumped tables
@@ -597,7 +661,7 @@ ALTER TABLE `userprofile`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `accountmembership`
@@ -609,25 +673,25 @@ ALTER TABLE `accountmembership`
 -- AUTO_INCREMENT for table `account_song`
 --
 ALTER TABLE `account_song`
-  MODIFY `account_song_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `account_song_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `album`
 --
 ALTER TABLE `album`
-  MODIFY `album_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `album_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `author`
 --
 ALTER TABLE `author`
-  MODIFY `author_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `author_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `comment`
@@ -675,19 +739,19 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `singer`
 --
 ALTER TABLE `singer`
-  MODIFY `singer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `singer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `song`
 --
 ALTER TABLE `song`
-  MODIFY `song_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `song_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `songdetail`
 --
 ALTER TABLE `songdetail`
-  MODIFY `song_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `song_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `transactionhistory`
@@ -699,7 +763,7 @@ ALTER TABLE `transactionhistory`
 -- AUTO_INCREMENT for table `userprofile`
 --
 ALTER TABLE `userprofile`
-  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -781,7 +845,6 @@ ALTER TABLE `song_singer`
 -- Constraints for table `transactionhistory`
 --
 ALTER TABLE `transactionhistory`
-  ADD CONSTRAINT `transactionhistory_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`),
   ADD CONSTRAINT `transactionhistory_ibfk_2` FOREIGN KEY (`package_id`) REFERENCES `membershippackage` (`package_id`);
 
 --
